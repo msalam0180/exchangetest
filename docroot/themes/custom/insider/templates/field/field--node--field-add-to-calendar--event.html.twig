@@ -1,0 +1,90 @@
+{#
+/**
+ * @file
+ * Theme override for a field.
+ *
+ * To override output, copy the "field.html.twig" from the templates directory
+ * to your theme's directory and customize it, just like customizing other
+ * Drupal templates such as page.html.twig or node.html.twig.
+ *
+ * Instead of overriding the theming for all fields, you can also just override
+ * theming for a subset of fields using
+ * @link themeable Theme hook suggestions. @endlink For example,
+ * here are some theme hook suggestions that can be used for a field_foo field
+ * on an article node type:
+ * - field--node--field-foo--article.html.twig
+ * - field--node--field-foo.html.twig
+ * - field--node--article.html.twig
+ * - field--field-foo.html.twig
+ * - field--text-with-summary.html.twig
+ * - field.html.twig
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ * - cal_items: Preprocessed variable containing paragraph session field.
+ * - cal_zone: Preprocessed variable containing taxonomy timezone in php supported format.
+ * @see template_preprocess_field()
+ */
+#}
+
+{%
+  set title_classes = [
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+
+
+{% if label_hidden %}
+  {% if multiple %}
+    <div{{ attributes }}>
+    {% for cal_item in cal_items %}
+      {% for item in items %}
+        <div{{ item.attributes.addClass('cal_item') }}>
+        {{ item['content']['#markup']
+        |replace({'<a class="atcb-link">':'<a  class="atcb-link" id="ics_invite-%s">'|format(loop.parent.loop.index)})
+        |regexReplace('/(<var class="atc_location">)(.*\n?)(<\\/var>)/', '$1'~ cal_item.field_location.value|render|striptags ~ '$3')
+        |regexReplace('/(<var class="atc_timezone">)(.*\n?)(<\\/var>)/', '$1'~ '' ~ '$3')
+        |regexReplace('/(<var class="atc_date_start">)(.*\n?)(<\\/var>)/', '<var class="atc_date_start">'~ cal_item.field_start_date.value| date('m/d/Y', 'UTC') ~ ' ' ~ cal_item.field_start_date.value|date('H:i e', 'UTC') ~'</var>')
+        |regexReplace('/(<var class="atc_date_end">)(.*\n?)(<\\/var>)/', '<var class="atc_date_end">'~ cal_item.field_end_date.value| date('m/d/Y', 'UTC') ~ ' ' ~ cal_item.field_end_date.value|date('H:i e', 'UTC') ~ '</var>')|render|raw }}</div>
+      {% endfor %}
+    {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      <div{{ attributes.addClass('cal_item') }}>
+      {% for cal_item in cal_items %}
+      {{ item['content']['#markup']
+      |replace({'<a class="atcb-link">':'<a  class="atcb-link" id="ics_invite-%s">'|format(loop.parent.loop.index)})
+      |regexReplace('/(<var class="atc_location">)(.*\n?)(<\\/var>)/', '$1'~ cal_item.field_location.value|render|striptags ~ '$3')
+      |regexReplace('/(<var class="atc_timezone">)(.*\n?)(<\\/var>)/', '$1'~ '' ~ '$3')
+      |regexReplace('/(<var class="atc_date_start">)(.*\n?)(<\\/var>)/', '<var class="atc_date_start">'~ cal_item.field_start_date.value| date('m/d/Y', 'UTC') ~ ' ' ~ cal_item.field_start_date.value|date('H:i e', 'UTC') ~'</var>')
+      |regexReplace('/(<var class="atc_date_end">)(.*\n?)(<\\/var>)/', '<var class="atc_date_end">'~ cal_item.field_end_date.value| date('m/d/Y', 'UTC') ~ ' ' ~ cal_item.field_end_date.value|date('H:i e', 'UTC') ~ '</var>')|render|raw }}</div>
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+{% else %}
+  <div{{ attributes }}>
+    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+    {% if multiple %}
+      <div>
+    {% endif %}
+    {% for item in items %}
+    {% set cal_id = 'ics_invite' ~ loop.index %}
+      <div{{ item.attributes.addClass('cal_item') }}>{{ item.content|replace({'<a class="atcb-link">':'<a  class="atcb-link" id="ics_invite-%s">'|format(loop.parent.loop.index)}) }}</div>
+    {% endfor %}
+    {% if multiple %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

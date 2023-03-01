@@ -1,0 +1,30 @@
+uuid: 0bef2ced-dca7-4221-bf43-5de0f32619d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_top_level_group
+    - node.type.event
+    - taxonomy.vocabulary.top_level_group
+_core:
+  default_config_hash: VuEOPvaUz3JKeCc-zGH4_Zo69wYXJoCbtaOW4ItWlPs
+id: node.event.field_top_level_group
+field_name: field_top_level_group
+entity_type: node
+bundle: event
+label: 'Top Level Group'
+description: 'Select the section of the site in which this content should appear. This selection determines the left navigation on the page.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      top_level_group: top_level_group
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

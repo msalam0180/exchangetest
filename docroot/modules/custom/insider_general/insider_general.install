@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function insider_general_install() {
+  // This module must be called after some publish_date module.
+  module_set_weight('insider_general', 100);
+}
+
+/**
+ * Migrating service now links from seceamsprod.service-now.com => seceamsprod.servicenowservices.com
+ */
+function insider_general_update_8001 () {
+  insider_general_update_service_now_links();
+}

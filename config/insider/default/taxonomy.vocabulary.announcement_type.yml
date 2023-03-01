@@ -1,0 +1,10 @@
+uuid: 5414096d-cd75-4c99-a1b7-dcf9f0c25199
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: hjHpB3IqIQ3-an1kCA_06pUHk0FKZsUpdwmG0ejP7r0
+name: 'Announcement Type'
+vid: announcement_type
+description: ''
+weight: 0

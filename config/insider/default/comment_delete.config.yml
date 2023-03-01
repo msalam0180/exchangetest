@@ -1,0 +1,8 @@
+_core:
+  default_config_hash: GTBEB0vmQ6cehsyTbTl0pNZhkEMOhKnA-35O8VJqntw
+default_selection: '2'
+soft: '1'
+soft_mode: unset_values
+soft_user: '0'
+threshold: '0'
+message: 'Comment has been successfully removed.'

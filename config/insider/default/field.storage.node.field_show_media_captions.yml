@@ -1,0 +1,24 @@
+uuid: 045255a0-5405-4419-9311-e3967dcc5bbb
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - node
+third_party_settings:
+  field_permissions:
+    permission_type: public
+_core:
+  default_config_hash: K7QJmjp46jBzdwFMOxroW11t89Y-u7SYiU_fdu1dE9c
+id: node.field_show_media_captions
+field_name: field_show_media_captions
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

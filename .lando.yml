@@ -1,0 +1,208 @@
+name: exchange
+recipe: drupal9
+
+config:
+  php: "8.0"
+  via: apache:2.4
+  drush: false
+  composer_version: "2.1.6"
+
+services:
+  appserver:
+    webroot: docroot
+    xdebug: true
+    config:
+      php: .lando-config/php.ini
+    build_as_root:
+      - .lando-config/build.sh
+
+  # Setting up Databases.
+  exchangedb: # Setting up Exchange.gov Database Creds
+    type: mysql:5.7
+    creds:
+      user: drupal
+      password: drupal
+      database: exchange
+    config:
+      database: .lando-config/my-custom.cnf
+
+  # Set phpmyadmin database hosts.
+  pma:
+    type: phpmyadmin
+    ssl: true
+    hosts:
+      - exchangedb
+
+  # Setup SOLR.
+  solr:
+    type: solr:7.7
+    core: exchange_lando
+    portforward: true
+    run:
+      - echo '*****Start copying SOLR files.*****'
+      - cp -r /app/.lando-config/exchange-solr-conf-7.x/* /opt/solr/server/solr/mycores/exchange_lando/conf/. && echo '*****Copying SOLR files complete.*****'
+
+  # Setting up mailhog service for emails.
+  mail:
+    type: mailhog
+    ssl: true
+    hogfrom:
+      - appserver
+
+  # Setting up Chromedriver and Selenium.
+  chrome:
+    type: compose
+    services:
+      image: selenium/standalone-chrome-debug
+      user: root
+      volumes:
+        - /dev/shm:/dev/shm
+      command: "/opt/bin/entry_point.sh"
+      ports:
+        - "4444"
+        - "5901:5900"
+      environment:
+        TZ: US/Eastern
+        VNC_NO_PASSWORD: "1"
+        JAVA_OPTS: -Dwebdriver.chrome.whitelistedIps=
+
+events:
+  post-start:
+    - .lando-config/post-start.sh
+
+proxy:
+  # Setting up static URLs for appserver, pma, chrome services.
+  appserver:
+    - exchange.lndo.site
+  pma:
+    - phpmyadmin-exchange.lndo.site
+  solr:
+    - solr-exchange.lndo.site
+  mail:
+    - mail-exchange.lndo.site
+  chrome:
+    - chrome-exchange.lndo.site:4444
+
+tooling:
+  # Setting up Acquia CLI command.
+  acli:
+    service: appserver
+    description: Acquia CLI is a command-line interface for interacting with Cloud Platform services. [Usage - lando acli auth:login]
+    cmd: /usr/local/bin/acli
+  acli-drush:
+    service: appserver
+    description: Runs drush command on Acquia Cloud given site and environment. [Usage - lando acli-drush sitename-environment]
+    cmd: /usr/local/bin/acli remote:drush
+  pulldb:
+    service: appserver
+    description: Pulls database down locally.
+    cmd:
+      - .lando-config/pull-database.sh
+
+  # Setting up Drush commands.
+  drush:
+    service: appserver
+    description: Allows you to run drush locally. [Usage - lando drush cr]
+    cmd: drush --root=/app/docroot
+  initproject-exchange:
+    service: appserver
+    description: Runs cr, updb, cim, user-create (lando) with admin permissions on local exchange site.
+    dir: /app/docroot
+    cmd:
+      - drush cr
+      - drush updb -y
+      - drush cim -y
+      - echo 'Local Username/Password will be set as lando/lando'
+      - drush ucrt "lando" --password=lando && drush urol administrator lando
+  login-exchange:
+    service: appserver
+    description: Creates one-time login link as admin for local exchange site.
+    dir: /app/docroot
+    cmd: drush uli --no-browser
+
+  # Setting up gatsby commands.
+  initgatsby:
+    service: appserver
+    description: Runs npm install for gatsby.
+    cmd:
+      - .lando-config/build-microsites.sh
+  # Starting microsite process.
+  gatsby-run:
+    service: appserver
+    description: Run commands to start gatsby run.
+    cmd:
+      - .lando-config/run-microsites.sh
+    level: app
+    options:
+      mode:
+        passthrough: true
+        alias:
+          - m
+        describe: Choose gatsby mode "build" or "develop"
+        interactive:
+          type: input
+          message: "\n[1] Build \n[2] Develop \nWhich mode?"
+          default: "1"
+
+  # Setting up Behat commands.
+  initbehat:
+    service: appserver
+    description: Runs npm install and composer install for Behat and WDIO.
+    dir: /app/test
+    cmd:
+      - rm -rf node_modules && npm install
+      - rm -rf vendor bin && composer install
+  behat:
+    service: appserver
+    description: Runs Behat command without any Behat Parameters.
+    dir: /app/test
+    cmd: /app/test/bin/behat
+  behat-exchange:
+    service: appserver
+    description: Runs Behat command for local exchange site.
+    dir: /app/test
+    env: # environment gets overridden by .lando.local.yml
+      BEHAT_PARAMS: '{"extensions": {"Behat\\MinkExtension": {"base_url": "http://exchange.lndo.site"},"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"/app/docroot"},"drush":{"alias":"local.exchange"}}}}'
+    cmd:
+      - appserver: /app/test/bin/behat --suite=default
+  behat-microsite:
+    service: appserver
+    description: Runs Behat command for local microsite site.
+    dir: /app/microsites/test
+    env:
+      BEHAT_PARAMS: '{"extensions": {"Behat\\MinkExtension": {"base_url": "http://exchange.lndo.site"},"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"/app/docroot"},"drush":{"alias":"local.exchange"}}}}'
+    cmd:
+      - appserver: /app/microsites/test/bin/behat --config=/app/microsites/test/behat.yml
+
+  # Setting up theme commands.
+  theme-exchange-build:
+    service: appserver
+    description: Runs npm install and compiles exchange theme sass.
+    dir: /app/docroot/themes/custom/insider
+    cmd:
+      - npm install
+      - npm run compile
+
+  # Setting up xdebug commands.
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for Apache.
+    cmd: docker-php-ext-enable xdebug && /etc/init.d/apache2 reload && echo "Enabling xdebug"
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for Apache.
+    cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload && echo "Disabling xdebug"
+    user: root
+
+  node:
+    service: appserver
+  npm:
+    service: appserver
+  npx:
+    service: appserver
+  gulp:
+    service: appserver
+  chromedriver:
+    service: chrome
+    cmd: chromedriver

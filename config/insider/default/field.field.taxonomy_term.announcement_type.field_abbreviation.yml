@@ -1,0 +1,21 @@
+uuid: 9dfbf310-957b-4c22-9014-febb1818b7a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_abbreviation
+    - taxonomy.vocabulary.announcement_type
+_core:
+  default_config_hash: o9__ha1jwe7H6-9zrlpYRothStcFgEf-74IyonnWN_Y
+id: taxonomy_term.announcement_type.field_abbreviation
+field_name: field_abbreviation
+entity_type: taxonomy_term
+bundle: announcement_type
+label: Abbreviation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

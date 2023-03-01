@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Contains hook implementations for the node_log module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_panelizer_pre_view_builder_alter().
+ */
+function node_log_panelizer_pre_view_builder_alter(&$view_mode, EntityInterface $entity, &$langcode){
+  $user = \Drupal::service('current_user');
+  $roles = $user->getRoles();
+
+  if(count($roles)<=1 || $user->isAnonymous()){
+    \Drupal::service('node_log.logger')->log('read', $entity);
+  }
+}

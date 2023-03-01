@@ -1,0 +1,9 @@
+uuid: 98b83192-57f1-4d4f-a4bb-4a3eb8760787
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: WDWonObI1Vu8vsnRYm92QfPBLkQmGbIj-QyBTowmGrI
+id: accordion_bg_style_with_multiple_headings_independent_open
+label: 'Accordion BG Style with multiple headings - Independent Open'
+pattern: "<!-- For each Accordion added to a page, the number of that accordion needs to be updated -->\r\n<!-- Example: `accordion-wysiwyg01` would be changed to `accordion-wysiwyg02` -->\r\n\r\n<div class=\"accordionGroup accordionBackground\">\r\n  <div class=\"darkBgHeading\">Dark Heading</div>\r\n  <div class=\"mediumBgHeading\">Medium Heading</div>\r\n  <!-- accordion-wysiwyg01  -->\r\n  <div id=\"accordion-wysiwyg01\">\r\n    <div>Item Title 1</div>\r\n    <div>Item Content 1</div>\r\n  </div>\r\n  <!-- accordion-wysiwyg02  -->\r\n  <div id=\"accordion-wysiwyg02\">\r\n    <div>Item Title 2</div>\r\n    <div>Item Content 2</div>\r\n  </div>\r\n  <!-- accordion-wysiwyg03  -->\r\n  <div id=\"accordion-wysiwyg03\">\r\n    <div>Item Title 3</div>\r\n    <div>Item Content 3</div>\r\n  </div>\r\n</div>"

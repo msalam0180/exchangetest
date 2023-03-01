@@ -1,0 +1,10 @@
+uuid: 76833a6f-9c7a-415c-a3c0-97daa04c6bc4
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: mimVhrV9OAZ5WTUlOBZglZzNhrmR4vNnX28Dm02oeeA
+name: Category
+vid: category
+description: 'Video Categories'
+weight: 0

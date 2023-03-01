@@ -1,0 +1,21 @@
+uuid: 6021dee7-5410-46d1-82b1-32fd4e606548
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_abbreviation
+    - taxonomy.vocabulary.timezone
+_core:
+  default_config_hash: 4cLLSWbddPrjdeX6x8qoXZvXZTxnqXfp-wjMc8d9BdU
+id: taxonomy_term.timezone.field_abbreviation
+field_name: field_abbreviation
+entity_type: taxonomy_term
+bundle: timezone
+label: Abbreviation
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

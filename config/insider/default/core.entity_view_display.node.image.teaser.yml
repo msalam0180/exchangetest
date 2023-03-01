@@ -1,0 +1,48 @@
+uuid: 04d3577e-bae5-4b2a-9fd8-794e2e582573
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.image.field_caption
+    - field.field.node.image.field_combined_date
+    - field.field.node.image.field_image_upload
+    - field.field.node.image.field_tags
+    - image.style.thumbnail
+    - node.type.image
+  module:
+    - image
+    - panelizer
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.image.teaser
+targetEntityType: node
+bundle: image
+mode: teaser
+content:
+  field_image_upload:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_caption: true
+  field_combined_date: true
+  field_tags: true
+  langcode: true
+  links: true
+  published_at: true
+  scheduling_options: true
+  search_api_excerpt: true
+  workbench_moderation_control: true

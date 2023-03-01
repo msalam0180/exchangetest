@@ -1,0 +1,21 @@
+uuid: d0e76026-99be-4c97-b6bd-ff1c10ec4b3d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_description_abstract
+    - media.type.file
+_core:
+  default_config_hash: k67UWRelMNcR_iuXJyjrZyWg7KobYxMz--H57X60Saw
+id: media.file.field_media_description_abstract
+field_name: field_media_description_abstract
+entity_type: media
+bundle: file
+label: Description/Abstract
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

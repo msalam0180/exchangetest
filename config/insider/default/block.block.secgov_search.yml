@@ -1,0 +1,23 @@
+uuid: bc088bc0-9944-497a-b21b-450cd9a009dd
+langcode: en
+status: false
+dependencies:
+  module:
+    - search
+  theme:
+    - insider
+_core:
+  default_config_hash: xj9X8YAURXGK4Uupl4QY6-ZkEIOydkdDHyORlS8dqus
+id: secgov_search
+theme: insider
+region: header
+weight: 1
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility: {  }

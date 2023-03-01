@@ -1,0 +1,11 @@
+uuid: 691fee30-7aac-476e-9dff-a5d14e50db49
+langcode: en
+status: true
+dependencies:
+  module:
+    - workbench_moderation_actions
+id: state_change__node__draft
+label: 'Set Content as Draft'
+type: node
+plugin: 'state_change:node__draft'
+configuration: {  }

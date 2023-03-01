@@ -1,0 +1,92 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main content
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div id="edgar">
+    <div class="panel">
+        <h2><a href="https://www.sec.gov/edgar/searchedgar/webusers.htm">Search EDGAR</a></h2>
+        <p>Free Access to 21 Million Filings</p>
+        <form id="edgar-search" action="/cgi-bin/browse-edgar" method="get" name="companysearch">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="row collapse">
+                      <label for="company-name" class="show-for-sr"><em>Company Name</em></label>
+                      <div class="small-11 medium-11 large-11 columns">
+                        <span class="twitter-typeahead" style="position: relative; display: inline-block;">
+                          <input id="company-name" name="company" title="Search For" type="text" value="Company Name" class="tt-input" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+                          <pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: Helvetica, sans-serif; font-size: 14.000040054321289px; font-style: normal; font-variant-ligatures: no-common-ligatures; font-variant-numeric: normal; font-variant-caps: normal; font-variant-alternates: normal; font-variant-position: normal; font-variant-east-asian: normal; font-weight: normal; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre>
+                          <div class="tt-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none; width: 292px;">
+                            <div class="tt-dataset tt-dataset-companies"></div>
+                          </div>
+                        </span>
+                      </div>
+
+                      <div class="small-1 medium-1 large-1 columns">
+                        <button id="edgar-search-button" type="submit" class="button postfix table-block">
+                          <span class="show-for-sr">Search</span>
+                          <i class="svg-icon svg-icon-sm svg-icon-box-md icon-search cell-block vcenter text-center">c</i>
+                        </button>
+                      </div>
+
+                      <div class="edgar-search-hidden">
+                        <input value="contains" name="match" type="hidden">
+                        <input value="getcompany" name="action" type="hidden">
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form class="companySearchForm" id="fast-search" method="get" action="https://www.sec.gov/cgi-bin/browse-edgar">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="row collapse">
+                      <label for="cik" class="show-for-sr"><em>Ticker or CIK</em></label>
+                      <div class="small-11 medium-11 large-11 columns">
+                        <input id="cik" name="CIK" title="Ticker or CIK" type="text" value="Ticker or CIK">
+                      </div>
+
+                      <div class="small-1 medium-1 large-1 columns">
+                        <button id="cik_find" type="submit" class="button postfix table-block">
+                          <span class="show-for-sr">Search</span>
+                          <i class="svg-icon svg-icon-sm svg-icon-box-md icon-search cell-block vcenter text-center">c</i>
+                        </button>
+                      </div>
+
+                      <div class="edgar-search-hidden">
+                        <input type="hidden" name="action" value="getcompany">
+                        <input type="hidden" name="owner" value="exclude">
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

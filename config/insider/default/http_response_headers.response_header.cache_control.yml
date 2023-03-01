@@ -1,0 +1,12 @@
+uuid: ad03e04a-824e-4f96-9d38-37582b21fbf5
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: R-KvfcvMXWPn-jPDhOXJb3SHAzuQYcqJVregm0JoKh0
+id: cache_control
+label: Cache-Control
+description: 'Cache-control is an HTTP header used to specify browser caching policies in both client requests and server responses.'
+group: Security
+name: Cache-Control
+value: 'no-cache, no-store, must-revalidate'

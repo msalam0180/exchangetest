@@ -1,0 +1,11 @@
+name: Views Natural Sort Test
+type: module
+description: Set up module for Views Natural Sort testing.
+package: Testing
+dependencies:
+  - views_natural_sort:views_natural_sort
+
+# Information added by Drupal.org packaging script on 2020-12-14
+version: '8.x-2.0-alpha5'
+project: 'views_natural_sort'
+datestamp: 1607956675

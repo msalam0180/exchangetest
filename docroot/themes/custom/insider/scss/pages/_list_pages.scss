@@ -1,0 +1,140 @@
+//
+// List Pages
+// These styles apply to ALL List pages
+// --------------------------------------------------
+
+//Search on list pages
+.list-search-wrapper {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.list-search-label {
+  @include raleway;
+  color: $dark-navy;
+  font-weight: 600;
+  display: block;
+}
+
+.list-search-wrapper input {
+  width: 40%;
+  display: inline-block;
+
+  @include breakpoint('small') {
+    width: 100%;
+  }
+}
+
+//Back to top button on mobile list pages
+a.back-to-top {
+
+  display: none;
+  background: $gray-middle;
+  color: $white;
+  border-radius: 3px;
+  position: fixed;
+  z-index: 999;
+  right: 20px;
+  bottom: 20px;
+  padding: 5px 10px;
+  font-size: 16px;
+
+  i,
+  svg {
+    margin-right: 5px;
+  }
+}
+
+//TODO: Each of these should be moved into it's own file
+/////////////////////////////////////////////
+//== Field Columns Width Settings
+//
+//## Specific table columns need to have min
+//   widths based on type of content
+/////////////////////////////////////////////
+
+@include breakpoint('medium-and-up') {
+
+  // URL: /forms
+  .forms-list-page {
+    #view-field-date-table-column {
+      min-width: 130px;
+    }
+
+    #view-field-form-topic-table-column {
+      min-width: 80px;
+    }
+
+    #view-field-release-number-table-column {
+      min-width: 124px;
+    }
+
+    .views-field-field-form-number {
+      min-width: 130px;
+    }
+  }
+
+  //URL: /highlights
+  .highlights-list-page {
+    .views-field-field-combined-date {
+      width: 20%;
+    }
+  }
+
+  // URL: /news/announcements
+  .announcements-list-page {
+    .views-field-field-combined-date {
+      width: 20%;
+    }
+
+    .views-field-title {
+      width: 55%;
+    }
+
+    .views-field-field-announcement-type {
+      width: 25%;
+    }
+  }
+
+  // URL: /news/calendar
+  .events-list-page {
+    .views-field.views-field-field-start-date {
+      width: 20%;
+    }
+
+    .views-field.views-field-title {
+      width: 50%;
+    }
+
+    .views-field.views-field-field-location {
+      width: 30%;
+    }
+
+    .form-item-field-event-type-value {
+      min-width: 120px;
+    }
+  }
+
+  // URL: /admin-regulations
+  .secr-list-page {
+    [id^=view-field-secr-number-table-column] {
+      min-width: 130px;
+    }
+
+    [id^=view-title-table-column] {
+      min-width: 276px;
+    }
+
+    [id^=view-field-series-table-column] {
+      min-width: 130px;
+    }
+
+    [id^=view-field-related-op-table-column] {
+      min-width: 240px;
+    }
+
+    table td.views-field ul {
+      margin: 0px 0px 10px 0px;
+    }
+  }
+}

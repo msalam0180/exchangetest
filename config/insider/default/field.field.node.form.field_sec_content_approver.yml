@@ -1,0 +1,36 @@
+uuid: b9a8c9ad-b89a-499e-baa8-76c3272e72b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sec_content_approver
+    - node.type.form
+_core:
+  default_config_hash: X9lWq6ndq5eOQP--SP6dbCKUFn001RCPQ6BjQZQ244w
+id: node.form.field_sec_content_approver
+field_name: field_sec_content_approver
+entity_type: node
+bundle: form
+label: 'SEC Content Approver'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    filter:
+      type: role
+      role:
+        content_approver: content_approver
+        administrator: '0'
+        content_creator: '0'
+        sitebuilder: '0'
+    include_anonymous: true
+field_type: entity_reference

@@ -1,0 +1,39 @@
+//
+// Homepage Announcements
+// Block on the homepage with announcements in it
+// This block mainly uses the media object for layout
+// --------------------------------------------------
+
+$reminder-status-color: #a03535;
+$reminder-status-color: #ab4d4d;
+.announcements_list-block_2{
+
+  .media .media-left img{
+    width: 64px;
+    height: 64px;
+  }
+
+
+  .reminder-icon{
+    margin-right: 5px;
+  }
+  .reminder-text{ color: $reminder-status-color;}
+  .update-text { color: $accent-dk-color;}
+  
+  .reminder-text, .update-text{
+    display: inline-block;
+    font-size: .7em;
+    text-transform: uppercase;
+    margin-left: 2px;
+    font-weight: bold;
+    border: 1px solid #d0cfcf;
+    border-radius: 3px;
+    line-height: 12px;
+    padding: 2px 3px;
+  }
+
+  .announcement-no-image {
+    padding: 0;
+  }
+
+}

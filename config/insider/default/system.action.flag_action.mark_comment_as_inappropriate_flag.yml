@@ -1,0 +1,15 @@
+uuid: 892c941e-4594-4d20-b5eb-b2b92b1ba37b
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.mark_comment_as_inappropriate
+  module:
+    - flag
+id: flag_action.mark_comment_as_inappropriate_flag
+label: 'Mark Inappropriate'
+type: comment
+plugin: 'flag_action:mark_comment_as_inappropriate_flag'
+configuration:
+  flag_id: mark_comment_as_inappropriate
+  flag_action: flag

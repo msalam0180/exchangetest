@@ -1,0 +1,27 @@
+uuid: 6ac8c1b2-f66a-4b98-b164-b391dd68c1a5
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.quick-links
+  module:
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: qEXwVGUW108v4frfPxPK9Ibz4hbRepxSGhoeJAS5Lhk
+id: quicklinks
+theme: insider
+region: global_navigation
+weight: -10
+provider: null
+plugin: 'system_menu_block:quick-links'
+settings:
+  id: 'system_menu_block:quick-links'
+  label: 'Quick Links'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: false
+visibility: {  }

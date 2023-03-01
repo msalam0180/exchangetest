@@ -1,0 +1,22 @@
+uuid: ab2dbbdd-faa3-49f5-8473-7cdec4f753c2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+_core:
+  default_config_hash: JyDgpc6h1d-wJohM9cetdlX0khmzDQFEvc84do4MQvM
+id: node.field_timezone_select
+field_name: field_timezone_select
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

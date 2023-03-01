@@ -1,0 +1,195 @@
+<?php
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Entity\EntityMalformedException;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\panels\Plugin\DisplayVariant\PanelsDisplayVariant;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\taxonomy\Entity\Term;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use GuzzleHttp\Cookie\CookieJar;
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function insider_headless_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($view_mode === "full") {
+    insider_headless_microsite_redirect($entity);
+  }
+}
+
+/**
+ * Implements hook_panels_build_alter().
+ */
+function insider_headless_panels_build_alter(array &$build, PanelsDisplayVariant $panels_display) {
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface) {
+    insider_headless_microsite_redirect($node);
+  }
+}
+
+/**
+ * Handles redirecting microsite content
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function insider_headless_microsite_redirect(EntityInterface $entity) {
+  // See if the entity is tagged with a site section
+  // Get this node's entity site section (taxonomy term id)
+  $entity_site_section = insider_headless_node_site_section($entity);
+
+  // If there's a section associated, grab the url
+  if ($entity_site_section) {
+
+    //check if unpublished
+    if ($entity->isPublished()) {
+      // Load the term
+      $siteSectionTerm = Term::load($entity_site_section);
+      // Get the microsite url
+      $site_section_url = rtrim(insider_headless_site_section_url($siteSectionTerm), "/");
+
+      // Get the entity path (we're using the same alias in Drupal & Gatsby, except for Homepages)
+      $entity_path = "";
+      $homepage = $siteSectionTerm->field_homepage->target_id;
+      if ($entity->id() !== $homepage) {
+        $entity_path = insider_headless_get_path($entity);
+      }
+
+      // Building the entire path
+      $microsite_path = $site_section_url . $entity_path;
+
+      //check if published was recently published
+      $changed = $entity->get("changed");
+      $since = time() - $changed->value;
+      //$grace_period = seconds in which gatsby should've built by
+      $grace_period = 1800;
+      if ($since < $grace_period) {
+        //check if this content is published in gatsby yet
+        $client = \Drupal::httpClient();
+
+        // Setup auth cookie
+        $cookieJar = CookieJar::fromArray(['SimpleSAMLSessionID' => '-'], $_SERVER['HTTP_HOST']);
+
+        try {
+          \Drupal::logger('insider_headless')->debug("Checking gatsby for " . $microsite_path);
+          $response = $client->get($microsite_path, ['cookies' => $cookieJar]);
+        } catch (Exception $e) {
+          //Use the preview URL as this content is not yet published by gatsby
+          $microsite_path = insider_headless_preview_url($entity->bundle(), $entity->id());
+          \Drupal::logger('insider_headless')->error($e->getMessage());
+        }
+      }
+    } else {
+      //Get a Preview URL
+      $microsite_path = insider_headless_preview_url($entity->bundle(), $entity->id());
+    }
+
+    $response = new RedirectResponse($microsite_path);
+    $response->send();
+    exit;
+  }
+}
+
+
+
+/**
+ * Gets the url alias for a given entity.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *
+ * @return string
+ */
+function insider_headless_get_path(EntityInterface $entity) {
+  try {
+    $path = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $entity->id());
+  } catch (EntityMalformedException $e) {
+    return false;
+  }
+  return $path;
+}
+
+function insider_headless_site_section_url($term) {
+  // Get the term's name
+  $site_section_name = $term ? strtolower($term->getName()) : '';
+
+  $site_section_url = insider_headless_base_url() . $site_section_name;
+
+  return $site_section_url;
+}
+
+function insider_headless_preview_url($entityType, $entityId) {
+  return insider_headless_base_url() . "preview/" . $entityType . "/?nid=" . $entityId;
+}
+
+function insider_headless_base_url() {
+  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+  $domainName = $_SERVER['HTTP_HOST'];
+
+  // Safely get the value of an environment variable, ignoring whether
+  // or not it was set by a SAPI or has been changed with putenv
+  $site_section_url = getenv('SITE_SECTION_URL', true) ?
+    getenv('SITE_SECTION_URL', true) :
+    "${protocol}${domainName}/microsites/";
+
+  return $site_section_url;
+}
+
+/**
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *
+ * @return mixed
+ */
+function insider_headless_node_site_section(EntityInterface $entity) {
+  try {
+    if (!empty($entity->get('field_site_section')->getValue())) {
+      $site_section_id = $entity->get('field_site_section')->getValue()[0]['target_id'];
+    } else {
+      return FALSE;
+    }
+  } catch (Exception $e) {
+    return FALSE;
+  }
+  return $site_section_id;
+}
+
+
+function insider_headless_site_sections() {
+  $vid = 'site_section';
+  $terms = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadTree($vid);
+  $site_sections = [];
+  foreach ($terms as $term) {
+    $site_sections[] = $term->name;
+  }
+  return $site_sections;
+}
+
+
+/**
+ * Implements hook_form_alter().
+ */
+function insider_headless_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  //microsites field is required by default, so we only need to unrequire
+  if (isset($form['field_site_section'])) {
+    $form['field_site_section']['widget']['#required'] = _site_section_required();
+  }
+}
+
+function _site_section_required() {
+  $userRoles = \Drupal::currentUser()->getRoles();
+  $micrositeRequired = FALSE;
+
+  $exchangeRoles = array_intersect($userRoles, ['administrator', 'sitebuilder', 'content_approver', 'content_creator']);
+  $micrositeRoles = array_intersect($userRoles, ['microsite_approver', 'microsite_creator']);
+
+  //if the user has only microsite roles and no exchange roles, microsite field is required
+  if (sizeof($micrositeRoles) > 0 && sizeof($exchangeRoles) === 0) {
+    $micrositeRequired = TRUE;
+  }
+
+  return $micrositeRequired;
+}

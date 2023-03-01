@@ -1,0 +1,23 @@
+uuid: c95e9c07-1591-46ab-b9b1-71a40fd9910f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_for_questions
+    - node.type.library_item
+  module:
+    - text
+_core:
+  default_config_hash: eAF_HmHRdAQSf83BgwgOA-FpA6Ck7cKN7C2PoEFA3T4
+id: node.library_item.field_contact_for_questions
+field_name: field_contact_for_questions
+entity_type: node
+bundle: library_item
+label: 'Contact for Questions'
+description: 'Enter the e-mail and/or phone number for the group or individual who can answer questions.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,21 @@
+uuid: b8b97af6-e5ac-4360-8298-b6c704a92902
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_combined_date
+    - node.type.announcement
+  module:
+    - datetime
+id: node.announcement.field_combined_date
+field_name: field_combined_date
+entity_type: node
+bundle: announcement
+label: 'Combined Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

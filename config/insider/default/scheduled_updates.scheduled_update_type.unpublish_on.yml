@@ -1,0 +1,19 @@
+uuid: bed827c5-e114-4596-84c1-7cf9b55fd1ef
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: TjjDmyljtKK09bRRi0Adyh3ReWmPJeXjHH6k0Ujh9Zs
+id: unpublish_on
+label: 'Unpublish On'
+update_entity_type: node
+update_types_supported:
+  - embedded
+field_map:
+  field_moderation_state_1: moderation_state
+update_runner:
+  id: latest_revision
+  invalid_update_behavior: ARCHIVE
+  after_run: DELETE
+  create_revisions: 'YES'
+  update_user: USER_UPDATE_OWNER

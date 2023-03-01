@@ -1,0 +1,10 @@
+uuid: fdc981fa-1c5a-4ce9-a5de-82c9ec8fb528
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 34i7cwTQmE-kPTSUr9tNrTX8by5NQ_9KJL_TjKrEBbw
+name: 'Article Type'
+vid: article_type
+description: ''
+weight: 0

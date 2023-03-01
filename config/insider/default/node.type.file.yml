@@ -1,0 +1,36 @@
+uuid: 33d0807a-a0cd-4814-bb86-b602ca1e565b
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_save_redirect
+    - workbench_access
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+    default_moderation_state: published
+  node_save_redirect:
+    save_type: '0'
+    save_location: ''
+    save_destination: 0
+    edit_type: '0'
+    edit_location: ''
+    edit_destination: 0
+  workbench_access:
+    workbench_access_status: false
+name: 'Static File'
+type: file
+description: 'Non-HTML files that are linked from intranet pages (e.g., PDFs, Microsoft Office files)'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

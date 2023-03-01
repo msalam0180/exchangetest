@@ -1,0 +1,25 @@
+uuid: 155c832f-bfdb-4cf4-b72b-db930457b51a
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:6217034f-c599-47db-beef-7f4334c766f9'
+  module:
+    - block_content
+  theme:
+    - insider
+id: twitter_embed
+theme: insider
+region: header
+weight: -3
+provider: null
+plugin: 'block_content:6217034f-c599-47db-beef-7f4334c766f9'
+settings:
+  id: 'block_content:6217034f-c599-47db-beef-7f4334c766f9'
+  label: 'Twitter Embed'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

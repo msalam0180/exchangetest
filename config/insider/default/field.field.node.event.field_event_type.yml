@@ -1,0 +1,23 @@
+uuid: 8ad5d1cc-130f-43e2-a6bd-7d54e33f5ba5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_type
+    - node.type.event
+  module:
+    - options
+_core:
+  default_config_hash: aJeZws9znet6hL0zsUyPYrF4WQSAv_iQjVggcpaAOvk
+id: node.event.field_event_type
+field_name: field_event_type
+entity_type: node
+bundle: event
+label: 'Event Type'
+description: 'Select event type from pulldown list'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

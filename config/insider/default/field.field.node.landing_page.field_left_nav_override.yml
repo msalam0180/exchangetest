@@ -1,0 +1,25 @@
+uuid: dd27673a-6394-4daa-b056-0af624885be3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_left_nav_override
+    - node.type.landing_page
+_core:
+  default_config_hash: 2K0TcmIck0bhc2l7RGzcClfwibdEdyIpcKvU7leGHMk
+id: node.landing_page.field_left_nav_override
+field_name: field_left_nav_override
+entity_type: node
+bundle: landing_page
+label: 'Choose Left Navigation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:menu'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

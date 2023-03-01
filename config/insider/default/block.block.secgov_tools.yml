@@ -1,0 +1,27 @@
+uuid: fe01b623-71bb-4264-ac88-1eb5c5d89c71
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.tools
+  module:
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: JjE05UT348cO6LC-RSSGuaoORjXfYOoYnEkGPGTZ1NI
+id: secgov_tools
+theme: insider
+region: header
+weight: 0
+provider: null
+plugin: 'system_menu_block:tools'
+settings:
+  id: 'system_menu_block:tools'
+  label: Tools
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

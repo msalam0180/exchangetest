@@ -1,0 +1,27 @@
+uuid: 57a9adb8-5230-4895-817f-bd35d7077105
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.video
+  module:
+    - entity_embed
+    - node
+_core:
+  default_config_hash: sht7yp4Htm8ZreIkk9qgwGD7_c50WfJXvY2bN5aU3Ns
+label: 'Video Embed'
+id: video_embed
+type_id: entity
+type_settings:
+  entity_type: node
+  bundles:
+    - video
+  display_plugins:
+    - 'view_mode:node.default_embed'
+    - 'view_mode:node.large_embed'
+    - 'view_mode:node.medium_embed'
+    - 'view_mode:node.small_embed'
+    - 'view_mode:node.teaser'
+  entity_browser: ''
+  entity_browser_settings: null
+icon_uuid: null

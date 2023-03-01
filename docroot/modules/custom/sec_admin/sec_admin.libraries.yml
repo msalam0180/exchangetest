@@ -1,0 +1,32 @@
+customizations:
+  version: 1.x
+  css:
+    theme:
+      css/admin.css: {}
+  js:
+    js/admin.js: {}
+  dependencies:
+    - tippy_lib/base_config
+
+ckeditor_linkit:
+  version: 1.x
+  css:
+    theme:
+      css/ckeditor_linkit.css: {}
+
+env_indicator:
+  version: 1.x
+  css:
+    theme:
+      css/env_indicator.css: {}
+  js:
+    js/env_indicator.js: {}
+  dependencies:
+    - toolbar/toolbar
+    - environment_indicator/drupal.environment_indicator
+
+file_customizations:
+  version: 1.x
+  css:
+    theme:
+      css/sec_file.css: {}

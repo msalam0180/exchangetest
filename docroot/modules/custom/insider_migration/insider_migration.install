@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * DI-3588 Migrate field_link_reference values to field_media_reference field
+ */
+function insider_migration_update_8001() {
+  // Load node/media mappings
+  $map = array();
+  $connection = \Drupal::database();
+  $query = $connection->query("SELECT * FROM {migrate_node_media_route}");
+  $result = $query->fetchAll();
+  foreach ($result as $r) {
+    $map[$r->nid] = $r->mid;
+  }
+
+  // Content types to migrate from field_link_reference to field_media_reference
+  $content_types = array('form', 'operating_procedure', 'secr');
+
+  // Loop through each content type and update each node
+  foreach ($content_types as $content_type) {
+    // Load all content with file_link_reference
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', $content_type)
+      ->exists('field_link_reference');
+
+    $nids = $query->execute();
+
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
+
+    // Loop through each existing node
+    foreach ($node_storage as $node) {
+      // Get the old static file nid
+      $link_id = $node->field_link_reference->target_id;
+
+      if (!empty($map[$link_id])) {
+        // If there is a mapping for this static file nid, map it to it's new media file home
+        $media_id = $map[$link_id];
+        // Set the new media field reference
+        $node->field_media_reference->target_id = $media_id;
+        // Empty out the old static link reference field value
+        $node->field_link_reference->target_id = NULL;
+        // Change the link reference type to media since we have migrated
+        $node->field_link_reference_type->value = 'media';
+      } else {
+        // Update the link reference type to link since this is a new field and no migration mappings were found
+        $node->field_link_reference_type->value = 'link';
+      }
+
+      // Save the node
+      $node->save();
+    }
+  }
+}

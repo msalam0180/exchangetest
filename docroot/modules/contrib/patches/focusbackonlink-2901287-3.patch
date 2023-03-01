@@ -1,0 +1,23 @@
+diff --git a/src/Controller/ActionLinkController.php b/src/Controller/ActionLinkController.php
+index 7d4be8e4b..3569b59a8 100644
+--- a/src/Controller/ActionLinkController.php
++++ b/src/Controller/ActionLinkController.php
+@@ -3,6 +3,7 @@
+ namespace Drupal\flag\Controller;
+
+ use Drupal\Core\Ajax\AjaxResponse;
++use Drupal\Core\Ajax\InvokeCommand;
+ use Drupal\Core\Ajax\ReplaceCommand;
+ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+ use Drupal\Core\Entity\EntityInterface;
+@@ -147,6 +148,10 @@ private function generateResponse(FlagInterface $flag, EntityInterface $entity,
+     $pulse = new ActionLinkFlashCommand($selector, $message);
+     $response->addCommand($pulse);
+
++    // Put the focus back on the link.
++    $focus = new InvokeCommand($selector . '>a', 'focus');
++    $response->addCommand($focus);
++
+     return $response;
+   }
+

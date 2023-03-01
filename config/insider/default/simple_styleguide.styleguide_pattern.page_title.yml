@@ -1,0 +1,9 @@
+uuid: e58ed0b1-8176-4b11-99b5-334ffaf96217
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: a9YiZhgUg5bnMXc_MhzW5jxGv7Q3d4pTAAiiTj2fVdY
+id: page_title
+label: 'Page Title'
+pattern: '<h1 class="page-title">Test Page</h1>'

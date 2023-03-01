@@ -1,0 +1,12 @@
+// Toolbar overrides
+
+//TODO: only load this file when logged in, or import this into the main css. There is no need for a file with one rule
+body.toolbar-tray-open.toolbar-vertical.toolbar-fixed {
+  margin-left: 0px;
+}
+
+.adminimal-admin-toolbar .toolbar-tray-horizontal a:focus,
+.toolbar-lining button:focus,
+.adminimal .toolbar .toolbar-bar .toolbar-tab > .toolbar-item:focus{
+  box-shadow: inset 0 0 0 1px white;
+}

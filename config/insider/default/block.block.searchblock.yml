@@ -1,0 +1,25 @@
+uuid: d62b0fe4-9826-4bee-b79c-6183107ec7f0
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:fa7d535b-67b3-4c74-a558-7dd2ec96522e'
+  module:
+    - block_content
+  theme:
+    - insider
+id: searchblock
+theme: insider
+region: header
+weight: 0
+provider: null
+plugin: 'block_content:fa7d535b-67b3-4c74-a558-7dd2ec96522e'
+settings:
+  id: 'block_content:fa7d535b-67b3-4c74-a558-7dd2ec96522e'
+  label: 'Search Block'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

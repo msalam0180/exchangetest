@@ -1,0 +1,137 @@
+//
+// Nodes Events
+// Styles ONLY apply to event nodes
+// --------------------------------------------------
+
+.details_heading{
+  margin-top: 30px;
+}
+
+// timebox on an event
+.field_session{
+  font-size: 1.1em;
+  .event_session {
+    font-weight: 600;
+    margin-bottom: 2px;
+    line-height: 1.5em;
+    display: table;
+    width: 100%;
+
+    @include breakpoint('medium-and-up'){
+      border-left: 3px solid #007472;
+    }
+
+    @include breakpoint('small'){
+      border: 1px solid #d9e8e8;
+      margin-bottom: 5px;
+    }
+
+  }
+
+  .event_session > div {
+    padding-right: 10px;
+    padding: 10px 15px;
+    vertical-align: middle;
+
+    @include breakpoint('small'){
+      width: 100%;
+    }
+    @include breakpoint('medium-and-up'){
+      display: table-cell;
+    }
+  }
+
+  .event_date {
+    background: #b3d2d2;
+    text-align: center;
+
+    @include breakpoint('medium-and-up'){
+      width: 150px;
+      border-right: 1px solid #ffffff;
+    }
+  }
+
+  .event_time {
+    background: #d9e8e8;
+    text-align: center;
+
+    @include breakpoint('medium-and-up'){
+      border-right: 1px solid #ffffff;
+      width: 150px;
+      &.show-end-time{
+        width: 220px;
+      }
+    }
+  }
+
+  .event_location {
+    background: $white-off;
+    text-align: center;
+
+    @include breakpoint('medium-and-up'){
+      text-align: left;
+    }
+    p {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .no-location{
+    @include breakpoint('small'){
+      display: none;
+    }
+  }
+
+  .event_session div.event_add_cal{
+    display: none;
+    width: 175px;
+	padding-left: 30px !important;
+	background: $white-off;
+
+	.atc-style-blue .atcb-link{
+	  background: #007472;
+	  font-size: 12px;
+	  padding: 5px 10px;
+	}
+
+  }
+}
+
+.events_list-block_1 .view-events-list {
+  display: block !important;
+}
+
+
+.locations-empty.field_session{
+  width: auto;
+  @include clearfix;
+
+  .event_location{
+    display: none !important;
+  }
+
+  .event_session{
+    display: block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    width: auto;
+
+    @include breakpoint('small'){
+      border: 1px solid #d9e8e8;
+      width: 48%;
+    }
+
+    @include breakpoint('x-small'){
+      width: 100%;
+    }
+  }
+
+  .event_session > div{
+    width: auto;
+  }
+}
+// Border for Communities Practice Events block - DI-7132
+.communities-practice-events {
+  border: 2px solid #bfbfbf;
+  padding: 15px;
+}

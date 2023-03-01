@@ -1,0 +1,7 @@
+name: 'Insider Announcement'
+description: 'Provides Announcement content type and related configuration. '
+type: module
+core: 8.x
+package: Insider
+version: 8.x-1.0
+core_version_requirement: ^8 || ^9

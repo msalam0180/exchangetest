@@ -1,0 +1,14 @@
+uuid: d4983235-dd60-46f1-87eb-369d8f9a4fc6
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.microsite_creator
+  module:
+    - user
+id: user_add_role_action.microsite_creator
+label: 'Add the Microsite Creator role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: microsite_creator

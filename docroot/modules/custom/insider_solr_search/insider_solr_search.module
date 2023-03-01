@@ -1,0 +1,20 @@
+<?php
+
+use Drupal\search_api\IndexInterface;
+
+/**
+ * Implements hook_search_api_solr_documents_alter().
+ *
+ * @param $documents
+ * @param \Drupal\search_api\IndexInterface $index
+ * @param array $items
+ */
+function insider_solr_search_search_api_solr_documents_alter(&$documents, IndexInterface $index, array $items) {
+  foreach ($documents as $document) {
+    // Checking to see if the Override Modified Date field is set and if so, set the Changed value to the Modified
+    //  Date for sorting purposes
+    if (isset($document->ds_field_override_modified_date)) {
+      $document->ds_changed = $document->ds_field_override_modified_date;
+    }
+  }
+}

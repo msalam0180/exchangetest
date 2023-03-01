@@ -1,0 +1,99 @@
+diff --git a/filefield_paths.module b/filefield_paths.module
+index 51e4d1f..f5c0804 100644
+--- a/filefield_paths.module
++++ b/filefield_paths.module
+@@ -10,6 +10,7 @@ use Drupal\Core\Config\Entity\ThirdPartySettingsInterface;
+ use Drupal\Core\Entity\ContentEntityInterface;
+ use Drupal\Core\Entity\EntityInterface;
+ use Drupal\Core\Field\BaseFieldDefinition;
++use Drupal\Core\Field\FieldItemListInterface;
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\Core\Language\Language;
+ use Drupal\Core\Url;
+@@ -212,16 +213,51 @@ function filefield_paths_form_field_config_edit_form_alter(array &$form, FormSta
+ function filefield_paths_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+   // Force all File (Field) Paths uploads to go to the temporary file system
+   // prior to being processed.
+-  if (isset($element['#type']) && $element['#type'] == 'managed_file') {
+-    $settings = $context['items']->getFieldDefinition()
+-      ->getThirdPartySettings('filefield_paths');
+-    if (isset($settings['enabled']) && $settings['enabled']) {
++  if (isset($element['#type']) && $element['#type'] == 'managed_file' && isset($context['items'])) {
++    $field = $context['items'];
++    if (_filefield_paths_is_enabled($field)) {
+       $element['#upload_location'] = \Drupal::config('filefield_paths.settings')
+         ->get('temp_location');
+     }
+   }
+ }
+
++/**
++ * Get filefield_paths field settings.
++ *
++ * @param \Drupal\Core\Field\FieldItemListInterface $field
++ *   A field item to check for settings.
++ *
++ * @return array
++ *   The filefield_paths settings for the field if set, else empty.
++ */
++function _fieldfield_paths_get_field_settings(FieldItemListInterface $field) {
++  $settings = [];
++  $definition = $field->getFieldDefinition();
++  if ($definition instanceof ThirdPartySettingsInterface) {
++    $settings = $definition->getThirdPartySettings('filefield_paths');
++  }
++
++  return $settings;
++}
++
++/**
++ * Check if filefield_paths is enabled fo a field.
++ *
++ * @param \Drupal\Core\Field\FieldItemListInterface|mixed $field
++ *   A field to check.
++ *
++ * @return bool
++ */
++function _filefield_paths_is_enabled($field) {
++  $settings = [];
++  if ($field instanceof FieldItemListInterface) {
++    $settings = _fieldfield_paths_get_field_settings($field);
++  }
++
++  return isset($settings['enabled']) ? (bool) $settings['enabled'] : FALSE;
++}
++
+ /**
+  * Submit callback for File (Field) Paths settings form.
+  *
+@@ -349,22 +385,14 @@ function filefield_paths_entity_insert(EntityInterface $entity) {
+ function filefield_paths_entity_update(EntityInterface $entity) {
+   if ($entity instanceof ContentEntityInterface) {
+     foreach ($entity->getFields() as $field) {
+-      if ($field instanceof FileFieldItemList) {
+-        /** @var FieldConfig $definition */
+-        $definition = $field->getFieldDefinition();
+-        // Ignore base fields.
+-        if ($definition instanceof ThirdPartySettingsInterface) {
+-          $settings = $definition->getThirdPartySettings('filefield_paths');
+-          if (isset($settings['enabled']) && $settings['enabled']) {
+-            // Invoke hook_filefield_paths_process_file().
+-            foreach (\Drupal::moduleHandler()
+-                       ->getImplementations('filefield_paths_process_file') as $module) {
+-              if (function_exists($function = "{$module}_filefield_paths_process_file")) {
+-                $function($entity, $field, $settings);
+-              }
+-            }
+-          }
+-        }
++      if ($field instanceof FileFieldItemList && _filefield_paths_is_enabled($field)) {
++        $settings = _fieldfield_paths_get_field_settings($field);
++        \Drupal::moduleHandler()
++          ->invokeAll('filefield_paths_process_file', [
++            $entity,
++            $field,
++            $settings,
++          ]);
+       }
+     }
+   }

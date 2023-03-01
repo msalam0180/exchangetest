@@ -1,0 +1,23 @@
+uuid: 4767a60b-69b8-40c1-8ea3-7143f9324c95
+langcode: en
+status: true
+dependencies:
+  module:
+    - sec_roles_and_permissions
+  theme:
+    - insider
+_core:
+  default_config_hash: WPg02MjXhoGmVxZrzYyB7g_GX7YU_iiuU9RCxsnC0cU
+id: insiderusernameblock
+theme: insider
+region: header
+weight: -11
+provider: null
+plugin: insider_username_block
+settings:
+  id: insider_username_block
+  label: 'Insider User Name block'
+  label_display: '0'
+  provider: sec_roles_and_permissions
+  insider_username_block_settings: null
+visibility: {  }

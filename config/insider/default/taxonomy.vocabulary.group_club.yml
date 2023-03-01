@@ -1,0 +1,10 @@
+uuid: a2460c9f-0441-4e22-8c9c-6e0d39267abf
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 1n4XA9AzeUWSMYbMn38-F4YmRm74tQFAGFChQvlfzYg
+name: Group/Club
+vid: group_club
+description: 'SEC Groups and Clubs'
+weight: 0

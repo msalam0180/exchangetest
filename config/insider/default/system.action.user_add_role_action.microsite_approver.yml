@@ -1,0 +1,14 @@
+uuid: cf78e863-36b1-49d6-a691-97f23354dbdd
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.microsite_approver
+  module:
+    - user
+id: user_add_role_action.microsite_approver
+label: 'Add the Microsite Approver role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: microsite_approver

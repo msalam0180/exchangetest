@@ -1,0 +1,48 @@
+uuid: 84dccc22-03fa-446e-8df2-a35abc793da9
+langcode: en
+status: true
+dependencies:
+  module:
+    - poll
+id: poll.poll.default
+targetEntityType: poll
+bundle: poll
+mode: default
+content:
+  choice:
+    type: poll_choice_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  flag:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  question:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: 'Please enter title or question here'
+    third_party_settings: {  }
+  runtime:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  anonymous_vote_allow: true
+  cancel_vote_allow: true
+  result_vote_allow: true
+  uid: true

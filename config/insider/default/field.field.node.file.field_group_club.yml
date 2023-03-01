@@ -1,0 +1,28 @@
+uuid: dde09e04-9505-4d2a-87ec-ada4b303f7de
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_group_club
+    - node.type.file
+    - taxonomy.vocabulary.group_club
+id: node.file.field_group_club
+field_name: field_group_club
+entity_type: node
+bundle: file
+label: Group/Club
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      group_club: group_club
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

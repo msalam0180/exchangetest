@@ -1,0 +1,23 @@
+uuid: 7f38b03a-e3ba-4892-88a3-b61374460d65
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hero_position
+    - node.type.featured
+  module:
+    - options
+_core:
+  default_config_hash: G4R9waWUCfuAtre917RV-Z71JeIg3LTZxSIRoBeVtSA
+id: node.featured.field_hero_position
+field_name: field_hero_position
+entity_type: node
+bundle: featured
+label: 'Hero Position'
+description: 'Top - Image appears under global navigation bar; Middle - Image appears under Announcements and Calendar'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

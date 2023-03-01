@@ -1,0 +1,28 @@
+uuid: 7698b020-d690-434e-ae0f-e89e82c50625
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.scheduling_options
+    - node.type.announcement
+    - scheduled_updates.scheduled_update_type.publish_on
+    - scheduled_updates.scheduled_update_type.unpublish_on
+_core:
+  default_config_hash: 5nKVikLmswD1znENOGRLKq3wcxjZx-k5-fLSutFX_mE
+id: node.announcement.scheduling_options
+field_name: scheduling_options
+entity_type: node
+bundle: announcement
+label: 'Scheduling Options'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:scheduled_update'
+  handler_settings:
+    target_bundles:
+      - publish_on
+      - unpublish_on
+field_type: entity_reference

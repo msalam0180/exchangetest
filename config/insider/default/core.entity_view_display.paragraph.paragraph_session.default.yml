@@ -1,0 +1,46 @@
+uuid: 8741668e-7d64-4ab4-8c5e-0f931daac075
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_session.field_end_date
+    - field.field.paragraph.paragraph_session.field_location
+    - field.field.paragraph.paragraph_session.field_start_date
+    - paragraphs.paragraphs_type.paragraph_session
+  module:
+    - datetime
+    - text
+_core:
+  default_config_hash: _lY9z71le1KtcTAjomNz7oEZUuI6wC8nk8RuL-l-NDg
+id: paragraph.paragraph_session.default
+targetEntityType: paragraph
+bundle: paragraph_session
+mode: default
+content:
+  field_end_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_location:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_start_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

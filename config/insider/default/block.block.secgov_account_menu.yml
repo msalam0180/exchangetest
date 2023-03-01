@@ -1,0 +1,27 @@
+uuid: 9ac093e0-794c-4ae1-8873-1a066d5b539c
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: IAD6g1VyoeZcAmQhpJEVaVWrHIfDtFVYrzlCfF2tEXw
+id: secgov_account_menu
+theme: insider
+region: header
+weight: 2
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: false
+visibility: {  }

@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Contains insider_scheduling_options.module.
+ */
+
+use Drupal\Core\Datetime\Element\Datetime;
+
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function insider_scheduling_options_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+  if (isset($entity_form['#entity_type']) && $entity_form['#entity_type'] == 'scheduled_update') {
+    // Changing date format: 12/23/2018 12:59:00 AM
+    $current_dt = Datetime::formatExample('m/d/Y g:i:s A');
+    $entity_form['update_timestamp']['widget']['0']['value']['#description'] = 'Enter date and time in <em>' . $current_dt . '</em> format.';
+  }
+}
+
+/**
+ * Implements hook_preprocess_input().
+ */
+function insider_scheduling_options_preprocess_input(&$variables) {
+  if (isset($variables['element']['#name'])) {
+    if ($variables['element']['#name'] == 'scheduling_options[form][inline_entity_form][update_timestamp][0][value][date]') {
+      $variables['attributes']['title'] = 'Date (e.g. ' . Datetime::formatExample('m/d/Y') . ')';
+    }
+    if ($variables['element']['#name'] == 'scheduling_options[form][inline_entity_form][update_timestamp][0][value][time]') {
+      $variables['attributes']['title'] = 'Time (e.g. ' . Datetime::formatExample('g:i:s A') . ')';
+    }
+  }
+}

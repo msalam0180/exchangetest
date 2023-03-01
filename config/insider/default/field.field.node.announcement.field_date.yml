@@ -1,0 +1,26 @@
+uuid: c9c3a6b7-1346-44d8-b745-45a538776e54
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date
+    - node.type.announcement
+  module:
+    - datetime
+_core:
+  default_config_hash: zl7-2SJc4ZjgmoCWYU6tEXl6zZyCTZ9AnZKivdzaI80
+id: node.announcement.field_date
+field_name: field_date
+entity_type: node
+bundle: announcement
+label: Date
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

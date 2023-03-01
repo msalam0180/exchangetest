@@ -1,0 +1,57 @@
+uuid: 6421c7a4-a03f-445d-b0df-d09c5c18c9cf
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: E-c_gE13hBURQFiCZsSiAMvemrTBhtOONUL4YRvyp1Q
+id: insider_external_links
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - insider_external_links
+migration_group: insider
+label: 'JSON import of Insider External Links'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  item_selector: 0
+  urls: 'http://secgovdcmdev1.prod.acquia-sites.com/files/migration/insider/source/insider_external_links.json'
+  fields:
+    -
+      name: id
+      label: Identifier
+      selector: id
+    -
+      name: title
+      label: Title
+      selector: title
+    -
+      name: url
+      label: URL
+      selector: url
+  ids:
+    id:
+      type: string
+process:
+  type:
+    plugin: default_value
+    default_value: link
+  title: title
+  field_url:
+    -
+      plugin: get
+      source:
+        - title
+        - url
+    -
+      plugin: flatten
+    -
+      plugin: link_import
+  uid:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: 'entity:node'
+migration_dependencies: null

@@ -1,0 +1,954 @@
+uuid: 67d351a8-b48f-41d0-939e-9ec893c90e03
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_description_abstract
+    - field.storage.media.field_media_file
+    - field.storage.media.field_media_override_modified
+    - field.storage.node.body
+    - field.storage.node.field_center_2_box
+    - field.storage.node.field_combined_date
+    - field.storage.node.field_contact
+    - field.storage.node.field_contact_for_questions
+    - field.storage.node.field_description_abstract
+    - field.storage.node.field_division_office
+    - field.storage.node.field_session
+    - field.storage.paragraph.field_location
+    - field.storage.node.field_form_number
+    - field.storage.node.field_form_topic
+    - field.storage.node.field_from
+    - field.storage.node.field_group_club
+    - field.storage.node.field_short_title
+    - field.storage.node.field_caption
+    - field.storage.node.field_image_reference
+    - field.storage.node.field_left_1_box
+    - field.storage.node.field_left_2_box
+    - field.storage.node.field_left_3_box
+    - field.storage.node.field_left_4_box
+    - field.storage.node.field_left_5_box
+    - field.storage.node.field_site_section
+    - field.storage.node.field_release_number
+    - field.storage.node.field_override_modified_date
+    - field.storage.node.field_right_2_box
+    - field.storage.node.field_right_3_box
+    - field.storage.node.field_right_4_box
+    - field.storage.node.field_secr_number
+    - field.storage.node.field_series
+    - field.storage.node.field_source
+    - field.storage.node.field_tags
+    - field.storage.node.field_teaser
+    - field.storage.node.field_to
+    - field.storage.node.field_topic
+    - field.storage.node.field_transcript
+    - field.storage.node.field_vendor
+    - search_api.server.acquia_search_server
+  module:
+    - search_api_solr
+    - media
+    - file
+    - node
+    - taxonomy
+    - paragraphs
+    - search_api
+    - search_api_attachments
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    term_modifiers:
+      slop: 10000000
+      fuzzy: 2
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+_core:
+  default_config_hash: thhtguA6aSmZKPbKucxo3tNiSwjisZ3gkTHOf0a_w4g
+id: acquia_search_index
+name: 'Acquia Search Solr Index'
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.body
+  changed:
+    label: Changed
+    datasource_id: 'entity:node'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - node
+  changed_1:
+    label: Changed
+    datasource_id: 'entity:media'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - media
+  created:
+    label: 'Authored on'
+    datasource_id: 'entity:media'
+    property_path: created
+    type: date
+    dependencies:
+      module:
+        - media
+  field_caption:
+    label: 'Image Reference » Content » Caption'
+    datasource_id: 'entity:node'
+    property_path: 'field_image_reference:entity:field_caption'
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_caption
+        - field.storage.node.field_image_reference
+      module:
+        - node
+  field_center_2_box:
+    label: 'Center 2 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_center_2_box
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_center_2_box
+  field_combined_date:
+    label: 'Combined Date'
+    datasource_id: 'entity:node'
+    property_path: field_combined_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_combined_date
+  field_contact:
+    label: Contact
+    datasource_id: 'entity:node'
+    property_path: field_contact
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_contact
+  field_contact_for_questions:
+    label: 'Contact for Questions'
+    datasource_id: 'entity:node'
+    property_path: field_contact_for_questions
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_contact_for_questions
+  field_description_abstract:
+    label: Description/Abstract
+    datasource_id: 'entity:node'
+    property_path: field_description_abstract
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_description_abstract
+  field_form_number:
+    label: 'Form Number'
+    datasource_id: 'entity:node'
+    property_path: field_form_number
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_form_number
+  field_from:
+    label: From
+    datasource_id: 'entity:node'
+    property_path: field_from
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_from
+  field_left_1_box:
+    label: 'Left 1 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_left_1_box
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_left_1_box
+  field_left_2_box:
+    label: 'Left 2 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_left_2_box
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_left_2_box
+  field_left_3_box:
+    label: 'Left 3 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_left_3_box
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_left_3_box
+  field_left_4_box:
+    label: 'Left 4 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_left_4_box
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_left_4_box
+  field_left_5_box:
+    label: 'Left 5 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_left_5_box
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_left_5_box
+  field_location:
+    label: 'Event Session » Paragraph » Location'
+    datasource_id: 'entity:node'
+    property_path: 'field_session:entity:field_location'
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_session
+        - field.storage.paragraph.field_location
+      module:
+        - paragraphs
+  field_media_description_abstract:
+    label: Description/Abstract
+    datasource_id: 'entity:media'
+    property_path: field_media_description_abstract
+    type: 'solr_text_custom:edge'
+    dependencies:
+      config:
+        - field.storage.media.field_media_description_abstract
+  field_media_file:
+    label: 'File Upload'
+    datasource_id: 'entity:media'
+    property_path: field_media_file
+    type: 'solr_text_custom:edge'
+    dependencies:
+      config:
+        - field.storage.media.field_media_file
+  field_media_override_modified:
+    label: 'Override Modified Date'
+    datasource_id: 'entity:media'
+    property_path: field_media_override_modified
+    type: date
+    dependencies:
+      config:
+        - field.storage.media.field_media_override_modified
+  field_override_modified_date:
+    label: 'Override Modified Date'
+    datasource_id: 'entity:node'
+    property_path: field_override_modified_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_override_modified_date
+  field_release_number:
+    label: 'OP Number'
+    datasource_id: 'entity:node'
+    property_path: field_release_number
+    type: 'solr_text_custom:edge'
+    boost: !!float 8
+    dependencies:
+      config:
+        - field.storage.node.field_release_number
+  field_release_number_1:
+    label: 'OP Number'
+    datasource_id: 'entity:node'
+    property_path: field_release_number
+    type: 'solr_text_custom:edge'
+    boost: !!float 8
+    dependencies:
+      config:
+        - field.storage.node.field_release_number
+  field_right_2_box:
+    label: 'Right 2 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_right_2_box
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_right_2_box
+  field_right_3_box:
+    label: 'Right 3 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_right_3_box
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_right_3_box
+  field_right_4_box:
+    label: 'Right 4 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_right_4_box
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_right_4_box
+  field_secr_number:
+    label: 'SECR Number'
+    datasource_id: 'entity:node'
+    property_path: field_secr_number
+    type: 'solr_text_custom:edge'
+    boost: !!float 8
+    dependencies:
+      config:
+        - field.storage.node.field_secr_number
+  field_secr_number_1:
+    label: 'SECR Number'
+    datasource_id: 'entity:node'
+    property_path: field_secr_number
+    type: 'solr_text_custom:edge'
+    boost: !!float 8
+    dependencies:
+      config:
+        - field.storage.node.field_secr_number
+  field_series:
+    label: Series
+    datasource_id: 'entity:node'
+    property_path: field_series
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_series
+  field_short_title:
+    label: 'Home Page Title'
+    datasource_id: 'entity:node'
+    property_path: field_short_title
+    type: 'solr_text_custom:edge'
+    dependencies:
+      config:
+        - field.storage.node.field_short_title
+  field_site_section:
+    label: Microsite
+    datasource_id: 'entity:node'
+    property_path: field_site_section
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_site_section
+  field_source:
+    label: Source
+    datasource_id: 'entity:node'
+    property_path: field_source
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_source
+  field_teaser:
+    label: Teaser
+    datasource_id: 'entity:node'
+    property_path: field_teaser
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_teaser
+  field_to:
+    label: To
+    datasource_id: 'entity:node'
+    property_path: field_to
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_to
+  field_transcript:
+    label: Transcript
+    datasource_id: 'entity:node'
+    property_path: field_transcript
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_transcript
+  field_vendor:
+    label: Vendor
+    datasource_id: 'entity:node'
+    property_path: field_vendor
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_vendor
+  filename_1:
+    label: 'File Upload » File » Filename'
+    datasource_id: 'entity:media'
+    property_path: 'field_media_file:entity:filename'
+    type: 'solr_text_custom:edge'
+    dependencies:
+      config:
+        - field.storage.media.field_media_file
+      module:
+        - file
+  name:
+    label: Name
+    datasource_id: 'entity:media'
+    property_path: name
+    type: 'solr_text_custom:edge'
+    dependencies:
+      module:
+        - media
+  name_1:
+    label: 'Form Topic » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_form_topic:entity:name'
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_form_topic
+      module:
+        - taxonomy
+  name_2:
+    label: 'Tags » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_tags:entity:name'
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_tags
+      module:
+        - taxonomy
+  name_3:
+    label: 'Topic » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_topic:entity:name'
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_topic
+      module:
+        - taxonomy
+  name_4:
+    label: 'Group/Club » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_group_club:entity:name'
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_group_club
+      module:
+        - taxonomy
+  name_5:
+    label: 'Division / Office » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_division_office:entity:name'
+    type: 'solr_text_custom:edge'
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.node.field_division_office
+      module:
+        - taxonomy
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: 'solr_text_custom:edge'
+    boost: !!float 8
+    configuration:
+      roles:
+        administrator: administrator
+        authenticated: authenticated
+        content_approver: content_approver
+        content_creator: content_creator
+      view_mode:
+        'entity:media':
+          audio: ''
+          file: ''
+          image: ''
+          remote_video: ''
+          video: ''
+        'entity:node':
+          announcement: ''
+          event: ''
+          form: ''
+          gallery: ''
+          landing_page: ''
+          library_item: ''
+          operating_procedure: ''
+          page: ''
+          sec_article: ''
+          secr: ''
+          video: ''
+  saa_field_media_file:
+    label: 'Search api attachments: File Upload'
+    property_path: saa_field_media_file
+    type: 'solr_text_custom:edge'
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  status_1:
+    label: Published
+    datasource_id: 'entity:media'
+    property_path: status
+    type: boolean
+    dependencies:
+      module:
+        - media
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: 'solr_text_custom:edge'
+    boost: !!float 13
+    dependencies:
+      module:
+        - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    dependencies:
+      module:
+        - node
+  uid_1:
+    label: 'Authored by'
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  url:
+    label: URI
+    property_path: search_api_url
+    type: string
+datasource_settings:
+  'entity:media':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:node':
+    bundles:
+      default: true
+      selected:
+        - featured
+        - file
+        - image
+        - link
+        - sec_alert
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url:
+    plugin_id: add_url
+    settings: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  entity_status: {  }
+  file_attachments:
+    excluded_extensions: 'aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv'
+    number_indexed: 0
+    number_first_bytes: '0'
+    max_filesize: '0'
+    excluded_private: 1
+    excluded_mimes: 'audio/x-aiff image/x-jg video/x-msvideo image/x-ms-bmp image/gif image/vnd.microsoft.icon video/quicktime audio/ogg video/ogg image/png image/x-photoshop audio/x-realaudio audio/x-pn-realaudio image/x-rgb video/x-flv'
+  highlight:
+    weights:
+      postprocess_query: 0
+    prefix: '<strong>'
+    suffix: '</strong>'
+    excerpt: true
+    excerpt_length: 256
+    exclude_fields:
+      - field_media_file
+      - field_series
+    highlight: always
+    highlight_partial: true
+  html_filter:
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+    all_fields: true
+    fields:
+      - body
+      - field_caption
+      - field_center_2_box
+      - field_contact
+      - field_contact_for_questions
+      - field_description_abstract
+      - field_form_number
+      - field_from
+      - field_left_1_box
+      - field_left_2_box
+      - field_left_3_box
+      - field_left_4_box
+      - field_left_5_box
+      - field_location
+      - field_media_description_abstract
+      - field_media_file
+      - field_release_number
+      - field_release_number_1
+      - field_right_2_box
+      - field_right_3_box
+      - field_right_4_box
+      - field_secr_number
+      - field_secr_number_1
+      - field_series
+      - field_short_title
+      - field_site_section
+      - field_source
+      - field_teaser
+      - field_to
+      - field_transcript
+      - field_vendor
+      - filename_1
+      - name
+      - name_1
+      - name_2
+      - name_3
+      - name_4
+      - name_5
+      - rendered_item
+      - saa_field_media_file
+      - title
+      - url
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+  ignore_character:
+    weights:
+      preprocess_index: -10
+      preprocess_query: -10
+    all_fields: false
+    fields:
+      - body
+      - field_caption
+      - field_center_2_box
+      - field_contact
+      - field_contact_for_questions
+      - field_description_abstract
+      - field_form_number
+      - field_from
+      - field_left_1_box
+      - field_left_2_box
+      - field_left_3_box
+      - field_left_4_box
+      - field_left_5_box
+      - field_location
+      - field_media_description_abstract
+      - field_media_file
+      - field_release_number
+      - field_right_2_box
+      - field_right_3_box
+      - field_right_4_box
+      - field_secr_number
+      - field_series
+      - field_short_title
+      - field_source
+      - field_teaser
+      - field_to
+      - field_transcript
+      - field_vendor
+      - filename_1
+      - name
+      - name_1
+      - name_2
+      - name_3
+      - name_4
+      - name_5
+      - rendered_item
+      - saa_field_media_file
+      - title
+    ignorable: '[''¿¡!?,.:;]'
+    ignorable_classes:
+      - Pc
+      - Pd
+      - Pe
+      - Pf
+      - Pi
+      - Po
+      - Ps
+  ignorecase:
+    all_fields: true
+    fields:
+      - body
+      - field_caption
+      - field_center_2_box
+      - field_contact
+      - field_contact_for_questions
+      - field_description_abstract
+      - field_form_number
+      - field_from
+      - field_left_1_box
+      - field_left_2_box
+      - field_left_3_box
+      - field_left_4_box
+      - field_left_5_box
+      - field_location
+      - field_media_description_abstract
+      - field_media_file
+      - field_release_number
+      - field_release_number_1
+      - field_right_2_box
+      - field_right_3_box
+      - field_right_4_box
+      - field_secr_number
+      - field_secr_number_1
+      - field_series
+      - field_short_title
+      - field_site_section
+      - field_source
+      - field_teaser
+      - field_to
+      - field_transcript
+      - field_vendor
+      - filename_1
+      - name
+      - name_1
+      - name_2
+      - name_3
+      - name_4
+      - name_5
+      - rendered_item
+      - saa_field_media_file
+      - title
+      - url
+  language_with_fallback: {  }
+  rendered_item: {  }
+  reverse_entity_references: {  }
+  solr_date_range:
+    weights:
+      preprocess_index: 0
+  stopwords:
+    all_fields: false
+    fields:
+      - body
+      - field_caption
+      - field_center_2_box
+      - field_contact
+      - field_contact_for_questions
+      - field_description_abstract
+      - field_form_number
+      - field_location
+      - field_media_description_abstract
+      - field_media_file
+      - field_release_number
+      - field_release_number_1
+      - field_secr_number
+      - field_secr_number_1
+      - field_series
+      - field_short_title
+      - field_source
+      - field_transcript
+      - field_vendor
+      - filename_1
+      - name
+      - name_1
+      - name_2
+      - name_3
+      - name_4
+      - name_5
+      - rendered_item
+      - saa_field_media_file
+      - title
+    stopwords:
+      - a
+      - an
+      - and
+      - are
+      - as
+      - at
+      - be
+      - but
+      - by
+      - for
+      - if
+      - in
+      - into
+      - is
+      - it
+      - 'no'
+      - not
+      - of
+      - 'on'
+      - or
+      - s
+      - such
+      - t
+      - that
+      - the
+      - their
+      - then
+      - there
+      - these
+      - they
+      - this
+      - to
+      - was
+      - will
+      - with
+  tokenizer:
+    all_fields: false
+    fields:
+      - body
+      - field_caption
+      - field_center_2_box
+      - field_contact
+      - field_contact_for_questions
+      - field_description_abstract
+      - field_form_number
+      - field_location
+      - field_media_description_abstract
+      - field_media_file
+      - field_release_number
+      - field_release_number_1
+      - field_secr_number
+      - field_secr_number_1
+      - field_series
+      - field_short_title
+      - field_source
+      - field_transcript
+      - field_vendor
+      - filename_1
+      - name
+      - name_1
+      - name_2
+      - name_3
+      - name_4
+      - name_5
+      - rendered_item
+      - saa_field_media_file
+      - title
+    spaces: ''
+    ignored: ._-
+    overlap_cjk: 1
+    minimum_word_size: '2'
+  transliteration:
+    all_fields: false
+    fields:
+      - body
+      - field_caption
+      - field_center_2_box
+      - field_contact
+      - field_contact_for_questions
+      - field_description_abstract
+      - field_form_number
+      - field_location
+      - field_media_description_abstract
+      - field_media_file
+      - field_release_number
+      - field_release_number_1
+      - field_secr_number
+      - field_secr_number_1
+      - field_series
+      - field_short_title
+      - field_source
+      - field_transcript
+      - field_vendor
+      - filename_1
+      - name
+      - name_1
+      - name_2
+      - name_3
+      - name_4
+      - name_5
+      - rendered_item
+      - saa_field_media_file
+      - title
+      - url
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 50
+  index_directly: true
+  track_changes_in_references: true
+  processors:
+    language:
+      status: '1'
+      weight: -50
+      settings: {  }
+      processorPluginId: language
+server: acquia_search_server

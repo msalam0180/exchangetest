@@ -1,0 +1,11 @@
+diff --git a/.htaccess b/.htaccess
+index 83cb71a042..5c507a10f8 100644
+--- a/.htaccess
++++ b/.htaccess
+@@ -186,4 +186,6 @@ AddEncoding gzip svgz
+   Header always set X-Content-Type-Options nosniff
+   # Disable Proxy header, since it's an attack vector.
+   RequestHeader unset Proxy
++  # Force XSS protection https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection
++  Header set X-XSS-Protection "1; mode=block"
+ </IfModule>

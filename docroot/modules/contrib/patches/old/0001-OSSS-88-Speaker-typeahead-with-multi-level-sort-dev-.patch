@@ -1,0 +1,75 @@
+From 7454b9f23b35e04a0249c959efc13819429ba368 Mon Sep 17 00:00:00 2001
+From: Jay Chand <jchand5066@gmail.com>
+Date: Thu, 15 Sep 2016 12:51:58 -0400
+Subject: [PATCH]  OSSS-88 : Speaker typeahead with multi level sort dev
+ complete
+
+---
+ .../ViewsAutocompleteFiltersController.php         | 47 +++++++++++++---------
+ 1 file changed, 27 insertions(+), 20 deletions(-)
+
+diff --git a/docroot/modules/contrib/views_autocomplete_filters/src/Controller/ViewsAutocompleteFiltersController.php b/docroot/modules/contrib/views_autocomplete_filters/src/Controller/ViewsAutocompleteFiltersController.php
+index 2271467..5696ad4 100644
+--- a/docroot/modules/contrib/views_autocomplete_filters/src/Controller/ViewsAutocompleteFiltersController.php
++++ b/docroot/modules/contrib/views_autocomplete_filters/src/Controller/ViewsAutocompleteFiltersController.php
+@@ -235,30 +235,37 @@ public function autocomplete(Request $request, $view_name, $view_display, $filte
+     // Follow https://www.drupal.org/node/2346973 issue when Drupal core will
+     // provide a solution for such messages.
+ 
+-    if (!empty($matches)) {
+-      if ($expose_options[autocomplete_field] === 'field_speaker_combined') {
+-        $collections = [];
+-        $collection = [];
+-
+-        foreach($matches as $key=>$matchCollection) {
+-          if(!in_array($matches[$key]['label'], $collections)) {
+-            $collections[] = $matches[$key]['label'];
+-          }
++  if (!empty($matches)) {
++    if ($expose_options[autocomplete_field] === 'field_speaker_combined') {
++      $collections = [];
++      $collection = [];
++      $chair = [];
++      $commissioner = [];
++      $array_lowercase = array_map('strtolower', $matches);
++      sort($array_lowercase,$matches);
++      //Get unique values;
++      foreach($matches as $key=>$matchCollection) {
++        if(!in_array($matches[$key]['label'], $collections)) {
++          $collections[] = $matches[$key]['label'];
+         }
+-        rsort($collections);
+-        //Re-sort values if it contanes 'chair' or 'Commissioner'
+-        foreach ($collections as $value) {
+-          if (strpos($value,'Chair') !== false) {
+-              $tmp = [$value];
+-              unset($value);
+-              $collection = array_merge($tmp, $collections);
+-          }
++      }
++      //Re-sort values if it contanes 'chair' or 'Commissioner';
++      foreach ($collections as $key=>$value) {
++        if (strpos($value,'Chair') !== false) {
++            $chair[] = $value;
++            unset($collections[$key]);
+         }
+-        // /var_dump($collection);
+-        return new JsonResponse($collection);
++        if (strpos($value,'Commissioner') !== false) {
++           $commissioner[] = $value;
++           unset($collections[$key]);
+         }
+       }
+-
++      //Merge back our collection after processing;
++      $chair = array_merge($chair,$commissioner);
++      $collection = array_merge($chair,$collections);
++        return new JsonResponse($collection);
++      }
++    }
+     return new JsonResponse($matches);
+   }
+ 
+-- 
+2.8.4 (Apple Git-73)
+

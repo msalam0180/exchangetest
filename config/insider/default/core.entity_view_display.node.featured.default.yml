@@ -1,0 +1,96 @@
+uuid: c2b18ee1-c41e-43ee-bd54-bb8d296e085e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.featured.field_combined_date
+    - field.field.node.featured.field_creator
+    - field.field.node.featured.field_featured_type
+    - field.field.node.featured.field_hero_position
+    - field.field.node.featured.field_image_reference
+    - field.field.node.featured.field_sec_content_approver
+    - field.field.node.featured.field_teaser
+    - field.field.node.featured.field_title_visibility
+    - field.field.node.featured.field_url
+    - field.field.node.featured.scheduling_options
+    - node.type.featured
+  module:
+    - link
+    - options
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.featured.default
+targetEntityType: node
+bundle: featured
+mode: default
+content:
+  field_featured_type:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_hero_position:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_image_reference:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default_embed
+      link: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_teaser:
+    type: text_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_title_visibility:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_url:
+    type: link
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+hidden:
+  field_combined_date: true
+  field_creator: true
+  field_sec_content_approver: true
+  langcode: true
+  published_at: true
+  scheduling_options: true
+  search_api_excerpt: true
+  workbench_moderation_control: true

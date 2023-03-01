@@ -1,0 +1,21 @@
+uuid: 6d54574a-0f85-40d9-8455-8cd85ba8fe46
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_abbreviation
+    - taxonomy.vocabulary.top_level_group
+_core:
+  default_config_hash: LCJHBrpM9ieRSYoTLKZheeVSXe6qlX0ubotjHMJuu_8
+id: taxonomy_term.top_level_group.field_abbreviation
+field_name: field_abbreviation
+entity_type: taxonomy_term
+bundle: top_level_group
+label: Abbreviation
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

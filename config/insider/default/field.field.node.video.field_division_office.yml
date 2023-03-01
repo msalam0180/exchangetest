@@ -1,0 +1,30 @@
+uuid: 808c0201-5296-471b-a4bb-8162db3d409b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_division_office
+    - node.type.video
+    - taxonomy.vocabulary.office_division
+_core:
+  default_config_hash: aRm-P51wTnL-2feMpOCRTAYkl3TYVROt05c82oHCO5c
+id: node.video.field_division_office
+field_name: field_division_office
+entity_type: node
+bundle: video
+label: 'Division / Office'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      office_division: office_division
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

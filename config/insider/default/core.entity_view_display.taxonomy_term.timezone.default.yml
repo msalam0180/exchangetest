@@ -1,0 +1,43 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.timezone.field_abbreviation
+    - field.field.taxonomy_term.timezone.field_php_supported_format
+    - taxonomy.vocabulary.timezone
+  module:
+    - panelizer
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+_core:
+  default_config_hash: SCtjh4TgAY9Sb2uekgs5EBUsx-r_UxjyknNOx1Ejfpo
+id: taxonomy_term.timezone.default
+targetEntityType: taxonomy_term
+bundle: timezone
+mode: default
+content:
+  field_abbreviation:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_php_supported_format:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  description: true
+  langcode: true
+  search_api_excerpt: true

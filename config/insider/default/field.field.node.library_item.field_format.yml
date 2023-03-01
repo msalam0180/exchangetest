@@ -1,0 +1,21 @@
+uuid: b96e981d-c4bc-4f74-86ef-b3305e7d6cdb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_format
+    - node.type.library_item
+_core:
+  default_config_hash: Jsu547Q3Gp83K0irzYCiTwrMW7asrLXLQvguNRNy1rE
+id: node.library_item.field_format
+field_name: field_format
+entity_type: node
+bundle: library_item
+label: Format
+description: 'Select at least one delivery format.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

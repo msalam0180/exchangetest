@@ -1,0 +1,15 @@
+uuid: 88fccc61-8a4f-4659-b238-c4b84ba79961
+langcode: en
+status: true
+dependencies:
+  module:
+    - graphql
+_core:
+  default_config_hash: '--F9MH7GTTW11ZFmEic-eVum-S3_97AoLKBH9Y0F_Dw'
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'execute graphql requests'
+  - 'execute persisted graphql requests'

@@ -1,0 +1,29 @@
+// Feature homepage poll stytling
+.poll-view.default {
+  padding-bottom: 2rem;
+
+  .poll {
+    padding: 4px 4px;
+    border-style: groove;
+
+    div.form-item-choice {
+      display: flex;
+
+      label {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .poll-question {
+    font-size: 20px;
+  }
+
+  .messages.messages--status {
+    display: none;
+  }
+
+  .messages.messages--error {
+    top: 10px;
+  }
+}

@@ -1,0 +1,15 @@
+uuid: 21a95e60-3dd0-4f77-a943-256392d7508c
+langcode: en
+status: true
+dependencies: {  }
+name: video_on_demand
+label: 'Video On Demand'
+effects:
+  ff0b8e70-5865-451e-a640-8c4b9620b934:
+    uuid: ff0b8e70-5865-451e-a640-8c4b9620b934
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 250
+      height: 150
+      anchor: center-center

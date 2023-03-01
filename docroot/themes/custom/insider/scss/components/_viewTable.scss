@@ -1,0 +1,61 @@
+//
+// Tables
+// Affects all tables created using a view
+// 
+// Note: If you only want to affect datatables, please use that file
+// --------------------------------------------------
+
+.viewTable {
+  @extend .table-bordered;
+  @extend .table-hover;
+
+  [role="row"] td,
+  & > tbody > tr > td{
+    border-right: none;
+    border-left: none;
+  }
+
+  .group{
+    background-color: $table-group-bg-color;
+    color: $table-group-color;
+    text-align: center;
+    font-weight: bold;
+    &:hover{
+      background-color: $table-group-bg-color;
+    }
+  }
+  
+  td p{
+    margin: 0;
+  } 
+
+  ul li{
+    margin-bottom: 0;
+  }
+  
+  .td-content *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.viewTable{
+  @include breakpoint('small'){
+    @include table-respond;
+  }
+}
+
+
+// Specific to Grouped Table
+//Hide the flashing H1 on grouped tables
+.grouped-table .view-content .grouped{
+  display: none;
+}
+
+// fix thick borders on groups
+.viewTable > thead > tr.group > td {
+    border: 0;
+}
+
+.view-filters + .view-content .viewTable{
+  border-top: 0;
+}

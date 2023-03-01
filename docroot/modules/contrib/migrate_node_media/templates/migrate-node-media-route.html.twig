@@ -1,0 +1,22 @@
+<!-- Setup the table for the list of mappings -->
+<div id="route-mappings">
+    <h1>Route Mappings</h1>
+    <table>
+        <thead>
+        <th>ID</th>
+        <th>Content Type Route</th>
+        <th>Media Content Route</th>
+        <th>Mapping ID</th>
+        </thead>
+        <tbody>
+        {% for route in data %}
+            <tr>
+                <td>{{ route.id }}</td>
+                <td>{{ route.content_route }}</td>
+                <td>{{ route.media_route }}</td>
+                <td>{{ route.map_id }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

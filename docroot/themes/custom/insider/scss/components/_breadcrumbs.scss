@@ -1,0 +1,51 @@
+//
+// Breadcrumbs
+// --------------------------------------------------
+
+//This code has not been reviewed - copied from SEC.gov
+#breadcrumbs {
+  @include span(12);
+  clear: both;
+  display: block;
+  margin-top: 10px;
+  &:after {
+    clear: both;
+    content: ' ';
+  }
+
+  #block-secgov-breadcrumbs {
+    margin: 0 auto;
+    width: 960px;
+    nav ol {
+      margin: 0;
+      padding: 0;
+    }
+
+    @include breakpoint('medium','portrait') {
+      margin-left: 0;
+      margin-top: 20px;
+      width: 100%;
+    }
+    @include breakpoint('small') {
+      margin-left: 0px;
+
+      nav ol {
+        li {
+          display: block;
+          float: left;
+          margin-left: 3px;
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+
+        span {
+          display: inline-block;
+          float: left;
+          margin: 3px 0 0 2px;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}

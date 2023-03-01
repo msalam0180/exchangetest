@@ -1,0 +1,87 @@
+//
+// Search Results
+// The search results page styles
+// --------------------------------------------------
+
+.site-search-results {
+  //Search Form on search page
+  .views-exposed-form {
+    border: none;
+    border-bottom: 1px solid $border-color;
+    margin-bottom: 30px;
+    @include clearfix;
+    padding: 3px 0px 20px;
+    background: transparent;
+
+    .form-container {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .form-item {
+      margin-top: 0;
+      margin-bottom: 0;
+      label {
+        @extend .sr-only;
+      }
+    }
+
+    .form-item-search-api-fulltext {
+      flex-grow: 2;
+    }
+
+    .form-item-sort-bef-combine.js-form-type-select {
+      max-width: 170px;
+      min-width: 127px;
+    }
+
+    .form-actions {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  //Search Results rows
+  .views-row {
+    margin-bottom: 32px;
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    p:first-child {
+      margin-top: 0px;
+    }
+    strong {
+      background-color: #e5f5f5;
+      padding: 0px 1px;
+      border-radius: 2px;
+      border: 0.5px solid #cce8e8;
+      display: inline-block;
+      margin-right: -0.5px;
+      margin-left: -0.5px;
+    }
+    .views-field-changed {
+      color: #757575;
+      font-size: 0.9em;
+    }
+    .fa-file-alt {
+      color: $primary-color;
+    }
+  }
+
+  //Search paging
+  #table_paging {
+    border-top: 1px solid $border-color;
+    @include breakpoint("medium-and-up") {
+      padding-top: 30px;
+    }
+  }
+
+  //No results behavior and help text
+  .view-empty {
+    text-align: center;
+    font-size: 1.5em;
+    padding: 20px 0;
+  }
+}

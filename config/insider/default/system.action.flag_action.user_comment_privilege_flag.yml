@@ -1,0 +1,15 @@
+uuid: e18d2946-cb0b-4679-86e7-74d66e24f095
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.user_comment_privilege
+  module:
+    - flag
+id: flag_action.user_comment_privilege_flag
+label: 'Remove Commenting Privileges'
+type: user
+plugin: 'flag_action:user_comment_privilege_flag'
+configuration:
+  flag_id: user_comment_privilege
+  flag_action: flag

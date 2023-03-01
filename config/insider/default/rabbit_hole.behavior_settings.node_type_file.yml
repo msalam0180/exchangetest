@@ -1,0 +1,14 @@
+uuid: dd549afc-18ee-4d94-b270-93511b697c68
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.file
+id: node_type_file
+entity_type_id: node_type
+entity_id: file
+action: page_redirect
+allow_override: 0
+redirect: '[node:field_file_upload:entity:url]'
+redirect_code: 301
+redirect_fallback_action: access_denied

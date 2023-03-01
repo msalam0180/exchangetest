@@ -1,0 +1,22 @@
+uuid: f10e6d0a-f170-4610-a35e-06cbd011e1c1
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: siBnlOUUyIVTULwAj3ABaswOjSJmVJpGcq4LDvaxC5w
+id: secgov_messages
+theme: insider
+region: content
+weight: -14
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

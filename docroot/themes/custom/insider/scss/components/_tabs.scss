@@ -1,0 +1,141 @@
+//
+// UI Tabs
+// These are tabs that use jQuery UI
+// --------------------------------------------------
+
+.ui-tabs {
+	background: none;
+	border: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	margin-top: 0px;
+	position: relative;	/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+	padding: 0;
+
+	.ui-tabs-nav {
+		background: none;
+		border:0;
+		margin: 0;
+		padding: 0;
+	}
+
+    .ui-tabs-nav ul {list-style: none;}
+	.ui-tabs-nav li {
+		border-right: none;
+		border-bottom: 1.5px solid $border-color;
+		border-top: 1.5px solid $border-color;
+		margin: 0;
+		// overflow-y: hidden;
+		white-space: normal;
+		width: 33.33333%;
+		border-left: 1.5px solid $tab-border-color;
+
+		&:first-child{
+			border-left: none;
+		}
+		a {
+			@include raleway;
+			font-size: 14px;
+			text-transform: uppercase;
+			font-weight: 600;
+			text-align: center;
+			width: 100%;
+			word-wrap: break-word;
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+
+	.ui-tabs-nav .ui-tabs-anchor {
+		float: left;
+		padding: .5em .25em;
+		text-decoration: none;
+
+		@include breakpoint('small'){
+			padding: 5px 0;
+		}
+	}
+
+	.ui-tabs-nav .ui-state-default {
+		background: $tab-bg-default;
+		color: $tab-color-default;
+		text-transform: uppercase;
+	}
+
+	.ui-tabs-nav li.ui-tabs-active, .ui-tabs-nav li.ui-tabs-active.ui-state-hover {
+		background: $tab-bg-active;
+		color: $tab-color-active;
+		margin-bottom: 0;
+    padding-bottom: 0;
+	}
+
+	.ui-tabs-nav li.ui-state-hover {
+		background: $tab-bg-hover;
+		color: $tab-color-hover;
+	}
+
+	.ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
+	.ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
+	.ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor {
+		cursor: text;
+	}
+
+	.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
+		cursor: pointer;
+	}
+
+	.tabs-pane, .ui-tabs-panel {
+		background: none;
+		border-top: none;
+		display: inline-block;
+		min-height: 180px;
+		padding: 1.7em 1.4em;
+		width: 100%;
+		word-break: break-word;
+		word-wrap: normal;
+		white-space: normal;
+		p { line-height: 1.4; }
+	}
+
+	/* Remove tab radius */
+	.ui-corner-all,
+	.ui-corner-top,
+	.ui-corner-bottom,
+	.ui-corner-left,
+	.ui-corner-right,
+	.ui-corner-tl,
+	.ui-corner-tr,
+	.ui-corner-bl,
+	.ui-corner-br {
+		border-radius: 0;
+	}
+}
+
+.ui-widget.ui-widget-content {
+	border: 1.5px solid $border-color;
+	border-top: none;
+}
+
+.ui-widget-content a {
+	color: $anchor-color;
+}
+
+//TODO: When needed review this rule - still an old Rule
+.vertical-tabs.ui-tabs {
+	@include breakpoint('small') {
+		.ui-tabs-nav li {
+			border-color: $border-color;
+			border-radius: 0;
+			clear: both;
+			display: block;
+			float: none;
+			width: 100%;
+
+			a {
+				padding: 10px;
+				width: 100%;
+			}
+		}
+	}
+}

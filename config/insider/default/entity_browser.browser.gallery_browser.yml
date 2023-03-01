@@ -1,0 +1,33 @@
+uuid: bf446a04-d0ca-45d7-be66-5f2e99068fa0
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.gallery_browser_view
+  module:
+    - views
+_core:
+  default_config_hash: IUSfnY3JCxwfkFH1dXpEYNMKllgMYa88gBpo3y6gRHo
+name: gallery_browser
+label: 'Gallery Browser'
+display: modal
+display_configuration:
+  width: ''
+  height: ''
+  link_text: 'Select Items'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: single
+widget_selector_configuration: {  }
+widgets:
+  4a86fe3f-fa59-491e-8de8-5f97222101a3:
+    id: view
+    uuid: 4a86fe3f-fa59-491e-8de8-5f97222101a3
+    label: view
+    weight: 1
+    settings:
+      submit_text: 'Select entities'
+      auto_select: false
+      view: gallery_browser_view
+      view_display: entity_browser_1

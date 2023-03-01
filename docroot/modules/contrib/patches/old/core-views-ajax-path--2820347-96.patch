@@ -1,0 +1,254 @@
+diff --git a/core/modules/views/src/Form/ViewsExposedForm.php b/core/modules/views/src/Form/ViewsExposedForm.php
+index 125cd1fe48..1a9e85171d 100644
+--- a/core/modules/views/src/Form/ViewsExposedForm.php
++++ b/core/modules/views/src/Form/ViewsExposedForm.php
+@@ -6,7 +6,6 @@
+ use Drupal\Core\Form\FormBase;
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\Core\Render\Element\Checkboxes;
+-use Drupal\Core\Url;
+ use Drupal\views\ExposedFormCache;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+ 
+@@ -113,7 +112,14 @@ public function buildForm(array $form, FormStateInterface $form_state) {
+       '#id' => Html::getUniqueId('edit-submit-' . $view->storage->id()),
+     ];
+ 
+-    $form['#action'] = $view->hasUrl() ? $view->getUrl()->toString() : Url::fromRoute('<current>')->toString();
++    // If we are on the views ajax route, ensure the action is set so that it
++    // defaults to the current path on render.
++    if ($view->hasUrl() && $this->getRouteMatch()->getRouteName() !== 'views.ajax') {
++      $form['#action'] = $view->getUrl()->toString();
++    }
++    else {
++      $form['#action'] = '';
++    }
+     $form['#theme'] = $view->buildThemeFunctions('views_exposed_form');
+     $form['#id'] = Html::cleanCssIdentifier('views_exposed_form-' . $view->storage->id() . '-' . $display['id']);
+ 
+diff --git a/core/modules/views/tests/modules/views_test_config/test_views/views.view.test_block_exposed_ajax.yml b/core/modules/views/tests/modules/views_test_config/test_views/views.view.test_block_exposed_ajax.yml
+new file mode 100644
+index 0000000000..4ae80d6713
+--- /dev/null
++++ b/core/modules/views/tests/modules/views_test_config/test_views/views.view.test_block_exposed_ajax.yml
+@@ -0,0 +1,96 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - core.entity_view_mode.node.teaser
++  module:
++    - node
++id: test_block_exposed_ajax
++label: ''
++module: views
++description: ''
++tag: ''
++base_table: node_field_data
++base_field: nid
++core: '8'
++display:
++  default:
++    display_options:
++      access:
++        type: none
++      cache:
++        type: tag
++      exposed_form:
++        options:
++          submit_button: Apply
++          reset_button: true
++        type: basic
++      filters:
++        type:
++          expose:
++            identifier: type
++            label: 'Content: Type'
++            operator_id: type_op
++            reduce: false
++          exposed: true
++          field: type
++          id: type
++          table: node_field_data
++          plugin_id: in_operator
++          entity_type: node
++          entity_field: type
++      pager:
++        type: full
++      query:
++        options:
++          query_comment: ''
++        type: views_query
++      style:
++        type: default
++      row:
++        type: 'entity:node'
++      display_extenders: {  }
++      use_ajax: true
++    display_plugin: default
++    display_title: Master
++    id: default
++    position: 0
++    cache_metadata:
++      max-age: -1
++      contexts:
++        - 'languages:language_interface'
++        - url
++        - url.query_args
++        - 'user.node_grants:view'
++      tags: {  }
++  block_1:
++    display_plugin: block
++    id: block_1
++    display_title: Block
++    position: 2
++    display_options:
++      display_extenders: {  }
++    cache_metadata:
++      max-age: -1
++      contexts:
++        - 'languages:language_interface'
++        - url
++        - url.query_args
++        - 'user.node_grants:view'
++      tags: {  }
++  page_1:
++    display_plugin: page
++    id: page_1
++    display_title: Page
++    position: 2
++    display_options:
++      display_extenders: {  }
++      path: some-path
++    cache_metadata:
++      max-age: -1
++      contexts:
++        - 'languages:language_interface'
++        - url
++        - url.query_args
++        - 'user.node_grants:view'
++      tags: {  }
+diff --git a/core/modules/views/tests/src/FunctionalJavascript/BlockExposedFilterAJAXTest.php b/core/modules/views/tests/src/FunctionalJavascript/BlockExposedFilterAJAXTest.php
+new file mode 100644
+index 0000000000..833cd66b2d
+--- /dev/null
++++ b/core/modules/views/tests/src/FunctionalJavascript/BlockExposedFilterAJAXTest.php
+@@ -0,0 +1,81 @@
++<?php
++
++namespace Drupal\Tests\views\FunctionalJavascript;
++
++use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
++use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
++use Drupal\Tests\node\Traits\NodeCreationTrait;
++use Drupal\views\Tests\ViewTestData;
++
++/**
++ * Tests the exposed filter ajax functionality in a block.
++ *
++ * @group views
++ */
++class BlockExposedFilterAJAXTest extends JavascriptTestBase {
++
++  use ContentTypeCreationTrait;
++  use NodeCreationTrait;
++
++  /**
++   * {@inheritdoc}
++   */
++  public static $modules = ['node', 'views', 'block', 'views_test_config'];
++
++  public static $testViews = ['test_block_exposed_ajax'];
++
++  /**
++   * {@inheritdoc}
++   */
++  public function setUp() {
++    parent::setUp();
++    ViewTestData::createTestViews(self::class, ['views_test_config']);
++    $this->drupalPlaceBlock('views_block:test_block_exposed_ajax-block_1');
++    $this->createContentType(['type' => 'page']);
++    $this->createContentType(['type' => 'article']);
++    $this->createNode(['title' => 'Page A']);
++    $this->createNode(['title' => 'Page B']);
++    $this->createNode(['title' => 'Article A', 'type' => 'article']);
++
++    $this->drupalLogin($this->drupalCreateUser([
++      'access content',
++    ]));
++  }
++
++  /**
++   * Tests if exposed filtering and reset works with a views block and ajax.
++   */
++  public function testExposedFilteringAndReset() {
++    $node = $this->createNode();
++    $this->drupalGet($node->toUrl());
++
++    $page = $this->getSession()->getPage();
++
++    // Ensure that the Content we're testing for is present.
++    $html = $page->getHtml();
++    $this->assertContains('Page A', $html);
++    $this->assertContains('Page B', $html);
++    $this->assertContains('Article A', $html);
++
++    // Filter by page type.
++    $this->submitForm(['type' => 'page'], t('Apply'));
++    $this->assertSession()->waitForElementRemoved('xpath', "//text()[normalize-space() = 'Article A']");
++
++    // Verify that only the page nodes are present.
++    $html = $page->getHtml();
++    $this->assertContains('Page A', $html);
++    $this->assertContains('Page B', $html);
++    $this->assertNotContains('Article A', $html);
++
++    // Reset the form.
++    $this->submitForm([], t('Reset'));
++    // Assert we are still on the node page.
++    $html = $page->getHtml();
++    // Repeat the original tests.
++    $this->assertContains('Page A', $html);
++    $this->assertContains('Page B', $html);
++    $this->assertContains('Article A', $html);
++    $this->assertEquals($node->toUrl()->setAbsolute()->toString(), $this->getSession()->getCurrentUrl());
++  }
++
++}
+diff --git a/core/tests/Drupal/FunctionalJavascriptTests/JSWebAssert.php b/core/tests/Drupal/FunctionalJavascriptTests/JSWebAssert.php
+index 281cb78348..b81a9fd2fe 100644
+--- a/core/tests/Drupal/FunctionalJavascriptTests/JSWebAssert.php
++++ b/core/tests/Drupal/FunctionalJavascriptTests/JSWebAssert.php
+@@ -71,6 +71,32 @@ public function waitForElement($selector, $locator, $timeout = 10000) {
+     return $result;
+   }
+ 
++  /**
++   * Looks for the specified selector and returns TRUE when it is unavailable.
++   *
++   * @param string $selector
++   *   The selector engine name. See ElementInterface::findAll() for the
++   *   supported selectors.
++   * @param string|array $locator
++   *   The selector locator.
++   * @param int $timeout
++   *   (Optional) Timeout in milliseconds, defaults to 10000.
++   *
++   * @return bool
++   *   TRUE if not found, FALSE if found.
++   *
++   * @see \Behat\Mink\Element\ElementInterface::findAll()
++   */
++  public function waitForElementRemoved($selector, $locator, $timeout = 10000) {
++    $page = $this->session->getPage();
++
++    $result = $page->waitFor($timeout / 1000, function() use ($page, $selector, $locator) {
++      return !$page->find($selector, $locator);
++    });
++
++    return $result;
++  }
++
+   /**
+    * Waits for the specified selector and returns it when available and visible.
+    *

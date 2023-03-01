@@ -1,0 +1,19 @@
+uuid: 76d05973-95c6-4b7f-916c-9838e906f241
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_comment_moderator
+    - node.type.library_item
+id: node.library_item.field_comment_moderator
+field_name: field_comment_moderator
+entity_type: node
+bundle: library_item
+label: 'Comment Moderator'
+description: 'Enter one or more email addresses for the employee or group mailbox that should receive email notices when comments are added, updated, or deleted on this page. Separate multiple email addresses with a comma.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

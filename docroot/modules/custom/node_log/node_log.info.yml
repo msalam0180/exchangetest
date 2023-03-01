@@ -1,0 +1,6 @@
+name: 'Node Log'
+type: module
+description: 'Provides a framework with swappable storage for logging entity node_log events.'
+package: 'Custom'
+core: '8.x'
+core_version_requirement: ^8 || ^9

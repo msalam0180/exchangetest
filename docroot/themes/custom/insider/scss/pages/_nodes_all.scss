@@ -1,0 +1,96 @@
+//
+// Nodes ALL
+// These are general styles that apply ALL node pages
+// --------------------------------------------------
+
+//node additional fields sections contains the source and the published/modified date
+.node-additional-fields{
+  font-size: 12px;
+  border-top: 1px solid $border-color;
+  padding-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  @include clearfix;
+
+  & > div{
+    margin-bottom: 20px;
+  }
+
+  .field__label {
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .field__item {
+    display: inline-table;
+    p{
+      margin: 0;
+    }
+  }
+}
+
+
+//layout of node additional fields sections
+.modified-date {
+  text-align: right;
+  float: right;
+  width: 25%;
+  line-height: 1.5;
+}
+
+.field--name-field-source {
+  float: left;
+  width: 75%;
+}
+
+.modified-date, .field--name-field-source{
+  @include breakpoint('small'){
+    width: 100%;
+    text-align: left;
+    float: none;
+  }
+}
+
+.field--name-field-source{
+  @include field-table-layout;
+}
+
+
+//TODO: do this in the twig if possible
+.embedded-entity .node-additional-fields{
+  display:none;
+}
+
+.text-formatted, .simple-styleguide--site-styles{
+  h1, h2, h3, h4, h5, h6{
+    margin-top: 2rem;
+  }
+
+}
+
+.node__content > *:first-child{
+  h1, h2, h3, h4, h5, h6{
+    &:first-child{
+      margin-top: 0;
+    }
+  }
+}
+
+// Set border to 0 per DI-6872
+.node__content.embedded-image {
+  max-width: 100%;
+  border: 0;
+}
+
+.media .media-left img {
+  border: 0;
+}
+
+.media-image-top {
+  border: 0;
+}
+
+// Set data-embed class align-center to render as text-align-center per DI-3450
+.embedded-entity.align-center {
+  text-align: center;
+}

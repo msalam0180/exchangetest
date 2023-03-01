@@ -1,0 +1,23 @@
+uuid: be60f355-5c6f-4d74-bf93-fc187b93d7a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_override_modified_date
+    - node.type.secr
+  module:
+    - datetime
+_core:
+  default_config_hash: g0rQ5igaN8u9uo8B4rppxhB8MFtvsnALFgwc-CVVzuQ
+id: node.secr.field_override_modified_date
+field_name: field_override_modified_date
+entity_type: node
+bundle: secr
+label: 'Override Modified Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

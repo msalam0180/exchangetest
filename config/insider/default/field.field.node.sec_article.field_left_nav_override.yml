@@ -1,0 +1,25 @@
+uuid: 792264a7-3169-4a42-a6db-781048ee05ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_left_nav_override
+    - node.type.sec_article
+_core:
+  default_config_hash: SbUMFZtHaqj4yWUpD2RnKBLdDZJLkjFktZtaG1Emrkw
+id: node.sec_article.field_left_nav_override
+field_name: field_left_nav_override
+entity_type: node
+bundle: sec_article
+label: 'Choose Left Navigation'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:menu'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

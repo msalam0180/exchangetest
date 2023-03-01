@@ -1,0 +1,54 @@
+uuid: b4e7fe17-23f1-42f3-a04f-8d0460fbbc43
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_comments
+    - node.type.landing_page
+  module:
+    - comment
+    - comment_delete
+third_party_settings:
+  comment_delete:
+    operation:
+      hard: hard
+      soft: soft
+      hard_partial: 0
+    visibility: visible
+    label:
+      hard: ''
+      hard_partial: ''
+      soft: ''
+    message:
+      hard: ''
+      hard_partial: ''
+      soft: ''
+    mode: unset
+    anonymize: false
+    default: soft
+    time_limit: false
+    timer: null
+id: node.landing_page.field_comments
+field_name: field_comments
+entity_type: node
+bundle: landing_page
+label: Comments
+description: 'Please adhere to the <a href="https://theexchange.sec.gov/media/1156/download">Rules of the Road</a> when posting a comment.'
+required: false
+translatable: true
+default_value:
+  -
+    status: 1
+    cid: 0
+    last_comment_timestamp: 0
+    last_comment_name: null
+    last_comment_uid: 0
+    comment_count: 0
+default_value_callback: ''
+settings:
+  default_mode: 1
+  per_page: 1000
+  anonymous: 0
+  form_location: true
+  preview: 0
+field_type: comment

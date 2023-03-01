@@ -1,0 +1,7 @@
+name: 'Insider Operating Procedure'
+description: 'Provides operating procedure content type for insider'
+type: module
+core: 8.x
+version: 8.x-1.0
+package: Insider
+core_version_requirement: ^8 || ^9

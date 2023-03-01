@@ -1,0 +1,36 @@
+uuid: d7c4074a-852d-4991-9c74-00f84e264f82
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_creator
+    - node.type.form
+_core:
+  default_config_hash: hFOv58dCHfqs5Isxf4oSzVZiKVsTrhZevEnil_9uM0s
+id: node.form.field_creator
+field_name: field_creator
+entity_type: node
+bundle: form
+label: 'SEC Content Creator'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    filter:
+      type: role
+      role:
+        content_creator: content_creator
+        administrator: '0'
+        content_approver: '0'
+        sitebuilder: '0'
+    include_anonymous: true
+field_type: entity_reference

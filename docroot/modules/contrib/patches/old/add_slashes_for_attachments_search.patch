@@ -1,0 +1,13 @@
+diff --git a/src/Plugin/search_api/backend/SearchApiSolrBackend.php b/src/Plugin/search_api/backend/SearchApiSolrBackend.php
+index 0e49bc6c..a879cbf0 100644
+--- a/src/Plugin/search_api/backend/SearchApiSolrBackend.php
++++ b/src/Plugin/search_api/backend/SearchApiSolrBackend.php
+@@ -2825,7 +2825,7 @@ class SearchApiSolrBackend extends BackendPluginBase implements SolrBackendInter
+
+     // Execute the query.
+     $result = $connector->extract($query);
+-    return $connector->getContentFromExtractResult($result, $filename);
++    return $connector->getContentFromExtractResult($result, addslashes($filepath));
+   }
+
+   /**

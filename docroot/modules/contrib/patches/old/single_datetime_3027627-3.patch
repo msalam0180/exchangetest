@@ -1,0 +1,126 @@
+diff --git a/js/drupal.single_datetime.es6.js b/js/drupal.single_datetime.es6.js
+index cc66304..5e2fdfa 100644
+--- a/js/drupal.single_datetime.es6.js
++++ b/js/drupal.single_datetime.es6.js
+@@ -105,6 +105,8 @@
+ 
+           const theme = input.data("datetimepickerTheme");
+ 
++          const allowBlank = Boolean(input.data("allowBlank"));
++
+           // Default empty array. Only calculate later if field type
+           // includes times.
+           let allowTimes = [];
+@@ -138,7 +140,8 @@
+             maxDate,
+             yearStart,
+             yearEnd,
+-            theme
++            theme,
++            allowBlank
+           });
+           // Explicitly set locale. Does not work with passed variable
+           // in setttings above.
+diff --git a/js/drupal.single_datetime.js b/js/drupal.single_datetime.js
+index 89544d4..dca6ccd 100644
+--- a/js/drupal.single_datetime.js
++++ b/js/drupal.single_datetime.js
+@@ -110,6 +110,8 @@
+ 
+         var theme = input.data("datetimepickerTheme");
+ 
++        var allowBlank = Boolean(input.data("allowBlank"));
++
+         // Default empty array. Only calculate later if field type
+         // includes times.
+         var allowTimes = [];
+@@ -140,7 +142,8 @@
+           maxDate: maxDate,
+           yearStart: yearStart,
+           yearEnd: yearEnd,
+-          theme: theme
++          theme: theme,
++          allowBlank: allowBlank
+         });
+         // Explicitly set locale. Does not work with passed variable
+         // in setttings above.
+@@ -148,4 +151,4 @@
+       });
+     }
+   };
+-})(jQuery, Drupal, drupalSettings);
+\ No newline at end of file
++})(jQuery, Drupal, drupalSettings);
+diff --git a/src/Element/SingleDateTime.php b/src/Element/SingleDateTime.php
+index ba9b0be..1f9af6d 100644
+--- a/src/Element/SingleDateTime.php
++++ b/src/Element/SingleDateTime.php
+@@ -115,6 +115,11 @@ class SingleDateTime extends FormElement {
+       $settings['data-max-date'] = $element['#max_date'];
+     }
+ 
++    // Allow blank.
++    if (!empty($element['#allow_blank'])) {
++      $settings['data-allow-blank'] = $element['#allow_blank'];
++    }
++
+     // Push field type to JS for changing between date only and time fields.
+     // Difference between date and date range fields.
+     if (isset($element['#date_type'])) {
+@@ -133,8 +138,11 @@ class SingleDateTime extends FormElement {
+     // Disable Chrome autofill on widget.
+     $element['#attributes']['autocomplete'] = 'off';
+ 
+-    // Prevent keyboard on mobile devices.
+-    $element['#attributes']['onfocus'] = 'blur();';
++    // Prevent keyboard on mobile devices, but only if allowBlank is false
++    // otherwise a user won't be able to delete a date.
++    if (!$element['#allow_blank']) {
++      $element['#attributes']['onfocus'] = 'blur();';
++    }
+ 
+     // Attach library.
+     $element['#attached']['library'][] = 'single_datetime/datetimepicker';
+diff --git a/src/Plugin/Field/FieldWidget/SingleDateTimeBase.php b/src/Plugin/Field/FieldWidget/SingleDateTimeBase.php
+index 5bb9c30..85b57ed 100644
+--- a/src/Plugin/Field/FieldWidget/SingleDateTimeBase.php
++++ b/src/Plugin/Field/FieldWidget/SingleDateTimeBase.php
+@@ -64,6 +64,7 @@ abstract class SingleDateTimeBase extends DateTimeWidgetBase implements Containe
+       'max_date' => '',
+       'year_start' => '',
+       'year_end' => '',
++      'allow_blank' => FALSE,
+     ];
+   }
+ 
+@@ -183,6 +184,13 @@ abstract class SingleDateTimeBase extends DateTimeWidgetBase implements Containe
+       '#default_value' => $this->getSetting('year_end'),
+       '#required' => FALSE,
+     ];
++    $elements['allow_blank'] = [
++      '#type' => 'checkbox',
++      '#title' => $this->t('Allow blank'),
++      '#description' => $this->t('Allow deleting the value to unset a date.'),
++      '#default_value' => $this->getSetting('allow_blank'),
++      '#required' => FALSE,
++    ];
+     return $elements;
+   }
+ 
+@@ -237,6 +245,8 @@ abstract class SingleDateTimeBase extends DateTimeWidgetBase implements Containe
+ 
+     $summary[] = t('End year: @year_end', ['@year_end' => !empty($year_end) ? $year_end : t('None')]);
+ 
++    $summary[] = t('Allow blank: @allow_blank', ['@allow_blank' => !empty($this->getSetting('allow_blank')) ? t('Yes') : t('No')]);
++
+     return $summary;
+   }
+ 
+@@ -370,6 +380,7 @@ abstract class SingleDateTimeBase extends DateTimeWidgetBase implements Containe
+       '#max_date' => $this->getSetting('max_date'),
+       '#year_start' => $this->getSetting('year_start'),
+       '#year_end' => $this->getSetting('year_end'),
++      '#allow_blank' => $this->getSetting('allow_blank'),
+     ];
+   }
+ 

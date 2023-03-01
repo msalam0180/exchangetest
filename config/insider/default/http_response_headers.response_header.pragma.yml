@@ -1,0 +1,12 @@
+uuid: a8ee2312-d284-4e14-9db7-f701e08b4233
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: i1wc9v8RoyQ5dOICye3J9_gQaPCdcwvxwC41gqy9oQY
+id: pragma
+label: Pragma
+description: 'The Pragma general-header field is used to include implementation-specific directives that might apply to any recipient along the request/response chain.  It is used for backwards compatibility with HTTP/1.0 caches where the Cache-Control HTTP/1.1 header is not yet present.'
+group: Security
+name: Pragma
+value: no-cache

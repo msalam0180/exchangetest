@@ -1,0 +1,7 @@
+insider_quicklinks.form:
+  path: '/user/profile/quicklinks'
+  defaults:
+    _title: 'My QuickLinks'
+    _form: '\Drupal\insider_quicklinks\Form\QuicklinksActionForm'
+  requirements:
+    _permission: 'access content'

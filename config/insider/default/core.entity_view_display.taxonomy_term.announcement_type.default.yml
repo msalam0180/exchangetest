@@ -1,0 +1,41 @@
+uuid: 2850e77f-0e47-4ddb-baa4-4cf29305b86a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.announcement_type.field_abbreviation
+    - taxonomy.vocabulary.announcement_type
+  module:
+    - panelizer
+    - text
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+_core:
+  default_config_hash: UBqVLbTRPq5Oj4lPY81pGAsz6Y_KiUQgvmKLKz8gxRA
+id: taxonomy_term.announcement_type.default
+targetEntityType: taxonomy_term
+bundle: announcement_type
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_abbreviation:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

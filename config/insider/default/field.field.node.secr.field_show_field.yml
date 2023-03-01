@@ -1,0 +1,25 @@
+uuid: 1986b7c1-9858-4098-9e5f-84bcf1c7dbd7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_field
+    - node.type.secr
+_core:
+  default_config_hash: '-xwZ1qcm1JFRMdgoOSAdnP8EHVqd8C8jpv-YNTJCfvQ'
+id: node.secr.field_show_field
+field_name: field_show_field
+entity_type: node
+bundle: secr
+label: 'Override Left Nav'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

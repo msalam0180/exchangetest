@@ -1,0 +1,26 @@
+{
+  "name": "insider",
+  "version": "1.0.0",
+  "description": "Compiling and theming for the SEC Insider Website",
+  "main": "index.js",
+  "devDependencies": {
+    "autoprefixer": "^9.6.5",
+    "event-stream": "^4.0.1",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "node-sass": "^4.14.1",
+    "susy": "^2.2.14"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "gulp sass",
+    "watch": "gulp watch"
+  },
+  "resolutions": {
+    "natives": "1.1.3"
+  },
+  "author": "",
+  "license": "ISC"
+}

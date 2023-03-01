@@ -1,0 +1,27 @@
+uuid: d8ea6c25-2c39-46df-bd1d-c6deed1eef13
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+_core:
+  default_config_hash: d-faMnVWsal0yUxXSL3ANOJ4FueuvFGKdI_EcnD3ky4
+id: home
+label: Home
+description: ''
+use_admin_theme: false
+path: /home
+access_logic: and
+access_conditions:
+  -
+    id: user_role
+    negate: false
+    context_mapping:
+      user: current_user
+    roles:
+      authenticated: authenticated
+      administrator: administrator
+      content_creator: content_creator
+      content_approver: content_approver
+      sitebuilder: sitebuilder
+parameters: {  }

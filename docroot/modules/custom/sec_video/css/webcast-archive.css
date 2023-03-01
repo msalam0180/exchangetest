@@ -1,0 +1,23 @@
+/*Make Limelight player Responsive*/
+[id^="limelight_player_9279"] {
+  width: 100%   !important;
+  height: auto  !important;
+}
+
+.limelight-player {
+  z-index: 98;
+}
+
+[id^="limelight_player_9279"] .vjs-limelight-viewport{
+  position: relative !important;
+}
+
+.limelight-player .vjs-tech{
+  width: 100%    !important;
+  height: auto   !important;
+  position: relative !important;
+  display: block;
+}
+.hidden {
+  display: none;
+}

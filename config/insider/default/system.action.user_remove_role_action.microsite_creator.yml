@@ -1,0 +1,14 @@
+uuid: 99257060-4166-462d-979d-876c23ccbc63
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.microsite_creator
+  module:
+    - user
+id: user_remove_role_action.microsite_creator
+label: 'Remove the Microsite Creator role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: microsite_creator

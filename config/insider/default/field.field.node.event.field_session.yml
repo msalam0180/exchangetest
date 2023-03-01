@@ -1,0 +1,32 @@
+uuid: 8dd7b41e-659d-478f-9d82-a8aa3776ceff
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_session
+    - node.type.event
+    - paragraphs.paragraphs_type.paragraph_session
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: mlPm6__x9bHSA1wMf2-4p1oe_rJezgKZydCV5QaTUus
+id: node.event.field_session
+field_name: field_session
+entity_type: node
+bundle: event
+label: 'Event Session'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      paragraph_session: paragraph_session
+    target_bundles_drag_drop:
+      paragraph_session:
+        weight: 2
+        enabled: true
+field_type: entity_reference_revisions

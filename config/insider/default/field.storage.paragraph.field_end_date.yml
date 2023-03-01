@@ -1,0 +1,22 @@
+uuid: 1c95fcdf-81a8-4cfc-a006-a5f4096b5e5f
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - paragraphs
+_core:
+  default_config_hash: MmDqXzTRx1Fg-JViiGuvAwfR4SVKl9D6cEXE4Y9b6n8
+id: paragraph.field_end_date
+field_name: field_end_date
+entity_type: paragraph
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

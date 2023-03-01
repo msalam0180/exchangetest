@@ -1,0 +1,31 @@
+uuid: 83c9e198-c7ec-4243-9ab7-754ce258656c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media_reference
+    - media.type.file
+    - node.type.form
+_core:
+  default_config_hash: w2PEfCxqIHio8c7iKvTvLKQxeLWChIEDdBHO4Kf5mek
+id: node.form.field_media_reference
+field_name: field_media_reference
+entity_type: node
+bundle: form
+label: 'File Media Reference'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      file: file
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: file
+field_type: entity_reference

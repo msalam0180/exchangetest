@@ -1,0 +1,30 @@
+uuid: a7c8552b-2de9-4b94-b5f8-ce918854dcd9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_form_topic
+    - node.type.form
+    - taxonomy.vocabulary.form_topic
+_core:
+  default_config_hash: w2ax_dsbECQZZyOJCr6iZqYyD6O-Ie_lrRxIyANMLNA
+id: node.form.field_form_topic
+field_name: field_form_topic
+entity_type: node
+bundle: form
+label: 'Form Topic'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      form_topic: form_topic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

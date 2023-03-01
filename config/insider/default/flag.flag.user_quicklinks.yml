@@ -1,0 +1,32 @@
+uuid: 50c37f9d-d24d-4d0a-9072-bdb767591484
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: NXQr5i60cJGKcvXX7p5xaKJLteGr72P19cZjbjXVgyE
+id: user_quicklinks
+label: 'User QuickLinks'
+bundles:
+  - link
+entity_type: node
+global: false
+flag_short: 'Add to My QuickLinks'
+flag_long: 'Selecting this item will add the link to your personal QuickLinks menu.'
+flag_message: 'The selected QuickLink has been added.'
+unflag_short: 'Remove from My QuickLinks'
+unflag_long: 'Selecting this item will remove the link to your personal QuickLinks menu.'
+unflag_message: 'The selected QuickLink has been removed.'
+unflag_denied_text: ''
+weight: 0
+flag_type: 'entity:node'
+link_type: reload
+flagTypeConfig:
+  show_in_links: {  }
+  show_as_field: false
+  show_on_form: false
+  show_contextual_link: false
+  extra_permissions:
+    owner: '0'
+linkTypeConfig: {  }

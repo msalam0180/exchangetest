@@ -1,0 +1,23 @@
+uuid: 69d498a0-44c9-4116-8d1d-90463f2e6869
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video_type
+    - node.type.video
+  module:
+    - options
+_core:
+  default_config_hash: lhxWurJ72Z4Lu6Ugv6s68vGmAXC-gT1h_EE6Xo9waco
+id: node.video.field_video_type
+field_name: field_video_type
+entity_type: node
+bundle: video
+label: 'Video Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

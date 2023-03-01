@@ -1,0 +1,96 @@
+//
+// LEGACY: stylized-boxes and callout
+// To style a div with a certain set of styles
+// These are in the style guide and on SEC.gov
+// Not Sure if we are going to use them or not
+// --------------------------------------------------
+
+.callout {
+  background-color: $yellow-orange;
+  border: none;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.stylized-box-1 {
+  background-color: $gray-ltest;
+  border: none;
+  margin-bottom: 20px;
+  padding: 15px;
+
+  h1, h2 {
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 0 0 10px 0;
+  }
+
+
+  @media print{
+    border: 5px solid $gray-ltest;
+  }
+}
+
+.stylized-box-2 {
+  background: #FFF;
+  border: 5px solid $gray-ltest;
+  margin-bottom: 20px;
+  padding: 10px;
+
+  -webkit-box-shadow: inset rgba(255, 255, 255, 0.8) 0 1px 1px;
+  -moz-box-shadow: inset rgba(255, 255, 255, 0.8) 0 1px 1px;
+  box-shadow: inset rgba(255, 255, 255, 0.8) 0 1px 1px;
+
+  h1 {
+    border: none;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+  }
+  h2 {
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  h3 {
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 0 0 10px 0;
+  }
+
+  hr {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 0;
+  }
+}
+
+.stylized-box-3 {
+  background-color: #D6EBFF;
+  border: none;
+  margin-bottom: 20px;
+  padding: 15px;
+  
+  @media print{
+    border: 5px solid #D6EBFF;
+  }
+}
+
+
+.callout, .stylized-box-1, .stylized-box-2, .stylized-box-3 {
+  .indentedList ul li {
+    a {
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }
+}

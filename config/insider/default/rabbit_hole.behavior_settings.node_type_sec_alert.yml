@@ -1,0 +1,16 @@
+uuid: 7bb5c62f-a2f9-4b3e-8cc7-c09fc963cac8
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.sec_alert
+_core:
+  default_config_hash: 9VChDHV6EjYebCkeGrYwZ76kbL_mbRHt3hFw1za9A7M
+id: node_type_sec_alert
+entity_type_id: node_type
+entity_id: sec_alert
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

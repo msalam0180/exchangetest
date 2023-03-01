@@ -1,0 +1,13 @@
+diff --git a/page_manager_ui/js/page-manager-ui-page-variants.js b/page_manager_ui/js/page-manager-ui-page-variants.js
+index 32f733b..1a82bfc 100644
+--- a/page_manager_ui/js/page-manager-ui-page-variants.js
++++ b/page_manager_ui/js/page-manager-ui-page-variants.js
+@@ -10,7 +10,7 @@
+       $('.current_variant').parents('.page__section__2').siblings('.page__section__label').addClass('active current_variant');
+ 
+       // When the label is clicked show the variant settings.
+-      $('.page__section_item__1 > .page__section__label').click(function() {
++      $('.page__section_item__1 > .page__section__label').once('labelClicked').click(function() {
+         if ($(this).hasClass('active')) {
+           $(this).removeClass('active');
+           $(this).siblings('.page__section__2').removeClass('active');

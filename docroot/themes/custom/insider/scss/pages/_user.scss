@@ -1,0 +1,75 @@
+//
+// Users
+// user logging in and user pages
+//
+// --------------------------------------------------
+
+// TODO: Styles have been slightly adjsuted, but they could use a second go and some template work
+
+body {
+	
+	.user-logged-in { display: none; }
+	.user-not-logged-in { display: block; }
+
+	&.path-user .mobile-menu .fa { display: none; }
+}
+
+body.user-logged-in {
+	
+	.user-logged-in { display: block;}
+	.user-not-logged-in { display: none; }
+}
+
+#user-login {
+	text-align: center;
+	padding: 20px 100px;
+
+	@include breakpoint('small'){
+		padding: 20px;
+	}
+
+	#user-login-content {
+		background-color: $white-off;
+		border: 1px solid $gray-lt;
+		padding: 40px 120px;
+
+		@include breakpoint('small'){
+			padding: 40px;
+		}
+
+		&:after {
+			clear: both;
+			content: ' ';
+			display: block;
+		}
+
+		img{
+			margin-bottom: 20px;
+		}
+	}
+
+	.user-login-form {
+		text-align: left;
+		margin-top: 20px;
+
+		.form-item{
+			margin-bottom: 20px;
+			input{
+				margin-bottom: 5px;
+			}
+		}
+
+		.description {
+			color: $gray-dk;
+			font-style: italic;
+		}
+
+		input[type="submit"] {
+			@media (max-width: 500px) {
+				width: 100%;
+			}
+
+		}
+
+	}
+}

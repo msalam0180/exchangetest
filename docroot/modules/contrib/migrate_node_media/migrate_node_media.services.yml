@@ -1,0 +1,13 @@
+services:
+  migrate_node_media.settings:
+    class: Drupal\migrate_node_media\Service\SettingsService
+    arguments: []
+  migrate_node_media.mapping:
+    class: Drupal\migrate_node_media\Service\MappingService
+    arguments: ['@database']
+  migrate_node_media.migrate:
+    class: Drupal\migrate_node_media\Service\MigrateService
+    arguments: ['@database']
+  migrate_node_media.route:
+    class: Drupal\migrate_node_media\Service\MappedRouteService
+    arguments: ['@database']

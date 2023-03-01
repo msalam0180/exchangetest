@@ -1,0 +1,35 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_timezone_select
+    - node.type.event
+    - taxonomy.vocabulary.timezone
+  content:
+    - 'taxonomy_term:timezone:2aabc9c9-adb8-41e4-8139-200385dd25fb'
+_core:
+  default_config_hash: m0U7gI6GnyjTU5hi-1HaBeBlWG662dXACDeHUMFZXMs
+id: node.event.field_timezone_select
+field_name: field_timezone_select
+entity_type: node
+bundle: event
+label: Timezone
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    target_uuid: 2aabc9c9-adb8-41e4-8139-200385dd25fb
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      timezone: timezone
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

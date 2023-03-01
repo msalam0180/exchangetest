@@ -1,0 +1,131 @@
+stages:
+  - test
+  - build
+  - deploy
+test:
+  stage: test
+  script:
+    - 'pwd'
+    - 'chmod a+x test.sh'
+    - 'sh ./test.sh'
+dev_build:
+  stage: build
+  only:
+    - intranet/phase3
+  script:
+    - 'cd ~/sec/insider/docroot'
+    - 'git checkout intranet/phase3'
+    - 'git pull'
+    - '~/vendor/bin/drush fr -y insider_view insider_gallery_slideshow sec_event'
+    - '~/vendor/bin/drush updb -y'
+    - '~/vendor/bin/drush cr'
+    - 'cd -'
+insidergov_build:
+  stage: build
+  only:
+    - master
+  script:
+    - 'pwd'
+    - 'chmod a+x build.sh'
+    - 'sh ./build.sh'
+pa11y:
+  stage: test
+  only:
+    - master
+    - intranet/phase3
+    - intranet/release2
+    - /^release\/.*$/
+  script:
+    - 'pwd'
+    - 'sh ./setup-test-environment-ex.sh'
+    - 'sh ./pa11y.sh'
+  when: manual
+behat:
+  stage: test
+  only:
+    - master
+    - intranet/phase3
+    - intranet/release2
+    - /^release\/.*$/
+  script:
+    - 'pwd'
+    - 'sh ./setup-test-environment.sh'
+    - 'sh ./behat.sh'
+  when: manual
+behat_nightly:
+  stage: test
+  only:
+    - schedules
+  script:
+    - 'pwd'
+    - 'sh ./setup-test-environment.sh'
+    - 'sh ./behat.sh'
+behat_rerun:
+  stage: test
+  only:
+    - master
+    - intranet/phase3
+    - intranet/release2
+    - /^release\/.*$/
+  script:
+    - 'pwd'
+    - 'sh ./setup-test-environment.sh'
+    - 'sh ./behat-rerun.sh'
+  when: manual
+behat_theexchange:
+  stage: test
+  only:
+    - master
+    - intranet/release2
+    - /^release\/.*$/
+  script:
+    - 'pwd'
+    - 'sh ./setup-test-environment-ex.sh'
+    - 'sh ./behat-ex.sh'
+  when: manual
+behat_rerun_theexchange:
+  stage: test
+  only:
+    - master
+    - intranet/release2
+    - /^release\/.*$/
+  script:
+    - 'pwd'
+    - 'sh ./setup-test-environment-ex.sh'
+    - 'sh ./behat-rerun-ex.sh'
+  when: manual
+deploy_stage:
+  stage: deploy
+  only:
+    - master
+  script:
+    - 'sh ./deploy.sh'
+  environment: stage
+  when: manual
+css_compile:
+  stage: build
+  only:
+    changes:
+      - "**/*.scss"
+  script:
+    - 'pwd'
+    - 'chmod a+x css-compile.sh'
+    - 'sh ./css-compile.sh'
+acquia_sync:
+  stage: build
+  only:
+    - master
+    - /^release\/.*$/
+    - /^insider\/.*$/
+    - /^docmig\/.*$/
+    - /^intranet\/.*$/
+  script:
+    - 'sh ./acquia-sync.sh'
+insider_build:
+  stage: build
+  only:
+    - 'insider/dev'
+  script:
+    - 'pwd'
+    - 'chmod a+x build-insider.sh'
+    - 'sh ./build-insider.sh'

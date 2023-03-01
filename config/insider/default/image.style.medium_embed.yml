@@ -1,0 +1,15 @@
+uuid: 4f312de5-2bcc-41f2-bb86-9e51c83881e0
+langcode: en
+status: true
+dependencies: {  }
+name: medium_embed
+label: 'Medium Embed (350×250)'
+effects:
+  d4eab754-5481-41fd-9b3f-ca475ef7e692:
+    uuid: d4eab754-5481-41fd-9b3f-ca475ef7e692
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 350
+      height: 250
+      anchor: center-center

@@ -1,0 +1,257 @@
+diff --git a/core/lib/Drupal/Core/Config/ConfigInstaller.php b/core/lib/Drupal/Core/Config/ConfigInstaller.php
+index 97c3688..dd5c62e 100644
+--- a/core/lib/Drupal/Core/Config/ConfigInstaller.php
++++ b/core/lib/Drupal/Core/Config/ConfigInstaller.php
+@@ -455,9 +455,14 @@ public function checkConfigurationToInstall($type, $name) {
+     $profile_storages = $this->getProfileStorages($name);
+ 
+     // Check the dependencies of configuration provided by the module.
+-    $invalid_default_config = $this->findDefaultConfigWithUnmetDependencies($storage, $enabled_extensions, $profile_storages);
++    $missing_dependencies = [];
++    $invalid_default_config = $this->findDefaultConfigWithUnmetDependencies($storage, $enabled_extensions, $profile_storages, $missing_dependencies);
+     if (!empty($invalid_default_config)) {
+-      throw UnmetDependenciesException::create($name, $invalid_default_config);
++      $missing = [];
++      foreach ($missing_dependencies as $dependent => $dependencies) {
++        $missing[$dependent] = $dependencies;
++      }
++      throw UnmetDependenciesException::create($name, array_unique($missing));
+     }
+ 
+     // Install profiles can not have config clashes. Configuration that
+@@ -483,16 +488,22 @@ public function checkConfigurationToInstall($type, $name) {
+    * @param \Drupal\Core\Config\StorageInterface[] $profile_storages
+    *   An array of storage interfaces containing profile configuration to check
+    *   for overrides.
++   * @param array $missing_dependencies
++   *   (optional) An array that will be filled with the list of missing
++   *   dependencies, keyed by by the dependents' names.
+    *
+    * @return array
+-   *   List of configuration that has unmet dependencies
++   *   List of configuration that has unmet dependencies.
+    */
+-  protected function findDefaultConfigWithUnmetDependencies(StorageInterface $storage, array $enabled_extensions, array $profile_storages = []) {
++  protected function findDefaultConfigWithUnmetDependencies(StorageInterface $storage, array $enabled_extensions, array $profile_storages = [], array &$missing_dependencies = []) {
+     $config_to_create = $this->getConfigToCreate($storage, StorageInterface::DEFAULT_COLLECTION, '', $profile_storages);
+     $all_config = array_merge($this->configFactory->listAll(), array_keys($config_to_create));
+-    return array_filter(array_keys($config_to_create), function($config_name) use ($enabled_extensions, $all_config, $config_to_create) {
+-      return !$this->validateDependencies($config_name, $config_to_create[$config_name], $enabled_extensions, $all_config);
+-    });
++    foreach ($config_to_create as $config_name => $config) {
++      if ($missing = $this->getMissingDependencies($config_name, $config, $enabled_extensions, $all_config)) {
++        $missing_dependencies[$config_name] = $missing;
++      }
++    }
++    return array_intersect_key($config_to_create, $missing_dependencies);
+   }
+ 
+   /**
+@@ -508,11 +519,37 @@ protected function findDefaultConfigWithUnmetDependencies(StorageInterface $stor
+    *   A list of all the active configuration names.
+    *
+    * @return bool
+-   *   TRUE if the dependencies are met, FALSE if not.
++   *   TRUE if all dependencies are present, FALSE otherwise.
+    */
+   protected function validateDependencies($config_name, array $data, array $enabled_extensions, array $all_config) {
+-    list($provider) = explode('.', $config_name, 2);
++    if (!isset($data['dependencies'])) {
++      // Simple config or a config entity without dependencies.
++      list($provider) = explode('.', $config_name, 2);
++      return in_array($provider, $enabled_extensions, TRUE);
++    }
++
++    $missing = $this->getMissingDependencies($config_name, $data, $enabled_extensions, $all_config);
++    return empty($missing);
++  }
++
++  /**
++   * Returns an array of missing dependencies for a config object.
++   *
++   * @param string $config_name
++   *   The name of the configuration object that is being validated.
++   * @param array $data
++   *   Configuration data.
++   * @param array $enabled_extensions
++   *   A list of all the currently enabled modules and themes.
++   * @param array $all_config
++   *   A list of all the active configuration names.
++   *
++   * @return array
++   *   A list of missing config dependencies.
++   */
++  protected function getMissingDependencies($config_name, array $data, array $enabled_extensions, array $all_config) {
+     if (isset($data['dependencies'])) {
++      list($provider) = explode('.', $config_name, 2);
+       $all_dependencies = $data['dependencies'];
+ 
+       // Ensure enforced dependencies are included.
+@@ -541,18 +578,12 @@ protected function validateDependencies($config_name, array $data, array $enable
+             break;
+         }
+         if (!empty($list_to_check)) {
+-          $missing = array_diff($dependencies, $list_to_check);
+-          if (!empty($missing)) {
+-            return FALSE;
+-          }
++          return array_diff($dependencies, $list_to_check);
+         }
+       }
+     }
+-    else {
+-      // Simple config or a config entity without dependencies.
+-      return in_array($provider, $enabled_extensions, TRUE);
+-    }
+-    return TRUE;
++
++    return [];
+   }
+ 
+   /**
+diff --git a/core/lib/Drupal/Core/Config/UnmetDependenciesException.php b/core/lib/Drupal/Core/Config/UnmetDependenciesException.php
+index c74513c..e49afc9 100644
+--- a/core/lib/Drupal/Core/Config/UnmetDependenciesException.php
++++ b/core/lib/Drupal/Core/Config/UnmetDependenciesException.php
+@@ -13,6 +13,20 @@ class UnmetDependenciesException extends ConfigException {
+   /**
+    * A list of configuration objects that have unmet dependencies.
+    *
++   * The list is keyed by the config object name, and the value is an array of
++   * the missing dependencies:
++   *
++   * @code
++   *
++   * self::configObjects = [
++   *   config_object_name => [
++   *     'missing_dependency_1',
++   *     'missing_dependency_2',
++   *   ]
++   * ];
++   *
++   * @endcode
++   *
+    * @var array
+    */
+   protected $configObjects = [];
+@@ -28,7 +42,8 @@ class UnmetDependenciesException extends ConfigException {
+    * Gets the list of configuration objects that have unmet dependencies.
+    *
+    * @return array
+-   *   A list of configuration objects that have unmet dependencies.
++   *   A list of configuration objects that have unmet dependencies, keyed by
++   *   object name, with the value being a list of the unmet dependencies.
+    */
+   public function getConfigObjects() {
+     return $this->configObjects;
+@@ -53,12 +68,10 @@ public function getExtension() {
+    * @return string
+    */
+   public function getTranslatedMessage(TranslationInterface $string_translation, $extension) {
+-    return $string_translation->formatPlural(
+-      count($this->getConfigObjects()),
+-      'Unable to install @extension, %config_names has unmet dependencies.',
+-      'Unable to install @extension, %config_names have unmet dependencies.',
++    return $string_translation->translate(
++      'Unable to install @extension due to unmet dependencies: @config_names',
+       [
+-        '%config_names' => implode(', ', $this->getConfigObjects()),
++        '@config_names' => self::formatConfigObjectList($this->configObjects),
+         '@extension' => $extension,
+       ]
+     );
+@@ -70,14 +83,15 @@ public function getTranslatedMessage(TranslationInterface $string_translation, $
+    * @param $extension
+    *   The name of the extension that is being installed.
+    * @param array $config_objects
+-   *   A list of configuration object names that have unmet dependencies
++   *   A list of configuration keyed by configuration name, with unmet
++   *   dependencies as the value.
+    *
+    * @return \Drupal\Core\Config\PreExistingConfigException
+    */
+   public static function create($extension, array $config_objects) {
+-    $message = SafeMarkup::format('Configuration objects (@config_names) provided by @extension have unmet dependencies',
++    $message = SafeMarkup::format('Configuration objects provided by @extension have unmet dependencies: @config_names',
+       array(
+-        '@config_names' => implode(', ', $config_objects),
++        '@config_names' => static::formatConfigObjectList($config_objects),
+         '@extension' => $extension
+       )
+     );
+@@ -87,4 +101,21 @@ public static function create($extension, array $config_objects) {
+     return $e;
+   }
+ 
++  /**
++   * Formats a list of configuration objects.
++   *
++   * @param array $config_objects
++   *   A list of configuration object names that have unmet dependencies.
++   *
++   * @return string
++   *   The imploded config_objects, formatted in an easy to read string.
++   */
++  protected static function formatConfigObjectList(array $config_objects) {
++    $list = [];
++    foreach ($config_objects as $config_object => $missing_dependencies) {
++      $list[] = $config_object . ' (' . implode(', ', $missing_dependencies) . ')';
++    }
++    return implode(', ', $list);
++  }
++
+ }
+diff --git a/core/modules/config/src/Tests/ConfigInstallProfileUnmetDependenciesTest.php b/core/modules/config/src/Tests/ConfigInstallProfileUnmetDependenciesTest.php
+index 3371198..cfebbb6 100644
+--- a/core/modules/config/src/Tests/ConfigInstallProfileUnmetDependenciesTest.php
++++ b/core/modules/config/src/Tests/ConfigInstallProfileUnmetDependenciesTest.php
+@@ -90,7 +90,7 @@ public function testInstalled() {
+     else {
+       $this->fail('Expected Drupal\Core\Config\UnmetDependenciesException exception thrown');
+     }
+-    $this->assertErrorLogged('Configuration objects (system.action.user_block_user_action) provided by user have unmet dependencies in');
++    $this->assertErrorLogged('Configuration objects provided by user have unmet dependencies: system.action.user_block_user_action (action)');
+   }
+ 
+ }
+diff --git a/core/modules/config/src/Tests/ConfigInstallWebTest.php b/core/modules/config/src/Tests/ConfigInstallWebTest.php
+index 083b123..6c3be10 100644
+--- a/core/modules/config/src/Tests/ConfigInstallWebTest.php
++++ b/core/modules/config/src/Tests/ConfigInstallWebTest.php
+@@ -180,7 +180,7 @@ public function testUnmetDependenciesInstall() {
+     // not depend on config_test and order is important.
+     $this->drupalPostForm('admin/modules', array('modules[Testing][config_test][enable]' => TRUE), t('Install'));
+     $this->drupalPostForm('admin/modules', array('modules[Testing][config_install_dependency_test][enable]' => TRUE), t('Install'));
+-    $this->assertRaw('Unable to install Config install dependency test, <em class="placeholder">config_other_module_config_test.weird_simple_config, config_test.dynamic.other_module_test_with_dependency</em> have unmet dependencies.');
++    $this->assertRaw('Unable to install Config install dependency test due to unmet dependencies: config_test.dynamic.other_module_test_with_dependency (config_other_module_config_test)');
+ 
+     $this->drupalPostForm('admin/modules', array('modules[Testing][config_other_module_config_test][enable]' => TRUE), t('Install'));
+     $this->drupalPostForm('admin/modules', array('modules[Testing][config_install_dependency_test][enable]' => TRUE), t('Install'));
+diff --git a/core/modules/simpletest/src/TestBase.php b/core/modules/simpletest/src/TestBase.php
+index 4258f80..c2b53ad 100644
+--- a/core/modules/simpletest/src/TestBase.php
++++ b/core/modules/simpletest/src/TestBase.php
+@@ -830,7 +830,7 @@ protected function assertErrorLogged($error_message) {
+     }
+ 
+     $content = file_get_contents($error_log_filename);
+-    $rows = explode(PHP_EOL, $content);
++     $rows = explode(PHP_EOL, $content);
+ 
+     // We iterate over the rows in order to be able to remove the logged error
+     // afterwards.
+diff --git a/core/tests/Drupal/KernelTests/Core/Config/ConfigInstallTest.php b/core/tests/Drupal/KernelTests/Core/Config/ConfigInstallTest.php
+index f8d76c8..d77a5af 100644
+--- a/core/tests/Drupal/KernelTests/Core/Config/ConfigInstallTest.php
++++ b/core/tests/Drupal/KernelTests/Core/Config/ConfigInstallTest.php
+@@ -199,8 +199,8 @@ public function testDependencyChecking() {
+     }
+     catch (UnmetDependenciesException $e) {
+       $this->assertEqual($e->getExtension(), 'config_install_dependency_test');
+-      $this->assertEqual($e->getConfigObjects(), ['config_other_module_config_test.weird_simple_config', 'config_test.dynamic.other_module_test_with_dependency']);
+-      $this->assertEqual($e->getMessage(), 'Configuration objects (config_other_module_config_test.weird_simple_config, config_test.dynamic.other_module_test_with_dependency) provided by config_install_dependency_test have unmet dependencies');
++      $this->assertEqual($e->getConfigObjects(), ['config_test.dynamic.other_module_test_with_dependency' => ['config_other_module_config_test']]);
++      $this->assertEqual($e->getMessage(), 'Configuration objects provided by config_install_dependency_test have unmet dependencies: config_test.dynamic.other_module_test_with_dependency (config_other_module_config_test)');
+     }
+     $this->installModules(['config_other_module_config_test']);
+     $this->installModules(['config_install_dependency_test']);

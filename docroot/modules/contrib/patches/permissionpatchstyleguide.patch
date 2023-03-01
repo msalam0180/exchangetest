@@ -1,0 +1,21 @@
+diff --git a/simple_styleguide.routing.yml b/simple_styleguide.routing.yml
+index 302d6ebae..4177095d1 100644
+--- a/simple_styleguide.routing.yml
++++ b/simple_styleguide.routing.yml
+@@ -12,7 +12,7 @@ simple_styleguide.configuration_panel:
+     _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+     _title: 'Styleguide'
+   requirements:
+-    _permission: 'administer site configuration'
++    _permission: 'administer style guide'
+
+ simple_styleguide.styleguide_settings:
+   path: '/admin/config/styleguide/settings'
+@@ -20,6 +20,6 @@ simple_styleguide.styleguide_settings:
+     _form: '\Drupal\simple_styleguide\Form\StyleguideSettings'
+     _title: 'Styleguide Settings'
+   requirements:
+-    _permission: 'administer site configuration'
++    _permission: 'administer style guide'
+   options:
+     _admin_route: TRUE

@@ -1,0 +1,400 @@
+uuid: b8a4a9b7-d996-4445-be98-094922cbf9ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.restricted_html
+    - filter.format.teaser_html
+    - media.type.file
+    - node.type.announcement
+    - node.type.event
+    - node.type.featured
+    - node.type.form
+    - node.type.image
+    - node.type.landing_page
+    - node.type.library_item
+    - node.type.link
+    - node.type.operating_procedure
+    - node.type.page
+    - node.type.sec_alert
+    - node.type.sec_article
+    - node.type.secr
+    - node.type.video
+    - taxonomy.vocabulary.announcement_type
+    - taxonomy.vocabulary.article_type
+    - taxonomy.vocabulary.audiences
+    - taxonomy.vocabulary.category
+    - taxonomy.vocabulary.form_topic
+    - taxonomy.vocabulary.group_club
+    - taxonomy.vocabulary.office_division
+    - taxonomy.vocabulary.site_alert_type
+    - taxonomy.vocabulary.site_section
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.timezone
+    - taxonomy.vocabulary.top_level_group
+    - taxonomy.vocabulary.topic
+  module:
+    - block
+    - block_content
+    - coffee
+    - comment
+    - comment_delete
+    - config
+    - contact
+    - contextual
+    - draggableviews
+    - entity_browser
+    - entity_usage
+    - environment_indicator
+    - field_permissions
+    - field_ui
+    - file
+    - filter
+    - flag
+    - google_tag
+    - image
+    - maillog
+    - masquerade
+    - media
+    - node
+    - page_manager
+    - panelizer
+    - panels
+    - panels_ipe
+    - paragraphs
+    - paragraphs_type_permissions
+    - path
+    - poll
+    - quickedit
+    - rabbit_hole
+    - redirect
+    - replicate_ui
+    - scheduled_updates
+    - shortcut
+    - simple_styleguide
+    - system
+    - taxonomy
+    - toolbar
+    - update
+    - video_embed_field
+    - views_ui
+    - webform
+    - workbench
+    - workbench_moderation
+_core:
+  default_config_hash: yYr12c2IasIk3GdTDB-5mh8oLUW_jVWuHRQaOIRLGgw
+id: sitebuilder
+label: Sitebuilder
+weight: 6
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access coffee'
+  - 'access content'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access draggableviews'
+  - 'access entity usage statistics'
+  - 'access environment indicator'
+  - 'access files overview'
+  - 'access gallery_browser entity browser pages'
+  - 'access in-place editing'
+  - 'access media overview'
+  - 'access panels in-place editing'
+  - 'access poll overview'
+  - 'access polls'
+  - 'access shortcuts'
+  - 'access style guide'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'access webform overview'
+  - 'access workbench'
+  - 'administer advanced pane settings'
+  - 'administer block_content display'
+  - 'administer block_content fields'
+  - 'administer block_content form display'
+  - 'administer blocks'
+  - 'administer coffee'
+  - 'administer comment display'
+  - 'administer comment fields'
+  - 'administer comment form display'
+  - 'administer comments'
+  - 'administer contact_message display'
+  - 'administer contact_message fields'
+  - 'administer contact_message form display'
+  - 'administer content types'
+  - 'administer display modes'
+  - 'administer filters'
+  - 'administer flagging display'
+  - 'administer flagging fields'
+  - 'administer flagging form display'
+  - 'administer flags'
+  - 'administer google tag manager'
+  - 'administer image styles'
+  - 'administer maillog'
+  - 'administer media fields'
+  - 'administer media form display'
+  - 'administer menu'
+  - 'administer node display'
+  - 'administer node fields'
+  - 'administer node form display'
+  - 'administer nodes'
+  - 'administer pages'
+  - 'administer pane access'
+  - 'administer panelizer'
+  - 'administer panelizer node landing_page defaults'
+  - 'administer panelizer taxonomy_term tags content'
+  - 'administer panelizer taxonomy_term tags defaults'
+  - 'administer panelizer taxonomy_term tags layout'
+  - 'administer panelizer taxonomy_term tags revert'
+  - 'administer panels layouts'
+  - 'administer panels styles'
+  - 'administer paragraph display'
+  - 'administer paragraph fields'
+  - 'administer paragraph form display'
+  - 'administer polls'
+  - 'administer redirects'
+  - 'administer scheduled update types'
+  - 'administer scheduled_update display'
+  - 'administer scheduled_update fields'
+  - 'administer scheduled_update form display'
+  - 'administer shortcuts'
+  - 'administer site configuration'
+  - 'administer style guide'
+  - 'administer taxonomy_term display'
+  - 'administer taxonomy_term fields'
+  - 'administer taxonomy_term form display'
+  - 'administer url aliases'
+  - 'administer user display'
+  - 'administer user fields'
+  - 'administer user form display'
+  - 'administer views'
+  - 'administer webform'
+  - 'administer webform element access'
+  - 'administer webform submission'
+  - 'allow node announcement field_comments hard delete'
+  - 'allow node announcement field_comments soft delete'
+  - 'allow node event field_comments hard delete'
+  - 'allow node event field_comments soft delete'
+  - 'allow node form field_comments hard delete'
+  - 'allow node form field_comments soft delete'
+  - 'allow node gallery field_comments hard delete'
+  - 'allow node gallery field_comments soft delete'
+  - 'allow node landing_page field_comments hard delete'
+  - 'allow node landing_page field_comments soft delete'
+  - 'allow node library_item field_comments hard delete'
+  - 'allow node library_item field_comments soft delete'
+  - 'allow node operating_procedure field_comments hard delete'
+  - 'allow node operating_procedure field_comments soft delete'
+  - 'allow node page field_comments hard delete'
+  - 'allow node page field_comments soft delete'
+  - 'allow node sec_article field_comments hard delete'
+  - 'allow node sec_article field_comments soft delete'
+  - 'allow node secr field_comments hard delete'
+  - 'allow node secr field_comments soft delete'
+  - 'allow node video field_comments hard delete'
+  - 'allow node video field_comments soft delete'
+  - 'bypass node access'
+  - 'create field_comment_moderator'
+  - 'create field_enable_likes'
+  - 'create field_site_section'
+  - 'create field_tags'
+  - 'create file media'
+  - 'create image content'
+  - 'create landing_page content'
+  - 'create link content'
+  - 'create paragraph content paragraph_session'
+  - 'create polls'
+  - 'create publish_on scheduled updates'
+  - 'create scheduling_options'
+  - 'create terms in announcement_type'
+  - 'create terms in article_type'
+  - 'create terms in audiences'
+  - 'create terms in category'
+  - 'create terms in form_topic'
+  - 'create terms in group_club'
+  - 'create terms in office_division'
+  - 'create terms in site_alert_type'
+  - 'create terms in site_section'
+  - 'create terms in tags'
+  - 'create terms in timezone'
+  - 'create terms in top_level_group'
+  - 'create terms in topic'
+  - 'create unpublish_on scheduled updates'
+  - 'create url aliases'
+  - 'create webform'
+  - 'customize shortcut links'
+  - 'delete any comment'
+  - 'delete any comment anytime'
+  - 'delete any file media'
+  - 'delete any image content'
+  - 'delete any landing_page content'
+  - 'delete any link content'
+  - 'delete any media'
+  - 'delete any publish_on scheduled updates'
+  - 'delete any unpublish_on scheduled updates'
+  - 'delete any webform'
+  - 'delete any webform submission'
+  - 'delete comment replies'
+  - 'delete maillog'
+  - 'delete media'
+  - 'delete own announcement content'
+  - 'delete own event content'
+  - 'delete own featured content'
+  - 'delete own file media'
+  - 'delete own form content'
+  - 'delete own image content'
+  - 'delete own landing_page content'
+  - 'delete own library_item content'
+  - 'delete own link content'
+  - 'delete own operating_procedure content'
+  - 'delete own page content'
+  - 'delete own publish_on scheduled updates'
+  - 'delete own sec_alert content'
+  - 'delete own sec_article content'
+  - 'delete own secr content'
+  - 'delete own unpublish_on scheduled updates'
+  - 'delete own video content'
+  - 'delete own webform'
+  - 'delete own webform submission'
+  - 'delete paragraph content paragraph_session'
+  - 'delete terms in tags'
+  - 'edit any announcement content'
+  - 'edit any file media'
+  - 'edit any image content'
+  - 'edit any landing_page content'
+  - 'edit any library_item content'
+  - 'edit any link content'
+  - 'edit any operating_procedure content'
+  - 'edit any publish_on scheduled updates'
+  - 'edit any sec_alert content'
+  - 'edit any sec_article content'
+  - 'edit any secr content'
+  - 'edit any unpublish_on scheduled updates'
+  - 'edit any video content'
+  - 'edit any webform'
+  - 'edit any webform submission'
+  - 'edit field_comment_moderator'
+  - 'edit field_enable_likes'
+  - 'edit field_site_section'
+  - 'edit field_tags'
+  - 'edit own announcement content'
+  - 'edit own event content'
+  - 'edit own featured content'
+  - 'edit own field_comment_moderator'
+  - 'edit own field_enable_likes'
+  - 'edit own field_site_section'
+  - 'edit own field_tags'
+  - 'edit own file media'
+  - 'edit own form content'
+  - 'edit own image content'
+  - 'edit own landing_page content'
+  - 'edit own library_item content'
+  - 'edit own link content'
+  - 'edit own operating_procedure content'
+  - 'edit own page content'
+  - 'edit own polls'
+  - 'edit own publish_on scheduled updates'
+  - 'edit own scheduling_options'
+  - 'edit own sec_alert content'
+  - 'edit own sec_article content'
+  - 'edit own secr content'
+  - 'edit own unpublish_on scheduled updates'
+  - 'edit own video content'
+  - 'edit own webform'
+  - 'edit own webform submission'
+  - 'edit scheduling_options'
+  - 'edit terms in announcement_type'
+  - 'edit terms in article_type'
+  - 'edit terms in audiences'
+  - 'edit terms in category'
+  - 'edit terms in form_topic'
+  - 'edit terms in group_club'
+  - 'edit terms in office_division'
+  - 'edit terms in site_alert_type'
+  - 'edit terms in site_section'
+  - 'edit terms in tags'
+  - 'edit terms in timezone'
+  - 'edit terms in top_level_group'
+  - 'edit terms in topic'
+  - 'edit webform assets'
+  - 'edit webform source'
+  - 'export configuration'
+  - 'flag featured_poll'
+  - 'flag mark_comment_as_inappropriate'
+  - 'flag user_comment_privilege'
+  - 'import configuration'
+  - 'masquerade as enduser'
+  - 'never autoplay videos'
+  - 'rabbit hole bypass node'
+  - 'replicate entities'
+  - 'revert all revisions'
+  - 'revert announcement revisions'
+  - 'revert featured revisions'
+  - 'revert form revisions'
+  - 'revert image revisions'
+  - 'revert landing_page revisions'
+  - 'revert library_item revisions'
+  - 'revert link revisions'
+  - 'revert operating_procedure revisions'
+  - 'revert sec_alert revisions'
+  - 'revert sec_article revisions'
+  - 'revert secr revisions'
+  - 'revert video revisions'
+  - 'switch shortcut sets'
+  - 'synchronize configuration'
+  - 'unflag featured_poll'
+  - 'unflag mark_comment_as_inappropriate'
+  - 'unflag user_comment_privilege'
+  - 'update any media'
+  - 'update media'
+  - 'update paragraph content paragraph_session'
+  - 'use draft_needs_review transition'
+  - 'use ipe with page manager'
+  - 'use needs_review_draft transition'
+  - 'use panels caching features'
+  - 'use panels dashboard'
+  - 'use panels locks'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'use text format restricted_html'
+  - 'use text format teaser_html'
+  - 'view all media revisions'
+  - 'view all revisions'
+  - 'view announcement revisions'
+  - 'view any unpublished content'
+  - 'view any webform submission'
+  - 'view event revisions'
+  - 'view featured revisions'
+  - 'view field_comment_moderator'
+  - 'view field_enable_likes'
+  - 'view form revisions'
+  - 'view image revisions'
+  - 'view landing_page revisions'
+  - 'view latest version'
+  - 'view library_item revisions'
+  - 'view link revisions'
+  - 'view maillog'
+  - 'view moderation states'
+  - 'view operating_procedure revisions'
+  - 'view own field_comment_moderator'
+  - 'view own field_enable_likes'
+  - 'view own field_site_section'
+  - 'view own field_tags'
+  - 'view own scheduling_options'
+  - 'view own unpublished content'
+  - 'view own webform submission'
+  - 'view page revisions'
+  - 'view pane admin links'
+  - 'view poll results'
+  - 'view scheduled update entities'
+  - 'view scheduling_options'
+  - 'view sec_alert revisions'
+  - 'view sec_article revisions'
+  - 'view secr revisions'
+  - 'view the administration theme'
+  - 'view update notifications'
+  - 'view video revisions'

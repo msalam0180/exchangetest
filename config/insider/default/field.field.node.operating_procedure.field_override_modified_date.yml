@@ -1,0 +1,23 @@
+uuid: 25f17b0a-046e-48c1-8456-4bfbf8448659
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_override_modified_date
+    - node.type.operating_procedure
+  module:
+    - datetime
+_core:
+  default_config_hash: N4pyB2mkr7bSV-pDEdZmtIgf1FZv4QLtChq6NYpRTsU
+id: node.operating_procedure.field_override_modified_date
+field_name: field_override_modified_date
+entity_type: node
+bundle: operating_procedure
+label: 'Override Modified Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,54 @@
+//
+// blockquote (pullquotes)
+// --------------------------------------------------
+
+//This code has not been reviewed - copied from SEC.gov
+
+blockquote {
+  clear:both;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Raleway", sans-serif;
+  background-color: #e9e9e9;
+  border-top-width: .25em;
+  border-bottom-width: .25em;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  display: inline-block;
+  font-size: 1.2em;
+  font-weight: 400;
+  margin: 1em 0;
+  padding: 2em 3.5em 2em 3.5em;
+  position: relative;
+  quotes: none;
+  width: inherit;
+  line-height: 1.8;
+}
+
+
+blockquote:before, blockquote:after {
+  color: #BFBFBF;
+  display: block;
+  font-size: 500%;
+  font-family: Georgia, serif;
+  line-height: 100%;
+  position: absolute;
+  width: auto;
+}
+
+blockquote:before {
+  content: "\201C";
+  left: 0.3em8;
+  margin-left: 0em;
+  margin-top: 0.25em;
+  max-height: 40px;
+  top: -14px;
+  left: 17px;
+}
+
+blockquote:after {
+  content: "\201D";
+  right: 25px;
+  height: 0px;
+  bottom: 56px;
+}

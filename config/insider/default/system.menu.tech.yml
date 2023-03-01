@@ -1,0 +1,8 @@
+uuid: da4ac4f0-00ce-488c-8645-7199cede889c
+langcode: en
+status: true
+dependencies: {  }
+id: tech
+label: Tech
+description: 'This section covers technology subject matter.'
+locked: false

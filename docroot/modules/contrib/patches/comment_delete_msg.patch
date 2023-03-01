@@ -1,0 +1,13 @@
+diff --git a/src/CommentDeleteManager.php b/src/CommentDeleteManager.php
+index 1fa53f7..32d6bdd 100644
+--- a/src/CommentDeleteManager.php
++++ b/src/CommentDeleteManager.php
+@@ -325,7 +325,7 @@ class CommentDeleteManager {
+             $comment->setOwnerId(0);
+           }
+           $comment_translation->set('subject', NULL);
+-          $comment_translation->set('comment_body', NULL);
++          $comment_translation->set('comment_body', 'This comment has been deleted.');
+           foreach ($fields as $field_machine_name => $field) {
+             $comment_translation->set($field_machine_name, NULL);
+           }

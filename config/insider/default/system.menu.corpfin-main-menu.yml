@@ -1,0 +1,8 @@
+uuid: 393208e8-526e-4285-885f-97c02888f503
+langcode: en
+status: true
+dependencies: {  }
+id: corpfin-main-menu
+label: 'Corpfin Main Menu'
+description: ''
+locked: false

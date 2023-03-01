@@ -1,0 +1,5 @@
+services:
+  insider_quicklinks.flag_subscriber:
+    class: Drupal\insider_quicklinks\EventSubscriber\QuicklinksFlagSubscriber
+    tags:
+      - { name: event_subscriber }

@@ -1,0 +1,29 @@
+uuid: e05da76a-8e18-46db-9de0-4ff64752baaf
+langcode: en
+status: true
+dependencies:
+  module:
+    - insider_quicklinks
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: GknfeGp9-XsQeI2_XGDhRQ5dCwxPhJ9NHru44bL66cM
+id: quicklinkmenublock
+theme: insider
+region: global_navigation
+weight: 0
+provider: null
+plugin: insider_quicklinks_menu
+settings:
+  id: insider_quicklinks_menu
+  label: 'Quicklink Menu Block'
+  label_display: '0'
+  provider: insider_quicklinks
+  insider_quicklinks_menu: null
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '*'

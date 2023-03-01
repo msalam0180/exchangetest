@@ -1,0 +1,77 @@
+//
+// Styles
+// These are all the includes for the pages on screens
+// --------------------------------------------------
+
+// General
+@import "../node_modules/susy/sass/susy";
+@import "general/vars"; //TODO: Need to replace vars in legacy code
+@import "general/fonts";
+@import "general/mixins";
+@import "general/normalize";
+@import "general/grid";
+@import "general/general";
+@import "components/messages";
+@import "general/container";
+
+// layouts
+@import "layouts/panel_layouts_general";
+
+// Components
+@import "components/panelizer";
+@import "components/display_field";
+@import "components/scroll_box";
+@import "components/more_link";
+@import "components/breadcrumbs";
+@import "components/blockquotes";
+@import "components/views";
+@import "components/panels";
+@import "components/forms";
+@import "components/table";
+@import "components/sidebars";
+@import "components/tabs";
+@import "components/alerts";
+@import "components/stylized-boxes";
+@import "components/lists";
+@import "components/buttons";
+@import "components/accordion";
+@import "components/exposed_filters";
+@import "components/pager";
+@import "components/flex-container";
+@import "components/media_object";
+@import "components/datatables";
+@import "components/viewTable";
+@import "components/videos";
+@import "components/embeded_entities";
+@import "components/masquerade";
+@import "components/comments";
+@import "components/polls";
+
+//blocks
+@import "blocks/homepage_announcements_block";
+@import "blocks/homepage_events_block";
+@import "blocks/homepage_hero_blocks";
+@import "blocks/_related_materials";
+
+// partials
+@import "partials/header";
+@import "partials/global-navigation";
+@import "partials/footer";
+@import "partials/_left-and-mobile-menu";
+
+//pages
+@import "pages/nodes_all";
+@import "pages/nodes_events";
+@import "pages/homepage";
+@import "pages/user";
+@import "pages/node_video";
+@import "pages/node_announcement";
+@import "pages/_node_secr_op";
+@import "pages/list_pages";
+@import "pages/search_results";
+@import "pages/view_media";
+@import "pages/style_guide";
+@import "pages/quicklinks";
+
+//Emergency CSS
+@import "adhoc";

@@ -1,0 +1,29 @@
+uuid: 0e4a8ce3-3846-419a-89d8-dbe469466054
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+_core:
+  default_config_hash: LkQ6dJ0Ur9pxN4k776hZq9ykPRcNlUfAyaFBeLMBQPI
+id: node.field_video_origin
+field_name: field_video_origin
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: youtubevimeo
+      label: 'YouTube or Vimeo'
+    -
+      value: limelight
+      label: Wowza
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

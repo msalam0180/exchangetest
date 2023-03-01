@@ -1,0 +1,19 @@
+<section role="banner">
+  <div class="header-content">
+    {{ page.header }}
+
+    <a class="left-nav-menu">
+      <span class="fa fa-bars"></span>
+      <span class="sr-only">Toggle Menu</span>
+    </a>
+  </div>
+  <div id="global-navigation" class="clearfix global-navigation">
+    {{ page.global_navigation }}
+  </div>
+</section>
+
+{% if page.highlighted %}
+    <aside class="highlighted clearfix" role="complementary">
+      {{ page.highlighted }}
+    </aside>
+{% endif %}

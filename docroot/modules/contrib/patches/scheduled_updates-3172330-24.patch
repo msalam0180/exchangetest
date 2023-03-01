@@ -1,0 +1,470 @@
+diff --git a/scheduled_updates.info.yml b/scheduled_updates.info.yml
+index 6f3dcfb..5ecba1d 100644
+--- a/scheduled_updates.info.yml
++++ b/scheduled_updates.info.yml
+@@ -1,7 +1,6 @@
+ name: Scheduled Updates
+ type: module
+ description: Create scheduled updates to field values on entities such content, users, and terms.
+-core: 8.x
+ core_version_requirement: ^8 || ^9
+ package: Other
+ configure: scheduled_update.config.overview
+diff --git a/scheduled_updates.links.menu.yml b/scheduled_updates.links.menu.yml
+index 9428357..dcb14c0 100644
+--- a/scheduled_updates.links.menu.yml
++++ b/scheduled_updates.links.menu.yml
+@@ -16,7 +16,7 @@ scheduled_update.config.overview:
+ entity.scheduled_update_type.collection:
+   title: 'Scheduled Update Types'
+   route_name: entity.scheduled_update_type.collection
+-  description: 'Manage Scheduled Update Types and anually run updates.'
++  description: 'Manage Scheduled Update Types and manually run updates.'
+   parent: scheduled_update.config.overview
+   weight: 97
+ schedule_updates.runner_form:
+diff --git a/scheduled_updates.services.yml b/scheduled_updates.services.yml
+index ee44b36..48ddc19 100644
+--- a/scheduled_updates.services.yml
++++ b/scheduled_updates.services.yml
+@@ -13,12 +13,12 @@ services:
+     arguments: ['@entity_field.manager', '@entity_type.manager', '@entity_type.bundle.info']
+   scheduled_updates.routing.subscriber:
+     class: Drupal\scheduled_updates\Routing\RouteSubscriber
+-    arguments: ['@entity.manager']
++    arguments: ['@entity_type.manager']
+     tags:
+       - { name: event_subscriber }
+   scheduled_updates.route_enhancer:
+     class: Drupal\scheduled_updates\Routing\FieldUiRouteEnhancer
+-    arguments: ['@entity.manager']
++    arguments: ['@entity_type.manager']
+     tags:
+       - { name: route_enhancer }
+ #rename scheduled_updates.update_utils service or class
+diff --git a/src/ClassUtilsTrait.php b/src/ClassUtilsTrait.php
+index 9edb6d9..dc63fcd 100644
+--- a/src/ClassUtilsTrait.php
++++ b/src/ClassUtilsTrait.php
+@@ -69,10 +69,6 @@ trait ClassUtilsTrait {
+    */
+   protected function getRevisionOwner(ContentEntityInterface $entity) {
+     if ($entity instanceof NodeInterface) {
+-      return $entity->getRevisionAuthor();
+-    }
+-    elseif ($this->implementsInterface($entity, ['Drupal\entity\Revision\EntityRevisionLogInterface'])){
+-      /** @var \Drupal\entity\Revision\EntityRevisionLogInterface $entity */
+       return $entity->getRevisionUser();
+     }
+     return NULL;
+diff --git a/src/Command/RunUpdatesCommand.php b/src/Command/RunUpdatesCommand.php
+index 8b4e8a3..05220c6 100644
+--- a/src/Command/RunUpdatesCommand.php
++++ b/src/Command/RunUpdatesCommand.php
+@@ -7,8 +7,8 @@
+ 
+ namespace Drupal\scheduled_updates\Command;
+ 
+-use Drupal\Console\Command\ContainerAwareCommand;
+-use Drupal\Console\Style\DrupalStyle;
++use Drupal\Console\Core\Command\ContainerAwareCommand;
++use Drupal\Console\Core\Style\DrupalStyle;
+ use Drupal\scheduled_updates\UpdateRunnerUtils;
+ use Symfony\Component\Console\Input\InputArgument;
+ use Symfony\Component\Console\Input\InputInterface;
+diff --git a/src/Entity/ScheduledUpdateType.php b/src/Entity/ScheduledUpdateType.php
+index 928b733..74f66b6 100644
+--- a/src/Entity/ScheduledUpdateType.php
++++ b/src/Entity/ScheduledUpdateType.php
+@@ -39,6 +39,15 @@ use Drupal\scheduled_updates\ScheduledUpdateTypeInterface;
+  *     "delete-form" = "/admin/config/workflow/scheduled-update-type/{scheduled_update_type}/delete",
+  *     "collection" = "/admin/config/workflow/scheduled-update-type/list",
+  *     "clone-fields" = "/admin/config/workflow/scheduled-update-type/{scheduled_update_type}/clone-fields"
++ *   },
++ *   config_export = {
++ *     "id",
++ *     "label",
++ *     "uuid",
++ *     "update_entity_type",
++ *     "update_types_supported",
++ *     "field_map",
++ *     "update_runner"
+  *   }
+  * )
+  */
+diff --git a/src/Form/ScheduledUpdateTypeAddAsFieldForm.php b/src/Form/ScheduledUpdateTypeAddAsFieldForm.php
+index 1dee348..d90825a 100644
+--- a/src/Form/ScheduledUpdateTypeAddAsFieldForm.php
++++ b/src/Form/ScheduledUpdateTypeAddAsFieldForm.php
+@@ -71,7 +71,7 @@ class ScheduledUpdateTypeAddAsFieldForm extends ScheduledUpdateTypeBaseForm {
+   public function afterBuild(array $form, FormStateInterface $form_state) {
+     $form = parent::afterBuild($form, $form_state);
+     $trigger = $form_state->getTriggeringElement();
+-    if ($trigger['#name'] == 'clone_field' && $clone_field = $form_state->getValue('clone_field')) {
++    if (isset($trigger['#name']) && $trigger['#name'] == 'clone_field' && $clone_field = $form_state->getValue('clone_field')) {
+       $new_field_element = &$form['type_dependent_elements']['reference_settings']['new_field'];
+       $selected_field_label = $form['type_dependent_elements']['clone_field']['#options'][$clone_field];
+       $new_field_element['label']['#value'] = $selected_field_label . ' ' . $this->t('Update');
+diff --git a/src/Form/ScheduledUpdateTypeBaseForm.php b/src/Form/ScheduledUpdateTypeBaseForm.php
+index afe2860..571b252 100644
+--- a/src/Form/ScheduledUpdateTypeBaseForm.php
++++ b/src/Form/ScheduledUpdateTypeBaseForm.php
+@@ -7,7 +7,6 @@
+ 
+ namespace Drupal\scheduled_updates\Form;
+ 
+-
+ use Drupal\Core\Entity\EntityFieldManagerInterface;
+ use Drupal\Core\Entity\EntityForm;
+ use Drupal\Core\Extension\ModuleHandlerInterface;
+@@ -17,6 +16,7 @@ use Drupal\Core\Field\FieldItemListInterface;
+ use Drupal\Core\Field\FieldStorageDefinitionInterface;
+ use Drupal\Core\Field\WidgetBase;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Messenger\MessengerInterface;
+ use Drupal\field\Entity\FieldConfig;
+ use Drupal\field\Entity\FieldStorageConfig;
+ use Drupal\scheduled_updates\ClassUtilsTrait;
+@@ -62,6 +62,12 @@ class ScheduledUpdateTypeBaseForm extends EntityForm{
+    */
+   protected $updateUtils;
+ 
++  /**
++   * The Messenger service.
++   *
++   * @var \Drupal\Core\Messenger\MessengerInterface
++   */
++  protected $messenger;
+ 
+   /**
+    * Constructs a ScheduledUpdateTypeForm object.
+@@ -71,16 +77,18 @@ class ScheduledUpdateTypeBaseForm extends EntityForm{
+    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+    * @param \Drupal\scheduled_updates\FieldManagerInterface $fieldManager
+    * @param \Drupal\scheduled_updates\UpdateUtilsInterface $updateUtils
++   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
++   *   The messenger service.
+    *
+    * @internal param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entityTypeBundleInfo
+    */
+-  public function __construct(EntityFieldManagerInterface $entityFieldManager, UpdateRunnerManager $runnerManager, ModuleHandlerInterface $moduleHandler, FieldManagerInterface $fieldManager, UpdateUtilsInterface $updateUtils) {
++  public function __construct(EntityFieldManagerInterface $entityFieldManager, UpdateRunnerManager $runnerManager, ModuleHandlerInterface $moduleHandler, FieldManagerInterface $fieldManager, UpdateUtilsInterface $updateUtils, MessengerInterface $messenger) {
+     $this->entityFieldManager = $entityFieldManager;
+     $this->runnerManager = $runnerManager;
+     $this->moduleHandler = $moduleHandler;
+     $this->fieldManager = $fieldManager;
+     $this->updateUtils = $updateUtils;
+-
++    $this->messenger = $messenger;
+   }
+   /**
+    * {@inheritdoc}
+@@ -91,7 +99,8 @@ class ScheduledUpdateTypeBaseForm extends EntityForm{
+       $container->get('plugin.manager.scheduled_updates.update_runner'),
+       $container->get('module_handler'),
+       $container->get('scheduled_updates.field_manager'),
+-      $container->get('scheduled_updates.update_utils')
++      $container->get('scheduled_updates.update_utils'),
++      $container->get('messenger')
+     );
+   }
+ 
+@@ -719,9 +728,10 @@ class ScheduledUpdateTypeBaseForm extends EntityForm{
+   protected function getDefaultBundle($field_selected, FormStateInterface $form_state) {
+     $all_fields = $this->entityFieldManager->getFieldMap();
+     $entity_fields = $all_fields[$this->entity->getUpdateEntityType()];
+-    drupal_set_message(print_r($entity_fields[$field_selected], 1));
++    $this->messenger->addMessage(print_r($entity_fields[$field_selected], 1));
+     if (isset($entity_fields[$field_selected])) {
+-      $bundle = array_shift(array_keys($entity_fields[$field_selected]['bundles']));
++      $bundles = array_keys($entity_fields[$field_selected]['bundles']);
++      $bundle = array_shift($bundles);
+     }
+     else {
+       $bundle = $this->entityTypeManager()->getDefinition($this->entity->getUpdateEntityType())->getBundleEntityType();
+diff --git a/src/Form/ScheduledUpdateTypeForm.php b/src/Form/ScheduledUpdateTypeForm.php
+index bbc4550..826e662 100644
+--- a/src/Form/ScheduledUpdateTypeForm.php
++++ b/src/Form/ScheduledUpdateTypeForm.php
+@@ -118,7 +118,7 @@ class ScheduledUpdateTypeForm extends ScheduledUpdateTypeBaseForm {
+     }
+ 
+ 
+-    drupal_set_message("clone field $clone_field, status $status");
++    $this->messenger->addMessage("clone field $clone_field, status $status");
+     switch ($status) {
+       case SAVED_NEW:
+         if ($multi_field) {
+diff --git a/src/Permissions.php b/src/Permissions.php
+index 1e2c7da..65f18f4 100644
+--- a/src/Permissions.php
++++ b/src/Permissions.php
+@@ -7,7 +7,6 @@
+ 
+ namespace Drupal\scheduled_updates;
+ 
+-use Drupal\Core\Routing\UrlGeneratorTrait;
+ use Drupal\Core\StringTranslation\StringTranslationTrait;
+ use Drupal\scheduled_updates\Entity\ScheduledUpdateType;
+ 
+@@ -17,7 +16,6 @@ use Drupal\scheduled_updates\Entity\ScheduledUpdateType;
+ class Permissions {
+ 
+   use StringTranslationTrait;
+-  use UrlGeneratorTrait;
+ 
+   /**
+    * Returns an array of node type permissions.
+diff --git a/src/Plugin/Derivative/AddUpdateFieldLocalAction.php b/src/Plugin/Derivative/AddUpdateFieldLocalAction.php
+index 4915c34..7d4c04e 100644
+--- a/src/Plugin/Derivative/AddUpdateFieldLocalAction.php
++++ b/src/Plugin/Derivative/AddUpdateFieldLocalAction.php
+@@ -9,7 +9,7 @@
+ namespace Drupal\scheduled_updates\Plugin\Derivative;
+ 
+ use Drupal\Component\Plugin\Derivative\DeriverBase;
+-use Drupal\Core\Entity\EntityManagerInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
+ use Drupal\Core\Routing\RouteProviderInterface;
+ use Drupal\Core\StringTranslation\StringTranslationTrait;
+@@ -21,23 +21,23 @@ class AddUpdateFieldLocalAction extends DeriverBase implements ContainerDeriverI
+   use StringTranslationTrait;
+ 
+   /**
+-   * The entity manager
++   * The entity type manager
+    *
+-   * @var \Drupal\Core\Entity\EntityManagerInterface
++   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+    */
+-  protected $entityManager;
++  protected $entityTypeManager;
+ 
+   /**
+    * Constructs a FieldUiLocalAction object.
+    *
+    * @param \Drupal\Core\Routing\RouteProviderInterface $route_provider
+    *   The route provider to load routes by name.
+-   * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
+-   *   The entity manager.
++   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
++   *   The entity type manager.
+    */
+-  public function __construct(RouteProviderInterface $route_provider, EntityManagerInterface $entity_manager) {
++  public function __construct(RouteProviderInterface $route_provider, EntityTypeManagerInterface $entity_type_manager) {
+     $this->routeProvider = $route_provider;
+-    $this->entityManager = $entity_manager;
++    $this->entityTypeManager = $entity_type_manager;
+   }
+ 
+   /**
+@@ -46,7 +46,7 @@ class AddUpdateFieldLocalAction extends DeriverBase implements ContainerDeriverI
+   public static function create(ContainerInterface $container, $base_plugin_id) {
+     return new static(
+       $container->get('router.route_provider'),
+-      $container->get('entity.manager')
++      $container->get('entity_type.manager')
+     );
+   }
+ 
+@@ -56,7 +56,7 @@ class AddUpdateFieldLocalAction extends DeriverBase implements ContainerDeriverI
+   public function getDerivativeDefinitions($base_plugin_definition) {
+     $this->derivatives = array();
+ 
+-    foreach ($this->entityManager->getDefinitions() as $entity_type_id => $entity_type) {
++    foreach ($this->entityTypeManager->getDefinitions() as $entity_type_id => $entity_type) {
+       if ($entity_type_id == 'scheduled_update') {
+         continue;
+       }
+diff --git a/src/Routing/FieldUiRouteEnhancer.php b/src/Routing/FieldUiRouteEnhancer.php
+index c9d92f5..f8bcde1 100644
+--- a/src/Routing/FieldUiRouteEnhancer.php
++++ b/src/Routing/FieldUiRouteEnhancer.php
+@@ -7,8 +7,8 @@
+ 
+ namespace Drupal\scheduled_updates\Routing;
+ 
+-use Drupal\Core\Entity\EntityManagerInterface;
+-use Drupal\Core\Routing\Enhancer\RouteEnhancerInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Routing\EnhancerInterface;
+ use Symfony\Cmf\Component\Routing\RouteObjectInterface;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\Routing\Route;
+@@ -16,23 +16,23 @@ use Symfony\Component\Routing\Route;
+ /**
+  * Enhances Field UI routes by adding proper information about the bundle name.
+  */
+-class FieldUiRouteEnhancer implements RouteEnhancerInterface {
++class FieldUiRouteEnhancer implements EnhancerInterface {
+ 
+   /**
+-   * The entity manager.
++   * The entity type manager.
+    *
+-   * @var \Drupal\Core\Entity\EntityManagerInterface
++   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+    */
+-  protected $entityManager;
++  protected $entityTypeManager;
+ 
+   /**
+    * Constructs a FieldUiRouteEnhancer object.
+    *
+-   * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
+-   *   The entity manager.
++   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
++   *   The entity type manager.
+    */
+-  public function __construct(EntityManagerInterface $entity_manager) {
+-    $this->entityManager = $entity_manager;
++  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
++    $this->entityTypeManager = $entity_type_manager;
+   }
+ 
+   /**
+@@ -42,7 +42,7 @@ class FieldUiRouteEnhancer implements RouteEnhancerInterface {
+     if (!$this->applies($defaults[RouteObjectInterface::ROUTE_OBJECT])) {
+       return $defaults;
+     }
+-    if (($bundle = $this->entityManager->getDefinition($defaults['entity_type_id'])->getBundleEntityType()) && isset($defaults[$bundle])) {
++    if (($bundle = $this->entityTypeManager->getDefinition($defaults['entity_type_id'])->getBundleEntityType()) && isset($defaults[$bundle])) {
+       // Field UI forms only need the actual name of the bundle they're dealing
+       // with, not an upcasted entity object, so provide a simple way for them
+       // to get it.
+diff --git a/src/Routing/RouteSubscriber.php b/src/Routing/RouteSubscriber.php
+index b20d9c9..d9a0bda 100644
+--- a/src/Routing/RouteSubscriber.php
++++ b/src/Routing/RouteSubscriber.php
+@@ -7,7 +7,7 @@
+ 
+ namespace Drupal\scheduled_updates\Routing;
+ 
+-use Drupal\Core\Entity\EntityManagerInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Routing\RouteSubscriberBase;
+ use Drupal\Core\Routing\RoutingEvents;
+ use Symfony\Component\Routing\Route;
+@@ -21,25 +21,25 @@ class RouteSubscriber extends RouteSubscriberBase {
+   /**
+    * The entity type manager
+    *
+-   * @var \Drupal\Core\Entity\EntityManagerInterface
++   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+    */
+-  protected $manager;
++  protected $entityTypeManager;
+ 
+   /**
+    * Constructs a RouteSubscriber object.
+    *
+-   * @param \Drupal\Core\Entity\EntityManagerInterface $manager
++   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+    *   The entity type manager.
+    */
+-  public function __construct(EntityManagerInterface $manager) {
+-    $this->manager = $manager;
++  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
++    $this->entityTypeManager = $entity_type_manager;
+   }
+ 
+   /**
+    * {@inheritdoc}
+    */
+   protected function alterRoutes(RouteCollection $collection) {
+-    foreach ($this->manager->getDefinitions() as $entity_type_id => $entity_type) {
++    foreach ($this->entityTypeManager->getDefinitions() as $entity_type_id => $entity_type) {
+       if ($route_name = $entity_type->get('field_ui_base_route')) {
+         // Try to get the route from the current collection.
+         if (!$entity_route = $collection->get($route_name)) {
+diff --git a/src/ScheduledUpdateListBuilder.php b/src/ScheduledUpdateListBuilder.php
+index bde60aa..399b002 100644
+--- a/src/ScheduledUpdateListBuilder.php
++++ b/src/ScheduledUpdateListBuilder.php
+@@ -27,7 +27,11 @@ class ScheduledUpdateListBuilder extends EntityListBuilder {
+ 
+   use ClassUtilsTrait;
+ 
+-  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface  */
++  /**
++   * The entity type manager
++   *
++   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
++   */
+   protected $entityTypeManager;
+ 
+   /**
+@@ -41,7 +45,7 @@ class ScheduledUpdateListBuilder extends EntityListBuilder {
+   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
+     return new static(
+       $entity_type,
+-      $container->get('entity.manager')->getStorage($entity_type->id()),
++      $container->get('entity_type.manager')->getStorage($entity_type->id()),
+       $container->get('scheduled_updates.update_utils')
+     );
+   }
+diff --git a/src/ScheduledUpdateTypeAccessControlHandler.php b/src/ScheduledUpdateTypeAccessControlHandler.php
+index 7ac86be..7d9c764 100644
+--- a/src/ScheduledUpdateTypeAccessControlHandler.php
++++ b/src/ScheduledUpdateTypeAccessControlHandler.php
+@@ -29,7 +29,7 @@ class ScheduledUpdateTypeAccessControlHandler extends EntityAccessControlHandler
+         break;
+ 
+       case 'delete':
+-        return parent::checkAccess($entity, $operation, $account)->cacheUntilEntityChanges($entity);
++        return parent::checkAccess($entity, $operation, $account)->addCacheableDependency($entity);
+         break;
+ 
+       default:
+diff --git a/src/ScheduledUpdateTypeListBuilder.php b/src/ScheduledUpdateTypeListBuilder.php
+index 508a10f..8742ead 100644
+--- a/src/ScheduledUpdateTypeListBuilder.php
++++ b/src/ScheduledUpdateTypeListBuilder.php
+@@ -20,6 +20,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
+ class ScheduledUpdateTypeListBuilder extends ConfigEntityListBuilder {
+ 
+   /**
++   * The entity type manager.
++   *
+    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+    */
+   protected $entityTypeManager;
+@@ -30,7 +32,7 @@ class ScheduledUpdateTypeListBuilder extends ConfigEntityListBuilder {
+   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
+     return new static(
+       $entity_type,
+-      $container->get('entity.manager')->getStorage($entity_type->id()),
++      $container->get('entity_type.manager')->getStorage($entity_type->id()),
+       $container->get('entity_type.manager')
+     );
+   }
+@@ -42,11 +44,12 @@ class ScheduledUpdateTypeListBuilder extends ConfigEntityListBuilder {
+    *   The entity type definition.
+    * @param \Drupal\Core\Entity\EntityStorageInterface $storage
+    *   The entity storage class.
+-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
++   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
++   *`  The entity type manager.
+    */
+-  public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, EntityTypeManagerInterface $entityTypeManager) {
++  public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, EntityTypeManagerInterface $entity_type_manager) {
+     parent::__construct($entity_type, $storage);
+-    $this->entityTypeManager = $entityTypeManager;
++    $this->entityTypeManager = $entity_type_manager;
+   }
+ 
+   /**
+diff --git a/src/UpdateUtils.php b/src/UpdateUtils.php
+index e84c46e..45090b8 100644
+--- a/src/UpdateUtils.php
++++ b/src/UpdateUtils.php
+@@ -108,7 +108,7 @@ class UpdateUtils implements UpdateUtilsInterface {
+     // This should exist because of previous check in
+     // supportsRevisionBundleDefault but just in case.
+     if ($bundle instanceof NodeTypeInterface) {
+-      return $bundle->isNewRevision();
++      return $bundle->shouldCreateNewRevision();
+     }
+     return FALSE;
+   }

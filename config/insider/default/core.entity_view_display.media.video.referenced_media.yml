@@ -1,0 +1,36 @@
+uuid: b0ba1bb0-ac81-4b71-9c87-a55e438cd61c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.referenced_media
+    - field.field.media.video.field_media_video_file
+    - media.type.video
+  module:
+    - media_entity_download
+_core:
+  default_config_hash: S0QxFlle7PE6DCqTruUr3p9UlQUjsVEs3OTayoeptI4
+id: media.video.referenced_media
+targetEntityType: media
+bundle: video
+mode: referenced_media
+content:
+  field_media_video_file:
+    type: media_entity_download_download_link
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

@@ -1,0 +1,11 @@
+uuid: 37bae6ed-abea-45f5-8bf9-053136712cf7
+langcode: en
+status: true
+dependencies:
+  module:
+    - workbench_moderation_actions
+id: state_change__section_association__needs_review
+label: 'Set Section association as Needs Review'
+type: section_association
+plugin: 'state_change:section_association__needs_review'
+configuration: {  }

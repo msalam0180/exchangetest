@@ -1,0 +1,23 @@
+uuid: 8fd1ac93-2228-41e4-bf87-4180569650e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_source
+    - node.type.event
+  module:
+    - text
+_core:
+  default_config_hash: 8ALsXaDJtYvkZaOt6XZYcdfzt76UXf2tlO6RAuwHwlQ
+id: node.event.field_source
+field_name: field_source
+entity_type: node
+bundle: event
+label: Source
+description: 'Federal employee responsible for providing the information for publishing. If contact is same as the source, only source is required.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

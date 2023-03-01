@@ -1,0 +1,38 @@
+//
+// Node: Videos 
+// These styles apply the node video pages
+// --------------------------------------------------
+
+.node--type-video{
+
+  .field--label-inline .field__label {
+    width: 180px;
+  }
+  
+  //Transcript Accordion
+  div[id^="accordion-"] {
+    margin-bottom: -30px;
+    border-top: 1px solid $border-color;
+    margin-top: 20px;
+    
+    //Accordion Header
+    .ui-accordion-header.ui-state-default {
+      background: none;
+      font-weight: 600;
+      padding: 10px 0 14px 25px;
+      border: none;
+      color: $body-text;
+      margin: 0;
+
+      &.ui-accordion-header-active.ui-state-active {
+        border-bottom: 1px solid $border-color;
+      }
+    }
+    //Accordion Content
+    .ui-accordion-content{
+      padding: 10px 20px 15px;
+      border: none;
+    }
+  }
+}
+

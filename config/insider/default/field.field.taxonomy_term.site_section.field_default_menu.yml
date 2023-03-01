@@ -1,0 +1,25 @@
+uuid: 77a9f905-ea97-44fd-86b1-12a3dda2a374
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_default_menu
+    - taxonomy.vocabulary.site_section
+_core:
+  default_config_hash: TPQiqxDsIGeyJ_EoVhob8q28pVHxNo8k0Zifx8CDKuc
+id: taxonomy_term.site_section.field_default_menu
+field_name: field_default_menu
+entity_type: taxonomy_term
+bundle: site_section
+label: 'Main Menu'
+description: "Choose a menu to be used as the microsite's top navigation bar e.g. Corpfin Main Menu.<br>\r\nA new menu may need to be created if there is a custom menu for this microsite.<br>\r\nNaming convention of a menu item should be: \"SiteName Main Menu\" e.g. \"Corpfin Main Menu\"."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:menu'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

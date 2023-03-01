@@ -1,0 +1,7 @@
+name: 'Roles & Permissions'
+description: 'Feature bundle that contains sec_roles & permissions.'
+type: module
+core: 8.x
+version: 8.x-3.0
+package: SEC
+core_version_requirement: ^8 || ^9

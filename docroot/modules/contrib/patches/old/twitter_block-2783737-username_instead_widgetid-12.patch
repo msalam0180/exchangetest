@@ -1,0 +1,192 @@
+diff --git a/config/schema/twitter_block.schema.yml b/config/schema/twitter_block.schema.yml
+index 0cf3551..f078bd3 100644
+--- a/config/schema/twitter_block.schema.yml
++++ b/config/schema/twitter_block.schema.yml
+@@ -1,17 +1,17 @@
+ block.settings.twitter_block:
+   type: block_settings
+   label: 'Twitter block settings'
+   mapping:
+-    widget_id:
++    username:
+       type: string
+-      label: 'Widget ID'
++      label: 'Username'
+     theme:
+       type: string
+       label: 'Theme'
+     link_color:
+       type: string
+       label: 'Link Color'
+     width:
+       type: string
+       label: 'Width'
+     height:
+diff --git a/src/Plugin/Block/TwitterBlock.php b/src/Plugin/Block/TwitterBlock.php
+index dcae380..b6ad5c2 100644
+--- a/src/Plugin/Block/TwitterBlock.php
++++ b/src/Plugin/Block/TwitterBlock.php
+@@ -17,36 +17,26 @@ use Drupal\Core\Url;
+  */
+ class TwitterBlock extends BlockBase {
+ 
+   /**
+    * {@inheritdoc}
+    */
+   public function blockForm($form, FormStateInterface $form_state) {
+ 
+     $config = $this->getConfiguration();
+ 
+-    $form['widget_id'] = [
++    $form['username'] = [
+       '#type' => 'textfield',
+-      '#title' => $this->t('Widget ID'),
+-      '#default_value' => $config['widget_id'],
++      '#title' => $this->t('Username'),
++      '#default_value' => $config['username'],
+       '#required' => TRUE,
+-      '#description' => $this->t('Each Twitter Block block requires a unique
+-        widget ID which determines, among other things, the source (user
+-        timeline, favourites, list or search) of the tweets to display. You can
+-        view a list of your existing embedded timeline widgets (and their widget
+-        IDs) or create new embedded timeline widgets by visiting the
+-        <a href="@widgets_section">widgets section of your Twitter settings
+-        page</a> (make sure that you\'re logged in). You can determine a
+-        widget\'s ID by editing it and inspecting the URL (which should be in
+-        the form of twitter.com/settings/widgets/WIDGET_ID/edit) or by looking
+-        at the widget\'s embed code (look for data-widget-id="WIDGET_ID").',
+-        ['@widgets_section' => 'https://twitter.com/settings/widgets']),
++      '#field_prefix' => '@',
+     ];
+     $form['appearance'] = [
+       '#type' => 'fieldset',
+       '#title' => $this->t('Appearance'),
+     ];
+     $form['appearance']['theme'] = [
+       '#type' => 'select',
+       '#title' => $this->t('Theme'),
+       '#default_value' => $config['theme'],
+       '#options' => [
+@@ -175,63 +165,62 @@ class TwitterBlock extends BlockBase {
+         setting, using "assertive".',
+         ['@website' => 'http://www.w3.org/WAI/intro/aria.php']),
+     ];
+     return $form;
+   }
+ 
+   /**
+    * {@inheritdoc}
+    */
+   public function blockSubmit($form, FormStateInterface $form_state) {
+-    $this->setConfigurationValue('widget_id', $form_state->getValue('widget_id'));
++    $this->setConfigurationValue('username', $form_state->getValue('username'));
+     foreach (['appearance', 'functionality', 'size', 'accessibility'] as $fieldset) {
+       $fieldset_values = $form_state->getValue($fieldset);
+       foreach ($fieldset_values as $key => $value) {
+         $this->setConfigurationValue($key, $value);
+       }
+     }
+   }
+ 
+   /**
+    * {@inheritdoc}
+    */
+   public function build() {
+ 
+     $config = $this->getConfiguration();
+ 
+     $render['block'] = [
+       '#type' => 'link',
+-      '#title' => 'Twitter feed',
+-      '#url' => Url::fromUri('https://twitter.com/twitterapi'),
++      '#title' => $this->t('Tweets by @@username', ['@username' => $config['username']]),
++      '#url' => Url::fromUri('https://twitter.com/' . $config['username']),
+       '#attributes' => [
+         'class' => ['twitter-timeline'],
+-        'data-widget-id' => $config['widget_id'],
+       ],
+       '#attached' => [
+         'library' => ['twitter_block/widgets'],
+       ],
+     ];
+ 
+     if (!empty($config['theme'])) {
+       $render['block']['#attributes']['data-theme'] = $config['theme'];
+     }
+ 
+     if (!empty($config['link_color'])) {
+       $render['block']['#attributes']['data-link-color'] = '#' . $config['link_color'];
+     }
+ 
+     if (!empty($config['width'])) {
+-      $render['block']['#attributes']['width'] = $config['width'];
++      $render['block']['#attributes']['data-width'] = $config['width'];
+     }
+ 
+     if (!empty($config['height'])) {
+-      $render['block']['#attributes']['height'] = $config['height'];
++      $render['block']['#attributes']['data-height'] = $config['height'];
+     }
+ 
+     if (!empty($config['chrome'])) {
+       $options = array_keys(array_filter($config['chrome']));
+ 
+       if (count($options)) {
+         $render['block']['#attributes']['data-chrome'] = implode(' ', $options);
+       }
+     }
+ 
+@@ -256,21 +245,21 @@ class TwitterBlock extends BlockBase {
+     }
+ 
+     return $render;
+   }
+ 
+   /**
+    * {@inheritdoc}
+    */
+   public function defaultConfiguration() {
+     return [
+-      'widget_id' => '',
++      'username' => '',
+       'theme' => '',
+       'link_color' => '',
+       'width' => '',
+       'height' => '',
+       'chrome' => [],
+       'border_color' => '',
+       'language' => '',
+       'tweet_limit' => '',
+       'related' => '',
+       'polite' => '',
+diff --git a/src/Tests/TwitterBlockTest.php b/src/Tests/TwitterBlockTest.php
+index c49badb..051e144 100644
+--- a/src/Tests/TwitterBlockTest.php
++++ b/src/Tests/TwitterBlockTest.php
+@@ -35,24 +35,24 @@ class TwitterBlockTest extends WebTestBase {
+    * Test that the twitter block can be placed and works.
+    */
+   public function testTwitterBlock() {
+     // Test availability of the twitter block in the admin "Place blocks" list.
+     \Drupal::service('theme_handler')->install(['bartik', 'seven', 'stark']);
+     $theme_settings = $this->config('system.theme');
+     foreach (['bartik', 'seven', 'stark'] as $theme) {
+       $this->drupalGet('admin/structure/block/list/' . $theme);
+       // Configure and save the block.
+       $this->drupalPlaceBlock('twitter_block', array(
+-        'widget_id' => 600720083413962752,
++        'username' => 'drupal',
+         'width' => 180,
+         'height' => 200,
+         'region' => 'content',
+         'theme' => $theme,
+       ));
+       // Set the default theme and ensure the block is placed.
+       $theme_settings->set('default', $theme)->save();
+       $this->drupalGet('');
+-      $this->assertText('Twitter feed', 'Twitter block found');
++      $this->assertText('Tweets by @drupal', 'Twitter block found');
+     }
+   }
+ 
+ }

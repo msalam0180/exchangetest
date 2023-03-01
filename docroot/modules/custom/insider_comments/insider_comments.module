@@ -1,0 +1,232 @@
+<?php
+
+use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+
+function insider_comments_comment_deleted_text(): string {
+  return "This comment has been deleted";
+}
+/**
+ * Implements hook_form_alter().
+ * @param $form
+ * @param FormStateInterface $form_state
+ * @param $form_id
+ * @throws InvalidPluginDefinitionException
+ * @throws PluginNotFoundException
+ */
+function insider_comments_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Working with the comment form.
+  if ($form_id == 'comment_comment_form') {
+
+    // Grab the user
+    $user_id = \Drupal::currentUser()->id();
+    $user_entity = \Drupal::entityTypeManager()->getStorage('user')->load($user_id);
+
+    // Call the flag service
+    $flag_service = getFlagService();
+
+    // Get the User Comment Privilege flag
+    $flag = $flag_service->getFlagById('user_comment_privilege');
+
+    // Get the flagging boolean
+    $flagging = $flag_service->getFlagging($flag, $user_entity);
+
+    // If it is not flagged, flag it (toggling now for debug tests)
+    if ($flagging) {
+      unset($form['title']);
+      unset($form['comment_body']);
+      unset($form['actions']);
+    }
+  }
+}
+
+
+/**
+ * Implements hook_mail().
+ *
+ * @param [type] $key
+ * @param [type] $message
+ * @param [type] $params
+ * @return void
+ */
+
+function insider_comments_backup_comment(Drupal\Core\Entity\EntityInterface &$entity) {
+  if ($entity->get('comment_body')->getValue()[0]['value'] != insider_comments_comment_deleted_text()) {
+    $entity->field_comment_backup = $entity->comment_body;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function insider_comments_comment_presave(Drupal\Core\Entity\EntityInterface $entity) {
+  insider_comments_backup_comment($entity);
+}
+/**
+ * Implements hook_comment_insert().
+ *
+ * @param Drupal\Core\Entity\EntityInterface $entity
+ * @return void
+ */
+function insider_comments_comment_insert(Drupal\Core\Entity\EntityInterface $entity) {
+  insider_comment_notify($entity, 'create');
+}
+
+/**
+ * Implements hook_comment_update().
+ *
+ * @param Drupal\Core\Entity\EntityInterface $entity
+ * @return void
+ */
+function insider_comments_comment_update(Drupal\Core\Entity\EntityInterface $entity) {
+  insider_comment_notify($entity, 'update');
+}
+
+/**
+ * Implements hook_comment_delete().
+ *
+ * @param Drupal\Core\Entity\EntityInterface $entity
+ * @return void
+ */
+function insider_comments_comment_delete(Drupal\Core\Entity\EntityInterface $entity) {
+  insider_comment_notify($entity, 'delete');
+}
+
+/**
+ * Send a mail if a comment is create/update/deleted
+ *
+ * @param Drupal\Core\Entity\EntityInterface $entity
+ * @param string $operation
+ * @return void
+ */
+function insider_comment_notify(Drupal\Core\Entity\EntityInterface $entity, string $operation) {
+  // Get node data from comment entity
+  $node = $entity->getCommentedEntity();
+  if (isset($_ENV['AH_PRODUCTION']) && $_ENV['AH_PRODUCTION'] == 1) {
+    $to = ["SECToday@sec.gov", "TheExchange@sec.gov"];
+  } else {
+    $to = ["drupalsupport@sec.gov"];
+  }
+
+  if ($node->getOwner()->getEmail()) {
+    array_push($to, $node->getOwner()->getEmail());
+  }
+
+  // Append any comment moderators to email
+  if ($node->get('field_comment_moderator')->value) {
+    $to[] = $node->get('field_comment_moderator')->value;
+  }
+
+  // Get data to insert into message
+  $comment_body = $entity->get('comment_body')->value;
+  $comment_author = $entity->getAuthorEmail();
+  $comment_created = date('m/d/Y H:i:s', $entity->getChangedTime());
+  $comment_page = $node->toLink(NULL, 'canonical', ['absolute' => true]);
+  $comment_anchor_link = $comment_page->getUrl()->toString() . '#comment-' . $entity->id();
+  $comment_url = Link::fromTextAndUrl($comment_anchor_link, Url::fromUri($comment_anchor_link))->toString();
+  $comment_page = $comment_page->toString();
+  $comment_title = $entity->label();
+  $body = <<<EOT
+    Comment Text:
+    <br>$comment_body
+    <br>Comment Page: $comment_page
+    <br>Comment Date/Time: $comment_created
+    <br>Commenter Email: $comment_author
+    <br>Comment Link: $comment_url
+EOT;
+
+  $path = \Drupal::config('swiftmailer.transport')->get('sendmail_path');
+  $mode = \Drupal::config('swiftmailer.transport')->get('sendmail_mode');
+
+  // Instantiate transport.
+  $transport = new Swift_SendmailTransport($path . ' -' . $mode);
+
+  $mailer = new Swift_Mailer($transport);
+  $options['langcode'] = Drupal::currentUser()->getPreferredLangcode();
+
+  // Create a message
+  $message = (new Swift_Message(t('Comment ' . $operation . 'd : @title', array('@title' => $comment_title), $options)))
+    ->setFrom(Drupal::config('system.site')->get('mail'))
+    ->setTo($to)
+    ->setBody($body, 'text/html');
+
+  $type = $message->getHeaders()->get('Content-Type');
+  $type->setValue('text/html');
+  $type->setParameter('charset', 'utf-8');
+
+  // Send the message if maillog settings have enabled emails
+  $maillog_config = \Drupal::configFactory()->get('maillog.settings');
+  $result = 0;
+
+  if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
+    if ($maillog_config->get('send')) {
+      $result = $mailer->send($message);
+    } elseif (\Drupal::currentUser()->hasPermission('administer maillog')) {
+      $message = t('Sending of e-mail messages is disabled by Maillog module. Go @here to enable.', ['@here' => \Drupal::service('link_generator')->generate('here', Url::fromRoute('maillog.settings'))]);
+
+      \Drupal::messenger()->addWarning($message, TRUE);
+    }
+  }
+
+  // Print messages only for local behat testing
+  if (isset($_ENV['LANDO'])) {
+    $transport = new Swift_SmtpTransport('mail', 1025, 0);
+    $mailer = new Swift_Mailer($transport);
+    $result = $mailer->send($message);
+    if ($result === 0) {
+      \Drupal::messenger()->addMessage(t('There was a problem sending your message and it was not sent.'), MessengerInterface::TYPE_ERROR);
+    } else {
+      \Drupal::messenger()->addMessage(t('Your message has been sent.'));
+    }
+  }
+}
+
+/**
+ * TODO: Check if updated version of Drupal resolves issue
+ * Passes Comment hidden status filter value into query
+ *
+ * @param ViewExecutable $view
+ * @param QueryPluginBase $query
+ * @return void
+ */
+function insider_comments_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if ($view->id() == 'content' && isset($view->exposed_raw_input['field_comments_status'])) {
+    $exposed_input = $view->getExposedInput();
+    if ($exposed_input['field_comments_status'] == '0') {
+      $definition = [
+        'type' => 'LEFT',
+        'table' => 'node__field_comments',
+        'field' => 'entity_id',
+        'left_table' => 'node_field_data',
+        'left_field' => 'nid',
+        'operator' => '='
+      ];
+      $join = Drupal::service('plugin.manager.views.join')->createInstance('standard', $definition);
+      $query->addRelationship('node__field_comments', $join, 'comments');
+      $query->addWhere('', 'field_comments_status', 0, '=');
+    }
+  }
+}
+
+/**
+ * Forces comment hidden status filter to persist after page load
+ *
+ * @param [type] $form
+ * @param FormStateInterface $form_state
+ * @return void
+ */
+function insider_comments_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
+  $view = $form_state->get('view');
+  if ($view->id() == 'content') {
+    $exposed_input = $view->getExposedInput();
+    if ($exposed_input['field_comments_status'] == '0') {
+      $form['field_comments_status']['#value'] = '0';
+    }
+  }
+}

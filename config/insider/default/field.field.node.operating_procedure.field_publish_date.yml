@@ -1,0 +1,23 @@
+uuid: 48489773-c9e2-4c04-8e0e-50a552a7e11e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_publish_date
+    - node.type.operating_procedure
+  module:
+    - datetime
+_core:
+  default_config_hash: CdbtLJpMShpBlt03ufUkQevhQx0SvF5aX0UhJSpZRow
+id: node.operating_procedure.field_publish_date
+field_name: field_publish_date
+entity_type: node
+bundle: operating_procedure
+label: 'Revision Date'
+description: 'Enter the date and time this operating procedure file was last revised.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,38 @@
+uuid: d22c4b8e-3dab-4844-abf2-c2f3d0500d99
+langcode: en
+status: true
+dependencies: {  }
+id: primary
+label: Primary
+weight: 0
+container_id: GTM-PLACEHOLDER
+data_layer: dataLayer
+include_classes: false
+whitelist_classes: |-
+  google
+  nonGooglePixels
+  nonGoogleScripts
+  nonGoogleIframes
+blacklist_classes: |-
+  customScripts
+  customPixels
+include_environment: false
+environment_id: ''
+environment_token: ''
+path_toggle: 'exclude listed'
+path_list: |-
+  /admin*
+  /batch*
+  /node/add*
+  /node/*/edit
+  /node/*/delete
+  /user/*/edit*
+  /user/*/cancel*
+  /user/*
+role_toggle: 'exclude listed'
+role_list: {  }
+status_toggle: 'exclude listed'
+status_list: |-
+  403
+  404
+conditions: {  }

@@ -1,0 +1,30 @@
+uuid: 1dc6908b-2b8b-44b0-b14a-dc2901d8a2a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_group_club
+    - node.type.video
+    - taxonomy.vocabulary.group_club
+_core:
+  default_config_hash: EediAAUJObXeQECjCrl0rS2m0qalPh5v824Evybx3xY
+id: node.video.field_group_club
+field_name: field_group_club
+entity_type: node
+bundle: video
+label: Group/Club
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      group_club: group_club
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

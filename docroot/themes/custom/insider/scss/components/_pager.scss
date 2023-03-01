@@ -1,0 +1,108 @@
+//
+// Pagers (from a view and comments)
+//
+// Note: not fully reviewed, but working well
+// --------------------------------------------------
+
+#table_paging {
+  display: table;
+  position: relative;
+  padding: 10px 0;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  width: 100%;
+
+  @include breakpoint('small') {
+    display: block;
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  select[name="items_per_page"] {
+    width: auto;
+  }
+
+  .tgroup {
+    display: table-cell;
+    width: 180px;
+    padding-top: 0;
+
+    @include breakpoint('small') {
+      display: block;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+
+      li {
+        display: inline-block;
+        line-height: normal;
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  .tgroup1 {
+    display: table-cell;
+    width: 180px;
+    right: 0 !important;
+    top: 1.3em;
+    padding-top: 0;
+    text-align: right;
+
+    @include breakpoint('small') {
+      display: block;
+      padding: 15px 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      text-align: right;
+      width: 60%;
+    }
+  }
+}
+
+nav.pager {
+  text-align: center;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+
+    li {
+      display: inline-block;
+      line-height: normal;
+      margin-bottom: 0px;
+
+      .form-item {
+        @include breakpoint('small') {
+          margin-top: 0;
+        }
+
+        margin-bottom: -10px;
+      }
+
+      a {
+        box-sizing: border-box;
+        display: inline-block;
+        min-width: 1em;
+        padding: 0.5em 0.3em;
+        text-align: center;
+      }
+    }
+  }
+
+  @include breakpoint('small') {
+    clear: both;
+    margin: 15px 0;
+    width: 100%;
+  }
+
+  li.pager__item.is-active a {
+    color: #000000;
+    font-weight: bold;
+  }
+}

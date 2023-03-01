@@ -1,0 +1,48 @@
+uuid: 2417c931-3693-42e0-80e5-756fb3add116
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:50d09789-33b5-4b55-bc22-8f4426f46d68'
+  module:
+    - block_content
+    - system
+    - user
+  theme:
+    - insider
+_core:
+  default_config_hash: 2gs6OQpfYH2HyaG9x_M-X6GyBmn87DaktmQuGpz664g
+id: quicklinkshelp
+theme: insider
+region: content
+weight: -10
+provider: null
+plugin: 'block_content:50d09789-33b5-4b55-bc22-8f4426f46d68'
+settings:
+  id: 'block_content:50d09789-33b5-4b55-bc22-8f4426f46d68'
+  label: 'QuickLinks Help'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/user/profile/quicklinks\r\n/user/profile/quicklinks/*"
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated
+      enduser: enduser
+      administrator: administrator
+      content_creator: content_creator
+      content_approver: content_approver
+      sitebuilder: sitebuilder
+      microsite_creator: microsite_creator
+      microsite_approver: microsite_approver

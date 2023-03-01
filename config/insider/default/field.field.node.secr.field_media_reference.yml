@@ -1,0 +1,31 @@
+uuid: 6ec17f00-556c-4bd7-b15b-a05e4fb3ff78
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media_reference
+    - media.type.file
+    - node.type.secr
+_core:
+  default_config_hash: jf5evH5FSPwJtK0B9-ykofeITTu6LIzVrjy_tNkTYhw
+id: node.secr.field_media_reference
+field_name: field_media_reference
+entity_type: node
+bundle: secr
+label: 'File Media Reference'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      file: file
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: file
+field_type: entity_reference

@@ -1,0 +1,10 @@
+uuid: 0d42a2cd-1b19-455e-95ac-47c079a89623
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: TMlwBAp7WZkFqr8p6bj1WnT0rQiyqrNM_vcZhZnJpjs
+name: 'Site Alert Type'
+vid: site_alert_type
+description: ''
+weight: 0

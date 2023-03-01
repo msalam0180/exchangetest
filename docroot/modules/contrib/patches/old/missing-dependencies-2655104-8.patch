@@ -1,0 +1,110 @@
+diff --git a/core/lib/Drupal/Core/Config/ConfigInstaller.php b/core/lib/Drupal/Core/Config/ConfigInstaller.php
+index a77bb1c..1266682 100644
+--- a/core/lib/Drupal/Core/Config/ConfigInstaller.php
++++ b/core/lib/Drupal/Core/Config/ConfigInstaller.php
+@@ -66,6 +66,13 @@ class ConfigInstaller implements ConfigInstallerInterface {
+   protected $isSyncing = FALSE;
+ 
+   /**
++   * Any missing dependencies.
++   *
++   * @var array
++   */
++  protected $missingDependencies;
++
++  /**
+    * Constructs the configuration installer.
+    *
+    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+@@ -85,6 +92,7 @@ public function __construct(ConfigFactoryInterface $config_factory, StorageInter
+     $this->typedConfig = $typed_config;
+     $this->configManager = $config_manager;
+     $this->eventDispatcher = $event_dispatcher;
++    $this->missingDependencies = array();
+   }
+ 
+   /**
+@@ -451,7 +459,7 @@ public function checkConfigurationToInstall($type, $name) {
+     // Check the dependencies of configuration provided by the module.
+     $invalid_default_config = $this->findDefaultConfigWithUnmetDependencies($storage, $enabled_extensions, $profile_storages);
+     if (!empty($invalid_default_config)) {
+-      throw UnmetDependenciesException::create($name, $invalid_default_config);
++      throw UnmetDependenciesException::create($name, $this->getMissingDependencies());
+     }
+ 
+     // Install profiles can not have config clashes. Configuration that
+@@ -537,6 +545,7 @@ protected function validateDependencies($config_name, array $data, array $enable
+         if (!empty($list_to_check)) {
+           $missing = array_diff($dependencies, $list_to_check);
+           if (!empty($missing)) {
++            $this->missingDependencies[$config_name] = $missing;
+             return FALSE;
+           }
+         }
+@@ -649,4 +658,13 @@ protected function drupalInstallationAttempted() {
+     return drupal_installation_attempted();
+   }
+ 
++  /**
++   * Returns the list of missing dependencies
++   *
++   * @return array A list of missing dependencies, if any.
++   */
++  public function getMissingDependencies() {
++    return $this->missingDependencies;
++  }
++
+ }
+diff --git a/core/lib/Drupal/Core/Config/UnmetDependenciesException.php b/core/lib/Drupal/Core/Config/UnmetDependenciesException.php
+index 22f1bde..94e303b 100644
+--- a/core/lib/Drupal/Core/Config/UnmetDependenciesException.php
++++ b/core/lib/Drupal/Core/Config/UnmetDependenciesException.php
+@@ -58,12 +58,10 @@ public function getExtension() {
+    * @return string
+    */
+   public function getTranslatedMessage(TranslationInterface $string_translation, $extension) {
+-    return $string_translation->formatPlural(
+-      count($this->getConfigObjects()),
+-      'Unable to install @extension, %config_names has unmet dependencies.',
+-      'Unable to install @extension, %config_names have unmet dependencies.',
++    return $string_translation->translate(
++      'Unable to install @extension due to unmet dependencies: @config_names',
+       [
+-        '%config_names' => implode(', ', $this->getConfigObjects()),
++        '@config_names' => self::formatConfigObjectList($this->configObjects),
+         '@extension' => $extension,
+       ]
+     );
+@@ -80,9 +78,9 @@ public function getTranslatedMessage(TranslationInterface $string_translation, $
+    * @return \Drupal\Core\Config\PreExistingConfigException
+    */
+   public static function create($extension, array $config_objects) {
+-    $message = SafeMarkup::format('Configuration objects (@config_names) provided by @extension have unmet dependencies',
++    $message = SafeMarkup::format('Configuration objects provided by @extension have unmet dependencies: @config_names',
+       array(
+-        '@config_names' => implode(', ', $config_objects),
++        '@config_names' => self::formatConfigObjectList($config_objects),
+         '@extension' => $extension
+       )
+     );
+@@ -92,4 +90,20 @@ public static function create($extension, array $config_objects) {
+     return $e;
+   }
+ 
++  /**
++   * Formats a list of configuration objects.
++   *
++   * @param array $config_objects
++   *   A list of configuration object names that have unmet dependencies
++   *
++   * @return string
++   */
++  protected static function formatConfigObjectList($config_objects) {
++    $list = array();
++    foreach ($config_objects as $config_object => $missing_dependencies) {
++      $list[] = $config_object . ' (' . implode(', ', $missing_dependencies) .')';
++    }
++    return implode(', ', $list);
++  }
++
+ }

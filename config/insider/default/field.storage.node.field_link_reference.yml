@@ -1,0 +1,25 @@
+uuid: 9aa9e7cf-1164-48c4-bd85-17857ba7ec47
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - node
+third_party_settings:
+  field_permissions:
+    permission_type: public
+_core:
+  default_config_hash: j81bTuTLcVAgjSMGQq7mkq6v-SdsYgU_z-VfcVgDiJ4
+id: node.field_link_reference
+field_name: field_link_reference
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,901 @@
+diff --git a/core/modules/taxonomy/tests/src/Functional/Views/TaxonomyIndexTidUiTest.php b/core/modules/taxonomy/tests/src/Functional/Views/TaxonomyIndexTidUiTest.php
+index a611eee5a9..01b277b46b 100644
+--- a/core/modules/taxonomy/tests/src/Functional/Views/TaxonomyIndexTidUiTest.php
++++ b/core/modules/taxonomy/tests/src/Functional/Views/TaxonomyIndexTidUiTest.php
+@@ -268,4 +268,46 @@ class TaxonomyIndexTidUiTest extends UITestBase {
+     $this->assertEmpty($this->cssSelect('option[value="' . $this->terms[1][0]->id() . '"]'));
+   }
+ 
++  /**
++   * Tests using the TaxonomyIndexTid in a filter group.
++   */
++  public function testFilterGrouping() {
++    $node_type = $this->drupalCreateContentType(['type' => 'page']);
++
++    // Create the tag field itself.
++    $field_name = 'taxonomy_tags';
++    $this->createEntityReferenceField('node', $node_type->id(), $field_name, NULL, 'taxonomy_term');
++
++    // Create 3 nodes: 1 without a term and 2 with different terms.
++    $this->drupalCreateNode();
++    $this->drupalCreateNode([
++      $field_name => [['target_id' => $this->terms[1][0]->id()]],
++    ]);
++    $this->drupalCreateNode([
++      $field_name => [['target_id' => $this->terms[2][0]->id()]],
++    ]);
++    // Create two groups. The first group contains the published filter and set
++    // up the second group as an 'OR' group for two different terms.
++    $view = View::load('test_filter_taxonomy_index_tid');
++    $display =& $view->getDisplay('default');
++    $display['display_options']['filters']['tid']['value'][0] = $this->terms[1][0]->id();
++    $display['display_options']['filters']['tid']['group'] = 2;
++    $display['display_options']['filters']['tid_2'] = $display['display_options']['filters']['tid'];
++    $display['display_options']['filters']['tid_2']['id'] = 'tid_2';
++    $display['display_options']['filters']['tid_2']['value'][0] = $this->terms[2][0]->id();
++    $display['display_options']['filter_groups'] = [
++      'operator' => 'AND',
++      'groups' => [
++        1 => 'AND',
++        2 => 'OR',
++      ],
++    ];
++    $view->save();
++
++    $this->drupalGet('test-filter-taxonomy-index-tid');
++    $xpath = $this->xpath('//div[@class="view-content"]//a');
++    // We expect both nodes with terms but not the node without a term.
++    $this->assertCount(2, $xpath);
++  }
++
+ }
+diff --git a/core/modules/views/src/ManyToOneHelper.php b/core/modules/views/src/ManyToOneHelper.php
+index ad659a3626..aec386136f 100644
+--- a/core/modules/views/src/ManyToOneHelper.php
++++ b/core/modules/views/src/ManyToOneHelper.php
+@@ -4,6 +4,7 @@ namespace Drupal\views;
+ 
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\views\Plugin\views\HandlerBase;
++use Drupal\views\Plugin\views\join\JoinPluginBase;
+ 
+ /**
+  * This many to one helper object is used on both arguments and filters.
+@@ -73,6 +74,10 @@ class ManyToOneHelper {
+     // See if there's a chain between us and the base relationship. If so, we need
+     // to create a new relationship to use.
+     $relationship = $this->handler->relationship;
++    if ($relationship) {
++      $relationship = $this->handler->query->relationships[$relationship]['link'];
++    }
++    $base_relationship = $relationship;
+ 
+     // Determine the primary table to seek
+     if (empty($this->handler->query->relationships[$relationship])) {
+@@ -82,15 +87,18 @@ class ManyToOneHelper {
+       $base_table = $this->handler->query->relationships[$relationship]['base'];
+     }
+ 
++    if (!$join instanceof JoinPluginBase) {
++      return $this->handler->relationship;
++    }
+     // Cycle through the joins. This isn't as error-safe as the normal
+     // ensurePath logic. Perhaps it should be.
+     $r_join = clone $join;
+-    while ($r_join->leftTable != $base_table) {
++    while (isset($r_join->leftTable) && ($r_join->leftTable != $base_table)) {
+       $r_join = HandlerBase::getTableJoin($r_join->leftTable, $base_table);
+     }
+     // If we found that there are tables in between, add the relationship.
+     if ($r_join->table != $join->table) {
+-      $relationship = $this->handler->query->addRelationship($this->handler->table . '_' . $r_join->table, $r_join, $r_join->table, $this->handler->relationship);
++      $relationship = $this->handler->query->addRelationship($this->handler->table . '_' . $r_join->table, $r_join, $r_join->table, $base_relationship);
+     }
+ 
+     // And now add our table, using the new relationship if one was used.
+@@ -171,21 +179,23 @@ class ManyToOneHelper {
+         }
+         else {
+           $join = $this->getJoin();
+-          $join->type = 'LEFT';
+-          if (!empty($this->handler->view->many_to_one_tables[$field])) {
+-            foreach ($this->handler->view->many_to_one_tables[$field] as $value) {
+-              $join->extra = [
+-                [
+-                  'field' => $this->handler->realField,
+-                  'operator' => '!=',
+-                  'value' => $value,
+-                  'numeric' => !empty($this->handler->definition['numeric']),
+-                ],
+-              ];
++          if (isset($join)) {
++            $join->type = 'LEFT';
++            if (!empty($this->handler->view->many_to_one_tables[$field])) {
++              foreach ($this->handler->view->many_to_one_tables[$field] as $value) {
++                $join->extra = [
++                  [
++                    'field' => $this->handler->realField,
++                    'operator' => '!=',
++                    'value' => $value,
++                    'numeric' => !empty($this->handler->definition['numeric']),
++                  ],
++                ];
++              }
+             }
+-          }
+ 
+-          $this->handler->tableAlias = $this->addTable($join);
++            $this->handler->tableAlias = $this->addTable($join);
++          }
+         }
+ 
+         return $this->handler->tableAlias;
+@@ -201,13 +211,15 @@ class ManyToOneHelper {
+           if ($this->handler->operator == 'and') {
+             $join->type = 'INNER';
+           }
+-          $join->extra = [
+-            [
+-              'field' => $this->handler->realField,
+-              'value' => $value,
+-              'numeric' => !empty($this->handler->definition['numeric']),
+-            ],
+-          ];
++          if (isset($join)) {
++            $join->extra = [
++              [
++                'field' => $this->handler->realField,
++                'value' => $value,
++                'numeric' => !empty($this->handler->definition['numeric']),
++              ],
++            ];
++          }
+ 
+           // The table alias needs to be unique to this value across the
+           // multiple times the filter or argument is called by the view.
+@@ -230,18 +242,23 @@ class ManyToOneHelper {
+       // the query phase to ensure that $table.$field IS NULL.
+       else {
+         $join = $this->getJoin();
+-        $join->type = 'LEFT';
+-        $join->extra = [];
+-        $join->extraOperator = 'OR';
+-        foreach ($this->handler->value as $value) {
+-          $join->extra[] = [
+-            'field' => $this->handler->realField,
+-            'value' => $value,
+-            'numeric' => !empty($this->handler->definition['numeric']),
+-          ];
+-        }
++        if (isset($join)) {
++          $join->type = 'LEFT';
++          $join->extra = [];
++          $join->extraOperator = 'OR';
++          foreach ($this->handler->value as $value) {
++            $join->extra[] = [
++              'field' => $this->handler->realField,
++              'value' => $value,
++              'numeric' => !empty($this->handler->definition['numeric']),
++            ];
++          }
+ 
+-        $this->handler->tableAlias = $this->addTable($join);
++          $this->handler->tableAlias = $this->addTable($join);
++        }
++        else {
++          $this->handler->tableAlias = $this->handler->query->ensureTable($this->handler->table, $this->handler->relationship, $join);
++        }
+       }
+     }
+     return $this->handler->tableAlias;
+@@ -274,8 +291,13 @@ class ManyToOneHelper {
+     // is set to TRUE, conditions will be added.
+     $add_condition = TRUE;
+     if ($operator == 'not') {
+-      $value = NULL;
+-      $operator = 'IS NULL';
++      if (count($value) > 1) {
++        $operator = 'NOT IN';
++      }
++      else {
++        $value = is_array($value) ? array_pop($value) : $value;
++        $operator = '!=';
++      }
+       $add_condition = FALSE;
+     }
+     elseif ($operator == 'or' && empty($options['reduce_duplicates'])) {
+@@ -309,18 +331,18 @@ class ManyToOneHelper {
+           $placeholder .= '[]';
+ 
+           if ($operator == 'IS NULL') {
+-            $this->handler->query->addWhereExpression(0, "$field $operator");
++            $this->handler->query->addWhereExpression($options['group'], "$field $operator");
+           }
+           else {
+-            $this->handler->query->addWhereExpression(0, "$field $operator($placeholder)", [$placeholder => $value]);
++            $this->handler->query->addWhereExpression($options['group'], "$field $operator($placeholder)", [$placeholder => $value]);
+           }
+         }
+         else {
+           if ($operator == 'IS NULL') {
+-            $this->handler->query->addWhereExpression(0, "$field $operator");
++            $this->handler->query->addWhereExpression($options['group'], "$field $operator");
+           }
+           else {
+-            $this->handler->query->addWhereExpression(0, "$field $operator $placeholder", [$placeholder => $value]);
++            $this->handler->query->addWhereExpression($options['group'], "$field $operator $placeholder", [$placeholder => $value]);
+           }
+         }
+       }
+diff --git a/core/modules/views/src/Plugin/views/HandlerBase.php b/core/modules/views/src/Plugin/views/HandlerBase.php
+index ef76b57369..5e157c26a4 100644
+--- a/core/modules/views/src/Plugin/views/HandlerBase.php
++++ b/core/modules/views/src/Plugin/views/HandlerBase.php
+@@ -592,12 +592,14 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
+     // Determine the primary table to seek
+     if (empty($this->query->relationships[$this->relationship])) {
+       $base_table = $this->view->storage->get('base_table');
++      $join = $this->getTableJoin($this->table, $base_table);
+     }
+     else {
+-      $base_table = $this->query->relationships[$this->relationship]['base'];
++      $tableQueue = $this->query->getTableQueue();
++      $join = $tableQueue[$this->relationship]['join'];
++      $join = $this->getTableJoin($join->table, $join->leftTable);
+     }
+ 
+-    $join = $this->getTableJoin($this->table, $base_table);
+     if ($join) {
+       return clone $join;
+     }
+diff --git a/core/modules/views/tests/modules/views_test_filter/config/install/field.field.node.test_views_filters.field_integer_list.yml b/core/modules/views/tests/modules/views_test_filter/config/install/field.field.node.test_views_filters.field_integer_list.yml
+new file mode 100644
+index 0000000000..1724638af6
+--- /dev/null
++++ b/core/modules/views/tests/modules/views_test_filter/config/install/field.field.node.test_views_filters.field_integer_list.yml
+@@ -0,0 +1,20 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.field_integer_list
++    - node.type.test_views_filters
++  module:
++    - options
++id: node.test_views_filters.field_integer_list
++field_name: field_integer_list
++entity_type: node
++bundle: test_views_filters
++label: 'Integer List'
++description: ''
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: list_integer
+diff --git a/core/modules/views/tests/modules/views_test_filter/config/install/field.field.node.test_views_filters.field_integer_list_2.yml b/core/modules/views/tests/modules/views_test_filter/config/install/field.field.node.test_views_filters.field_integer_list_2.yml
+new file mode 100644
+index 0000000000..52200bfb8b
+--- /dev/null
++++ b/core/modules/views/tests/modules/views_test_filter/config/install/field.field.node.test_views_filters.field_integer_list_2.yml
+@@ -0,0 +1,20 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.field_integer_list_2
++    - node.type.test_views_filters
++  module:
++    - options
++id: node.test_views_filters.field_integer_list_2
++field_name: field_integer_list_2
++entity_type: node
++bundle: test_views_filters
++label: 'Integer List 2'
++description: ''
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: list_integer
+diff --git a/core/modules/views/tests/modules/views_test_filter/config/install/field.field.node.test_views_filters.field_integer_list_3.yml b/core/modules/views/tests/modules/views_test_filter/config/install/field.field.node.test_views_filters.field_integer_list_3.yml
+new file mode 100644
+index 0000000000..c569a1cb73
+--- /dev/null
++++ b/core/modules/views/tests/modules/views_test_filter/config/install/field.field.node.test_views_filters.field_integer_list_3.yml
+@@ -0,0 +1,20 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.field_integer_list_3
++    - node.type.test_views_filters
++  module:
++    - options
++id: node.test_views_filters.field_integer_list_3
++field_name: field_integer_list_3
++entity_type: node
++bundle: test_views_filters
++label: 'Integer List 3'
++description: ''
++required: true
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: list_integer
+diff --git a/core/modules/views/tests/modules/views_test_filter/config/install/field.storage.node.field_integer_list.yml b/core/modules/views/tests/modules/views_test_filter/config/install/field.storage.node.field_integer_list.yml
+new file mode 100644
+index 0000000000..165c7141b1
+--- /dev/null
++++ b/core/modules/views/tests/modules/views_test_filter/config/install/field.storage.node.field_integer_list.yml
+@@ -0,0 +1,50 @@
++langcode: en
++status: true
++dependencies:
++  module:
++    - node
++    - options
++id: node.field_integer_list
++field_name: field_integer_list
++entity_type: node
++type: list_integer
++settings:
++  allowed_values:
++    -
++      value: 0
++      label: 'Zero value'
++    -
++      value: 1
++      label: 'First value'
++    -
++      value: 2
++      label: 'Second value'
++    -
++      value: 3
++      label: 'Third value'
++    -
++      value: 4
++      label: 'Fourth value'
++    -
++      value: 5
++      label: 'Fifth value'
++    -
++      value: 6
++      label: 'Sixth value'
++    -
++      value: 7
++      label: 'Seventh value'
++    -
++      value: 8
++      label: 'Eighth value'
++    -
++      value: 9
++      label: 'Ninth value'
++  allowed_values_function: ''
++module: options
++locked: false
++cardinality: -1
++translatable: true
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/core/modules/views/tests/modules/views_test_filter/config/install/field.storage.node.field_integer_list_2.yml b/core/modules/views/tests/modules/views_test_filter/config/install/field.storage.node.field_integer_list_2.yml
+new file mode 100644
+index 0000000000..7814dbc33e
+--- /dev/null
++++ b/core/modules/views/tests/modules/views_test_filter/config/install/field.storage.node.field_integer_list_2.yml
+@@ -0,0 +1,32 @@
++langcode: en
++status: true
++dependencies:
++  module:
++    - node
++    - options
++id: node.field_integer_list_2
++field_name: field_integer_list_2
++entity_type: node
++type: list_integer
++settings:
++  allowed_values:
++    -
++      value: 0
++      label: 'Zero value'
++    -
++      value: 1
++      label: 'First value'
++    -
++      value: 2
++      label: 'Second value'
++    -
++      value: 3
++      label: 'Third value'
++  allowed_values_function: ''
++module: options
++locked: false
++cardinality: 1
++translatable: true
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/core/modules/views/tests/modules/views_test_filter/config/install/field.storage.node.field_integer_list_3.yml b/core/modules/views/tests/modules/views_test_filter/config/install/field.storage.node.field_integer_list_3.yml
+new file mode 100644
+index 0000000000..a7b033765d
+--- /dev/null
++++ b/core/modules/views/tests/modules/views_test_filter/config/install/field.storage.node.field_integer_list_3.yml
+@@ -0,0 +1,35 @@
++langcode: en
++status: true
++dependencies:
++  module:
++    - node
++    - options
++id: node.field_integer_list_3
++field_name: field_integer_list_3
++entity_type: node
++type: list_integer
++settings:
++  allowed_values:
++    -
++      value: 0
++      label: 'Zero value'
++    -
++      value: -1
++      label: 'Minus one'
++    -
++      value: 1
++      label: One
++    -
++      value: 2
++      label: Two
++    -
++      value: -2
++      label: 'Minus two'
++  allowed_values_function: ''
++module: options
++locked: false
++cardinality: 1
++translatable: true
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/core/modules/views/tests/modules/views_test_filter/config/install/node.type.test_views_filters.yml b/core/modules/views/tests/modules/views_test_filter/config/install/node.type.test_views_filters.yml
+new file mode 100644
+index 0000000000..c1d47d4ed8
+--- /dev/null
++++ b/core/modules/views/tests/modules/views_test_filter/config/install/node.type.test_views_filters.yml
+@@ -0,0 +1,17 @@
++langcode: en
++status: true
++dependencies:
++  module:
++    - menu_ui
++third_party_settings:
++  menu_ui:
++    available_menus:
++      - main
++    parent: 'main:'
++name: 'Test views filters'
++type: test_views_filters
++description: ''
++help: ''
++new_revision: true
++preview_mode: 1
++display_submitted: true
+diff --git a/core/modules/views/tests/modules/views_test_filter/config/install/views.view.test_filters.yml b/core/modules/views/tests/modules/views_test_filter/config/install/views.view.test_filters.yml
+new file mode 100644
+index 0000000000..eb64b36011
+--- /dev/null
++++ b/core/modules/views/tests/modules/views_test_filter/config/install/views.view.test_filters.yml
+@@ -0,0 +1,395 @@
++langcode: en
++status: true
++dependencies:
++  config:
++    - system.menu.main
++  module:
++    - node
++    - options
++    - user
++id: test_filters
++label: 'Test filters'
++module: views
++description: ''
++tag: ''
++base_table: node_field_data
++base_field: nid
++display:
++  default:
++    display_plugin: default
++    id: default
++    display_title: Master
++    position: 0
++    display_options:
++      access:
++        type: perm
++        options:
++          perm: 'access content'
++      cache:
++        type: tag
++        options: {  }
++      query:
++        type: views_query
++        options:
++          disable_sql_rewrite: false
++          distinct: false
++          replica: false
++          query_comment: ''
++          query_tags: {  }
++      exposed_form:
++        type: basic
++        options:
++          submit_button: Apply
++          reset_button: false
++          reset_button_label: Reset
++          exposed_sorts_label: 'Sort by'
++          expose_sort_order: true
++          sort_asc_label: Asc
++          sort_desc_label: Desc
++      pager:
++        type: mini
++        options:
++          items_per_page: 10
++          offset: 0
++          id: 0
++          total_pages: null
++          expose:
++            items_per_page: false
++            items_per_page_label: 'Items per page'
++            items_per_page_options: '5, 10, 25, 50'
++            items_per_page_options_all: false
++            items_per_page_options_all_label: '- All -'
++            offset: false
++            offset_label: Offset
++          tags:
++            previous: â€¹â€¹
++            next: â€ºâ€º
++      style:
++        type: table
++      row:
++        type: fields
++      fields:
++        nid:
++          id: nid
++          table: node_field_data
++          field: nid
++          relationship: none
++          group_type: group
++          admin_label: ''
++          label: ID
++          exclude: false
++          alter:
++            alter_text: false
++            text: ''
++            make_link: false
++            path: ''
++            absolute: false
++            external: false
++            replace_spaces: false
++            path_case: none
++            trim_whitespace: false
++            alt: ''
++            rel: ''
++            link_class: ''
++            prefix: ''
++            suffix: ''
++            target: ''
++            nl2br: false
++            max_length: 0
++            word_boundary: true
++            ellipsis: true
++            more_link: false
++            more_link_text: ''
++            more_link_path: ''
++            strip_tags: false
++            trim: false
++            preserve_tags: ''
++            html: false
++          element_type: ''
++          element_class: ''
++          element_label_type: ''
++          element_label_class: ''
++          element_label_colon: true
++          element_wrapper_type: ''
++          element_wrapper_class: ''
++          element_default_classes: true
++          empty: ''
++          hide_empty: false
++          empty_zero: false
++          hide_alter_empty: true
++          click_sort_column: value
++          type: number_integer
++          settings:
++            thousand_separator: ''
++            prefix_suffix: true
++          group_column: value
++          group_columns: {  }
++          group_rows: true
++          delta_limit: 0
++          delta_offset: 0
++          delta_reversed: false
++          delta_first_last: false
++          multi_type: separator
++          separator: ', '
++          field_api_classes: false
++          entity_type: node
++          entity_field: nid
++          plugin_id: field
++        title:
++          id: title
++          table: node_field_data
++          field: title
++          entity_type: node
++          entity_field: title
++          alter:
++            alter_text: false
++            make_link: false
++            absolute: false
++            trim: false
++            word_boundary: false
++            ellipsis: false
++            strip_tags: false
++            html: false
++          hide_empty: false
++          empty_zero: false
++          settings:
++            link_to_entity: true
++          plugin_id: field
++          relationship: none
++          group_type: group
++          admin_label: ''
++          label: Title
++          exclude: false
++          element_type: ''
++          element_class: ''
++          element_label_type: ''
++          element_label_class: ''
++          element_label_colon: true
++          element_wrapper_type: ''
++          element_wrapper_class: ''
++          element_default_classes: true
++          empty: ''
++          hide_alter_empty: true
++          click_sort_column: value
++          type: string
++          group_column: value
++          group_columns: {  }
++          group_rows: true
++          delta_limit: 0
++          delta_offset: 0
++          delta_reversed: false
++          delta_first_last: false
++          multi_type: separator
++          separator: ', '
++          field_api_classes: false
++        operations:
++          id: operations
++          table: node
++          field: operations
++          relationship: none
++          group_type: group
++          admin_label: ''
++          label: 'Operations links'
++          exclude: false
++          alter:
++            alter_text: false
++            text: ''
++            make_link: false
++            path: ''
++            absolute: false
++            external: false
++            replace_spaces: false
++            path_case: none
++            trim_whitespace: false
++            alt: ''
++            rel: ''
++            link_class: ''
++            prefix: ''
++            suffix: ''
++            target: ''
++            nl2br: false
++            max_length: 0
++            word_boundary: true
++            ellipsis: true
++            more_link: false
++            more_link_text: ''
++            more_link_path: ''
++            strip_tags: false
++            trim: false
++            preserve_tags: ''
++            html: false
++          element_type: ''
++          element_class: ''
++          element_label_type: ''
++          element_label_class: ''
++          element_label_colon: true
++          element_wrapper_type: ''
++          element_wrapper_class: ''
++          element_default_classes: true
++          empty: ''
++          hide_empty: false
++          empty_zero: false
++          hide_alter_empty: true
++          destination: true
++          entity_type: node
++          plugin_id: entity_operations
++      filters:
++        field_integer_list_value:
++          id: field_integer_list_value
++          table: node__field_integer_list
++          field: field_integer_list_value
++          relationship: none
++          group_type: group
++          admin_label: ''
++          operator: or
++          value:
++            - '0'
++          group: 1
++          exposed: false
++          expose:
++            operator_id: ''
++            label: ''
++            description: ''
++            use_operator: false
++            operator: ''
++            identifier: ''
++            required: false
++            remember: false
++            multiple: false
++            remember_roles:
++              authenticated: authenticated
++            reduce: false
++          is_grouped: false
++          group_info:
++            label: ''
++            description: ''
++            identifier: ''
++            optional: true
++            widget: select
++            multiple: false
++            remember: false
++            default_group: All
++            default_group_multiple: {  }
++            group_items: {  }
++          reduce_duplicates: false
++          plugin_id: list_field
++        field_integer_list_2_value:
++          id: field_integer_list_2_value
++          table: node__field_integer_list_2
++          field: field_integer_list_2_value
++          relationship: none
++          group_type: group
++          admin_label: ''
++          operator: or
++          value:
++            2: '2'
++          group: 1
++          exposed: false
++          expose:
++            operator_id: ''
++            label: ''
++            description: ''
++            use_operator: false
++            operator: ''
++            identifier: ''
++            required: false
++            remember: false
++            multiple: false
++            remember_roles:
++              authenticated: authenticated
++            reduce: false
++          is_grouped: false
++          group_info:
++            label: ''
++            description: ''
++            identifier: ''
++            optional: true
++            widget: select
++            multiple: false
++            remember: false
++            default_group: All
++            default_group_multiple: {  }
++            group_items: {  }
++          reduce_duplicates: false
++          plugin_id: list_field
++        field_integer_list_3_value:
++          id: field_integer_list_3_value
++          table: node__field_integer_list_3
++          field: field_integer_list_3_value
++          relationship: none
++          group_type: group
++          admin_label: ''
++          operator: or
++          value:
++            2: '2'
++          group: 1
++          exposed: false
++          expose:
++            operator_id: ''
++            label: ''
++            description: ''
++            use_operator: false
++            operator: ''
++            identifier: ''
++            required: false
++            remember: false
++            multiple: false
++            remember_roles:
++              authenticated: authenticated
++            reduce: false
++          is_grouped: false
++          group_info:
++            label: ''
++            description: ''
++            identifier: ''
++            optional: true
++            widget: select
++            multiple: false
++            remember: false
++            default_group: All
++            default_group_multiple: {  }
++            group_items: {  }
++          reduce_duplicates: false
++          plugin_id: list_field
++      sorts: {  }
++      title: 'Test filters'
++      header: {  }
++      footer: {  }
++      empty: {  }
++      relationships: {  }
++      arguments: {  }
++      display_extenders: {  }
++      filter_groups:
++        operator: AND
++        groups:
++          1: OR
++    cache_metadata:
++      max-age: 0
++      contexts:
++        - 'languages:language_content'
++        - 'languages:language_interface'
++        - url.query_args
++        - 'user.node_grants:view'
++        - user.permissions
++      tags: {  }
++  page_1:
++    display_plugin: page
++    id: page_1
++    display_title: Page
++    position: 1
++    display_options:
++      display_extenders: {  }
++      path: test-filters
++      menu:
++        type: normal
++        title: 'Test filters'
++        menu_name: main
++    cache_metadata:
++      max-age: 0
++      contexts:
++        - 'languages:language_content'
++        - 'languages:language_interface'
++        - url.query_args
++        - 'user.node_grants:view'
++        - user.permissions
++      tags: {  }
+diff --git a/core/modules/views/tests/modules/views_test_filter/views_test_filter.info.yml b/core/modules/views/tests/modules/views_test_filter/views_test_filter.info.yml
+new file mode 100644
+index 0000000000..69f10ecc63
+--- /dev/null
++++ b/core/modules/views/tests/modules/views_test_filter/views_test_filter.info.yml
+@@ -0,0 +1,8 @@
++name: 'Views Test Filters'
++type: module
++description: 'Test module for Views.'
++package: Testing
++version: VERSION
++core: 8.x
++dependencies:
++  - drupal:views

@@ -1,0 +1,7 @@
+insider_view_lib:
+  version: 1.0
+  js:
+  #  js/sec_views.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery-once

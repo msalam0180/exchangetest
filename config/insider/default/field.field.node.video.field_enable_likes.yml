@@ -1,0 +1,23 @@
+uuid: 9979dca4-feae-431e-aa35-1aa47dc1388f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_enable_likes
+    - node.type.video
+id: node.video.field_enable_likes
+field_name: field_enable_likes
+entity_type: node
+bundle: video
+label: 'Enable Likes'
+description: 'Users have the ability to like this content'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,17 @@
+uuid: a36921cd-e251-4402-9ee4-6a01a0f54ad1
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.user_quicklinks
+  module:
+    - flag
+_core:
+  default_config_hash: XRQ7WLFx6dFkqaqKJ5n1w8VhVnc1R6CjDCFiPVunOKs
+id: flag_action.user_quicklinks_unflag
+label: 'Remove from my QuickLinks Menu'
+type: node
+plugin: 'flag_action:user_quicklinks_unflag'
+configuration:
+  flag_id: user_quicklinks
+  flag_action: unflag

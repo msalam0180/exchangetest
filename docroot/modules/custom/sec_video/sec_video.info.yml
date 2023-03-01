@@ -1,0 +1,6 @@
+name: Insider SEC Video
+type: module
+description: Provides Video content type and related configuration.
+package: Insider
+core: 8.x
+core_version_requirement: ^8 || ^9

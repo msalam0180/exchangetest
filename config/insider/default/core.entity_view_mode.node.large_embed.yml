@@ -1,0 +1,12 @@
+uuid: ec4ac617-c346-4e9b-8792-248a71e0ae54
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: OpVWeCBWJnu3fswcBwfu9lFkObBTRp1ysNR-kfrIGrs
+id: node.large_embed
+label: 'Large Embed'
+targetEntityType: node
+cache: true

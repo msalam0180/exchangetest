@@ -1,0 +1,26 @@
+diff --git a/src/Plugin/Action/ModerationOptOutPublishNode.php b/src/Plugin/Action/ModerationOptOutPublishNode.php
+index 68e65bf..bf18412 100644
+--- a/src/Plugin/Action/ModerationOptOutPublishNode.php
++++ b/src/Plugin/Action/ModerationOptOutPublishNode.php
+@@ -53,7 +53,7 @@ class ModerationOptOutPublishNode extends PublishNode implements ContainerFactor
+    */
+   public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
+     $result = parent::access($object, $account, TRUE)
+-      ->andif(AccessResult::forbiddenIf($this->moderationInfo->isModeratableEntity($object))->addCacheableDependency($object));
++      ->andif(AccessResult::allowedIf(!$this->moderationInfo->isModeratableEntity($object))->addCacheableDependency($object));
+ 
+     return $return_as_object ? $result : $result->isAllowed();
+   }
+diff --git a/src/Plugin/Action/ModerationOptOutUnpublishNode.php b/src/Plugin/Action/ModerationOptOutUnpublishNode.php
+index 627cb6e..072d4a7 100644
+--- a/src/Plugin/Action/ModerationOptOutUnpublishNode.php
++++ b/src/Plugin/Action/ModerationOptOutUnpublishNode.php
+@@ -53,7 +53,7 @@ class ModerationOptOutUnpublishNode extends UnpublishNode implements ContainerFa
+    */
+   public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
+     $result = parent::access($object, $account, TRUE)
+-      ->andif(AccessResult::forbiddenIf($this->moderationInfo->isModeratableEntity($object))->addCacheableDependency($object));
++      ->andif(AccessResult::allowedIf(!$this->moderationInfo->isModeratableEntity($object))->addCacheableDependency($object));
+ 
+     return $return_as_object ? $result : $result->isAllowed();
+   }

@@ -1,0 +1,21 @@
+uuid: 26657c04-18b3-4196-805f-348bfb854120
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: AAmEJ4ppLc2Mj-Gx6wPgfG0RNUMJ8P1_4zXxHGAeJ_0
+label: 'Media Linkit'
+id: media_linkit
+description: ''
+matchers:
+  f55c324e-2cc3-4cd6-bd8a-65f745e0bc11:
+    id: 'entity:media'
+    uuid: f55c324e-2cc3-4cd6-bd8a-65f745e0bc11
+    settings:
+      metadata: ''
+      bundles:
+        file: file
+      group_by_bundle: false
+      substitution_type: media
+      limit: 100
+    weight: 0

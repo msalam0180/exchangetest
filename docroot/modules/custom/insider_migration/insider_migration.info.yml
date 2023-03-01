@@ -1,0 +1,7 @@
+name: 'Insider Migration'
+description: 'This module is used for Insider Migration'
+type: module
+core: 8.x
+version: 8.x-1.0
+package: Insider
+core_version_requirement: ^8 || ^9

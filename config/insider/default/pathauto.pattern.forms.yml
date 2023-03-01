@@ -1,0 +1,24 @@
+uuid: db534b7c-3f76-44a1-a59b-71614aa25d40
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: wD2jcNKpCsui7FFwx7MnIS1OTfD62ncqN6WMu34MmRU
+id: forms
+label: Forms
+type: 'canonical_entities:node'
+pattern: '[node:field_top_level_group:entity:field_abbreviation]/forms/[node:field_form_number]-[node:title]'
+selection_criteria:
+  dba8c031-a4e1-4a82-a8cd-406f13dea19a:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: dba8c031-a4e1-4a82-a8cd-406f13dea19a
+    context_mapping:
+      node: node
+    bundles:
+      form: form
+selection_logic: and
+weight: -5
+relationships: {  }

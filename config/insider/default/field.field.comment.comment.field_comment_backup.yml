@@ -1,0 +1,25 @@
+uuid: 43bbf7b2-856e-48ee-ab42-90dcadc69c72
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comment
+    - field.storage.comment.field_comment_backup
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats: {  }
+id: comment.comment.field_comment_backup
+field_name: field_comment_backup
+entity_type: comment
+bundle: comment
+label: 'Comment Backup'
+description: 'A backup of the main comment text.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,23 @@
+uuid: 9e944f3f-0602-4a76-ae0a-6af86469d8a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_override_modified_date
+    - node.type.video
+  module:
+    - datetime
+_core:
+  default_config_hash: TVVwnMtt8V0yLpylX4vzOXv8N65c9q-aBWaQuOYZCq8
+id: node.video.field_override_modified_date
+field_name: field_override_modified_date
+entity_type: node
+bundle: video
+label: 'Override Modified Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

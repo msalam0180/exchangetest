@@ -1,0 +1,10 @@
+uuid: f1bafbc9-f9e0-44c6-95e3-719951ce2269
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: m0gMzUc7M3Zgya_2WD0NKNLx-ZWfMA_D9Zk3zxWMQ8c
+name: 'Form Topic'
+vid: form_topic
+description: ''
+weight: 0

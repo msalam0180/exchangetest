@@ -1,0 +1,16 @@
+diff --git a/docroot/core/lib/Drupal/Component/Plugin/Discovery/DiscoveryTrait.php b/docroot/core/lib/Drupal/Component/Plugin/Discovery/DiscoveryTrait.php
+index 7d076fa..50eb112 100644
+--- a/docroot/core/lib/Drupal/Component/Plugin/Discovery/DiscoveryTrait.php
++++ b/docroot/core/lib/Drupal/Component/Plugin/Discovery/DiscoveryTrait.php
+@@ -42,6 +42,9 @@
+    */
+   protected function doGetDefinition(array $definitions, $plugin_id, $exception_on_invalid) {
+     // Avoid using a ternary that would create a copy of the array.
++    //BEGIN SEC CUSTOM MODIFICATION See OSSS-4946
++    if ($plugin_id == "toptwocol" || $plugin_id == "twocolonecolbottom") $plugin_id = "twocol_stacked";
++    if ($plugin_id == "toptwocolnestedcols") $plugin_id = "threecol_25_50_25_stacked";
++    if ($plugin_id == "herolandingpage") $plugin_id = "onecol";
++    //END SEC CUSTOM MODIFICATION
+     if (isset($definitions[$plugin_id])) {
+       return $definitions[$plugin_id];
+     }

@@ -1,0 +1,24 @@
+uuid: 719852f2-6dc1-4651-bd94-66ce921326fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.landing_page
+_core:
+  default_config_hash: aLEkwJDnJ84f_5E_r7Q0vBsZUd3QsEYDlZbvYRvvS4o
+id: node.landing_page.status
+field_name: status
+entity_type: node
+bundle: landing_page
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

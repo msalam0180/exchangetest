@@ -1,0 +1,6 @@
+name: 'Insider Poll'
+description: 'Custom extension of contribute poll module'
+type: module
+core: 8.x
+package: Insider
+core_version_requirement: ^8 || ^9

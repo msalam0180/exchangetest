@@ -1,0 +1,19 @@
+/* DI-5977: add + icon to 'link it' button in ckeditor for content creators and comment editor users (w/elevated roles)
+*/
+span.cke_button_icon.cke_button__drupallink_icon::after {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  width: 10px;
+  height: 8px;
+  position: relative;
+  content: '';
+  background-image: linear-gradient(white, white), linear-gradient(white, white);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 20% 70%, 70% 20%;
+  background-color: #494949;
+  opacity: 0.75;
+  top: 5px;
+  left: 1px;
+}

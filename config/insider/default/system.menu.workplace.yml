@@ -1,0 +1,8 @@
+uuid: bb3946c5-7c15-4dfb-aabd-bc12fc19f6c1
+langcode: en
+status: true
+dependencies: {  }
+id: workplace
+label: Workplace
+description: 'Left nav for workplace section'
+locked: false

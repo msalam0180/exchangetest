@@ -1,0 +1,61 @@
+uuid: 321e29e7-3fda-4f57-873c-a801606970c0
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+    - environment_indicator
+    - field_permissions
+    - flag
+    - graphql
+    - media
+    - media_entity_download
+    - paragraphs_type_permissions
+    - poll
+    - search
+    - system
+_core:
+  default_config_hash: C5N4dqdsHeS8OKAyTsxSST8W9wOHffNY2vQ-MhBOw0w
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access environment indicator'
+  - 'access polls'
+  - 'bypass graphql field security'
+  - 'download media'
+  - 'edit own comments'
+  - 'execute graphql requests'
+  - 'execute persisted graphql requests'
+  - 'flag like_comment'
+  - 'flag like_content'
+  - 'flag user_quicklinks'
+  - 'post comments'
+  - 'search content'
+  - 'skip comment approval'
+  - 'unflag like_comment'
+  - 'unflag like_content'
+  - 'unflag user_quicklinks'
+  - 'view field_add_to_calendar'
+  - 'view field_announcement_type'
+  - 'view field_article_type'
+  - 'view field_audience'
+  - 'view field_date'
+  - 'view field_division_office'
+  - 'view field_from'
+  - 'view field_group_club'
+  - 'view field_image_reference'
+  - 'view field_left_nav_override'
+  - 'view field_retain_disposal_date'
+  - 'view field_show_field'
+  - 'view field_site_section'
+  - 'view field_status'
+  - 'view field_tags'
+  - 'view field_to'
+  - 'view field_top_level_group'
+  - 'view field_topic'
+  - 'view media'
+  - 'view paragraph content paragraph_session'

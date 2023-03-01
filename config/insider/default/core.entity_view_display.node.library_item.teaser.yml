@@ -1,0 +1,92 @@
+uuid: 4ceac05a-b9ca-4940-a8bd-6f85ab2ada7e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.library_item.body
+    - field.field.node.library_item.field_audience
+    - field.field.node.library_item.field_combined_date
+    - field.field.node.library_item.field_comment_moderator
+    - field.field.node.library_item.field_comments
+    - field.field.node.library_item.field_contact_for_questions
+    - field.field.node.library_item.field_creator
+    - field.field.node.library_item.field_division_office
+    - field.field.node.library_item.field_enable_likes
+    - field.field.node.library_item.field_format
+    - field.field.node.library_item.field_group_club
+    - field.field.node.library_item.field_how_to_access
+    - field.field.node.library_item.field_left_nav_override
+    - field.field.node.library_item.field_override_modified_date
+    - field.field.node.library_item.field_sec_content_approver
+    - field.field.node.library_item.field_show_field
+    - field.field.node.library_item.field_top_level_group
+    - field.field.node.library_item.field_topic
+    - field.field.node.library_item.field_vendor
+    - field.field.node.library_item.scheduling_options
+    - node.type.library_item
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: 2XuALYpZaNWklOZo4D096k_2pt5KibA0EK-POwSP-jM
+id: node.library_item.teaser
+targetEntityType: node
+bundle: library_item
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  flag_like_content:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  published_at:
+    type: timestamp
+    label: hidden
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  workbench_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+hidden:
+  field_audience: true
+  field_combined_date: true
+  field_comment_moderator: true
+  field_comments: true
+  field_contact_for_questions: true
+  field_creator: true
+  field_division_office: true
+  field_enable_likes: true
+  field_format: true
+  field_group_club: true
+  field_how_to_access: true
+  field_left_nav_override: true
+  field_override_modified_date: true
+  field_sec_content_approver: true
+  field_show_field: true
+  field_top_level_group: true
+  field_topic: true
+  field_vendor: true
+  langcode: true
+  scheduling_options: true
+  search_api_excerpt: true

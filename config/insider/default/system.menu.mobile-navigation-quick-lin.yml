@@ -1,0 +1,8 @@
+uuid: aea58d51-cbfe-4324-b213-ab1afb070d6a
+langcode: en
+status: true
+dependencies: {  }
+id: mobile-navigation-quick-lin
+label: 'Mobile Navigation Quick Links'
+description: 'Quick Links on mobile'
+locked: false

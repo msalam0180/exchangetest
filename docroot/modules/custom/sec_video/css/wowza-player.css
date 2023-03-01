@@ -1,0 +1,48 @@
+/* Make changes to caption settings for wowza players */
+
+.videoplayer .video-js .vjs-caption-settings {
+  position: absolute;
+  height: 75%;
+  width: 100%;
+  top: 0;
+}
+
+.videoplayer .video-js .vjs-tracksettings {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 10px 0px 10px;
+}
+
+.videoplayer .video-js .vjs-tracksettings div {
+  flex: 1 1 50%;
+}
+@media only screen and (max-width: 600px) {
+  .videoplayer .video-js .vjs-tracksettings div {
+    flex: 1 1 100%;
+  }
+}
+
+.videoplayer .video-js .vjs-caption-settings .vjs-tracksettings-colors,
+.videoplayer .video-js .vjs-caption-settings .vjs-tracksettings-font,
+.videoplayer .video-js .vjs-caption-settings .vjs-tracksettings-controls {
+  float: unset;
+}
+
+.videoplayer .video-js .vjs-caption-settings .vjs-tracksettings-colors fieldset legend {
+  width: 100%;
+  color: #FFFFFF;
+}
+
+.videoplayer .video-js .vjs-caption-settings .vjs-tracksettings-colors fieldset {
+  display: flex;
+}
+
+.videoplayer .video-js .vjs-caption-settings .vjs-tracksettings-colors span {
+  float: none;
+  width: 100%;
+}
+
+.videoplayer .video-js .vjs-tracksettings .vjs-tracksettings-controls {
+  position: revert;
+  text-align: right;
+}

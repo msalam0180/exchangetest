@@ -1,0 +1,14 @@
+name: Insider SEC Admin
+type: module
+description: 'Provides customized administrative functions for SEC.'
+package: SEC
+core: 8.x
+version: 8.x-1.0
+tags:
+ - dev
+stylesheets:
+  all:
+    - css/env_indicator.css
+scripts:
+  - js/env_indicator.js
+core_version_requirement: ^8 || ^9

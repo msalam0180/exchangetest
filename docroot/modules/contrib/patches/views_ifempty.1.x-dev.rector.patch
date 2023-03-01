@@ -1,0 +1,11 @@
+diff --git a/views_ifempty.info.yml b/views_ifempty.info.yml
+index 3ef1ea7..eedebeb 100644
+--- a/views_ifempty.info.yml
++++ b/views_ifempty.info.yml
+@@ -3,5 +3,6 @@ type: module
+ description: "Allows Views to output a field if another field is empty."
+ package: Views
+ core: 8.x
++core_version_requirement: ^8 || ^9
+ dependencies:
+   - views

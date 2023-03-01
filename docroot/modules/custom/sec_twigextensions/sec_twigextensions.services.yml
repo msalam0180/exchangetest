@@ -1,0 +1,5 @@
+services:
+  sec_twigextensions.twig.sec_extension:
+    class: Drupal\sec_twigextensions\Twig\SecExtension
+    tags:
+    - { name: twig.extension }

@@ -1,0 +1,19 @@
+diff --git a/media_entity_download/src/Controller/DownloadController.php b/media_entity_download/src/Controller/DownloadController.php
+index 6b7c0ce500..639bafecca 100644
+--- a/media_entity_download/src/Controller/DownloadController.php
++++ b/media_entity_download/src/Controller/DownloadController.php
+@@ -147,11 +147,11 @@ public function download(MediaInterface $media) {
+       // $public parameter to make sure we don't change the headers.
+       $response = new BinaryFileResponse($uri, Response::HTTP_OK, $headers, $scheme !== 'private');
+       if (empty($headers['Content-Disposition'])) {
+-        if ($request_query->has(ResponseHeaderBag::DISPOSITION_INLINE)) {
+-          $disposition = ResponseHeaderBag::DISPOSITION_INLINE;
++        if ($request_query->has(ResponseHeaderBag::DISPOSITION_ATTACHMENT)) {
++          $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT;
+         }
+         else {
+-          $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT;
++          $disposition = ResponseHeaderBag::DISPOSITION_INLINE;
+         }
+         $response->setContentDisposition($disposition);
+       }

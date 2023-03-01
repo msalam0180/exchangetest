@@ -1,0 +1,23 @@
+uuid: 516a7453-ac34-4105-8d56-58059998d6af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_override_modified_date
+    - node.type.announcement
+  module:
+    - datetime
+_core:
+  default_config_hash: xBFcR87WsKFWP_XOKk4rKJHe4Qq3l8mnuCe_SscuM5k
+id: node.announcement.field_override_modified_date
+field_name: field_override_modified_date
+entity_type: node
+bundle: announcement
+label: 'Override Modified Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

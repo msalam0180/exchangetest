@@ -1,0 +1,40 @@
+uuid: 707a2e6f-5964-4abe-85e6-f7e3829145bf
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_save_redirect
+    - workbench_access
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  workbench_access:
+    workbench_access_status: false
+  node_save_redirect:
+    save_type: '0'
+    save_location: ''
+    save_destination: 0
+    edit_type: '2'
+    edit_location: ''
+    edit_destination: 1
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+    default_moderation_state: draft
+_core:
+  default_config_hash: c2d-FhdqnUapBPJ4KB-annIst-NDh4I3DD4wOiXrwHc
+name: Article
+type: sec_article
+description: 'Serves as a reference or resource and is evergreen; generally has little to no edits (i.e. user guides, policies, legally-mandated reminders, etc.)'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

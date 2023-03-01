@@ -1,0 +1,182 @@
+{#
+/**
+ * @file
+ * Theme override for a field.
+ *
+ * To override output, copy the "field.html.twig" from the templates directory
+ * to your theme's directory and customize it, just like customizing other
+ * Drupal templates such as page.html.twig or node.html.twig.
+ *
+ * Instead of overriding the theming for all fields, you can also just override
+ * theming for a subset of fields using
+ * @link themeable Theme hook suggestions. @endlink For example,
+ * here are some theme hook suggestions that can be used for a field_foo field
+ * on an article node type:
+ * - field--node--field-foo--article.html.twig
+ * - field--node--field-foo.html.twig
+ * - field--node--article.html.twig
+ * - field--field-foo.html.twig
+ * - field--text-with-summary.html.twig
+ * - field.html.twig
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ *
+ * @see template_preprocess_field()
+ */
+#}
+
+
+{% set articleTypeList = [
+    {'type':'agendas', 'listpage':'', 'pageDetailTitle':'Agendas'},
+    {'type':'academic-publications', 'listpage':'/dera/academic-publications', 'pageDetailTitle':'Academic Publications'},
+    {'type':'announcement', 'listpage':'/announcements', 'pageDetailTitle':'Announcement'},
+    {'type':'announcement', 'listpage':'/dera/newsletter', 'pageDetailTitle':'Announcement'},
+    {'type':'biographies', 'listpage':'', 'pageDetailTitle':'Biographies'},
+    {'type':'contact-information', 'listpage':'', 'pageDetailTitle':'Contact Information'},
+    {'type':'data', 'listpage':'/data', 'pageDetailTitle':'Data'},
+    {'type':'education-help-guides-faqs', 'listpage':'', 'pageDetailTitle':'Education/Help/Guides/FAQs'},
+    {'type':'fact-sheets', 'listpage':'', 'pageDetailTitle':'Fact Sheets'},
+    {'type':'fast-answers', 'listpage':'/fast-answers', 'pageDetailTitle':'Fast Answers'},
+    {'type':'forms', 'listpage':'/forms', 'pageDetailTitle':'Forms'},
+    {'type':'investor-alerts-and-bulletins', 'listpage':'/investor/alerts', 'pageDetailTitle':'Investor Alerts and Bulletins'},
+    {'type':'laws', 'listpage':'', 'pageDetailTitle':'Laws'},
+    {'type':'other', 'listpage':'', 'pageDetailTitle':'Other'},
+    {'type':'reports-and-publications', 'listpage':'/reports', 'pageDetailTitle':'Reports and Publications' },
+    {'type':'staff-papers', 'listpage':'/dera/staff-papers', 'pageDetailTitle': 'Staff Papers and Economic Analyses'},
+    {'type':'sunshine-act', 'listpage':'', 'pageDetailTitle':'Sunshine Act'},
+    {'type':'data-highlight', 'listpage':'', 'pageDetailTitle':'Data Highlight'},
+    {'type':'webcasts', 'listpage':'/news/webcasts.shtml', 'pageDetailTitle':'Webcasts'}
+] %}
+
+{% set listViews = [
+  {'id':'36', 'name':'corpfin'},
+  {'id':'38', 'name':'dera'},
+  {'id':'48', 'name':'im'},
+  {'id':'35', 'name':'ocie'},
+  {'id':'56', 'name':'structureddata'}
+]%}
+
+{% set currentlistViews = ['/corpfin', '/dera', '/im', '/ocie', '/structureddata'] %}
+{% set excludedLinks = ['agendas', 'biographies', 'contact-information','data-highlight', 'education-help-guides-faqs', 'fact-sheets', 'laws', 'sunshine-act'] %}
+{% set articleDivision = element['#object'].field_primary_division_office.target_id %}
+{% set articleSubtype = element['#object'].field_article_sub_type_secart.0.value %}
+{% if articleDivision is null %}
+  {% set articleDivision = element['#object'].field_division_office.target_id %}
+{% endif %}
+
+{% set breakloop = false %}
+{% set primaryDiv = '' %}
+{% for d in listViews if (d.id == articleDivision) and (breakloop == false) %}
+    {% set primaryDiv = '/' ~ d.name %}
+    {% set breakloop = true %}
+{% endfor %}
+
+<div id="page-title">
+<h1 class="article-type">
+{% if label_hidden %}
+  {% if multiple %}
+    {% for item in items %}
+    <div{{ item.attributes }}>
+      {% set listItem = item.content|render|striptags|lower|trim|replace({' ':'-'})|replace({'/':'-'}) %} 
+      {% for a in articleTypeList if a.type is same as(listItem) %} 
+
+        {% if a.listpage and a.listpage is not same as ("") %}
+          <a href="{{ a.listpage }}">        
+            {{ a.pageDetailTitle }}      
+          </a>
+        {% else %}
+          {% if a.type is not same as('other') %}
+             {{ item.content|render|striptags }}
+          {% else %}
+             <span class="hide">{{ item.content|render|striptags }}</span>
+          {% endif %}  
+        {% endif %}  
+
+      {% else %}
+         {{ item.content|render|striptags }}
+      {% endfor %}  
+    </div>        
+    {% endfor %}
+    
+  {% else %}
+
+    {% set breakloop = false %} 
+    {% for item in items %}
+      
+      {% set listItem = item.content|render|striptags|lower|trim|replace({' ':'-'})|replace({'/':'-'}) %} 
+      {% for a in articleTypeList if (a.type is same as(listItem)) and (breakloop == false) %}
+
+        {% if primaryDiv is not null %}
+          {% if primaryDiv is same as('/structureddata') and a.type is same as("announcement")%}
+            <a href="{{ primaryDiv }}/news">
+              {{ a.pageDetailTitle }}
+              {% set breakloop = true %}    
+            </a>
+          {% elseif primaryDiv is same as('/dera') and a.type is same as("announcement")%}
+            <a href="{{ primaryDiv }}/newsletter">
+              {{ a.pageDetailTitle }}
+              {% set breakloop = true %}    
+            </a>
+          {% elseif a.type is same as("announcement")%}
+		        {% if primaryDiv in currentlistViews %}
+              <a href="{{ primaryDiv }}{{ a.listpage }}">
+                {{ a.pageDetailTitle }}
+                {% set breakloop = true %}     
+              </a>
+      			{% else %}
+      			  {{ a.pageDetailTitle }}
+      			  {% set breakloop = true %}
+      			{% endif %}
+		      {% elseif a.type is same as ("other") %}
+		        <span class="hide">{{ item.content|render|striptags }}</span>
+            {% set breakloop = true %}
+		      {% elseif a.type in excludedLinks %}
+		        {{ a.pageDetailTitle }}
+            {% set breakloop = true %}
+          {% else %}
+		        <a href="{{ a.listpage }}">
+              {% if articleSubtype is same as('Staff Papers-Other') or (a.type is same as("staff-papers") and not articleSubtype) %}
+                Staff Papers
+              {% else %}       
+                {{ a.pageDetailTitle }}
+              {% endif %}
+              {% set breakloop = true %}     
+            </a>
+          {% endif %}
+        {% else %}
+          <a href="{{ a.listpage }}">
+            {{ a.pageDetailTitle }}  
+          </a>
+        {% endif %}
+
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+{% else %}
+  <div{{ attributes }}>
+    <div{{ item.attributes }}><a href="">{{ item.content }}</a></div>
+    {% if multiple %}
+      <div>
+    {% endif %}
+    {% for item in items %}
+      <div{{ item.attributes }}><a href="">{{ item.content }}</a></div>
+    {% endfor %}
+    {% if multiple %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
+</h1>
+</div>

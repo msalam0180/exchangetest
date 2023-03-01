@@ -1,0 +1,291 @@
+{
+    "name": "acquia/acquia-ra-composer",
+    "description": "Project json for Acquia Remote Administration Composer builds",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "ckeditor-plugin/link": "4.16.2",
+        "composer/installers": "^1.3",
+        "cweagans/composer-patches": "^1.6",
+        "datetimepicker/datetimepicker": "2.5.21",
+        "drupal/acquia_connector": "^3.0",
+        "drupal/acquia_purge": "^1.0",
+        "drupal/acquia_search": "^3.0",
+        "drupal/address": "^1.8",
+        "drupal/addtocalendar": "^3.1",
+        "drupal/admin_toolbar": "^3.2",
+        "drupal/adminimal_admin_toolbar": "^1.10",
+        "drupal/adminimal_theme": "^1.6",
+        "drupal/allowed_formats": "^1.3",
+        "drupal/anchor_link": "^2.4",
+        "drupal/autologout": "^1.3",
+        "drupal/better_exposed_filters": "^5.1",
+        "drupal/browserclass": "^1.0@alpha",
+        "drupal/ckwordcount": "^2.0",
+        "drupal/coffee": "^1.0",
+        "drupal/color": "^1.0",
+        "drupal/comment_delete": "^2.0",
+        "drupal/conditional_fields": "^4.0@alpha",
+        "drupal/config_filter": "^1.5",
+        "drupal/config_log": "^3.0",
+        "drupal/config_split": "^1.7",
+        "drupal/config_update": "^1.7",
+        "drupal/consumers": "^1.11",
+        "drupal/core": "~9.4.0",
+        "drupal/core-composer-scaffold": "~9.4.0",
+        "drupal/core-project-message": "~9.4.0",
+        "drupal/core-recommended": "~9.4.0",
+        "drupal/csv_serialization": "^2.1",
+        "drupal/ctools": "^3.6",
+        "drupal/devel": "^4.1",
+        "drupal/draggableviews": "^2.1",
+        "drupal/editor_advanced_link": "^1.4",
+        "drupal/embed": "^1.4",
+        "drupal/entity_browser": "^2.5",
+        "drupal/entity_embed": "^1.2",
+        "drupal/entity_reference_revisions": "^1.8",
+        "drupal/entity_usage": "^2.0",
+        "drupal/environment_indicator": "^4.0",
+        "drupal/externalauth": "^1.3",
+        "drupal/extlink": "^1.3",
+        "drupal/fakeobjects": "^1.0",
+        "drupal/feeds": "^3.0@alpha",
+        "drupal/field_group": "^3.0",
+        "drupal/field_permissions": "^1.0",
+        "drupal/filefield_paths": "^1.0@beta",
+        "drupal/flag": "^4.0",
+        "drupal/google_tag": "^1.3",
+        "drupal/graphql": "^3.1",
+        "drupal/graphql_views": "^1.1",
+        "drupal/hook_event_dispatcher": "^3.2",
+        "drupal/http_response_headers": "^2.0",
+        "drupal/inline_entity_form": "^1.0",
+        "drupal/jquery_ui_touch_punch": "^1.0",
+        "drupal/linkit": "^5.0",
+        "drupal/maillog": "^1.0@beta",
+        "drupal/mailsystem": "^4.3",
+        "drupal/masquerade": "^2.0@beta",
+        "drupal/media_entity_download": "^2.1",
+        "drupal/memcache": "^2.0",
+        "drupal/migrate_plus": "^6.0",
+        "drupal/migrate_tools": "^6.0",
+        "drupal/no_autocomplete": "^1.6",
+        "drupal/notification": "^1.0",
+        "drupal/other_view_filter": "^1.1",
+        "drupal/page_manager": "^4.0",
+        "drupal/panelizer": "^4.4",
+        "drupal/panels": "^4.6",
+        "drupal/paragraphs": "^1.11",
+        "drupal/pathauto": "^1.8",
+        "drupal/poll": "^1.4",
+        "drupal/protected_pages": "^1.2",
+        "drupal/publication_date": "^2.0",
+        "drupal/purge": "^3.0",
+        "drupal/quicktabs": "^3.0@alpha",
+        "drupal/r4032login": "^2.1",
+        "drupal/rabbit_hole": "^1.0",
+        "drupal/redirect": "^1.6",
+        "drupal/replicate": "^1.0",
+        "drupal/replicate_actions": "^1.0",
+        "drupal/replicate_ui": "^1.0",
+        "drupal/role_log": "^1.1",
+        "drupal/scheduled_updates": "^1.x-dev",
+        "drupal/search_api": "^1.16",
+        "drupal/search_api_attachments": "^9.0",
+        "drupal/search_api_solr": "^4.2",
+        "drupal/simple_oauth": "^5.2",
+        "drupal/simple_styleguide": "^1.8",
+        "drupal/simplesamlphp_auth": "^3.2",
+        "drupal/single_datetime": "^1.7",
+        "drupal/subpathauto": "^1.0",
+        "drupal/swiftmailer": "^2.2",
+        "drupal/token": "^1.7",
+        "drupal/token_filter": "^1.2",
+        "drupal/twig_tweak": "^3.1",
+        "drupal/typed_data": "^1.0",
+        "drupal/video_embed_field": "^2.4",
+        "drupal/views_data_export": "^1.0",
+        "drupal/views_ifempty": "1.x-dev",
+        "drupal/views_natural_sort": "^2.0@alpha",
+        "drupal/webform": "^6.1",
+        "drupal/workbench": "^1.3",
+        "drupal/workbench_access": "^1.0",
+        "drupal/workbench_moderation": "^1.5",
+        "drupal/workbench_moderation_actions": "1.x-dev@dev",
+        "drush/drush": "10.5",
+        "simplesamlphp/simplesamlphp": "^1.18.6",
+        "solarium/solarium": "^6.1",
+        "swiftmailer/swiftmailer": "^6.0",
+        "zodiacmedia/drupal-libraries-installer": "^1.4"
+    },
+    "require-dev": {
+        "behat/mink": "^1.7",
+        "phpunit/phpunit": "^9.5"
+    },
+    "conflict": {
+        "drupal/core": "7.*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "drupal-scaffold": {
+            "file-mapping": {
+                "[web-root]/robots.txt": {
+                    "mode": "skip"
+                },
+                "[web-root]/.eslintignore": {
+                    "mode": "skip"
+                },
+                "[web-root]/.htaccess": {
+                    "mode": "skip"
+                },
+                "[web-root]/sites/development.services.yml": {
+                    "mode": "skip"
+                }
+            },
+            "locations": {
+                "web-root": "./docroot"
+            }
+        },
+        "_readme": [
+            "By default Drupal loads the autoloader from ./vendor/autoload.php.",
+            "To change the autoloader you can edit ./autoload.php."
+        ],
+        "installer-paths": {
+            "docroot/core": ["type:drupal-core"],
+            "docroot/libraries/{$name}": ["type:drupal-library", "swiftmailer/swiftmailer"],
+            "docroot/modules/contrib/{$name}": ["type:drupal-module"],
+            "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
+            "docroot/drush/{$name}": ["type:drupal-drush"]
+        },
+        "drupal-libraries": {
+            "ckeditor-wordcount-plugin": "https://download.ckeditor.com/wordcount/releases/wordcount_1.17.9.zip",
+            "fakeobjects": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.16.2.zip",
+            "jquery-ui-touch-punch": "https://github.com/furf/jquery-ui-touch-punch/archive/refs/heads/master.zip",
+            "notification": "https://download.ckeditor.com/notification/releases/notification_4.16.2.zip"
+        },
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "enable-patching": true,
+        "patches": {
+            "ckeditor-plugin/link": {
+                "Drupal Issue: https://www.drupal.org/project/anchor_link/issues/2802085": "docroot/modules/contrib/patches/custom-removing-duplicate-edit-link-wysiwyg-based-on-2802085-18.patch"
+            },
+            "datetimepicker/datetimepicker": {
+                "Datetimepicker updating library jquery.datetimepicker.full.js from 1.3.4 to 1.3.5": "docroot/modules/contrib/patches/datetimepicker-js-update-version.patch"
+            },
+            "drupal/adminimal_admin_toolbar": {
+                "D9 icon update patch https://www.drupal.org/project/adminimal_admin_toolbar/issues/3163092": "docroot/modules/contrib/patches/icon-update-3163092-4.patch"
+            },
+            "drupal/core": {
+                "Drupal issue: https://www.drupal.org/project/drupal/issues/3031364": "docroot/modules/contrib/patches/core-comment_status_views_support-3031364-2.patch",
+                "Drupal issue: https://www.drupal.org/project/drupal/issues/3266341": "docroot/modules/contrib/patches/3266341-9.patch",
+                "Custom patch from DI-7178: (Note: Issue unable to view the weight value.)": "docroot/modules/contrib/patches/manual_patch/DI-7178-weight-value-fix-width.patch"
+
+            },
+            "drupal/better_exposed_filters": {
+                "Custom patch from Drupal issue: https://www.drupal.org/project/better_exposed_filters/issues/2903080 (Note: Updated patch due to newer version of better_exposed_filters.": "docroot/modules/contrib/patches/dropdown-option-none-2903080-11.patch"
+            },
+            "drupal/coffee": {
+                "Drupal issue: https://www.drupal.org/project/coffee/issues/2896408": "docroot/modules/contrib/patches/hidden_coffee_div-2896408-11.patch"
+            },
+            "drupal/comment_delete": {
+                "Custom issue: DI-7186, print deleted message where comment was deleted.": "docroot/modules/contrib/patches/DI-7186_comment-deleted-message.patch"
+            },
+            "drupal/entity_reference_revisions": {
+                "Drupal issue: https://www.drupal.org/project/entity_reference_revisions/issues/2799479 (Note: Updated the patch manually to allow patching via composer.json No code has been changed from original patch.)": "docroot/modules/contrib/patches/views-paragraph-relationship-to-host-2799479-158.patch"
+            },
+            "drupal/flag": {
+                "Drupal issue (Re-rolled Custom patch): https://www.drupal.org/project/flag/issues/2901287": "docroot/modules/contrib/patches/focusbackonlink-2901287-3.patch"
+            },
+            "drupal/http_response_headers": {
+                "Drupal issue: https://www.drupal.org/project/http_response_headers/issues/3193303": "docroot/modules/contrib/patches/http_response_headers-3193303.patch",
+                "Drupal issue: https://www.drupal.org/project/http_response_headers/issues/3193304": "docroot/modules/contrib/patches/http_response_headers-3193304.patch"
+            },
+            "drupal/masquerade": {
+                "Drupal issue: https://www.drupal.org/project/masquerade/issues/3003796": "docroot/modules/contrib/patches/2019-4-5-filterbyrole.patch",
+                "Drupal issue: https://www.drupal.org/project/masquerade/issues/2900413": "docroot/modules/contrib/patches/2900413-8.show-unmasquerade-link-in-block.patch",
+                "Custom: Patch masquerade check for user to have all perms": "docroot/modules/contrib/patches/patch-masquerade-roles-check.patch",
+                "Drupal issue: https://www.drupal.org/project/masquerade/issues/2679088": "docroot/modules/contrib/patches/masquerade-2679088-redirect.patch"
+            },
+            "drupal/media_entity_download": {
+                "Custom DI-3237: Default PDF to show within browser instead of downloading,which is a default behavior from the contrib module.": "docroot/modules/contrib/patches/inlinedisposition.patch"
+            },
+            "drupal/rabbit_hole": {
+                "Custom DI-1724: decode html special chars": "docroot/modules/contrib/patches/rabbit_hole_DI-1724_htmlspecialchars_decode_url.patch"
+            },
+            "drupal/replicate_actions": {
+                "Custom DI-3265 and DI-5460: ensure new node is not published when using workbench moderation, and avoid copying certain fields": "docroot/modules/contrib/patches/replicate_actions_draft_state.patch"
+            },
+            "drupal/scheduled_updates": {
+                "D9 Compatibility Fix patch https://www.drupal.org/project/scheduled_updates/issues/3172330": "docroot/modules/contrib/patches/scheduled_updates-3172330-24.patch"
+            },
+            "drupal/simple_styleguide": {
+                "Drupal issue: https://www.drupal.org/project/simple_styleguide/issues/3054918": "docroot/modules/contrib/patches/permissionpatchstyleguide.patch",
+                "Custom: Simple-styleguide js file changing from ES6 to ES5 to work with IE": "docroot/modules/contrib/patches/simple-styleguide-js-es6-to-es5.patch"
+            },
+            "drupal/simplesamlphp_auth": {
+                "Drupal issue: https://www.drupal.org/project/simplesamlphp_auth/issues/2983154": "docroot/modules/contrib/patches/simplesamlphp_auth-return-to-destination-parameter-2983154-8-D8.patch",
+                "Drupal issue: https://www.drupal.org/project/simplesamlphp_auth/issues/2124117": "docroot/modules/contrib/patches/2124117-6-reroll-14.patch",
+                "Custom DI-5153: Forces simplesaml redirection to requested url": "docroot/modules/contrib/patches/saml_redirect-DI5153.patch"
+            },
+            "drupal/views_ifempty": {
+                "Drupal issue: D9 Compatibility Rector Fixes https://www.drupal.org/project/views_ifempty/issues/3142112": "docroot/modules/contrib/patches/views_ifempty.1.x-dev.rector.patch"
+            },
+            "drupal/workbench_moderation": {
+                "Drupal issue: https://www.drupal.org/project/workbench_moderation/issues/2804105": "docroot/modules/contrib/patches/fix_access_checks-2804105-15.patch"
+            }
+        }
+    },
+    "repositories": [{
+            "type": "package",
+            "package": {
+                "name": "ckeditor-plugin/link",
+                "version": "4.16.2",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/link/releases/link_4.16.2.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "datetimepicker/datetimepicker",
+                "version": "2.5.21",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://registry.npmjs.org/jquery-datetimepicker/-/jquery-datetimepicker-2.5.21.tgz",
+                    "type": "tar"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": [{
+                "name": "drupal/views_ifempty",
+                "type": "drupal-module",
+                "version": "1.x-dev",
+                "source": {
+                    "type": "git",
+                    "url": "https://git.drupalcode.org/project/views_ifempty.git",
+                    "reference": "265baf5230726df3ec43b4b605fb78b50ad11641"
+                }
+            }]
+        },
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "discard-changes": true,
+        "platform": {
+            "php": "8.0"
+        }
+    }
+}

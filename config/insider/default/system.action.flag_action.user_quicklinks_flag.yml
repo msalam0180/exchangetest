@@ -1,0 +1,17 @@
+uuid: 75666173-aae6-4cf2-8465-b4ba5ea6577e
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.user_quicklinks
+  module:
+    - flag
+_core:
+  default_config_hash: jwuCTSgup3BhQRSxTjI0vOGriyGSpIl422LQc8b2JV8
+id: flag_action.user_quicklinks_flag
+label: 'Add to my QuickLinks Menu'
+type: node
+plugin: 'flag_action:user_quicklinks_flag'
+configuration:
+  flag_id: user_quicklinks
+  flag_action: flag

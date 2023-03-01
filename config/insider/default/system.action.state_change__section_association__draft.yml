@@ -1,0 +1,11 @@
+uuid: 87372013-89ff-4cdd-9104-e9fc19802d68
+langcode: en
+status: true
+dependencies:
+  module:
+    - workbench_moderation_actions
+id: state_change__section_association__draft
+label: 'Set Section association as Draft'
+type: section_association
+plugin: 'state_change:section_association__draft'
+configuration: {  }

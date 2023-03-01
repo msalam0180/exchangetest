@@ -1,0 +1,11 @@
+services:
+  migrate_node_media.migrate_node_media_list:
+    class: Drupal\migrate_node_media\Command\ListCommand
+    arguments: ['@migrate_node_media.mapping']
+    tags:
+      - { name: drupal.command }
+  migrate_node_media.migrate_node_media_run:
+    class: Drupal\migrate_node_media\Command\RunCommand
+    arguments: []
+    tags:
+      - { name: drupal.command }

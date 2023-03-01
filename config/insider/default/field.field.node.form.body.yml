@@ -1,0 +1,25 @@
+uuid: 6752f0ab-54a4-43d4-ab47-1f181502942b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.form
+  module:
+    - text
+_core:
+  default_config_hash: gqfTwU1QJOD2qGI_4zkxPNDKPXe4NYf8fSTocN09qpQ
+id: node.form.body
+field_name: body
+entity_type: node
+bundle: form
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

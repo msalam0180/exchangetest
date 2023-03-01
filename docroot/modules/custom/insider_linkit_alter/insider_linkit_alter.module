@@ -1,0 +1,39 @@
+<?php
+
+use Drupal\node\Entity\Node;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_link_alter() to change link url of content nodes to their respective field_url value
+ */
+function insider_linkit_alter_link_alter(&$vars) {
+  $url = $vars['url'];
+
+  if ($url->isRouted() && $url->getRouteName() == 'entity.node.canonical') {
+    $params = $url->getRouteParameters();
+
+    if (empty($params['node'])) {
+      return;
+    }
+
+    if ($node = Node::load($params['node'])) {
+      if ($node->getType() == 'link') {
+        if (!empty($node->get('field_url')->getValue()[0]['uri'])) {
+          // Check user permissions
+          $account = \Drupal::currentUser();
+          $is_admin = $account->hasPermission('edit any link content');
+
+          // Comment this next line out if content editors should not see altered links
+          //$is_admin = FALSE;
+
+          //modify links only if user does not have edit link permissions
+          if (!$is_admin) {
+            // Assigning field_url value to $url_value variable with quotes.
+            $uri = $node->get('field_url')->getValue()[0]['uri'];
+            $vars['url'] = Url::fromUri($uri, ['absolute' => TRUE]);
+          }
+        }
+      }
+    }
+  }
+}

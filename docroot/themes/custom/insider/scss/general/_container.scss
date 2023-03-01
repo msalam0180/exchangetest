@@ -1,0 +1,85 @@
+//
+// Container
+// Page layout containers
+// 
+// NOTE: cleaning in process
+// NOTE: When completed give a better name to this file
+// --------------------------------------------------
+
+@include breakpoint('mobile-menu-notshowing'){
+  #page-wrapper {
+  	margin-bottom:0;
+      overflow: hidden;
+      max-width: 100%;
+      width: 100%;
+  }
+}
+
+#main-wrapper {
+	height: inherit;
+	@include section;
+	max-width: 960px;
+	min-height: auto;
+	padding: 0 10px;
+	position: relative;
+}
+
+//what do I need of this?
+[role="main"] {
+  display: block;
+  min-height: 30vh;
+
+  @include breakpoint('medium','portrait'){
+    min-height: 25vh;
+  }
+
+  @include breakpoint('small'){
+    min-height: 25vh;
+  }
+
+  @include breakpoint('x-small'){
+    min-height: 25vh;
+  }
+}
+
+//what do I need of this?
+#content-wrapper {
+  // @include span(10);
+  color: $dark-navy;
+  display: block;
+  font-size: 1em;
+  height: inherit;
+  margin-right: 0;
+
+  #main {
+    @include span(12);
+    margin: 0;
+    padding: 0;
+
+    @include breakpoint('medium','portrait'){
+      padding: 0 10px;
+    }
+
+    @include breakpoint('medium','portrait','ipad'){
+      padding: 0 10px;
+    }
+  }
+
+}
+
+// Page layout if there is NOT mobile menu
+@include breakpoint('mobile-menu-notshowing'){
+
+  //if show-sidebar is present and is not mobile layout, then set column width
+  .show-sidebar{
+    //TODO: look as Suzy, may need to add a container here...
+    #content-wrapper{
+      @include span(10 of 12);
+      margin-right: 0;
+    }
+
+    #sidebar-first{
+       @include span(2 of 12);
+    }
+  }
+}

@@ -1,0 +1,37 @@
+_core:
+  default_config_hash: SlvBDvDYAFLAkAikHJp_4rntvPn-nX6DLf92HOoX2cQ
+langcode: en
+activate: true
+auth_source: default-sp
+login_link_display_name: 'SEC ADFS Login'
+login_link_show: true
+user_name: 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+unique_id: 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+mail_attr: 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+header_no_cache: true
+role:
+  population: ''
+  eval_every_time: false
+register_users: true
+allow:
+  set_drupal_pwd: true
+  default_login: true
+  default_login_roles:
+    administrator: administrator
+    content_creator: content_creator
+    content_approver: content_approver
+    sitebuilder: sitebuilder
+    authenticated: '0'
+    enduser: '0'
+    microsite_creator: '0'
+    microsite_approver: '0'
+  default_login_users: '1,731'
+logout_goto_url: /
+user_register_original: visitors_admin_approval
+sync:
+  mail: true
+  user_name: true
+autoenablesaml: false
+debug: true
+secure: true
+httponly: true

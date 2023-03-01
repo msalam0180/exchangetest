@@ -1,0 +1,72 @@
+//
+// Global footer
+// The site wide footers
+// --------------------------------------------------
+
+footer.sitefooter {
+	margin: 20px 0 0;
+
+	.block {
+		margin: 0;
+	}
+
+	#block-secgov-footer, #block-footertop {
+		@include span(12);
+		clear: both;
+		margin-right: 0px;
+		padding: 24px;
+	    text-align: center;
+	}
+
+	ul.menu-ul {
+
+		line-height: 1.5;
+		list-style: none;
+		margin: 6px auto;
+		padding: 0;
+
+		@include breakpoint('small'){
+			width: 83.33%;
+		}
+
+		li {
+			display: inline;
+			margin-left: 5px;
+
+			border-right: 1px solid $white;
+			&:last-child { border-right: none; }
+
+			a {
+				color: $footer-anchor-color;
+				padding-right:5px;
+				text-decoration: none;
+
+				&:hover, &:focus {
+					text-decoration: underline;
+					color: $footer-anchor-hover-color;
+				}
+			}
+		}
+	}
+
+
+	#block-footertop {
+		background-color: $footertop-bg-color;
+	    padding: 12px 0px;
+
+		li {
+			a{color: $footertop-anchor-color;}
+			a:hover, a:focus {color: $footertop-anchor-hover-color;}
+		}
+	}
+
+	#block-secgov-footer {
+		background-color: $footer-bg-color;
+	    padding: 12px 0px;
+
+		li {
+			a{color: $footer-anchor-color;}
+			a:hover, a:focus {color: $footer-anchor-hover-color;}
+		}
+	}
+}

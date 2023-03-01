@@ -1,0 +1,19 @@
+_core:
+  default_config_hash: Ieq3f2pLmpGn-TgQOveAsiSJ8yiU6kZhXlk8lQYHDvI
+extlink_exclude_admin_routes: false
+extlink_target: true
+extlink_target_no_override: false
+extlink_nofollow: true
+extlink_follow_no_override: false
+extlink_subdomains: false
+extlink_alert: false
+extlink_alert_text: 'You are now leaving the SEC Website. The link you have selected is located on another server. Please click on the OK button below to proceed to the selected site. The SEC does not endorse this web site, its sponsor, or any of the policies, activities, products, or services offered on the site or by any advertiser on the site.'
+extlink_exclude: ''
+extlink_include: ''
+extlink_class: '0'
+extlink_label: '(link is external)'
+extlink_img_class: false
+extlink_css_exclude: .data-exempt
+extlink_css_explicit: ''
+extlink_mailto_class: '0'
+extlink_mailto_label: '(link sends email)'

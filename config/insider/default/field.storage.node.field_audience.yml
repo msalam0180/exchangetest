@@ -1,0 +1,26 @@
+uuid: db7a55d2-0818-4e59-af3e-659be6457df8
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - node
+    - taxonomy
+third_party_settings:
+  field_permissions:
+    permission_type: custom
+_core:
+  default_config_hash: GFjuw1WHF46urJ9T-qBW1AeHtZye8p2rrDbE_jbtQG4
+id: node.field_audience
+field_name: field_audience
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

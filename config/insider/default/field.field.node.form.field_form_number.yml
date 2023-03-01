@@ -1,0 +1,21 @@
+uuid: 4de2b42e-8745-4577-a37d-85f97fb89860
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_form_number
+    - node.type.form
+_core:
+  default_config_hash: Ue8iLmzO-9Ot2QHFEYLsAyoNrIiQgEkw5b-eWs_5lSU
+id: node.form.field_form_number
+field_name: field_form_number
+entity_type: node
+bundle: form
+label: 'Form Number'
+description: 'Enter the number for this form. Leave blank for un-numbered forms.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

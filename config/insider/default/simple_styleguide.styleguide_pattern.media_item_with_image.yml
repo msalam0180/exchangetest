@@ -1,0 +1,9 @@
+uuid: 94bc3b03-abff-421a-8da8-5f4b08cb4c6c
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: b8MjR7mEiAMdxHEH-ZSWY89OwQDZG4mTarmT4p7jNhg
+id: media_item_with_image
+label: 'Media Item With Image'
+pattern: "<div class=\"media\">\r\n  <div class=\"media-left\">\r\n    <img src=\"/files/exchange/style-guide.png\" width=\"64\" height=\"64\" alt=\"A team working together over lunch\" typeof=\"Image\">\r\n  </div>\r\n  <div class=\"media-body\">\r\n    <h3 class=\"media-heading\"><a href=\"/policies-and-forms/announcements/obits/2017-10/george-washington\">Media Item Title</a></h3>\r\n    <div class=\"event-details media-details\">\r\n      Curabitur finibus, magna id suscipit blandit, diam odio ultricies ante, at fermentum ante tortor eu turpis. Sed ultrices odio vel ligula tincidunt dictum. Suspendisse vitae diam mauris.\r\n    </div>\r\n  </div>\r\n</div>\r\n"

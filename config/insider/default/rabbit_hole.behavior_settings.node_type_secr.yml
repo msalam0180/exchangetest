@@ -1,0 +1,16 @@
+uuid: f10e255a-68e5-4448-aa6c-56f4680dfebd
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.secr
+_core:
+  default_config_hash: HZL06XCXrWNOheISsK1-WW1H3Q5THJz0Kthk86d78bs
+id: node_type_secr
+entity_type_id: node_type
+entity_id: secr
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

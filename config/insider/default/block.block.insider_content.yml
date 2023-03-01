@@ -1,0 +1,22 @@
+uuid: 2224ea9d-3335-43e0-a394-58027c7d48d8
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: insider_content
+theme: insider
+region: content
+weight: -8
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,9 @@
+uuid: 102a09ed-8039-427c-87f1-3116756e1466
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: e67ssfkl-FObi1RzpS0MHdOMgaStPSsIiMn3XHX4Ua8
+id: media_item_with_large_image
+label: 'Media Item with Large Image'
+pattern: "<div class=\"media\">\r\n  <div class=\"media-left\">\r\n    <img src=\"/files/exchange/style-guide.png\" width=\"250\" height=\"150\" alt=\"\" typeof=\"Image\">\r\n  </div>\r\n  <div class=\"media-body\">\r\n    <h3 class=\"media-heading\"><a href=\"/policies-and-forms/announcements/obits/2017-10/george-washington\">Media Item Title</a></h3>\r\n    <div class=\"event-details media-details\">\r\n      Curabitur finibus, magna id suscipit blandit, diam odio ultricies ante, at fermentum ante tortor eu turpis. Sed ultrices odio vel ligula tincidunt dictum. Suspendisse vitae diam mauris.\r\n    </div>\r\n  </div>\r\n</div>"

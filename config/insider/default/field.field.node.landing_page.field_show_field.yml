@@ -1,0 +1,25 @@
+uuid: 1a3c919d-d50b-489f-a234-8b0d126e333d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_field
+    - node.type.landing_page
+_core:
+  default_config_hash: sPVRC7hOSP0gSwb2drDswCn1fiDIH6NT1htKY81jaBc
+id: node.landing_page.field_show_field
+field_name: field_show_field
+entity_type: node
+bundle: landing_page
+label: 'Override Left Nav'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,30 @@
+uuid: cedeee73-f3bf-4904-98d5-7d01e69fa19a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image_reference
+    - node.type.announcement
+    - node.type.image
+_core:
+  default_config_hash: 0nKPDtg1fc5MiBKY4cxf2pSAvX5CMZqKsgbWA__Q_8c
+id: node.announcement.field_image_reference
+field_name: field_image_reference
+entity_type: node
+bundle: announcement
+label: 'Image Reference'
+description: 'Creates a thumbnail image to the left of the announcement when promoted to the home page'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

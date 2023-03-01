@@ -1,0 +1,37 @@
+{#
+/**
+* @file
+* Theme override for a 'form' element.
+*
+* Available variables
+* - attributes: A list of HTML attributes for the wrapper element.
+* - children: The child elements of the form.
+*
+* @see template_preprocess_form()
+*/
+#}
+
+{# TODO: Find out why the 'filter' ID was added here - could cause validation issues #}
+<form {{ attributes.setAttribute('id', 'filter') }} >
+
+  {% if attributes.hasClass('views-exposed-form') %}
+    <div class="form-container">
+      <input type="hidden" name="aId" value="">
+      {{ children }}
+      {% if children %}
+        <noscript>
+      		<input type="submit" value="Go">
+      	</noscript>
+      {% endif %}
+    </div>
+  {% else %}
+  {{ children }}
+    {% if children %}
+    	<noscript>
+    		<input type="submit" id="submitFilter" value="Go">
+    	</noscript>
+    {% endif %}
+  {% endif %}
+</form>
+
+{# TODO: why are we creating a jump menu on all forms (508 compliance) #}

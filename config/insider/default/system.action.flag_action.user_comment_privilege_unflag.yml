@@ -1,0 +1,15 @@
+uuid: 223df8d7-e643-4cf3-b89c-500ef32256f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.user_comment_privilege
+  module:
+    - flag
+id: flag_action.user_comment_privilege_unflag
+label: 'Add Commenting Privileges'
+type: user
+plugin: 'flag_action:user_comment_privilege_unflag'
+configuration:
+  flag_id: user_comment_privilege
+  flag_action: unflag

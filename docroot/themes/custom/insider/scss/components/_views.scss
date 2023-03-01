@@ -1,0 +1,771 @@
+//
+// LEGACY: View
+// Currently a bunch of styles relating to views (see note below)
+// --------------------------------------------------
+
+/*
+TODO: Needs refactoring - should not be so much in this file - Insider will not need all these
+
+This SASS file contains CSS for list/view pages.
+The following is the list/view pages represented:
+Articles:
+- Announcement
+- Contact Information
+- Fast Answers
+- Laws
+- Other
+- Sunshine Act Notices
+News:
+- Press Releases
+- Public Statement
+- Speech
+- Testimony
+Mobile List View
+*/
+/* ================== */
+
+.article-publishdate-data {
+    font-size: 1.3em;
+    font-weight: bold;
+ }
+
+/*================== ARTICLES ==================*/
+/* ACADEMIC PUBLICATIONS LIST VIEW PAGE */
+.academic-pubs-list {
+  .seasonBars {
+		border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    font-weight: 600;
+	}
+	#view-field-publish-date-table-column {
+  	width: 15%;
+  }
+	.views-field-term-node-tid {
+		width: 25%;
+	}
+  .ap-list-row {
+   /* display: none !important;*/
+    min-height: none;
+  }
+}
+/* DATA LIST VIEW PAGE */
+.data-list {
+  .view-field-display-title-table-column {
+    width: 66%;
+    word-wrap: normal;
+  }
+}
+/* FORMS LIST VIEW PAGE */
+.forms {
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  .release-number {
+    font-weight:600;
+    padding-bottom: 10px;
+  }
+}
+.forms-list {
+  #view-field-list-page-det-secarticle-table-column {
+    width: 120px;
+  }
+
+  #view-name-table-column {
+    width: 170px;
+  }
+
+  &.views-field-field-date {
+    width: 128px;
+  }
+}
+
+
+/*================== NEWS ==================*/
+.pr-list .item-list {
+  ul {
+    margin-left: 0px;
+    padding-left: 0px;
+    list-style: none;
+  }
+  a { font-size: 15px; }
+}
+.newsroom-list-page {
+  /* List Page Display Title */
+  .views-field-field-display-title {
+    * {
+      line-height: inherit;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: 0;
+      padding-right: 0;
+      margin: inherit;
+      font: inherit;
+      display: inline;
+    }
+    span.show-for-small {
+      font-weight: 600;
+      display: none;
+      @include breakpoint('small'){
+        display: inline;
+      }
+    }
+    h1, h2, h3, h4, h5, h6 { color: inherit}
+  }
+  .views-field-field-person {
+    i,em {
+      font-style: inherit;
+    }
+    h2, h3 {
+      font-size: inherit;
+      font-weight: inherit;
+      font-family: inherit;
+    }
+    strong, b {
+      font-weight: inherit;
+    }
+
+    h4 {
+      display: none;
+    }
+  }
+
+  header {
+    font-size: 13px;
+    #gov-delivery-box {
+      display: inline;
+    }
+
+    #gov-delivery-submit {
+      display: inline;
+      float: none !important;
+      font-size: 14px;
+      font-weight: 600;
+      height: 26px;
+      margin: 0px 0px 0px 5px !important;
+      vertical-align: middle;
+    }
+  }
+}
+.pr-list-page, .ps-list-page, .speeches-list-page, .testimony-list-page {
+  header {
+    @include breakpoint('small','portrait') {
+      margin-bottom: 20px;
+    }
+  }
+
+  .grouped, h1.grouped {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px;
+    line-height: 1.5;
+    text-transform: uppercase;
+    background-color: white;
+
+    @include breakpoint('small') {
+      display: none !important;
+    }
+  }
+
+  h1.grouped {
+    border-left: thin solid $border-color;
+    border-right: thin solid $border-color;
+    display: block;
+    margin: 0;
+    width: 99.94%;
+
+    @include breakpoint('small') {
+      display: none !important;
+    }
+  }
+}
+.pr-list {
+  ul {
+      margin-left: 0;
+      list-style-type: none;
+      padding: 0;
+  }
+
+  .more-link {
+    clear: right;
+    text-align: right;
+    width: 100%;
+
+    &:after {
+      @include fontawesome;
+      color: $navy;
+      content: "\f0da";
+      padding-left: 5px;
+    }
+  }
+}
+
+/* TARGETS SEC VIDEOS LIST PAGE */
+.sec-videos-view {
+  .form-container {
+    #edit-reset {
+      margin-bottom: 2px;
+    }
+  }
+  .views-exposed-form {
+    display: none;
+
+    .form-item, .form-text {
+      margin-right: 0;
+    }
+    .form-item-field-display-title-value {
+      @include breakpoint('small') {
+        clear:both;
+        width: auto;
+      }
+    }
+    input#edit-submit-sec-videos:not(#edit-reset) {
+      margin-left: 0;
+      padding: 0px 8px;
+      top: 0;
+      @include breakpoint('small') {
+        display: inline;
+      }
+    }
+    input#edit-reset {
+      background-color: $cloudy-gray;
+      display: inline;
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 1px;
+      margin-left: 0;
+      padding: 0px 8px;
+    }
+  }
+}
+/* UPCOMING EVENTS LIST PAGE */
+
+.cancelled {
+  text-decoration: line-through !important;
+  -webkit-text-decoration-color: $asphalt;
+  -moz-text-decoration-color: $asphalt;
+  a:hover {
+    text-decoration: underline !important;
+  }
+}
+
+/* TARGETS SPECIFIC LIST VIEWS FOR MOBILE */
+@include breakpoint('small'){
+  .academic-pubs-list {
+    tbody td {
+      .show-for-small {
+        clear: both;
+      }
+    }
+  }
+
+  .data-list, .marketstructure-data {
+    thead th {
+      min-width: 90px;
+      &.views-field-field-display-title {
+      }
+      &.views-field-field-date {
+        display: inline-block;
+      }
+      &.views-field-field-article-sub-type-secart {
+        display: none !important;
+      }
+    }
+  }
+  .fast-answers-list {
+    table.list {
+      tbody {
+        tr {
+          @include breakpoint('small') {
+            padding: 1.66667em;
+          }
+          td {
+            @include breakpoint('small') {
+              .abstract {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .forms-list {
+    @include breakpoint('small') {
+      .form-item-field-audience-target-id {
+          margin-top: 25px;
+      }
+    }
+    #view-field-display-title-table-column,
+    #view-field-list-page-det-secarticle-table-column,
+    #view-term-node-tid-table-column {
+      display: none !important;
+    }
+  }
+  .fwro-news-list, .foia-freq-doc-list {
+    #datatable {
+      thead {
+        tr {
+          top: -33px;
+          th {
+            padding: 10px 8px;
+          }
+        }
+      }
+    }
+  }
+  .im-list {
+    table.list {
+      thead th {
+        border: 1px solid $border-color;
+
+        div {
+          padding: 0px !important;
+
+          a {
+            border: none;
+            color: $asphalt;
+            padding: 0;
+
+            &:last-child {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .investor-alerts-list {
+    .button-box {
+      float: none;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+    thead {
+      th {
+        &.views-field-field-publish-date {
+          width: auto;
+        }
+        &#view-field-display-title-table-column {
+          display: none !important;
+        }
+
+        div {
+          padding: 12px 8px 6px;
+
+          a {
+            border: none;
+            color: $asphalt;
+            padding: 0;
+
+            &:last-child {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        max-width: 320px;
+      }
+      td {
+        &.views-field-field-display-title {
+          span.abstract {
+            display: none;
+          }
+        }
+
+        div {
+          padding: 12px 8px 6px;
+
+          a {
+            border: none;
+            color: $asphalt;
+            padding: 0;
+
+            &:last-child {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+
+    #view-term-node-tid-table-column {
+      display: none !important;
+    }
+  }
+  .marketstructure-data  {
+    thead {
+      th {
+        &#view-field-display-title-table-column {
+          display: none !important;
+        }
+        &.views-field-field-date {
+          display: inline-block;
+        }
+        &.views-field-field-list-page-det-secarticle {
+          display: none !important;
+        }
+
+      }
+    }
+    tbody {
+      tr {
+        td {
+          &.views-field-field-date {
+            display: table-header-group;
+            &:after {
+              clear:both;
+              content: ' ';
+              display: block;
+              margin-bottom: 10px;
+            }
+          }
+          &.views-field-field-display-title {
+            display: table-row-group;
+            &:after {
+              clear:both;
+              content: ' ';
+              display: block;
+              margin-bottom: 10px;
+            }
+          }
+          &.views-field-field-list-page-det-secarticle {
+            display: table-footer-group;
+            .show-for-small {
+              clear: both;
+              font-weight: 600;
+              margin-bottom: 10px;
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .ocie-list {
+    thead {
+      th {
+        a {
+          border: none;
+          padding: 0;
+          &:last-child {
+            border-right: none;
+          }
+        }
+      }
+    }
+  }
+  .ocr-news-list {
+    .form-item {
+      margin-top: 30px;
+    }
+    #datatable {
+      thead {
+        tr { top: -32px; }
+        th { padding: 10px 8px; }
+      }
+    }
+  }
+  .oig-audit-reports {
+    #datatable {
+      thead {
+        tr { top: -33px; }
+        th { padding: 10px 8px; }
+      }
+    }
+
+  }
+  .oig-recent-reports {
+     #datatable {
+      thead {
+        tr { top: -33px; }
+        th { padding: 10px 8px; }
+      }
+    }
+  }
+  .pr-list-page  {
+    .form-item {
+      margin-top: 30px;
+    }
+    table {
+      width: 95%;
+      @include breakpoint('small'){
+        width: 100%;
+      }
+    }
+    thead {
+      tr {
+        border: 1px solid $border-color;
+        padding: 10px;
+
+        &:hover {
+          background: none;
+        }
+
+        th {
+          border: 1px solid $border-color;
+          background-color: $porcelain;
+          font-weight: normal;
+
+          &#view-field-display-title-table-column, &#view-field-release-number-table-column {
+            display: none !important;
+          }
+          &.sorting_asc, &.sorting_desc {
+            background-color: $gray-ltest;
+          }
+        }
+        td {
+          width:300px;
+        }
+      }
+    }
+    tbody tr {
+      padding: 15px;
+    }
+  }
+
+  .ps-list-page {
+    .form-item {
+      margin-top: 30px;
+    }
+    table{ width: 95%; }
+    thead {
+      border: none;
+      #view-field-publish-date-table-column {
+        a {
+          border: none;
+        }
+      }
+      #view-field-display-title-table-column, #view-field-person-table-column {
+        display: none !important;
+      }
+    }
+    tbody tr {
+      padding: 15px;
+      td {
+        width: 95%;
+
+        &.views-field-field-person span.show-for-small {
+          clear: both;
+          margin-bottom: 5px;
+        }
+      }
+    }
+    .form-item-field-person-target-id {
+      clear: both;
+      margin-top: 30px;
+      width: 100%;
+
+      input[type="text"] {
+        width: 100%;
+      }
+    }
+    #edit-reset {
+      clear:both;
+    }
+  }
+
+  .reports-pubs-list {
+    thead th {
+      div {
+        background: none;
+        padding: 0;
+        div { padding: 12px 8px 6px; }
+      }
+      &#view-field-display-title-table-column {
+        display: none !important;
+      }
+      &#view-field-article-sub-type-secart-table-column {
+        display: none !important;
+      }
+    }
+  }
+
+  .speeches-list-page, .testimony-list-page {
+    tr {
+      top: -33px;
+    }
+    .form-item-field-person-target-id {
+      clear: both;
+      margin-top: 30px;
+      width: 100%;
+
+      input[type="text"] {
+        width: 100%;
+      }
+    }
+    #edit-reset {
+      clear:both;
+    }
+    thead {
+      #view-field-publish-date-table-column {
+        width: 90px;
+        a {
+          border: none;
+        }
+      }
+      #view-field-display-title-table-column, #view-field-person-table-column {
+        display: none !important;
+      }
+    }
+    tbody tr {
+      padding: 15px;
+      td {
+        &.views-field-field-person span.show-for-small {
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+
+
+  .testimony-list-page {
+    td {
+      width: 98%;
+    }
+  }
+  .webcasts-list {
+    .form-item {
+      margin-top:30px;
+    }
+    #datatable {
+      thead {
+        tr {
+          top: -33px;
+        }
+        th {
+          padding: 10px 8px;
+        }
+        #view-field-related-materials-table-column {
+          display: none !important;
+        }
+      }
+    }
+  }
+
+}
+
+.sec-videos-view {
+  min-height: 600px;
+
+  .views-col {
+    position: relative;
+  }
+  .views-exposed-form {
+    margin-bottom: 1rem;
+  }
+  .form-container {
+    min-height: 57px;
+  }
+  .views-field-field-video {
+    clear:both;
+
+    .field-content {
+      display: block;
+      position: relative;
+
+      .field-content-runtime, .field-conetnt-video {
+        position: absolute;
+        z-index: 1;
+      }
+
+      .field-content-runtime {
+        background-color: lightgrey;
+        bottom: 0;
+        color: black;
+        padding: 5px 7px;
+        right: 0;
+        text-align: center;
+        width: 48px;
+        z-index: 10;
+      }
+    }
+  }
+  .colspan-4 {
+    @include gallery(3 of 9);
+  }
+
+  .views-field-field-date {
+    color: #646464;
+  }
+
+  .views-field-field-display-title {
+    clear:both;
+    display: block;
+    line-height: 1.3;
+    max-width: 256px;
+    padding: 5px 0px;
+  }
+
+  .youtube-subscribe {
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 20px 10px;
+    background-color: #EBEBEB;
+
+    @include breakpoint('small') {
+      position: relative;
+      clear: both;
+      width: 100%;
+    }
+
+    &:hover {
+      background-color: #273A56 !important;
+    }
+    a {
+      color: #273A56;
+      font-weight: 600;
+      background: #EBEBEB;
+      border: 1px solid white;
+      white-space: nowrap;
+      padding: 10px 20px;
+      font-size: 16px;
+      text-transform: uppercase;
+
+      @include breakpoint('small'){
+        display: block;
+        margin: auto;
+        width: 90%;
+      }
+    }
+    a:hover {
+      text-decoration: none;
+      background-color: #FFC057;
+    }
+    a:after {
+      content: " \f167";
+      font-family: FontAwesome;
+    }
+  }
+  input[type="text"] {
+    margin: 0px;
+  }
+}
+/***** MOBILE CSS *******/
+
+
+@include breakpoint('small', 'landscape'){
+
+  .investor-alerts-list {
+    .colspan-3 {
+      @include span(3);
+
+      &.last {
+        float: right;
+        margin-right: 0;
+      }
+    }
+    #view-term-node-tid-table-column {
+      display: none !important;
+    }
+  }
+}

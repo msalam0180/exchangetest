@@ -1,0 +1,623 @@
+uuid: 6b77fa18-5ec9-40c9-9ef2-a1cb5e906309
+langcode: en
+status: false
+dependencies:
+  config:
+    - field.storage.node.body
+    - field.storage.node.field_caption
+    - field.storage.node.field_image_reference
+    - field.storage.node.field_center_2_box
+    - field.storage.node.field_contact
+    - field.storage.node.field_contact_for_questions
+    - field.storage.node.field_description_abstract
+    - field.storage.node.field_form_number
+    - field.storage.node.field_from
+    - field.storage.node.field_left_1_box
+    - field.storage.node.field_left_2_box
+    - field.storage.node.field_left_3_box
+    - field.storage.node.field_left_4_box
+    - field.storage.node.field_left_5_box
+    - field.storage.node.field_session
+    - field.storage.paragraph.field_location
+    - field.storage.node.field_release_number
+    - field.storage.node.field_right_2_box
+    - field.storage.node.field_right_3_box
+    - field.storage.node.field_right_4_box
+    - field.storage.node.field_secr_number
+    - field.storage.node.field_series
+    - field.storage.node.field_short_title
+    - field.storage.node.field_source
+    - field.storage.node.field_teaser
+    - field.storage.node.field_to
+    - field.storage.node.field_transcript
+    - field.storage.node.field_vendor
+    - field.storage.node.field_file_upload
+    - field.storage.node.field_topic
+    - field.storage.node.field_tags
+    - field.storage.node.field_form_topic
+    - search_api.server.database_search_server
+  module:
+    - node
+    - paragraphs
+    - file
+    - taxonomy
+    - search_api
+id: content_index
+name: 'Content Index'
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  field_caption:
+    label: 'Image Reference » Content » Caption'
+    datasource_id: 'entity:node'
+    property_path: 'field_image_reference:entity:field_caption'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_caption
+        - field.storage.node.field_image_reference
+      module:
+        - node
+  field_center_2_box:
+    label: 'Center 2 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_center_2_box
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_center_2_box
+  field_contact:
+    label: Contact
+    datasource_id: 'entity:node'
+    property_path: field_contact
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_contact
+  field_contact_for_questions:
+    label: 'Contact for Questions'
+    datasource_id: 'entity:node'
+    property_path: field_contact_for_questions
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_contact_for_questions
+  field_description_abstract:
+    label: Description/Abstract
+    datasource_id: 'entity:node'
+    property_path: field_description_abstract
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_description_abstract
+  field_form_number:
+    label: 'Form Number'
+    datasource_id: 'entity:node'
+    property_path: field_form_number
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_form_number
+  field_from:
+    label: From
+    datasource_id: 'entity:node'
+    property_path: field_from
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_from
+  field_left_1_box:
+    label: 'Left 1 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_left_1_box
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_left_1_box
+  field_left_2_box:
+    label: 'Left 2 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_left_2_box
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_left_2_box
+  field_left_3_box:
+    label: 'Left 3 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_left_3_box
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_left_3_box
+  field_left_4_box:
+    label: 'Left 4 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_left_4_box
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_left_4_box
+  field_left_5_box:
+    label: 'Left 5 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_left_5_box
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_left_5_box
+  field_location:
+    label: 'Event Session » Paragraph » Location'
+    datasource_id: 'entity:node'
+    property_path: 'field_session:entity:field_location'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_session
+        - field.storage.paragraph.field_location
+      module:
+        - paragraphs
+  field_release_number:
+    label: 'OP Number'
+    datasource_id: 'entity:node'
+    property_path: field_release_number
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_release_number
+  field_right_2_box:
+    label: 'Right 2 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_right_2_box
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_right_2_box
+  field_right_3_box:
+    label: 'Right 3 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_right_3_box
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_right_3_box
+  field_right_4_box:
+    label: 'Right 4 - Box'
+    datasource_id: 'entity:node'
+    property_path: field_right_4_box
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_right_4_box
+  field_secr_number:
+    label: 'SECR Number'
+    datasource_id: 'entity:node'
+    property_path: field_secr_number
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_secr_number
+  field_series:
+    label: Series
+    datasource_id: 'entity:node'
+    property_path: field_series
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_series
+  field_short_title:
+    label: 'Home Page Title'
+    datasource_id: 'entity:node'
+    property_path: field_short_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_short_title
+  field_source:
+    label: Source
+    datasource_id: 'entity:node'
+    property_path: field_source
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_source
+  field_teaser:
+    label: Teaser
+    datasource_id: 'entity:node'
+    property_path: field_teaser
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_teaser
+  field_to:
+    label: To
+    datasource_id: 'entity:node'
+    property_path: field_to
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_to
+  field_transcript:
+    label: Transcript
+    datasource_id: 'entity:node'
+    property_path: field_transcript
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_transcript
+  field_vendor:
+    label: Vendor
+    datasource_id: 'entity:node'
+    property_path: field_vendor
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_vendor
+  filename_1:
+    label: 'File Upload » File » Filename'
+    datasource_id: 'entity:node'
+    property_path: 'field_file_upload:entity:filename'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_file_upload
+      module:
+        - file
+  name:
+    label: 'Topic » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_topic:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_topic
+      module:
+        - taxonomy
+  name_1:
+    label: 'Tags » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_tags:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_tags
+      module:
+        - taxonomy
+  name_2:
+    label: 'Form Topic » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_form_topic:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_form_topic
+      module:
+        - taxonomy
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        administrator: administrator
+        anonymous: anonymous
+      view_mode:
+        'entity:file':
+          file: ''
+        'entity:node':
+          announcement: ''
+          event: ''
+          featured: ''
+          file: ''
+          image: ''
+          landing_page: ''
+          link: ''
+          page: ''
+          sec_alert: ''
+          sec_article: ''
+          video: ''
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 0
+    dependencies:
+      module:
+        - node
+  uid:
+    label: 'Authored by'
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  url:
+    label: URI
+    property_path: search_api_url
+    type: string
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected:
+        - featured
+        - image
+        - link
+        - sec_alert
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -50
+  entity_status: {  }
+  highlight:
+    weights:
+      postprocess_query: 0
+    prefix: '<strong>'
+    suffix: '</strong>'
+    excerpt: true
+    excerpt_length: 256
+    exclude_fields: {  }
+    highlight: always
+    highlight_partial: true
+  html_filter:
+    weights:
+      preprocess_index: -15
+      preprocess_query: -47
+    all_fields: false
+    fields:
+      - body
+      - field_description_abstract
+      - field_form_number
+      - field_location
+      - field_release_number
+      - field_secr_number
+      - field_series
+      - field_source
+      - field_transcript
+      - field_vendor
+      - filename_1
+      - name
+      - name_1
+      - name_2
+      - rendered_item
+      - title
+      - url
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+  ignore_character:
+    weights:
+      preprocess_index: -10
+      preprocess_query: -46
+    all_fields: false
+    fields:
+      - body
+      - field_description_abstract
+      - field_form_number
+      - field_location
+      - field_release_number
+      - field_secr_number
+      - field_series
+      - field_source
+      - field_transcript
+      - field_vendor
+      - name
+      - name_1
+      - name_2
+      - rendered_item
+      - title
+      - url
+    ignorable: '[''¿¡!?,.:;]'
+    ignorable_classes:
+      - Pc
+      - Pd
+      - Pe
+      - Pf
+      - Pi
+      - Po
+      - Ps
+  ignorecase:
+    weights:
+      preprocess_index: -20
+      preprocess_query: -49
+    all_fields: false
+    fields:
+      - body
+      - field_description_abstract
+      - field_form_number
+      - field_location
+      - field_release_number
+      - field_secr_number
+      - field_series
+      - field_source
+      - field_transcript
+      - field_vendor
+      - filename_1
+      - name
+      - name_1
+      - name_2
+      - rendered_item
+      - title
+      - url
+  language_with_fallback: {  }
+  rendered_item: {  }
+  stemmer:
+    weights:
+      preprocess_index: 0
+      preprocess_query: -43
+    all_fields: true
+    fields:
+      - body
+      - field_caption
+      - field_center_2_box
+      - field_contact
+      - field_contact_for_questions
+      - field_description_abstract
+      - field_form_number
+      - field_from
+      - field_left_1_box
+      - field_left_2_box
+      - field_left_3_box
+      - field_left_4_box
+      - field_left_5_box
+      - field_location
+      - field_release_number
+      - field_right_2_box
+      - field_right_3_box
+      - field_right_4_box
+      - field_secr_number
+      - field_series
+      - field_short_title
+      - field_source
+      - field_teaser
+      - field_to
+      - field_transcript
+      - field_vendor
+      - filename_1
+      - name
+      - name_1
+      - name_2
+      - rendered_item
+      - title
+    exceptions:
+      mexican: mexic
+      texan: texa
+  stopwords:
+    weights:
+      preprocess_index: -5
+      preprocess_query: -44
+    all_fields: false
+    fields:
+      - body
+      - field_description_abstract
+      - field_form_number
+      - field_location
+      - field_release_number
+      - field_secr_number
+      - field_series
+      - field_source
+      - field_transcript
+      - field_vendor
+      - filename_1
+      - name
+      - name_1
+      - name_2
+      - rendered_item
+      - title
+    stopwords:
+      - a
+      - an
+      - and
+      - are
+      - as
+      - at
+      - be
+      - but
+      - by
+      - for
+      - if
+      - in
+      - into
+      - is
+      - it
+      - 'no'
+      - not
+      - of
+      - 'on'
+      - or
+      - s
+      - such
+      - t
+      - that
+      - the
+      - their
+      - then
+      - there
+      - these
+      - they
+      - this
+      - to
+      - was
+      - will
+      - with
+  tokenizer:
+    weights:
+      preprocess_index: -6
+      preprocess_query: -45
+    all_fields: false
+    fields:
+      - body
+      - field_description_abstract
+      - field_form_number
+      - field_location
+      - field_release_number
+      - field_secr_number
+      - field_series
+      - field_source
+      - field_transcript
+      - field_vendor
+      - filename_1
+      - name
+      - name_1
+      - name_2
+      - rendered_item
+      - title
+    spaces: ''
+    overlap_cjk: 1
+    minimum_word_size: '2'
+  transliteration:
+    weights:
+      preprocess_index: -20
+      preprocess_query: -48
+    all_fields: false
+    fields:
+      - rendered_item
+      - title
+      - url
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 100
+  index_directly: true
+  track_changes_in_references: true
+server: database_search_server

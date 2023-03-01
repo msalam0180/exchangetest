@@ -1,0 +1,6 @@
+name: 'Insider Comments'
+description: 'Custom Comment Functionalities for the Exchange'
+type: module
+core: 8.x
+package: Insider
+core_version_requirement: ^8 || ^9

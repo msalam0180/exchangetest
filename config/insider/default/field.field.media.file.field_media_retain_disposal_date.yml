@@ -1,0 +1,26 @@
+uuid: 6edd6f5a-202f-468a-8e82-b2dc18aa364a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_retain_disposal_date
+    - media.type.file
+  module:
+    - datetime
+_core:
+  default_config_hash: bJDUED9i0RJqQF5Oq-Zf7ifVAQDsV9tniYBsr77HXWk
+id: media.file.field_media_retain_disposal_date
+field_name: field_media_retain_disposal_date
+entity_type: media
+bundle: file
+label: 'Expiration/Review Date'
+description: 'Date article should be reviewed for updates or removal'
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: relative
+    default_date: '+3 years'
+default_value_callback: ''
+settings: {  }
+field_type: datetime

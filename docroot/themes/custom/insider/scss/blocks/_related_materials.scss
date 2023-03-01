@@ -1,0 +1,18 @@
+//
+// LEGACY: Related Materials Block
+// We may or may not be using a similar block on Insider
+// Saving the code in case
+// --------------------------------------------------
+
+.block.related-materials {
+  max-width: 256px;
+  h2 {
+    border-bottom: 1px solid $border-color;
+    font-size: 20px !important;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  a {
+    word-break: break-word;
+  }
+}

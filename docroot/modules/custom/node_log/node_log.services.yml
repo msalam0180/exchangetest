@@ -1,0 +1,20 @@
+services:
+  node_log.logger:
+    class: Drupal\node_log\NodeLogLogger
+    tags:
+      - { name: service_collector, tag: node_log_event_subscriber, call: addEventSubscriber }
+
+  node_log.storage:
+    class: Drupal\node_log\NodeLogStorage
+    tags:
+      - { name: service_collector, tag: node_log_storage_backend, call: addStorageBackend }
+
+  node_log.storage_backend.database:
+    class: Drupal\node_log\StorageBackend\Database
+    tags:
+      - { name: node_log_storage_backend }
+
+  node_log.event_subscriber.node:
+    class: Drupal\node_log\EventSubscriber\Node
+    tags:
+      - { name: node_log_event_subscriber }

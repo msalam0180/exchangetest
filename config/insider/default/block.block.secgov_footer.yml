@@ -1,0 +1,27 @@
+uuid: bdc8beae-23ed-4e8b-a10b-959c995fc817
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: MUmeMnwiaAeccGViFMSvTXs4Kw2C7ozIDHdt5K75Wdk
+id: secgov_footer
+theme: insider
+region: footer
+weight: -9
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: 'Footer menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

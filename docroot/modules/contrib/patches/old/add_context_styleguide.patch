@@ -1,0 +1,13 @@
+diff --git a/js/simple-styleguide.js b/js/simple-styleguide.js
+index 215a0df23..046971dcd 100644
+--- a/js/simple-styleguide.js
++++ b/js/simple-styleguide.js
+@@ -8,7 +8,7 @@
+   'use strict';
+   Drupal.behaviors.simple_styleguide = {
+     attach: function (context, settings) {
+-      jQuery('.simple-styleguide--view-sourecode').click(function () {
++      jQuery('.simple-styleguide--view-sourecode', context).click(function () {
+         jQuery(this).next('pre').toggle();
+       });
+

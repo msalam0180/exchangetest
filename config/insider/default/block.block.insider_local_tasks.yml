@@ -1,0 +1,22 @@
+uuid: 30ee4209-165e-4b79-8aea-5e78f24d7972
+langcode: en
+status: false
+dependencies:
+  theme:
+    - insider
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: insider_local_tasks
+theme: insider
+region: header
+weight: -7
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

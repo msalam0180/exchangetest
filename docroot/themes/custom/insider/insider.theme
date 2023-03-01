@@ -1,0 +1,575 @@
+<?php
+
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\UrlHelper;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\sec_twigextensions\Twig\SecExtension;
+
+/**
+ * @file
+ * Functions to support theming in the theme.
+ */
+
+/**
+ * Implements template_preprocess_default_variables().
+ *
+ * Returns hook-independent variables to template_preprocess().
+ */
+function insider_preprocess_default_variables() {
+  // Variables that don't depend on a database connection.
+  $variables = array(
+    'attributes' => array(),
+    'title_attributes' => array(),
+    'content_attributes' => array(),
+    'title_prefix' => array(),
+    'title_suffix' => array(),
+    'db_is_active' => !defined('MAINTENANCE_MODE'),
+    'is_admin' => FALSE,
+    'logged_in' => FALSE,
+    'ua_based_css' => FALSE
+  );
+  // Give modules a chance to alter the default template variables.
+  \Drupal::moduleHandler()->alter('insider_preprocess_default_variables', $variables);
+
+  // Tell all templates where they are located.
+  $variables['directory'] = \Drupal::theme()->getActiveTheme()->getPath();
+
+  return $variables;
+}
+
+/**
+ * Implements template_preprocess_html().
+ *
+ * Prepares variables for HTML document templates.
+ *
+ * Default template: html.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - page: A render element representing the page.
+ */
+function insider_preprocess_html(&$variables) {
+  // Checks to see if the browser is IE then add class specific to IE to body.
+  $ua = $_SERVER['HTTP_USER_AGENT'];
+  if (strpos($ua, 'MSIE') !== FALSE || strpos($ua, 'WOW64') !== FALSE || strpos($ua, 'Trident') !== FALSE) {
+    $variables['ua_based_css'] = TRUE;
+    $variables['view'] = 'ie-view';
+  } elseif (strpos($ua, 'iPad') !== FALSE || strpos($ua, 'Mac OS') !== FALSE) {
+    $variables['ua_based_css'] = TRUE;
+    $variables['view'] = 'mac-view';
+  } else {
+    $variables['ua_based_css'] = TRUE;
+    $variables['view'] = 'default-view';
+  }
+
+  // Remove Site name from the <title>.
+  unset($variables['head_title']['name']);
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (is_string($node)){
+    $node = Node::load($node);
+  }
+
+  // If this is a landing page and there is no value in the <head><title>, add one.
+  if (empty($variables['head_title']['title']) && $node && is_object($node) && $node->bundle() == 'landing_page') {
+    $variables['head_title']['title'] = $node->title->value;
+  }
+
+  // Add support for gallery captions/titles.
+  if (isset($node) && is_object($node)) {
+    if ($node->bundle() == "gallery") {
+      $showTitles = $node->field_show_media_titles->value;
+      $showCaptions = $node->field_show_media_captions->value;
+      if (!$showTitles) $variables['attributes']['class'][] = "hideGalleryTitles";
+      if (!$showCaptions) $variables['attributes']['class'][] = "hideGalleryCaptions";
+    }
+  }
+
+  if (isset($_ENV['AH_PRODUCTION']) && $_ENV['AH_PRODUCTION'] == 1) {
+    $variables['env'] = "production";
+  } else {
+    $variables['env'] = "staging";
+  }
+}
+
+/**
+ * Implements template_preprocess_page().
+ */
+function insider_preprocess_page(&$vars) {
+  if (!empty($vars['page']['#title'])) {
+    $vars['title'] = $vars['page']['#title'];
+  } else {
+    $vars['title'] = $vars['node']->title->value;
+  }
+
+  if (isset($vars['node']) && is_object($vars['node'])) {
+    $node = $vars['node'];
+    if (($node->bundle()) === "operating_procedure") {
+      $vars['title'] = $node->get('field_release_number')->value . " - " . $node->title->value;
+    }
+    if (($node->bundle()) === "secr") {
+      $vars['title'] = $node->get('field_secr_number')->value . " - " . $node->title->value;
+    }
+  }
+  $vars['quicklinks_menu'] = quicklinks_menu_block();
+}
+
+function quicklinks_menu_block() {
+  $block_manager = \Drupal::service('plugin.manager.block');
+  // You can hard code configuration or you load from settings.
+  $config = ['mobile' => true];
+  $plugin_block = $block_manager->createInstance('insider_quicklinks_menu', $config);
+  // Some blocks might implement access check.
+  $access_result = $plugin_block->access(\Drupal::currentUser());
+  // Return empty render array if user doesn't have access.
+  // $access_result can be boolean or an AccessResult class.
+  if (is_object($access_result) && $access_result->isForbidden() || is_bool($access_result) && !$access_result) {
+    // You might need to add some cache tags/contexts.
+    return [];
+  }
+  $plugin_block->setMobile(true);
+  $render = $plugin_block->build();
+  // In some cases, you need to add the cache tags/context depending on
+  // the block implemention. As it's possible to add the cache tags and
+  // contexts in the render method and in ::getCacheTags and
+  // ::getCacheContexts methods.
+  return $render;
+}
+
+/**
+ * Implements template_preprocess_datatable_view_table().
+ */
+function insider_preprocess_datatable_view_table(&$variables) {
+  if (empty($variables['#attached']['drupalSettings']['datatables'])) {
+    return;
+  }
+  $datatable = &$variables['#attached']['drupalSettings']['datatables'];
+  foreach ($datatable as $key => &$table) {
+    foreach ($table['aoColumns'] as $key => &$settings) {
+      if ($table['aoColumns'][$key]['bVisible'] !== FALSE && $settings['bSortable'] === FALSE) {
+        $settings = ['sType' => 'html', 'bSortable' => TRUE];
+      }
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view().
+ */
+function insider_preprocess_views_view(&$variables) {
+  // Remove the items per page field from the exposed filters sction of the page.
+  if (!empty($variables['exposed']['items_per_page'])) {
+    $itemsPerPage = $variables['exposed']['items_per_page'];
+    if (isset($itemsPerPage['#title'])) {
+      unset($itemsPerPage['#title']);
+    }
+    unset($variables['exposed']['items_per_page']);
+    $variables['itemsPerPage'] = $itemsPerPage;
+  }
+
+  // Add a var to test if there are actual fields in the exposed block.
+  if (!empty($variables['exposed']['#info'])) {
+    $variables['has_fields'] = true;
+  }
+
+  if (!empty($variables['footer']['result'])) {
+    $result = $variables['footer']['result'];
+    unset($variables['footer']['result']);
+    $variables['result'] = $result;
+  }
+}
+
+/***
+ * Implements hook_page_attachments_alter()
+ * to add meta tags with dynamic values
+ * @param array $page
+ */
+function insider_page_attachments_alter(array &$page) {
+  // Load the node entity from current route.
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node) {
+    $id = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'id',
+        'content' => is_object($node) !== false ? $node->id() : null,
+      ),
+    );
+    $page['#attached']['html_head'][] = [$id, 'id'];
+
+    if ($node->field_publish_date) {
+      $date = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'date',
+          'content' => $node->field_publish_date->value,
+        ),
+      );
+      $page['#attached']['html_head'][] = [$date, 'date'];
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view_field().
+ */
+function insider_preprocess_views_view_field(&$variables) {
+  $view = isset($variables['view']) ? $variables['view']->storage->id() : null;
+  if (!empty($view)) {
+    $variables['view_id'] = $view;
+  }
+
+  // Modify the date to display on the view for events_list since cannot alter on twig.
+  if ($view == 'events_list' && $variables['view']->current_display == 'block_1') {
+    if ($variables['field']->field == 'nothing') {
+      $row = $variables['row'];
+      $startDateValues = $row->_relationship_entities['field_session_target_revision_id']->field_start_date->getValue();
+      if (!empty($startDateValues)) {
+        $startDateArray = array_pop($startDateValues);
+        if (isset($startDateArray['value'])) {
+          $date = \DateTime::createFromFormat("Y-m-d\TH:i:s", $startDateArray['value'], new \DateTimeZone('UTC'));
+          $date->setTimezone(new \DateTimeZone('America/New_York'));
+          $variables['start_datetime'] = $date->format('g:i A');
+        }
+      }
+    }
+  }
+
+  if (($view == 'announcements_list' &&
+    ($variables['view']->current_display == 'block_2' ||
+    $variables['view']->current_display == 'block_3')) ||
+    ($view == 'the_exchange_search' &&
+    $variables['view']->current_display == 'page_1')) {
+
+    $displayName = $variables['view']->current_display;
+    $row = $variables['row']->_entity;
+    if ($variables['field']->field == 'title' || $variables['field']->field == 'field_short_title' || $variables['field']->realField == 'entity:node/title') {
+      $original_title = $url_location = $alias = '';
+      // Only get title if current display is block_3.
+      if ($displayName == 'block_3') {
+        $original_title = $row->get('title')->value;
+      }
+      // Only get hompe page title (field_short)title if current display is block_2.
+      if ($displayName == 'block_2') {
+        $original_title = $row->get('field_short_title')->value;
+      }
+      // Only get title if current display is page_1.
+      if ($view == 'the_exchange_search' && $displayName == 'page_1') {
+        $row = $variables["row"]->_object->getEntity();
+        if ($row->hasField('title')) {
+          $original_title = $row->get('title')->value;
+        }
+      }
+      if ($row->hasField('field_link_display') && $row->hasField('field_url')) {
+        if ($row->get('field_link_display')->value == 'contentURL' &&
+          !empty($row->get('field_url')->getValue()[0]['uri'])) {
+          // Get field_url and set url_location.
+          $fieldURL = Url::fromUri($row->get('field_url')->getValue()[0]['uri'])->toString();
+          // Get field_url redirects.
+          if (\Drupal::service('redirect.repository')->findMatchingRedirect($fieldURL)) {
+            $aliasObj = \Drupal::service('redirect.repository')->findMatchingRedirect($fieldURL);
+            $fieldURL = $alias = Url::fromUri($aliasObj->get('redirect_redirect')->getValue()[0]['uri'])->toString();
+          }
+          $url_location = $fieldURL;
+          // Check to see if link is external.
+          $externalLink = UrlHelper::isExternal($fieldURL);
+          // Check to see if link is valid.
+          $isValidLink = \Drupal::service('path.validator')->isValid($fieldURL);
+          // If link is internal and link is valid.
+          if (!$externalLink && $isValidLink) {
+            if (empty($alias)) {
+              $alias = \Drupal::service('path_alias.manager')->getPathByAlias($fieldURL);
+            }
+            $params = Url::fromUserInput($alias)->getRouteParameters();
+            if (!empty($params)) {
+              $entity_type = key($params);
+              $node = \Drupal::entityTypeManager()->getStorage($entity_type)->load($params[$entity_type]);
+              // If node type is link get field_url.
+              if ($node->bundle() == 'link') {
+                $url_location = $node->get('field_url')->getValue()[0]['uri'];
+              }
+            }
+          }
+          // Set field output.
+          $variables['output'] = [
+            '#markup' => '<a href="' . $url_location . '">' . $original_title . '</a>'
+          ];
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function insider_preprocess_node(&$variables) {
+  // Add related secrs to operating procedure nodes.
+  if (($variables['node']->bundle()) === "operating_procedure") {
+    $variables['secr_is_set'] = views_get_view_result('related_secr');
+    $variables['related_secr'] = views_embed_view('related_secr');
+  }
+
+  // Show/Hide link/media field based on value of field_link_reference_type.
+  $bundles = array('form', 'operating_procedure', 'secr');
+  if (in_array($variables['node']->bundle(), $bundles)) {
+    $type = $variables['node']->field_link_reference_type->value;
+    if ($type == 'media') {
+      unset($variables['content']['field_link_reference']);
+    } elseif ($type == 'link') {
+      unset($variables['content']['field_media_reference']);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_image_style().
+ */
+function insider_preprocess_image_style(&$variables) {
+  $style = $variables['style_name'];
+  switch ($style) {
+    case 'featured_video_image':
+      $variables['image']['#attributes']['class'][] = 'image-style-featured-video';
+      break;
+    case 'featured_graphic':
+      $variables['image']['#attributes']['class'][] = 'image-style-featured-graphic';
+      break;
+  }
+}
+
+/**
+ * Implements template_preprocess_field().
+ */
+function insider_preprocess_field(&$vars, $hook) {
+  // Change the title of the field_link_reference field.
+  if ($vars['element']['#bundle'] == 'operating_procedure' || $vars['element']['#bundle'] == 'secr' || $vars['element']['#bundle'] == 'form') {
+    if (in_array($vars['element']['#field_name'], array('field_link_reference', 'field_media_reference'))) {
+      $vars['label'] = 'View';
+    }
+  }
+
+  // Calendar invite button.
+  if ($vars['element']['#bundle'] == 'event'  || $vars['element']['#bundle'] == 'form') {
+    if ($vars['element']['#field_name'] == 'field_add_to_calendar' || $vars['element']['#field_name'] == 'field_session') {
+      $sessions = $vars['element']['#object']->get('field_session')->referencedEntities();
+
+      $vars['cal'] = $vars['element']['#object']->get('field_add_to_calendar');
+      $timezone = $vars['element']['#object']->get('field_timezone_select')->referencedEntities()[0]->get('field_php_supported_format')->getValue();
+
+      // Set default value of timezone to eastern if null/empty.
+      if ($timezone == NULL || empty($timezone)) {
+        $timezone = 'America/New_York';
+      } else {
+        $timezone = $timezone[0]['value'];
+      }
+
+      // Handle custom timezone taxonomy fields by converting everything from America/New_York (stored in db as UTC) into custom timezone.
+      foreach ($sessions as $session) {
+        // End date field is not required. set to end of start date if not filled.
+        $endDate = NULL;
+
+        if ($session->field_end_date->value == NULL) {
+          $endDate =  strstr($session->field_start_date->value, 'T', true) . 'T23:59:59';
+          // Do timezone conversions.
+          $endDate = (new \DateTime($endDate, new DateTimeZone("America/New_York")))->setTimezone(new DateTimeZone("UTC"))->format("Y-m-d H:i:s");
+        } else {
+          $endDate =  $session->field_end_date->value;
+        }
+
+        // TODO: cleanup this & add to calendar twig.
+        $startTime = new \DateTime($session->field_start_date->value, new DateTimeZone("America/New_York"));
+        $startTime = SecExtension::getTimeZoneAdjustedDateTime($startTime->getTimeStamp(), new DateTimeZone("America/New_York"));
+        $startTime = new \DateTime(str_replace("America/New_York", (string) $timezone, $startTime->format("Y-m-d H:i:s e")));
+        $startTime = $startTime->setTimezone(new DateTimeZone("UTC"));
+        $session->field_start_date->value = $startTime;
+
+        $endTime = new \DateTime($endDate, new DateTimeZone("America/New_York"));
+        $endTime = SecExtension::getTimeZoneAdjustedDateTime($endTime->getTimeStamp(), new DateTimeZone("America/New_York"));
+        $endTime = new \DateTime(str_replace("America/New_York", (string) $timezone, $endTime->format("Y-m-d H:i:s e")));
+        $endTime = $endTime->setTimezone(new DateTimeZone("UTC"));
+        $session->field_end_date->value = $endTime;
+      }
+      $vars['cal_items'] = $sessions;
+
+      if ($vars['element']['#object']->get('field_session')->count() > 1) {
+        $vars['multiple'] = TRUE;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * For main menu (top nav).
+ */
+function insider_preprocess_menu__main(&$vars) {
+  // Get the current node.
+  $node = \Drupal::routeMatch()->getParameter('node');
+
+  if (isset($node) && is_object($node)) {
+    // Get the top level group and attach url to variable in menu attributes.
+    $top_group_level = explode('/', $node->toUrl()->toString());
+    $vars['attributes']['top_group_abbr'] = $top_group_level[1];
+  }
+
+  // Set active-trail.
+  $current_path = \Drupal::request()->getRequestUri();
+  $items = $vars['items'];
+
+  foreach ($items as $key => $item) {
+    // Set active to dom element if path of menu item matches current path.
+    if ($item['url']->toString() == $current_path) {
+      // Add active link.
+      $vars['items'][$key]['in_active_trail'] = TRUE;
+    } else {
+      // Set active to dom element if path of menu item matches first part of current path.
+      $url_fragments = explode('/', $current_path);
+      if (count($url_fragments) > 1 and '/' . $url_fragments[1] == $item['url']->toString()) {
+        $vars['items'][$key]['in_active_trail'] = TRUE;
+      }
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_menu().
+ */
+function insider_preprocess_menu(&$vars) {
+  // Get the current node.
+  $node = \Drupal::routeMatch()->getParameter('node');
+
+  // Attach url to variable in menu attributes.
+  if (isset($node) && is_object($node) && $vars['menu_name'] != 'main') {
+    $vars['attributes']['left_nav_highlight'] = $node->toUrl()->toString();
+  }
+}
+
+/**
+ * Implements template_preprocess_media().
+ * To alter the output of referenced_media fields.
+ */
+function insider_preprocess_media(array &$vars) {
+  if ($vars['view_mode'] === 'referenced_media') {
+    $vars['content']['name'] = NULL;
+    $keys = array('field_media_file');
+    foreach ($keys as $key) {
+      if (!empty($vars['content'][$key])) {
+        $title = $vars['name'];
+        if ($uri = $vars['media']->$key->entity->getFileUri()) {
+          $parts = explode('.', $uri);
+          $ext = array_pop($parts);
+          $title .= ' (' . strtoupper($ext) . ')';
+        }
+        $vars['content'][$key][0]['#title'] = $title;
+        $vars['content'][$key][0]['#attributes']['target'] = '_blank';
+      }
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_block().
+ * For block.html.twig.
+ */
+function insider_preprocess_block(&$vars) {
+  if ($vars['plugin_id'] == 'system_menu_block:main') {
+    // This stops the block being cache in drupal 8.
+    $vars['#cache']['max-age'] = 0;
+  }
+}
+
+//TODO: need a class on the video field that says if it is Vimeo or youtube
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function insider_preprocess_comment(&$variables) {
+  /** @var \Drupal\comment\Entity\Comment $comment */
+  $comment = $variables['elements']['#comment'];
+
+  // Created Date var setup.
+  $created = $comment->getCreatedTime();
+  $variables['created'] = date('F j, Y, g:i A', $created);
+
+  // Changed Date var setup.
+  $changed = $comment->getChangedTime();
+  $variables['changed'] = date('F j, Y, g:i A', $changed);
+
+  // Author var setup.
+  $author = $comment->getAuthorName();
+  // Remove the domain.
+  $formatted_author = preg_filter('/@sec.gov|@SEC.GOV/', '', $author);
+  $variables['formatted_author'] = $formatted_author;
+
+  $banned_flagging = insider_check_if_user_banned_from_commenting();
+  $variables['banned'] = $banned_flagging ? 'banned' : '';
+
+  $comment_deleted_flagging = insider_check_if_comment_deleted($comment);
+  $variables['comment_deleted'] = $comment_deleted_flagging ? 'deleted' : 'not-deleted';
+}
+
+/**
+ * @return \Drupal\flag\FlaggingInterface|mixed|null
+ */
+function insider_check_if_user_banned_from_commenting()
+{
+// Get the flagging for allowed to comment.
+  $flag_id = 'user_comment_privilege';
+
+  $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+
+  $account = \Drupal::currentUser(); // or load a specific user
+  /** @var \Drupal\flag\FlagService $flag_service */
+  $flag_service = \Drupal::service('flag');
+
+  /** @var \Drupal\flag\Entity\Flag $flag */
+  $flag = $flag_service->getFlagById($flag_id); // replace by flag machine name
+
+  // check if already flagged
+  return $flag_service->getFlagging($flag, $user, $account);
+}
+
+/**
+ * @return \Drupal\flag\FlaggingInterface|mixed|null
+ */
+function insider_check_if_comment_deleted(\Drupal\comment\Entity\Comment $comment)
+{
+  // Get the flagging for if a commented was 'deleted' via the flag.
+  $flag_id = 'mark_comment_as_inappropriate';
+
+//  $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+
+  $account = \Drupal::currentUser(); // or load a specific user
+
+  /** @var \Drupal\flag\FlagService $flag_service */
+  $flag_service = \Drupal::service('flag');
+
+  /** @var \Drupal\flag\Entity\Flag $flag */
+  $flag = $flag_service->getFlagById($flag_id); // replace by flag machine name
+
+  // check if already flagged
+  return $flag_service->getFlagging($flag, $comment, $account);
+}
+
+/**
+ * Implements template_preprocess_links().
+ *
+ * This makes it so array keys of #links items are added as a class. This
+ * functionality was removed in Drupal 8.1, but still necessary in some
+ * instances.
+ *
+ * @todo remove in https://drupal.org/node/3120962
+ */
+function insider_preprocess_links(&$variables) {
+  if (!empty($variables['links'])) {
+    foreach ($variables['links'] as $key => $value) {
+      if (!is_numeric($key)) {
+        $class = Html::getClass($key);
+        $variables['links'][$key]['attributes']->addClass($class);
+      }
+    }
+  }
+}

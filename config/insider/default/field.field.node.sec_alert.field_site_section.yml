@@ -1,0 +1,31 @@
+uuid: cb8a7eb0-3695-48d5-a39a-7e803b27f602
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_site_section
+    - node.type.sec_alert
+    - taxonomy.vocabulary.site_section
+_core:
+  default_config_hash: 0855GnxOQSpsGaGsi6uOmURgwhx1EaC-6rH0_my9CdY
+id: node.sec_alert.field_site_section
+field_name: field_site_section
+entity_type: node
+bundle: sec_alert
+label: Microsite
+description: 'If the Site Alert is intended for use on a microsite (i.e. not a general Exchange Alert), select an microsite from the list below.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      site_section: site_section
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

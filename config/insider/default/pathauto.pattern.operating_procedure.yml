@@ -1,0 +1,24 @@
+uuid: 484794b0-8962-4993-bdfa-a08a21aa4e46
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: 6qjev8JqeG2cuYUHwKZyLexz5pfiaW_CGyQl9m4Ek1A
+id: operating_procedure
+label: 'Operating Procedure'
+type: 'canonical_entities:node'
+pattern: '[node:field_top_level_group:entity:field_abbreviation]/[node:field_release_number]-[node:title]'
+selection_criteria:
+  ed619f60-0da1-4cb7-9d22-b93269cffdc7:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: ed619f60-0da1-4cb7-9d22-b93269cffdc7
+    context_mapping:
+      node: node
+    bundles:
+      operating_procedure: operating_procedure
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,29 @@
+uuid: fde742cf-186a-48ef-8b69-b5dd93ef07c1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+_core:
+  default_config_hash: 8GLoZ4-45d7kBu6JXaUgpfysrAuhcpGVDNz32Y9a2lc
+id: node.field_link_reference_type
+field_name: field_link_reference_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: link
+      label: Link
+    -
+      value: media
+      label: Media
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

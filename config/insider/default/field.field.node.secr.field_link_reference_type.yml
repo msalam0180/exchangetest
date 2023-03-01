@@ -1,0 +1,23 @@
+uuid: 68fe2a3c-46ea-45c7-a45a-866511dba42f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_link_reference_type
+    - node.type.secr
+  module:
+    - options
+_core:
+  default_config_hash: Es9MNVGAnREX5T8sCL0BN7Wr-RoD42p8K1K7ZeWEk3M
+id: node.secr.field_link_reference_type
+field_name: field_link_reference_type
+entity_type: node
+bundle: secr
+label: 'Link/Media Type'
+description: 'Select the type of link to be used. Link will embed the Link node, media will embed the Media type.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

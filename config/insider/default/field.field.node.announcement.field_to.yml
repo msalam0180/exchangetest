@@ -1,0 +1,21 @@
+uuid: 23bf6ece-473a-49a8-ad99-e85f877cd401
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_to
+    - node.type.announcement
+_core:
+  default_config_hash: JKFHZaFsYXr6lgKROid59NBnFfisHn7UvVDq2RjrCh0
+id: node.announcement.field_to
+field_name: field_to
+entity_type: node
+bundle: announcement
+label: To
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

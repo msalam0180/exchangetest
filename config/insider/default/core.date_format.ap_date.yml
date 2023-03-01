@@ -1,0 +1,10 @@
+uuid: 57105265-b504-418e-bd14-6da2070821a2
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: RIVd549LyCETzmtKCCFIqFDiGlB32l7153BFGpfC3vo
+id: ap_date
+label: 'AP Date'
+locked: false
+pattern: $$

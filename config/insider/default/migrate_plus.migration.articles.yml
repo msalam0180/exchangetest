@@ -1,0 +1,550 @@
+uuid: 58713146-c789-49e6-82f8-4ce77d3a2b8e
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: T3ToPJGqni30k5kxKNDtlhBMY7k-u3MnMMIHA7QlLQk
+id: articles
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - articles
+migration_group: sec
+label: 'JSON import of Articles'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  item_selector: 0
+  urls: 'http://secgovdcmdev1.prod.acquia-sites.com/sites/default/files/migration/converted/secarticle.json'
+  fields:
+    -
+      name: id
+      label: Identifier
+      selector: id
+    -
+      name: name
+      label: Title
+      selector: name
+    -
+      name: createddate
+      label: 'Created Date'
+      selector: createddate
+    -
+      name: updateddate
+      label: 'Updated Date'
+      selector: updateddate
+    -
+      name: createdby
+      label: 'Created By'
+      selector: createdby
+    -
+      name: updatedby
+      label: 'Updated By'
+      selector: updatedby
+    -
+      name: ArticleType
+      label: 'Article Type'
+      selector: ArticleType
+    -
+      name: ArticleSubType
+      label: 'Article Subtype'
+      selector: ArticleSubType
+    -
+      name: ExtPubStatus
+      label: 'External Publication Status'
+      selector: ExtPubStatus
+    -
+      name: RelatedLeftNav
+      label: 'Related Left Nav Override'
+      selector: RelatedLeftNav
+    -
+      name: SECAct
+      label: Act
+      selector: SECAct
+    -
+      name: SECAlternateTitle
+      label: 'Alternate Title'
+      selector: SECAlternateTitle
+    -
+      name: SECArticleFileUpload
+      label: 'File Upload'
+      selector: SECArticleFileUpload
+    -
+      name: SECAudience
+      label: Audience
+      selector: SECAudience
+    -
+      name: SECBody
+      label: 'Article Body'
+      selector: SECBody
+    -
+      name: SECDate
+      label: 'Publish Date'
+      selector: SECDate
+    -
+      name: SECDescriptionAbstract
+      label: 'Description / Abstract'
+      selector: SECDescriptionAbstract
+    -
+      name: SECDivisionOffice
+      label: Division/Office
+      selector: SECDivisionOffice
+    -
+      name: SECHideDateOnDetail
+      label: 'Hide Publish Date on Detail Page'
+      selector: SECHideDateOnDetail
+    -
+      name: SECListPageDetails
+      label: 'List Page Details'
+      selector: SECListPageDetails
+    -
+      name: SECMoreAboutThisTopicTitle1
+      label: 'More About This Topic:Title'
+      selector: SECMoreAboutThisTopicTitle1
+    -
+      name: SECMoreAboutThisTopicTitle2
+      label: 'More About This Topic:Title 2'
+      selector: SECMoreAboutThisTopicTitle2
+    -
+      name: SECMoreAboutThisTopicTitle3
+      label: 'More About This Topic:Title 3'
+      selector: SECMoreAboutThisTopicTitle3
+    -
+      name: SECMoreAboutThisTopicURL1
+      label: 'More About This Topic:URL'
+      selector: SECMoreAboutThisTopicURL1
+    -
+      name: SECMoreAboutThisTopicURL2
+      label: 'More About This Topic:URL 2'
+      selector: SECMoreAboutThisTopicURL2
+    -
+      name: SECMoreAboutThisTopicURL3
+      label: 'More About This Topic:URL 3'
+      selector: SECMoreAboutThisTopicURL3
+    -
+      name: SECOverrideModifiedDate
+      label: 'Modified Date'
+      selector: SECOverrideModifiedDate
+    -
+      name: SECRegulation
+      label: Regulation
+      selector: SECRegulation
+    -
+      name: SECRelatedMaterialsTitle1
+      label: 'Related Materials:Title 1'
+      selector: SECRelatedMaterialsTitle1
+    -
+      name: SECRelatedMaterialsTitle2
+      label: 'Related Materials:Title 2'
+      selector: SECRelatedMaterialsTitle2
+    -
+      name: SECRelatedMaterialsTitle3
+      label: 'Related Materials:Title 3'
+      selector: SECRelatedMaterialsTitle3
+    -
+      name: SECRelatedMaterialsTitle4
+      label: 'Related Materials:Title 4'
+      selector: SECRelatedMaterialsTitle4
+    -
+      name: SECRelatedMaterialsTitle5
+      label: 'Related Materials:Title 5'
+      selector: SECRelatedMaterialsTitle5
+    -
+      name: SECRelatedMaterialsURL1
+      label: 'Related Materials:URL 1'
+      selector: SECRelatedMaterialsURL1
+    -
+      name: SECRelatedMaterialsURL2
+      label: 'Related Materials:URL 2'
+      selector: SECRelatedMaterialsURL2
+    -
+      name: SECRelatedMaterialsURL3
+      label: 'Related Materials:URL 3'
+      selector: SECRelatedMaterialsURL3
+    -
+      name: SECRelatedMaterialsURL4
+      label: 'Related Materials:URL 4'
+      selector: SECRelatedMaterialsURL4
+    -
+      name: SECRelatedMaterialsURL5
+      label: 'Related Materials:URL 5'
+      selector: SECRelatedMaterialsURL5
+    -
+      name: SECReleaseNumber
+      label: 'Release Number'
+      selector: SECReleaseNumber
+    -
+      name: SECRight1Box
+      label: 'Top Right Box'
+      selector: SECRight1Box
+    -
+      name: SECSubjectPerson
+      label: 'Subject Person'
+      selector: SECSubjectPerson
+    -
+      name: SECTitle
+      label: SECTitle
+      selector: SECTitle
+    -
+      name: template
+      label: Template
+      selector: template
+    -
+      name: SECTags
+      label: Tags
+      selector: SECTags
+  ids:
+    id:
+      type: string
+process:
+  type:
+    plugin: default_value
+    default_value: secarticle
+  title: name
+  status:
+    plugin: default_value
+    default_value: 1
+  uid:
+    plugin: default_value
+    default_value: 1
+  revision_uid:
+    plugin: default_value
+    default_value: 1
+  created:
+    -
+      plugin: machine_name
+      source: createddate
+    -
+      plugin: substr
+      start: 0
+      length: 10
+  changed:
+    -
+      plugin: machine_name
+      source: updateddate
+    -
+      plugin: substr
+      start: 0
+      length: 10
+  field_act:
+    plugin: static_map
+    source: SECAct
+    map:
+      'Dodd-Frank Act of 2010': 84
+      'Investment Advisers Act of 1940': 85
+      'Investment Company Act of 1940': 86
+      'JOBS Act of 2012': 87
+      'Sarbanes-Oxley Act of 2002': 88
+      'Securities Act of 1933': 83
+      'Securities Exchange Act of 1934': 89
+      'Trust Indenture Act of 1939': 90
+  field_alternate_title_secarticle: SECAlternateTitle
+  field_article_sub_type_secart:
+    plugin: static_map
+    bypass: true
+    source:
+      - ArticleType
+      - ArticleSubType
+    map:
+      Data:
+        Broker-Dealers: Data-BrokerDealers
+        Enforcement: Data-Enforcement
+        'Funds and Advisers': Data-FundsandAdvisers
+        'Investor Complaints': Data-InvestorComplaints
+        'Market Structure': Data-MarketStructure
+        Other: Data-Other
+        'Public Companies': Data-PublicCompanies
+      'Reports and Publications':
+        'Annual Reports': 'Reports and Publications-AnnualReports'
+        'Budget Reports': 'Reports and Publications-BudgetReports'
+        'Buy American Act': 'Reports and Publications-BuyAmericanAct'
+        'Conference Spending': 'Reports and Publications-ConferenceSpending'
+        'FAIR Act': 'Reports and Publications-FAIRAct'
+        'Federal Employee Viewpoint Survey': 'Reports and Publications-FederalEmployeeViewpointSurvey'
+        'Internal Supervisory Controls': 'Reports and Publications-InternalSupervisoryControls'
+        'Investor Publications': 'Reports and Publications-InvestorPublications'
+        Other: 'Reports and Publications-Other'
+        'Select SEC and Market Data': 'Reports and Publications-SelectSECandMarketData'
+        'Service Contract Inventory': 'Reports and Publications-ServiceContractInventory'
+        'Special Studies': 'Reports and Publications-SpecialStudies'
+        'Strategic Plan': 'Reports and Publications-StrategicPlan'
+      'Staff Papers':
+        'Economic Analyses': 'Staff Papers-Economic-Analyses'
+        Other: 'Staff Papers-Other'
+        'White Papers': 'Staff Papers-WhitePapers'
+        'Working Papers': 'Staff Papers-WorkingPapers'
+      Webcasts:
+        'Advisory Committees': Webcasts-AdvisoryCommittees
+        'News Conferences': Webcasts-NewsConferences
+        'Open Meetings': Webcasts-OpenMeetings
+        Other: Webcasts-Other
+        Roundtables: Webcasts-Roundtables
+  field_article_type_secarticle:
+    plugin: static_map
+    source: ArticleType
+    map:
+      Announcement: 16
+      'Spotlight Topic': 296
+      'Reports and Publications': 586
+      Forms: 596
+      'Academic Publications': 601
+      Agendas: 606
+      Biographies: 611
+      'Contact Information': 616
+      Data: 621
+      Education/Help/Guides/FAQs: 626
+      'Fact Sheets': 631
+      'Fast Answers': 636
+      'Investor Alerts and Bulletins': 641
+      Laws: 646
+      Other: 651
+      'Staff Papers': 656
+      'Sunshine Act Notices': 661
+      Webcasts: 666
+    default_value: 651
+  field_audience:
+    plugin: static_map
+    source: SECAudience
+    map:
+      Accountants: 60
+      Auditors: 61
+      Broker-Dealers: 62
+      'Clearing Agencies': 63
+      'Compliance Officers': 64
+      'Credit Rating Agencies': 65
+      'EDGAR Filers': 66
+      International: 67
+      'Investment Advisors': 68
+      'Investment Advisers': 68
+      'Investment Companies': 69
+      Investors: 70
+      'Municipal Advisors': 71
+      'Municipal Securities': 72
+      'Non-Regulated Entities': 73
+      NRSROs: 74
+      'Public Companies': 75
+      'Public Company Accounting Oversight Board': 76
+      'Security-Based Swap Data Repositories': 77
+      'Self-Regulatory Organizations': 78
+      'Small Businesses': 79
+      'Transfer Agents': 80
+      Whistleblowers: 81
+      'XBRL Filers': 82
+  body:
+    plugin: parse_embedded_content
+    source: SECBody
+  field_description_abstract: SECDescriptionAbstract
+  field_display_title: SECTitle
+  field_ext_pub_secarticle: ExtPubStatus
+  field_file_upload:
+    -
+      source: SECArticleFileUpload
+      plugin: file_import
+  field_hide_publish_date:
+    plugin: static_map
+    source: SECHideDateOnDetail
+    map:
+      'YES': 1
+  field_left_nav_override:
+    plugin: static_map
+    source: RelatedLeftNav
+    map:
+      'Page:1368724733311': about
+      'Page:1368724733371': newsroom-left-nav
+      'Page:1368724734264': corpfin-left-nav
+      'Page:1368724734289': enforcement
+      'Page:1368724734314': careers-nav
+      'Page:1368724734339': oia
+      'Page:1368724734364': filings-menu
+      'Page:1368724734462': oca
+      'Page:1368724734494': dera
+      'Page:1368724735341': trading-and-markets
+      'Page:1368724735813': ocie-left-nav
+      'Page:1368724736076': municipal
+      'Page:1368724736131': oig
+      'Page:1368724736360': omwi
+      'Page:1368724736391': ocr
+      'Page:1368724736564': investor-information-menu
+      'Page:1368724736621': ofm
+      'Page:1368724736829': oiea
+      'Page:1368724737152': ohr
+      'Page:1368725063914': edgar
+      'Page:1370541301473': investor-advocate
+      'Page:1370544743118': filing-fees-branch
+      'Page:1370545059514': edgar-filer-info
+      'Page:1370545241228': structured-data-left-nav
+      'Page:1370546729717': foia
+      'Page:1370547397857': seccompensation
+      'Page:1370547661737': ea
+      'Page:1370547804078': opa
+  field_list_page_det_secarticle:
+    plugin: html_import
+    source: SECListPageDetails
+  field_date:
+    -
+      plugin: date_import
+      source: SECOverrideModifiedDate
+  field_more_about_this_topic:
+    -
+      plugin: get
+      source:
+        - SECMoreAboutThisTopicTitle1
+        - SECMoreAboutThisTopicURL1
+        - SECMoreAboutThisTopicTitle2
+        - SECMoreAboutThisTopicURL2
+        - SECMoreAboutThisTopicTitle3
+        - SECMoreAboutThisTopicURL3
+    -
+      plugin: flatten
+    -
+      plugin: link_import
+  field_primary_division_office:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: SECDivisionOffice/0
+    -
+      plugin: static_map
+      map:
+        Agency-wide: 30
+        Acquisitions: 31
+        'Administrative Law Judges': 32
+        'Chief Accountant': 33
+        'Chief Operating Officer': 34
+        'Compliance Inspections and Examinations': 35
+        'Corporation Finance': 36
+        'Credit Ratings': 37
+        'Economic and Risk Analysis': 38
+        Enforcement: 39
+        'Equal Employment Opportunity': 40
+        'Ethics Counsel': 41
+        'Financial Management': 42
+        'General Counsel': 43
+        'Human Resources': 44
+        'Information Technology': 45
+        'Inspector General': 46
+        'International Affairs': 47
+        'Investment Management': 48
+        'Investor Advocate': 49
+        'Investor Education and Advocacy': 50
+        'Legislative and Intergovernmental Affairs': 51
+        'Minority and Women Inclusion': 52
+        'Municipal Securities': 53
+        'Public Affairs': 54
+        Secretary: 55
+        'Structured Disclosure': 56
+        'Support Operations': 57
+        'Trading and Markets': 58
+        Whistleblower: 59
+  field_publish_date:
+    -
+      plugin: date_import
+      source: SECDate
+  field_regulation:
+    plugin: static_map
+    source: SECRegulation
+    map:
+      'Regulation 13D': 91
+      'Regulation 14A': 92
+      'Regulation 14C': 93
+      'Regulation 14D': 94
+      'Regulation 14E': 95
+      'Regulation 15D': 96
+      'Regulation A': 97
+      'Regulation A-R': 100
+      'Regulation AB': 98
+      'Regulation AC': 99
+      'Regulation ATS': 101
+      'Regulation BTR': 102
+      'Regulation C': 103
+      'Regulation CE': 104
+      'Regulation D': 105
+      'Regulation E': 106
+      'Regulation FD': 107
+      'Regulation G': 108
+      'Regulation M': 109
+      'Regulation M-A': 110
+      'Regulation NMS': 111
+      'Regulation S': 112
+      'Regulation S-B': 113
+      'Regulation SHO': 114
+  field_related_materials:
+    -
+      plugin: get
+      source:
+        - SECRelatedMaterialsTitle1
+        - SECRelatedMaterialsURL1
+        - SECRelatedMaterialsTitle2
+        - SECRelatedMaterialsURL2
+        - SECRelatedMaterialsTitle3
+        - SECRelatedMaterialsURL3
+        - SECRelatedMaterialsTitle4
+        - SECRelatedMaterialsURL4
+        - SECRelatedMaterialsTitle5
+        - SECRelatedMaterialsURL5
+    -
+      plugin: flatten
+    -
+      plugin: link_import
+  field_release_number: SECReleaseNumber
+  field_show_full_width_page:
+    plugin: static_map
+    source: template
+    map:
+      LegacyDetail: 0
+      Detail: 0
+      BlankArticle: 1
+  field_person:
+    plugin: migration
+    source: SECSubjectPerson
+    migration: secperson
+  field_division_office:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: SECDivisionOffice/1
+    -
+      plugin: static_map
+      map:
+        Agency-wide: 30
+        Acquisitions: 31
+        'Administrative Law Judges': 32
+        'Chief Accountant': 33
+        'Chief Operating Officer': 34
+        'Compliance Inspections and Examinations': 35
+        'Corporation Finance': 36
+        'Credit Ratings': 37
+        'Economic and Risk Analysis': 38
+        Enforcement: 39
+        'Equal Employment Opportunity': 40
+        'Ethics Counsel': 41
+        'Financial Management': 42
+        'General Counsel': 43
+        'Human Resources': 44
+        'Information Technology': 45
+        'Inspector General': 46
+        'International Affairs': 47
+        'Investment Management': 48
+        'Investor Advocate': 49
+        'Investor Education and Advocacy': 50
+        'Legislative and Intergovernmental Affairs': 51
+        'Minority and Women Inclusion': 52
+        'Municipal Securities': 53
+        'Public Affairs': 54
+        Secretary: 55
+        'Structured Disclosure': 56
+        'Support Operations': 57
+        'Trading and Markets': 58
+        Whistleblower: 59
+  field_tags:
+    -
+      plugin: entity_lookup
+      source: SECTags
+  field_top_right_column:
+    plugin: html_import
+    source: SECRight1Box
+destination:
+  plugin: 'entity:node'
+migration_dependencies: null

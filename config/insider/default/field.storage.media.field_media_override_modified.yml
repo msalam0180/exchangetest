@@ -1,0 +1,22 @@
+uuid: 2cf5b13a-77e5-41de-aab9-2d0b95f0267f
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - media
+_core:
+  default_config_hash: xVytASmDyLrxFuPawJKKfg8CqN6MR24pbaWgEeATFUc
+id: media.field_media_override_modified
+field_name: field_media_override_modified
+entity_type: media
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,9 @@
+uuid: a6da8973-e4b1-4a83-86eb-8359ca802684
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: PGFYIOg-3qbuhhrd3UM6_HmYoygxS8SwXXI_ZRuMFfE
+id: media_item_with_date
+label: 'Media item with Date'
+pattern: "<div class=\"media\">\r\n  <div class=\"media-left media-middle\">\r\n    <div class=\"day-month\">\r\n      <time datetime=\"01Z\" class=\"datetime\">13</time>\r\n      <time datetime=\"01Z\" class=\"datetime\">Sep</time>\r\n    </div>\r\n  </div>\r\n  <div class=\"media-body media-divider\">\r\n    <h3 class=\"media-heading\">Title of item with Event</h3>\r\n      <div class=\"media-details\">\r\n        <p>\r\n          <time datetime=\"01Z\" class=\"datetime\">1:01 PM</time>\r\n        </p>\r\n      </div>\r\n  </div>\r\n</div>"

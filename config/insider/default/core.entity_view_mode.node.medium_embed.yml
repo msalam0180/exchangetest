@@ -1,0 +1,12 @@
+uuid: e068e210-4020-4a9f-b542-17ba680a0996
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: SfNkw5ytTTSpOws6Mlkc1q_l8sOtSnqd773kmvceiY4
+id: node.medium_embed
+label: 'Medium Embed'
+targetEntityType: node
+cache: true

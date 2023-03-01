@@ -1,0 +1,30 @@
+uuid: 24708ec1-e2c6-40bc-b61b-f748cf4336be
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - node
+  theme:
+    - insider
+_core:
+  default_config_hash: yMV0-GbRfa1QNezgSxmCDDfo-oI7gBKMJN_eyZf52R8
+id: secgov_page_title
+theme: insider
+region: page_title
+weight: -12
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      page: page

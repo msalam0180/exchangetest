@@ -1,0 +1,116 @@
+uuid: 0dc0be00-8fee-4213-8690-06e47a2cd3af
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.slideshow
+    - field.field.node.video.body
+    - field.field.node.video.field_audience
+    - field.field.node.video.field_caption
+    - field.field.node.video.field_combined_date
+    - field.field.node.video.field_comment_moderator
+    - field.field.node.video.field_comments
+    - field.field.node.video.field_creator
+    - field.field.node.video.field_division_office
+    - field.field.node.video.field_enable_likes
+    - field.field.node.video.field_group_club
+    - field.field.node.video.field_left_nav_override
+    - field.field.node.video.field_limelight_thumbnail
+    - field.field.node.video.field_media_id
+    - field.field.node.video.field_override_modified_date
+    - field.field.node.video.field_sec_content_approver
+    - field.field.node.video.field_show_field
+    - field.field.node.video.field_tags
+    - field.field.node.video.field_top_level_group
+    - field.field.node.video.field_topic
+    - field.field.node.video.field_transcript
+    - field.field.node.video.field_video
+    - field.field.node.video.field_video_origin
+    - field.field.node.video.field_video_running_time
+    - field.field.node.video.field_video_type
+    - field.field.node.video.scheduling_options
+    - node.type.video
+  module:
+    - panelizer
+    - text
+    - user
+    - video_embed_field
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+_core:
+  default_config_hash: _q6_AMzR5-S0TRSh-il_nL5YvzLVVgcEcsQxBiYbam4
+id: node.video.slideshow
+targetEntityType: node
+bundle: video
+mode: slideshow
+content:
+  field_media_id:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_transcript:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_video:
+    type: video_embed_field_video
+    label: above
+    settings:
+      autoplay: true
+      responsive: true
+      width: 854
+      height: 480
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  flag_like_content:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+hidden:
+  body: true
+  field_act: true
+  field_audience: true
+  field_caption: true
+  field_category: true
+  field_combined_date: true
+  field_comment_moderator: true
+  field_comments: true
+  field_complete_webcast: true
+  field_creator: true
+  field_date: true
+  field_division_office: true
+  field_enable_likes: true
+  field_group_club: true
+  field_left_nav_override: true
+  field_limelight_thumbnail: true
+  field_override_modified_date: true
+  field_person: true
+  field_primary_division_office: true
+  field_regulation: true
+  field_sec_content_approver: true
+  field_show_field: true
+  field_tags: true
+  field_top_level_group: true
+  field_topic: true
+  field_video_origin: true
+  field_video_running_time: true
+  field_video_type: true
+  langcode: true
+  links: true
+  published_at: true
+  scheduling_options: true
+  search_api_excerpt: true
+  workbench_moderation_control: true

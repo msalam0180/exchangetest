@@ -1,0 +1,9 @@
+uuid: 1837f13a-3b86-409e-8d83-22dbf8840076
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: ueM3kc6LaeG6CFtO4iyHdKLaJS5PR43j9XuwTdLHvPo
+id: media_item_with_left_divider_line_large_with_image_
+label: 'Media Item with Left Divider Line (Large with image)'
+pattern: "<div class=\"media\">\r\n<div class=\"media-left\">\r\n    <img src=\"/files/exchange/style-guide.png\" width=\"64\" height=\"64\" alt=\"A team working together over lunch\" typeof=\"Image\">\r\n  </div>\r\n  <div class=\"media-body media-divider-lg\"><!-- add class .media-divider-lg -->\r\n    <h3 class=\"media-heading\"><a href=\"/policies-and-forms/announcements/obits/2017-10/george-washington\">Media Item Title</a></h3>\r\n    <div class=\"media-details\">\r\n      Curabitur finibus, magna id suscipit blandit, diam odio ultricies ante, at fermentum ante tortor eu turpis. Sed ultrices odio vel ligula tincidunt dictum. Suspendisse vitae diam mauris.\r\n    </div>\r\n  </div>\r\n</div>"

@@ -1,0 +1,23 @@
+uuid: 81fa462b-ccf1-4f07-b95d-a5eeeda80960
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_status
+    - node.type.announcement
+  module:
+    - options
+_core:
+  default_config_hash: uBKwCWLvClJJ3nhlVko3XqeIGSdvDqVlbMEsWw85H_g
+id: node.announcement.field_status
+field_name: field_status
+entity_type: node
+bundle: announcement
+label: Status
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

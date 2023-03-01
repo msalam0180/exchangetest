@@ -1,0 +1,26 @@
+uuid: b8a275cd-0667-43a4-b4fc-32fe7d00aef9
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - node
+    - taxonomy
+third_party_settings:
+  field_permissions:
+    permission_type: custom
+_core:
+  default_config_hash: mzVGUYqMXsCC6tXTJd-QMQHgtcGs1vA7HJNY7hDHviU
+id: node.field_group_club
+field_name: field_group_club
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

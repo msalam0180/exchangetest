@@ -1,0 +1,15 @@
+uuid: 9c7c8604-3bf4-4f6f-bbff-2c5df05ff547
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.featured_poll
+  module:
+    - flag
+id: flag_action.featured_poll_flag
+label: Featured
+type: poll
+plugin: 'flag_action:featured_poll_flag'
+configuration:
+  flag_id: featured_poll
+  flag_action: flag

@@ -1,0 +1,132 @@
+<?php
+
+function migrate_node_media_schema() {
+  // Table for the mapping data
+  $schema['migrate_node_media'] = [
+    'description' => 'Content type to Media Mappings.',
+    'fields'      => [
+      'id'           => [
+        'type'     => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'name'         => [
+        'description' => 'Name of the migration',
+        'type'        => 'varchar',
+        'length'      => 255,
+        'not null'    => TRUE,
+        'default'     => '',
+      ],
+      'content_type' => [
+        'description' => 'Content type mapping from',
+        'type'        => 'varchar',
+        'length'      => 255,
+        'not null'    => TRUE,
+        'default'     => '',
+      ],
+      'media_type'   => [
+        'description' => 'Media type mapping to',
+        'type'        => 'varchar',
+        'length'      => 255,
+        'not null'    => TRUE,
+        'default'     => '',
+      ],
+      'mapping'      => [
+        'description' => 'Mapping Object Data',
+        'type'        => 'text',
+        'not null'    => TRUE,
+        'size'        => 'big',
+      ],
+      'run_count'    => [
+        'type'     => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default'  => 0,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  // Table for the route data
+  $schema['migrate_node_media_route'] = [
+    'description' => 'Route mappings.',
+    'fields'      => [
+      'id'            => [
+        'type'     => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'content_route' => [
+        'description' => 'Route for the content type',
+        'type'        => 'varchar',
+        'length'      => 255,
+        'not null'    => TRUE,
+        'default'     => '',
+      ],
+      'media_route'   => [
+        'description' => 'Route for the media type',
+        'type'        => 'varchar',
+        'length'      => 255,
+        'not null'    => TRUE,
+        'default'     => '',
+      ],
+      'map_id'        => [
+        'description' => 'Foreign key for the map',
+        'type'        => 'int',
+        'not null'    => TRUE,
+        'unsigned'    => TRUE,
+        'default'     => 0,
+      ],
+      'nid'        => [
+        'description' => 'Foreign key for the node',
+        'type'        => 'int',
+        'not null'    => TRUE,
+        'unsigned'    => TRUE,
+        'default'     => 0,
+      ],
+      'mid'        => [
+        'description' => 'Foreign key for the media entity',
+        'type'        => 'int',
+        'not null'    => TRUE,
+        'unsigned'    => TRUE,
+        'default'     => 0,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  // Table for information about the migration runs
+  $schema['migrate_node_media_migrations'] = [
+    'description' => 'Route mappings.',
+    'fields'      => [
+      'id'       => [
+        'type'     => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'map_id'   => [
+        'description' => 'Foreign key for the map',
+        'type'        => 'int',
+        'not null'    => TRUE,
+        'unsigned'    => TRUE,
+        'default'     => 0,
+      ],
+      'node_id'  => [
+        'description' => 'Node ID for the content',
+        'type'        => 'int',
+        'not null'    => TRUE,
+        'unsigned'    => TRUE,
+        'default'     => 0,
+      ],
+      'media_id' => [
+        'description' => 'Media ID for the migrated media content',
+        'type'        => 'int',
+        'not null'    => TRUE,
+        'unsigned'    => TRUE,
+        'default'     => 0,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+  return $schema;
+}

@@ -1,0 +1,7 @@
+sec_event:
+  version: VERSION
+  js:
+    js/sec_event.js: {}
+    js/moment.min.js: {}
+  dependencies:
+    - core/jquery

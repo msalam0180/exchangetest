@@ -1,0 +1,189 @@
+//
+// Header
+// these are the styles for the site header
+// --------------------------------------------------
+
+[role="banner"] {
+  display: block;
+  margin-bottom: 20px; //space between header and content
+  padding: 0px;
+
+  @include breakpoint("mobile-menu-showing") {
+    border-bottom: 1px solid $light-gray;
+    background: hsla(0, 0%, 98%, 1);
+  }
+}
+
+.header-content {
+  @include clearfix;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: $header-v-padding 10px;
+
+  @include breakpoint("mobile-menu-showing") {
+    padding: $header-mobile-v-padding 10px;
+  }
+}
+
+.system_branding_block {
+  @include span(5);
+  clear: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  .banner-seal {
+    a {
+      display: block;
+
+      @include breakpoint("mobile-menu-showing") {
+        width: 180px;
+      }
+      .ie-view & img {
+        //set image width for ie
+        width: 460px;
+      }
+    }
+  }
+}
+
+.menu--header-links {
+  font-size: 13px;
+  @include raleway;
+  clear: right;
+  float: right;
+  margin-top: 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  .menu-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: right;
+    text-align: right;
+    a {
+      font-weight: bold;
+    }
+
+    li {
+      display: inline-block;
+
+      &:not(:last-child):after {
+        content: "|";
+        color: $secondary-color;
+        display: inline;
+        padding: 0 4px 0 6px;
+      }
+    }
+  }
+
+  @include breakpoint("mobile-menu-showing") {
+    display: none;
+  }
+}
+
+.global-header .search-block {
+  clear: right;
+  float: right;
+  position: relative;
+
+  .global-search {
+    @include breakpoint("mobile-menu-showing") {
+      display: none;
+    }
+
+    //field label
+    label.overlabel {
+      color: $cloudy-gray;
+      font-size: 15px;
+      font-weight: 300;
+      position: absolute;
+      right: 206px;
+      top: 9px;
+    }
+
+    //Search Field
+    input.form-search {
+      background: transparent;
+      float: right;
+      height: 26px;
+      &::-ms-clear {
+        display: none;
+      }
+      @include breakpoint("medium") {
+        width: 226px;
+        padding-right: 30px;
+      }
+    }
+
+    //Search button wrapper
+    .form-actions {
+      border: none;
+      display: block;
+      height: 40px;
+      width: 30px;
+      position: absolute;
+      right: 0;
+      z-index: 2;
+      color: transparent;
+      margin-bottom: 0;
+      border-radius: 0px 3px 3px 0;
+
+      //search button icon
+      &:before {
+        content: "\f002";
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+          content: "";
+          background-image: url(../images/fontawesome-icons-sprite.svg);
+          background-repeat: no-repeat;
+          background-size: 26em;
+          background-position-x: -4.92em;
+          width: 24px;
+          height: 24px;
+        }
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: absolute;
+        top: 30%;
+        left: 16%;
+        color: $azure;
+      }
+    }
+
+    //Search Button
+    input.form-submit {
+      background: transparent;
+      color: transparent;
+      border: none;
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      &:hover,
+      &:focus {
+        background-color: $cloudy-gray;
+        opacity: 0.3;
+        width: 114%;
+        margin-left: -5px;
+      }
+    }
+  }
+}
+
+.header-content .username {
+  float: right;
+  font-weight: bold;
+  color: $primary-color;
+  font-family: "Raleway", sans-serif;
+  text-transform: capitalize;
+
+  @include breakpoint("mobile-menu-showing") {
+    display: none;
+  }
+}

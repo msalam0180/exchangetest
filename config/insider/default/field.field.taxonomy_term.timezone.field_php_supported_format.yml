@@ -1,0 +1,21 @@
+uuid: babdf5be-09a6-49de-93ab-4074c697d25f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_php_supported_format
+    - taxonomy.vocabulary.timezone
+_core:
+  default_config_hash: kILjvMWi6_6gArX4Wn-QPUnf4-u5j2wBMQtsffFe05w
+id: taxonomy_term.timezone.field_php_supported_format
+field_name: field_php_supported_format
+entity_type: taxonomy_term
+bundle: timezone
+label: 'PHP Supported Format'
+description: "Enter the PHP supported timezone format <i>(e.g. America/New_York)</i>.\r\n<br>For a list of formats visit this <a href=\"http://php.net/manual/en/timezones.php\">page.</a>"
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

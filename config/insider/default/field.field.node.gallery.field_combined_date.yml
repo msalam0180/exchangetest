@@ -1,0 +1,21 @@
+uuid: 7302792c-57e2-469c-a85a-67090af5df4b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_combined_date
+    - node.type.gallery
+  module:
+    - datetime
+id: node.gallery.field_combined_date
+field_name: field_combined_date
+entity_type: node
+bundle: gallery
+label: 'Combined Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

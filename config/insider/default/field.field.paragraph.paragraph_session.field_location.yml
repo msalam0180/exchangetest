@@ -1,0 +1,23 @@
+uuid: bbc3cda1-bb9b-4829-b1be-4fbbd5ad417d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_location
+    - paragraphs.paragraphs_type.paragraph_session
+  module:
+    - text
+_core:
+  default_config_hash: '-k3eS0bOzSYNc4UjAIdOH8D3IvC1fZTrVRkHpCF9zqY'
+id: paragraph.paragraph_session.field_location
+field_name: field_location
+entity_type: paragraph
+bundle: paragraph_session
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

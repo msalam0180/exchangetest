@@ -1,0 +1,57 @@
+//
+// Node Type: Announcement
+//
+// This page displays differently based on the announcement type
+// --------------------------------------------------
+
+.announce-heading{
+	text-align: center;
+	font-size: 2em;
+	margin-bottom: 20px;
+}
+
+.announce-details{
+	margin-bottom: 30px;
+}
+
+.field--label-inline{
+	@include field-table-layout("field__label", "field__item");
+	.field__label{
+		width: 80px;
+		font-weight: 600;
+	}
+}
+
+//memorandum styling
+.node--announcement-memorandum > .node__content{
+    border: 3px solid #a03535;
+    padding: 20px;
+
+    .memo-heading{
+		text-transform: uppercase;
+		color: #a03535;
+	}
+}
+
+//obituary styling
+.node--announcement-obituary > .node__content{
+    border: 3px solid $gray-lt;
+    padding: 20px;
+    .memo-heading{
+		text-transform: capitalize;
+	}
+}
+
+//What are these?
+.rxfrom .rxbodyfield {
+    display: inline;
+    padding-left: 21px;
+}
+
+.rxto label {
+    padding-right: 40px;
+}
+
+.rxsubject label {
+    padding-right: 5px;
+}

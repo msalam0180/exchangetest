@@ -1,0 +1,351 @@
+/* Fix Toolbar Tray Overlay */
+body.toolbar-tray-open.toolbar-vertical.toolbar-fixed {
+  margin-left: 0px;
+}
+
+/* Do not let forms get too slim */
+body.adminimal,
+#toolbar-bar {
+  min-width: 560px;
+}
+
+input[disabled] {
+  opacity: 0.5;
+  background: #e2e2e2 !important;
+}
+
+div[data-drupal-selector="edit-field-teaser-0-format"] {
+  display: none;
+}
+
+/* Overrides to CK editor when editng a node */
+span.cke_button_icon.cke_button__image_embed_icon {
+  background-image: url(/modules/custom/sec_admin/ckeditor_custom_icons/image.png) !important;
+}
+
+span.cke_button_icon.cke_button__video_embed_icon {
+  background-image: url(/modules/custom/sec_admin/ckeditor_custom_icons/video.png) !important;
+}
+
+/* Overrides to CK editor in a node */
+
+li.ckeditor-button[data-drupal-ckeditor-button-name="image_embed"] .cke_button_icon {
+  background-image: url(/modules/custom/sec_admin/ckeditor_custom_icons/image.png) !important;
+}
+li.ckeditor-button[data-drupal-ckeditor-button-name="image_embed"] .cke_button_icon img {
+  display: none;
+}
+
+li.ckeditor-button[data-drupal-ckeditor-button-name="video_embed"] .cke_button_icon {
+  background-image: url(/modules/custom/sec_admin/ckeditor_custom_icons/video.png) !important;
+}
+li.ckeditor-button[data-drupal-ckeditor-button-name="video_embed"] .cke_button_icon img {
+  display: none;
+}
+
+
+/*Hide The Caption Option*/
+.entity-embed-dialog .form-item-attributes-data-caption {
+  display: none;
+}
+
+/*Admin Theme Accessibility Fixes*/
+
+/*DI-1019 Validate and/or Fix: 13021: Sufficient visual focus is not provided for certain user interface elements (Drupal User Pages)*/
+th > a:hover,
+th > a:focus,
+th.is-active > a:hover,
+th.is-active > a:focus {
+  color: #008ee6;
+  text-decoration: none;
+  display: block;
+}
+
+th > a:focus,
+th.is-active > a:focus {
+  color: #008ee6;
+  text-decoration: none;
+  outline: 1px dotted #71716e;
+  display: block;
+}
+
+.pager__item--next a:focus,
+.pager__item--last a:focus,
+.pager__item--first a:focus,
+.pager__item--previous a:focus {
+  outline: 1px dotted #71716e;
+}
+
+.adminimal-admin-toolbar .toolbar-tray-horizontal a:focus,
+.toolbar-lining button:focus,
+.adminimal .toolbar .toolbar-bar .toolbar-tab > .toolbar-item:focus {
+  box-shadow: inset 0 0 0 1px white;
+}
+
+/* Add to checkboxes on forcus: box shadow for IE11 */
+input[type=checkbox]:hover, input[type=checkbox]:focus, input[type=radio]:hover, input[type=radio]:focus {
+  box-shadow: inset 0 0 0 3px #fff, 0px 0px 5px #0074bd !important;
+}
+
+/* Up the contrast ratio on links */
+body a,
+body .link,
+.ui-widget-content a {
+  color: #005cad;
+}
+
+/* Up the contrast ratio on Buttons */
+body.adminimal .action-links .button--primary {
+  color: #005cad;
+  border-color: #005cad;
+}
+
+/* Dropdown focus for promenent */
+/* prettier-ignore */
+.js body.adminimal .dropbutton-wrapper .dropbutton-widget .dropbutton-action a:focus,
+.js body.adminimal .dropbutton-wrapper .dropbutton-widget .dropbutton-action button:focus,
+.js body.adminimal .dropbutton-wrapper .dropbutton-widget .dropbutton-action input:focus,
+.js body.adminimal .dropbutton-wrapper .dropbutton-widget .dropbutton-toggle button:focus{
+  box-shadow: inset 0 0 0px 1px #68A3CF;
+}
+
+/* Form Fields */
+/* Text Area */
+tr.odd .form-type-textarea.form-item,
+tr.even .form-type-textarea.form-item {
+  margin-bottom: 0;
+}
+
+/* Filter */
+tr.odd .filter-wrapper .form-type-select {
+  margin: 0;
+}
+
+/* MutiSelects */
+.adminimal select[multiple="multiple"],
+.adminimal select[multiple="multiple"]:hover,
+.adminimal select[multiple="multiple"]:focus {
+  background-image: none;
+  padding: 0;
+}
+
+.adminimal select[multiple="multiple"] option {
+  padding: 2px 5px;
+}
+
+/*vertical-tabs - for example: field group on node form or block configuration visibility settings*/
+
+.adminimal .vertical-tabs__menu-item.is-selected a {
+  border-left: 5px solid #0071b8;
+}
+
+.adminimal .vertical-tabs .vertical-tabs__menu-item.is-selected a:focus {
+  background: #d2e7f4;
+  color: #004f80;
+}
+
+.adminimal table thead th {
+  color: #403f3f;
+}
+
+.adminimal input.button--primary:focus {
+  text-decoration: underline;
+}
+
+/*Add visual indication of focus to details accordions */
+.adminimal details [role="button"]:focus {
+  outline: 2px solid #c1e0ff;
+  outline-offset: 0px;
+  background: #f1eeee;
+}
+
+/* Paragraphs */
+
+@media screen and (min-width: 800px) {
+  .field--widget-entity-reference-paragraphs {
+    position: relative;
+  }
+
+  .field--widget-entity-reference-paragraphs .tabledrag-toggle-weight-wrapper {
+    position: absolute;
+    right: 0px;
+    top: -20px;
+  }
+}
+
+@media screen and (max-width: 799px) {
+  .field--widget-entity-reference-paragraphs .form-item {
+    margin: 0px 0 10px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .field--widget-entity-reference-paragraphs .select-wrapper {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  .field--widget-entity-reference-paragraphs .select-wrapper select {
+    width: 100%;
+  }
+}
+
+.field--widget-entity-reference-paragraphs {
+  margin: 30px 0 20px;
+  border: 1px solid #e3e3e3;
+  padding: 5px 15px;
+}
+
+.field--widget-entity-reference-paragraphs tr {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+/* Event Content Type - Location Field */
+.field--name-field-session .field--name-field-location .cke_contents {
+  height: 90px !important;
+}
+
+/*Title Tooltip added via js*/
+.ui-tooltip-content {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  box-shadow: 1px 1px 2px #afadad;
+  border-radius: 2px;
+  padding: 5px 8px;
+}
+
+/* Inline entity Admin style updates */
+
+/*Hide extra button when adding an exsisting document to a dataset*/
+.field--widget-inline-entity-form-complex
+  [data-drupal-selector$="-form-actions"]
+  .ief-entity-submit {
+  display: none;
+}
+.field--widget-inline-entity-form-complex
+  [data-drupal-selector$="-form-actions"]
+  [data-drupal-selector$="-ief-add-save"].ief-entity-submit {
+  display: inline-block;
+}
+.field--widget-inline-entity-form-complex
+  [data-drupal-selector$="-form-actions"]
+  [data-drupal-selector$="-ief-edit-save"].ief-entity-submit {
+  display: inline-block;
+}
+.field--widget-inline-entity-form-complex
+  [data-drupal-selector$="-form-entity-browser-entity-browser"] {
+  float: left;
+}
+.field--widget-inline-entity-form-complex
+  [data-drupal-selector$="-form-entity-browser-entity-browser-open-modal"] {
+  margin-left: 0;
+}
+
+.ief-row-entity,
+.ief-row-form {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.ief-form-row .form-wrapper {
+  max-width: 400px;
+}
+.ief-form > [id*="form-inline-entity-form-entities"] {
+  max-width: 100%;
+}
+
+.ief-form-row .form-wrapper.field--widget-string-textarea {
+  max-width: 100%;
+}
+
+.ief-form-row input:not([type="button"]):not([type="submit"]):not([type="checkbox"]),
+.ief-form-row select {
+  display: block;
+  width: 100%;
+}
+
+td.inline-entity-form-node-label {
+  width: 50%;
+}
+
+.ief-form-row > div > div {
+  margin-top: 10px;
+}
+
+.ief-entity-table div[class*='-form-delete'] {
+  display: none;
+}
+
+/* Entity Browser modal popup styles*/
+.entity-browser-form table {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.entity-browser-form table td {
+  min-width: 80px;
+}
+
+/* Required help text at the top of forms */
+.form-item.form-item-required-help {
+  margin-top: 0;
+  color: #a51b00;
+}
+
+/*//helper-popup - see js*/
+.helper-popup {
+  cursor: pointer;
+  display: inline-block;
+  background: url(/core/themes/stable/images/core/help.png) no-repeat;
+  height: 16px;
+  width: 16px;
+  margin-left: 3px;
+  text-indent: -9999px;
+}
+.has-helper-popup {
+  display: inline-block;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+  border: solid #ccc;
+  border-width: 0px 0px 0px 1px;
+  background: #ffffff;
+  padding-top: 2px;
+}
+
+div.ui-datepicker.ui-widget.ui-widget-content {background: #fff}

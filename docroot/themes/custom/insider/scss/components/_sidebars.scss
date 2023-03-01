@@ -1,0 +1,283 @@
+//
+// LEGACY: Sidebars
+// These are general styles that apply to all sidebars
+// 
+// NOTE: we will be adding sidebars to the site. These legacy styles will need to be reviewed at that point
+// --------------------------------------------------
+
+//TODO: Review this code from SEC.gov
+
+/* Spotlight Topics Block */
+ul.spotlight-topics-list {
+    font-size: 1em;          
+    list-style: disc;
+    margin-left: 20px;      
+    
+    li.spotlight-topic-item {               
+        margin-top: 9px;
+    
+        a {
+            color: $deep-sea;
+            font-size: 13px;
+            &:hover {
+                color: $azure;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+#sidebar-second {
+  @include span (3 last);
+  display: block;
+  font-size: 1rem;
+  padding-left: 0.833333em;
+  margin-right: 0;
+    
+    @include breakpoint('medium','landscape'){
+      @include span(3 last);
+      padding-left: 0.833333em;
+      word-break: break-word;      
+    }
+    @include breakpoint('medium','portrait'){
+      @include span(3 last);
+      padding-left: 0.833333em;
+      word-break: break-word;      
+    }
+    @include breakpoint('medium','portrait','ipad'){
+      @include span(3 last);
+      padding-left: 0.833333em;
+      word-break: break-word;      
+    }
+
+    @include breakpoint('small') {
+        @include span(11);
+        clear: both;
+        float: none;
+        margin: 0 auto;
+        padding: 0;
+    }
+    @include breakpoint('x-small') {
+        @include span(11);
+        clear: both;
+        margin: 0 auto;
+        float: none;
+        padding: 0;
+    }
+    
+    .field_top_right_column {
+      word-break: break-word;
+      p {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+      }
+    }
+
+    .block {
+      background: none;
+      clear: both;
+      color: $navy;
+      display: block;
+      float: right;
+      font-size: 13px;
+      margin: 0 0 20px 0;
+      padding-bottom: 10px;
+      padding-top: 5px;
+      text-align: left;
+      width: 100%;
+        
+      @include breakpoint('medium'){
+        word-break: break-word;
+      }
+
+      header {
+        margin-bottom: 0px !important;
+      }
+
+      a {
+        font-size: 13px;
+      }
+
+      h2 {
+        font-size: 1.25em;
+        font-weight: 600;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+
+        a {
+          color: $navy;
+          font-size:inherit;
+          text-decoration: none;
+
+          &:hover {
+            color: $azure;
+            text-decoration: underline;
+          }
+        }
+      }
+
+      ul {
+        list-style: disc;
+        margin-left: 20px;
+      }
+
+      footer {
+        @include breakpoint('medium','portrait') {
+          .more-link{
+            display: none ;
+          }
+        @include breakpoint('medium','portrait','ipad') {
+          .more-link{
+            display: none ;
+          }
+        }
+        @include breakpoint('small') {
+          .more-link{
+            display: none;
+          }
+        }
+        @include breakpoint('x-small') {
+          .more-link{
+            display: none;
+          }
+        }
+      }
+
+      form {
+        display: block;
+        margin-bottom: 20px;
+      }
+
+      fieldset {
+        border: none;
+      }
+
+      label {
+        color: $shadow;
+      }
+
+      input#gov-delivery-box {
+        border: 1px solid #CCC;
+        display: inline;
+        margin-bottom: 5px;
+        width: 100%;
+      }
+
+      input#gov-delivery-submit {
+        background-color: #646464;
+        border: none;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        padding: 5px 15px;
+        text-transform: uppercase;
+
+        &:hover {
+            background-color: $deep-sea;
+        }
+      }
+
+      span, label {
+        font-size: 13px;
+        font-weight: normal;
+      }
+      
+      ul {
+        margin: 0px 20px;
+		list-style: disc;
+      }
+
+      li {
+        line-height: 1.5;
+        margin-bottom:0;
+        
+        &.spotlight-topic-item {               
+            margin-top: 0px;
+        }
+      }          
+
+      &.related-materials h2 {
+        @include raleway;
+        font-size: 20px;
+        font-weight: 600;
+        border-bottom: 1px solid #BFBFBF;
+        color: #273a56;
+        margin-bottom: 20px;   
+      }
+    }
+	}
+}	
+
+/* Grid Sidebar Block */
+#sidebar-grid {
+    position: absolute;
+    @include span(3);
+    clear: none;
+    padding-right: 1rem;
+    border-right: 1px solid $light-gray;
+    top: 472px;
+    @include breakpoint('medium','portrait'){
+      top: 550px;
+    }
+    @include breakpoint('small'){
+        @include span(12); 
+        position: static;
+        padding-right: 0px;
+        border-right: none;
+    }   
+    h2 {
+		font-family: "-apple-system-font", "Helvetica", sans-serif;
+		font-weight: bold;
+		color: $cloudy-gray;
+		font-size: 1rem;
+		margin-bottom: .75rem;
+		line-height: 1.25rem;
+		margin-top: 0rem;
+		text-transform: uppercase;
+    }
+    p a {
+		@include raleway;
+		font-weight: 500;
+		color: $stone;
+		font-size: 14px;
+		font-size: .9rem;
+		text-transform: uppercase;
+		display: block;
+		padding: 20px 30px;
+		background-color: $porcelain;
+		text-align: center;
+		position: relative;
+		margin-bottom: 20px;
+		margin-bottom: 1.2rem;
+    }
+    p a:hover {
+      background-color: $navy;
+      color: $yellow-orange;
+      text-decoration: none;
+    }
+    p a:after {
+      content: " \f054";
+      font-family: FontAwesome;
+      position: absolute;
+    	right: 10px;
+    	top: 45px;
+    	@include breakpoint('small'){
+    	 	top: initial;
+    	}
+    }
+}
+
+.promo-module {
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-overlay {
+  color: #6f7479;
+  font-style: oblique;
+
+  .promo-text {
+      padding: 5px;
+  }
+}

@@ -1,0 +1,25 @@
+uuid: be2f0ae6-8c8d-416d-b036-34945bc69756
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_add_to_default_quicklinks
+    - node.type.link
+_core:
+  default_config_hash: Cd0Zkm-1bC3zlOmNSf6DNxnKsG5r9w_nYi-3O-HUnm4
+id: node.link.field_add_to_default_quicklinks
+field_name: field_add_to_default_quicklinks
+entity_type: node
+bundle: link
+label: 'Add to Default QuickLinks'
+description: 'Add link to QuickLinks that users see by default'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

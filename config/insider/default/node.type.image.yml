@@ -1,0 +1,36 @@
+uuid: 54a99e70-c83a-4db2-ac9d-3c4151469eb9
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_save_redirect
+    - workbench_access
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  workbench_access:
+    workbench_access_status: false
+  workbench_moderation:
+    enabled: false
+    allowed_moderation_states:
+      - published
+      - archived
+    default_moderation_state: published
+  node_save_redirect:
+    save_type: '0'
+    save_location: ''
+    save_destination: 0
+    edit_type: '2'
+    edit_location: ''
+    edit_destination: 1
+name: Image
+type: image
+description: 'Graphics and photographs that are displayed or embedded on intranet pages'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

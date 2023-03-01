@@ -1,0 +1,25 @@
+uuid: 2d1ee8d9-cfe0-449a-bea7-58ababfba13a
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer-top
+  module:
+    - system
+  theme:
+    - insider
+id: footertop
+theme: insider
+region: footer
+weight: -10
+provider: null
+plugin: 'system_menu_block:footer-top'
+settings:
+  id: 'system_menu_block:footer-top'
+  label: 'Footer Top'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

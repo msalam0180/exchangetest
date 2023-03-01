@@ -1,0 +1,9 @@
+name: Insider SEC View Filter Plugin
+type: module
+description: Performes alterations to exposed forms before it is rendered and provides custom Year & Month filter plugin.
+package: SEC
+core: 8.x
+version: 8.x-1.0
+tags:
+ - dev
+core_version_requirement: ^8 || ^9

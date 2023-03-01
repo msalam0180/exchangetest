@@ -1,0 +1,51 @@
+uuid: 72bf9883-12b7-43f6-89df-7508b04e8b5a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_file
+    - media.type.file
+  module:
+    - file
+    - filefield_paths
+  enforced:
+    module:
+      - media
+third_party_settings:
+  filefield_paths:
+    enabled: true
+    file_path:
+      value: 'media/[media:field_media_top_level_group:entity:field_abbreviation]'
+      options:
+        slashes: false
+        pathauto: true
+        transliterate: false
+    file_name:
+      value: ''
+      options:
+        slashes: true
+        pathauto: true
+        transliterate: false
+    redirect: false
+    retroactive_update: false
+    active_updating: true
+_core:
+  default_config_hash: mHEhXu43jKUSN9fobTT1j6E5oUCmCIgbwkg-u100t8Y
+id: media.file.field_media_file
+field_name: field_media_file
+entity_type: media
+bundle: file
+label: 'File Upload'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'csv doc docx ics pdf ppt pptx txt vcs xls xlsx xml zip'
+  max_filesize: ''
+  description_field: false
+field_type: file

@@ -1,0 +1,24 @@
+uuid: af7cea1f-3109-4a4d-987b-8d1f94ade6af
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.featured
+_core:
+  default_config_hash: 8NriAQ5qncNF6PSEzGc9Jzre54Qd7NcUSHQtYyeC0tY
+id: node.featured.status
+field_name: status
+entity_type: node
+bundle: featured
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

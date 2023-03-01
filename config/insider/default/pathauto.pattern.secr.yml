@@ -1,0 +1,24 @@
+uuid: df5240e4-db01-4cfc-9946-332117382ff1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: V62yGPWO49IyG0ZC3Uj6lpxQmswZC7QKhAP6uEV6W_U
+id: secr
+label: SECR
+type: 'canonical_entities:node'
+pattern: '[node:field_top_level_group:entity:field_abbreviation]/[node:field_secr_number]-[node:title]'
+selection_criteria:
+  4595d95e-7474-4598-a72f-5212f5c12ba7:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 4595d95e-7474-4598-a72f-5212f5c12ba7
+    context_mapping:
+      node: node
+    bundles:
+      secr: secr
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,23 @@
+{# Outer Nav Wrapper #}
+<nav
+  aria-labelledby="block-quicklinks-menu" class="contextual-region block block-menu navigation menu--quick-links" id="block-quicklinks" role="navigation">
+
+  {# Menu Label #}
+  <h2 class="visually-hidden" id="block-quicklinks-menu">{{ branding }}</h2>
+
+  {# List of Links #}
+  <ul class="sf-js-enabled sf-arrows" id="quick-links" style="touch-action: pan-y;">
+    <li>
+      <a href="#void" data-drupal-link-system-path="<front>" class="sf-with-ul is-active">{{ branding }}</a>
+      <ul
+        style="display: none;">
+        {# Generate a link for each of the quicklinks received #}
+        {% for link in quicklinks %}
+          <li>
+            <a href="{{link.href}}" target="{{link.target}}">{{link.title}}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </li>
+  </ul>
+</nav>

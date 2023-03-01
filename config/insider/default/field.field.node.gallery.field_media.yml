@@ -1,0 +1,32 @@
+uuid: d7e8578b-a4b9-480e-a084-6479602f7d25
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media
+    - node.type.gallery
+    - node.type.image
+    - node.type.video
+_core:
+  default_config_hash: y6u78Ksj1kaRn0LAREJq01A8oNGdjGkqQJlRye5CEKg
+id: node.gallery.field_media
+field_name: field_media
+entity_type: node
+bundle: gallery
+label: Media
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      image: image
+      video: video
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

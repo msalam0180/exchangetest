@@ -1,0 +1,9 @@
+name: 'Featured Content'
+description: 'Provides Featured content type custom functionality.'
+type: module
+core: 8.x
+version: 8.x-1.0
+package: Insider
+core_version_requirement: ^8 || ^9
+dependencies:
+    - draggableviews:draggableviews

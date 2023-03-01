@@ -1,0 +1,12 @@
+uuid: 6b0c8194-e4c0-49d6-95fd-8b4c39d9004a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: gcEmBf-lOLHcx9Roe9bKKBT-8alGdV4_uWmbVYEZXuE
+id: node.original_size
+label: 'Original size'
+targetEntityType: node
+cache: true

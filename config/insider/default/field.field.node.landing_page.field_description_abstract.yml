@@ -1,0 +1,21 @@
+uuid: f2b73914-12fa-4f9a-af6f-b1737d705b46
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description_abstract
+    - node.type.landing_page
+_core:
+  default_config_hash: Yy-ykFSx06uMtTg3O5mQHhSHymLkHEPUeON7ZyIbG-c
+id: node.landing_page.field_description_abstract
+field_name: field_description_abstract
+entity_type: node
+bundle: landing_page
+label: Description/Abstract
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

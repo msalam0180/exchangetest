@@ -1,0 +1,16 @@
+# Custom module library for general purposes.
+sec_video:
+  js:
+    js/sec_video.js: {}
+  dependencies:
+    - core/jquery
+# Custom module library for wowza player purpose.
+wowza_player:
+  js:
+    js/wowza-player.js: {}
+    //secview/video.js: { type: external, minified: false }
+    //secview/videojs-contrib-hls.min.js: { type: external, minified: false }
+  css:
+    layout:
+      //secview/video-js.min.css: { type: external, minified: false }
+      css/wowza-player.css: {}

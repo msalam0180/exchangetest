@@ -1,0 +1,9 @@
+uuid: 628515a9-64e5-444d-8e4f-034cbeb281bb
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: X2niOgY-zBAG2Op-prx9CLsv2sHg-Nrw8AxMEM6bn9M
+id: media_item_with_image_on_top
+label: 'Media Item with Image on Top'
+pattern: "<div class=\"media\" style=\"width:300px;\"><!-- Width added for style guide only -->\r\n  <div class=\"media-image-top\">\r\n    <img src=\"/files/exchange/style-guide.png\" width=\"300\" height=\"200\" alt=\"Man reading a business paper\" typeof=\"foaf:Image\">\r\n  </div>\r\n  <div class=\"media-body\">\r\n    <h3 class=\"media-heading\"><a href=\"/policies-and-forms/announcements/obits/2017-10/george-washington\">Media Item Title</a></h3>\r\n    <div class=\"event-details media-details\">\r\n      Curabitur finibus, magna id suscipit blandit, diam odio ultricies ante, at fermentum ante tortor eu turpis. Sed ultrices odio vel ligula tincidunt dictum. Suspendisse vitae diam mauris.\r\n    </div>\r\n  </div>\r\n</div>"

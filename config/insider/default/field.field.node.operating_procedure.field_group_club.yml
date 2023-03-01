@@ -1,0 +1,30 @@
+uuid: b58e87b8-cb25-4d42-a865-c76f63989f85
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_group_club
+    - node.type.operating_procedure
+    - taxonomy.vocabulary.group_club
+_core:
+  default_config_hash: LDT8Pyf2mrNkiR_VuWGPpuemc4uCOyUrLDqQrpH3nnU
+id: node.operating_procedure.field_group_club
+field_name: field_group_club
+entity_type: node
+bundle: operating_procedure
+label: Group/Club
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      group_club: group_club
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

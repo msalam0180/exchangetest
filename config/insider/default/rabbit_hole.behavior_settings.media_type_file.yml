@@ -1,0 +1,16 @@
+uuid: 158e4634-5300-446c-8525-350c5227e5fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.file
+_core:
+  default_config_hash: 0hZGA-ImPu-xqRN_rR83uSdGp1GFacGgQ6hYiwlhRiQ
+id: media_type_file
+entity_type_id: media_type
+entity_id: file
+action: page_redirect
+allow_override: 0
+redirect: '[media:url:unaliased]/download'
+redirect_code: 301
+redirect_fallback_action: access_denied

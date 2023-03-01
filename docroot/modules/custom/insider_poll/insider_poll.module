@@ -1,0 +1,41 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+
+/**
+ * Implements hook_form_alter
+ *
+ * @param [type] $form
+ * @param Drupal\Core\Form\FormStateInterface $form_state
+ * @param [type] $form_id
+ * @return void
+ */
+
+ function insider_poll_form_alter(&$form, FormStateInterface $form_state, $form_id)
+ {
+  // Adjust all poll forms flag field to checkbox
+  $entity_form = ['poll_form', 'poll_edit_form'];
+  if(in_array($form_id, $entity_form)){
+    $form['flag']['#type'] ='container';
+    $form['flag']['featured_poll']['#title'] = t('Featured');
+    $form['flag']['featured_poll']['#description'] = t('A flag indicating whether the poll is featured on the homepage.');
+  }
+
+ }
+
+/**
+ * Fixes QCTC bug Jaws screen reader
+ * Implements hook_preprocess_poll_vote()
+ *
+ * @param [type] $variables
+ * @return void
+ */
+ function insider_poll_preprocess_poll_vote(&$variables)
+ {
+  // Get poll entity from form
+  $poll = $variables['form']['poll']['#value'];
+
+  // Assign poll question to title
+  $variables['form']['choice']['#title'] = new TranslatableMarkup($poll->question->value);
+ }

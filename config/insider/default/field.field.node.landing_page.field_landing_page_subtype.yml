@@ -1,0 +1,23 @@
+uuid: 2a45a9ba-2cdc-42ab-9e64-3cfa10f98807
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_landing_page_subtype
+    - node.type.landing_page
+  module:
+    - options
+_core:
+  default_config_hash: UZ7NBIP9stssfp7CSpeGb-TNdBDeI_4ImANyDNCTkv0
+id: node.landing_page.field_landing_page_subtype
+field_name: field_landing_page_subtype
+entity_type: node
+bundle: landing_page
+label: 'Landing Page Subtype'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

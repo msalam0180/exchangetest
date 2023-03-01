@@ -1,0 +1,9 @@
+uuid: 1990f420-1ac2-482d-8744-c904142d3a65
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: trW2tRg4QlzaVoymkq-JHPhJz7yaTpeJYa9bc1M8eHk
+id: media_item_with_left_line
+label: 'Media Item with Left Divider Line (Large no image)'
+pattern: "<div class=\"media\">\r\n  <div class=\"media-body media-divider-lg\"><!-- add class .media-divider-lg -->\r\n    <h3 class=\"media-heading\"><a href=\"/policies-and-forms/announcements/obits/2017-10/george-washington\">Media Item Title</a></h3>\r\n    <div class=\"media-details\">\r\n      Curabitur finibus, magna id suscipit blandit, diam odio ultricies ante, at fermentum ante tortor eu turpis. Sed ultrices odio vel ligula tincidunt dictum. Suspendisse vitae diam mauris.\r\n    </div>\r\n  </div>\r\n</div>\r\n"

@@ -1,0 +1,14 @@
+//
+// SECR Nodes and Op Nodes
+// 
+// Changes here should affect *ALL* SECR Nodes and Op Nodes on the site
+// --------------------------------------------------
+
+
+.field--name-field-related-op{
+  @include relatedContent();
+}
+
+.related-secr{
+  @include relatedContent("views-row");
+}

@@ -1,0 +1,60 @@
+//
+// Quicklinks
+// the admin page where a user chooses their quicklinks
+// /user/profile/quicklinks
+// --------------------------------------------------
+
+.available_quicklinks-block_1{
+  margin-top: 20px;
+}
+
+//Tables
+@include breakpoint('medium-and-up'){
+  .view-id-available_quicklinks, .view-id-my_quicklinks{
+    .views-field-link-flag{
+      width: 120px;
+    }
+  }
+}
+
+// Reset My Quicklinks
+.quicklinks-action-form{
+
+  display: flex;
+  align-items: flex-end;
+  margin-top: 0px;
+  background-color: #F3F3F3;
+  padding: 15px 20px;
+  border: 1px solid #d9d9d9;
+  .form-item-quicklinks-reset{
+    width: 200px;
+  }
+  
+  .form-actions{
+    margin-left: 10px;
+  }
+}
+
+.view-available-quicklinks, .view-id-my_quicklinks {
+  .flag-user-quicklinks{
+    a{
+      @extend .button;
+      border: 0;
+    }
+  }
+
+  .action-unflag{
+    a{
+      @extend .button-remove;
+      border: 0; 
+    }
+  }
+
+  .action-flag{
+    a{
+      @extend .button-add;
+      border: 0;
+    }
+  }
+
+}

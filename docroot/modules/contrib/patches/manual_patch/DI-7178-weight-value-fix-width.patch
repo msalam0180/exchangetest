@@ -1,0 +1,12 @@
+diff --git a/core/themes/seven/css/components/tables.css b/core/themes/seven/css/components/tables.css
+index 727e0658e6..e62773e585 100644
+--- a/core/themes/seven/css/components/tables.css
++++ b/core/themes/seven/css/components/tables.css
+@@ -156,7 +156,6 @@ th.select-all {
+  * Target every .form-text input where its parent is a form-item inside a table
+  * cell.
+  */
+-td > .form-item > .form-text,
+ td > .ajax-new-content > .form-item > .form-text {
+   width: 100%;
+ }

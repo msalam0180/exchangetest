@@ -1,0 +1,32 @@
+global-css:
+  css:
+    theme:
+      css/print.css: {}
+      css/layout.css: {}
+      css/toolbars.css: {}
+
+global-js-header:
+  header: true
+  js:
+    js/third-party/jquery-ui.min.js: { weight: -1, minified: true }
+  dependencies:
+    - core/jquery
+    - jquery_ui_accordion/accordion
+    - jquery_ui_tabs/tabs
+global-js:
+  js:
+    js/third-party/foresee-trigger.js: {}
+    js/third-party/superfish.js: {}
+    js/third-party/hoverIntent.js: {}
+    js/third-party/jquery.canvas.min.js: {}
+    js/shared.js: { minified: false, preprocess: false }
+    js/fontawesome-all.min.js: {}
+  dependencies:
+    - core/jquery
+    - jquery_ui_accordion/accordion
+    - jquery_ui_tabs/tabs
+
+panel-layouts-toptwocol:
+  css:
+    layout:
+      css/toptwocol.css: {}

@@ -1,0 +1,52 @@
+//
+// Panelizer
+// Styles the Panelizer editing tray
+// --------------------------------------------------
+
+
+#panels-ipe-tray {
+
+  .ipe-tabs {
+    background-color: #FFFFFF;
+    border-left: 1px solid $gray-dk;
+    border-right: 1px solid $gray-dk;
+    border-top: 1px solid $gray-dk;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: inline-block;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3333);
+    overflow: hidden;
+    position: relative;
+    bottom: -6px;
+
+    .ipe-tab {
+      border-top: none;
+      box-shadow: none;
+    }
+
+    .ipe-tab:first-child, .ipe-tab:last-child  {
+      border-left: none;
+      border-right: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    // hide the revert button
+    li[data-tab-id='revert'] {
+      display:none;
+    }
+  }
+
+  .ipe-tabs-content {
+    border-top: 1px solid $gray-dk;
+
+    //hide the save as default button
+    a.panelizer-ipe-save-default {
+      display: none;
+    }
+
+    a.panelizer-ipe-save-custom {
+      @extend .button;
+    }
+  }
+}

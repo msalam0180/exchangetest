@@ -1,0 +1,21 @@
+uuid: 1a60cdc3-fb89-4c06-b003-ec4bc0dadd6b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media_id
+    - node.type.video
+_core:
+  default_config_hash: 1PLq53tM9XfGTiulVyFx4Tcy_TbTLRpqspXzn1G4Iv0
+id: node.video.field_media_id
+field_name: field_media_id
+entity_type: node
+bundle: video
+label: 'Wowza URL'
+description: 'Please enter the URL to the .mp4 file for this video on the Wowza server (e.g., the URL should end with ".mp4") To choose a specific frame to use as a preview image, add this code to the end of the URL that specifies the minute and second mark of the frame to use (in this case it is the frame at three seconds): #t=00:03'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

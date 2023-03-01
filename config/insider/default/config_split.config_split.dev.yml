@@ -1,0 +1,16 @@
+uuid: bf20b521-b4c4-4887-8df2-8fadb033b5c4
+langcode: en
+status: false
+dependencies: {  }
+id: dev
+label: Dev
+description: 'Config for acquia dev environments'
+weight: 2
+folder: ../config/insider/dev
+module: {  }
+theme: {  }
+blacklist: {  }
+graylist:
+  - google_tag.container.primary
+graylist_dependents: true
+graylist_skip_equal: true

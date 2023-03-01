@@ -1,0 +1,76 @@
+uuid: 172662fd-267b-4e5d-adf4-c7419202eddb
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: i2ukHAmHe9FSVPsjVISwbQGbKZJoL08Q5Whf4lcq3CY
+id: positionhistory
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - positionhistory
+migration_group: sec
+label: 'JSON import of SEC Person Position Histories'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  item_selector: 0
+  urls: 'http://secgovdcmdev1.prod.acquia-sites.com/sites/default/files/migration/converted/secperson.json'
+  fields:
+    -
+      name: id
+      label: Identifier
+      selector: id
+    -
+      name: PositionHistory
+      label: 'Position History'
+      selector: PositionHistory
+  ids:
+    id:
+      type: string
+process:
+  host_type:
+    plugin: default_value
+    default_value: node
+  host_entity_id:
+    plugin: migration
+    migration:
+      - secperson
+    source: id
+  langcode:
+    plugin: default_value
+    default_value: en
+  field_name:
+    plugin: default_value
+    default_value: field_position_history
+  positionHistoryArray:
+    plugin: explode
+    delimiter: '|'
+    source: PositionHistory
+  field_from:
+    plugin: skip_on_empty
+    method: process
+    source: '@positionHistoryArray/0/0'
+  field_to:
+    plugin: skip_on_empty
+    method: process
+    source: '@positionHistoryArray/0/1'
+  field_position_category:
+    plugin: static_map
+    source: '@positionHistoryArray/0/2'
+    map:
+      '1-1 Chair': Chair
+      '2-1 Commissioner': Commissioner
+      '3-1 Other': Other
+  field_current_position:
+    plugin: static_map
+    source: '@positionHistoryArray/0/3'
+    map:
+      'true': 1
+      'false': 0
+  field_position_title: '@positionHistoryArray/0/4'
+destination:
+  plugin: 'entity:field_collection_item'
+migration_dependencies: null

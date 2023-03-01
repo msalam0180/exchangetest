@@ -1,0 +1,25 @@
+uuid: ae71ba81-c325-4d34-b480-625f25ccfad9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_url
+    - node.type.featured
+  module:
+    - link
+_core:
+  default_config_hash: yA3JreMSSCrdQRWfzjRU_zW0kOMyx9Tq72Jp1UlBxcs
+id: node.featured.field_url
+field_name: field_url
+entity_type: node
+bundle: featured
+label: 'Content/Link URL'
+description: ' Start typing the title of a piece of content to select it. You can also enter an internal path such as /node/add or an external URL such as http://example.com. Enter <front> to link to the front page. Change label to "Link to more information"'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link

@@ -1,0 +1,41 @@
+diff --git a/js/drupal.single_datetime.js b/js/drupal.single_datetime.js
+index 917c15f..9e7a024 100644
+--- a/js/drupal.single_datetime.js
++++ b/js/drupal.single_datetime.js
+@@ -91,23 +91,23 @@
+         }
+ 
+         $('#' + input.attr('id')).datetimepicker({
+-          lang,
+-          format,
+-          formatTime,
++          lang: lang,
++          format: format,
++          formatTime: formatTime,
+           lazyInit: true,
+           timepicker: allowTimepicker,
+           todayButton: true,
+-          dayOfWeekStart,
+-          allowTimes,
+-          disabledWeekDays,
+-          disabledDates,
++          dayOfWeekStart: dayOfWeekStart,
++          allowTimes: allowTimes,
++          disabledWeekDays: disabledWeekDays,
++          disabledDates: disabledDates,
+           formatDate: 'd.m.Y',
+-          inline,
+-          minDate,
+-          maxDate,
+-          yearStart,
+-          yearEnd,
+-          theme,
++          inline: inline,
++          minDate: minDate,
++          maxDate: maxDate,
++          yearStart: yearStart,
++          yearEnd: yearEnd,
++          theme: theme
+         });
+       });
+     },

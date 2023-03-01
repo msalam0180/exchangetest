@@ -1,0 +1,32 @@
+uuid: 050ed080-88de-4ee5-8cd0-30cb6cc55511
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.site_alerts_insider
+  module:
+    - system
+    - views
+  theme:
+    - insider
+_core:
+  default_config_hash: RX33fYFAAgYrG122qemV0KUAimO9FkYDDa-t53UrQ9k
+id: views_block__site_alerts_insider_view_alerts_block_homepage
+theme: insider
+region: highlighted
+weight: 0
+provider: null
+plugin: 'views_block:site_alerts_insider-view_alerts_block_homepage'
+settings:
+  id: 'views_block:site_alerts_insider-view_alerts_block_homepage'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '<front>'

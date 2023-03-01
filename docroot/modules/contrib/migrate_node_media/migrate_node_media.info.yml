@@ -1,0 +1,11 @@
+name: 'Migrate File Nodes to Media'
+type: module
+description: 'Migrates Entities of type Node to Media'
+core: 8.x
+package: 'Migration'
+dependencies:
+  - migrate
+  - serialization
+  - media
+  - redirect
+core_version_requirement: ^8 || ^9

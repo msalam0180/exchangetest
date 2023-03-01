@@ -1,0 +1,74 @@
+diff --git a/src/Plugin/better_exposed_filters/filter/FilterWidgetBase.php b/src/Plugin/better_exposed_filters/filter/FilterWidgetBase.php
+index 7a32942..d8158ab 100644
+--- a/src/Plugin/better_exposed_filters/filter/FilterWidgetBase.php
++++ b/src/Plugin/better_exposed_filters/filter/FilterWidgetBase.php
+@@ -72,6 +72,7 @@ abstract class FilterWidgetBase extends BetterExposedFiltersWidgetBase implement
+         'rewrite' => [
+           'filter_rewrite_values' => '',
+         ],
++        'replace_all_with_none' => FALSE,
+         'sort_options' => FALSE,
+       ],
+     ];
+@@ -131,6 +132,12 @@ abstract class FilterWidgetBase extends BetterExposedFiltersWidgetBase implement
+       ];
+     }
+ 
++    $form['advanced']['replace_all_with_none'] = [
++      '#type' => 'checkbox',
++      '#title' => $this->t('Replace the all option with none'),
++      '#default_value' => $this->configuration['advanced']['replace_all_with_none'],
++    ];
++
+     // Allow any filter to be collapsible.
+     $form['advanced']['collapsible'] = [
+       '#type' => 'checkbox',
+@@ -192,6 +199,12 @@ abstract class FilterWidgetBase extends BetterExposedFiltersWidgetBase implement
+       // }
+     }
+ 
++    if ($this->configuration['advanced']['replace_all_with_none']) {
++      // Replace 'All' with 'None'.
++      $form[$field_id]['#options']['All'] = $this->t('- None -');
++      $form[$field_id]['#process'][] = [$this, 'resetFilter'];
++    }
++
+     // Identify all exposed filter elements.
+     $identifier = $filter_id;
+     $exposed_label = $filter->options['expose']['label'];
+@@ -329,4 +342,35 @@ abstract class FilterWidgetBase extends BetterExposedFiltersWidgetBase implement
+     return $form[$filter_id]['#type'] ?? $form[$filter_id]['value']['#type'] ?? '';
+   }
+ 
++  /**
++   * Reset filter value for the element associated.
++   *
++   * This is a #process callback.
++   *
++   * @param array $element
++   *   The relevant element.
++   * @param \Drupal\Core\Form\FormStateInterface $form_state
++   *   The current state of the form.
++   *
++   * @return array
++   *   The processed element.
++   */
++  public function resetFilter(array $element, FormStateInterface $form_state) {
++    $name = $element['#name'];
++
++    // Remove the view input value for this field if the value is set to 'All'.
++    // Originally this was using _none, but that would cause an invalid value
++    // error.
++    if ($form_state->getValue($name) == 'All') {
++      $input = $this->view->getExposedInput();
++      unset($input[$name]);
++
++      $input['__none'] = 'This is a dummy value that prevents an empty() check in ViewExecutable::getExposedInput() from being true, overwriting the removal of $input[$name] above because views then pulls in values from the query (again).';
++
++      $this->view->setExposedInput($input);
++    }
++
++    return $element;
++  }
++
+ }

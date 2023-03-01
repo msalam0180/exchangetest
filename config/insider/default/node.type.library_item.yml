@@ -1,0 +1,34 @@
+uuid: c90bf3e6-e376-43df-b921-873832f02625
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_save_redirect
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  node_save_redirect:
+    save_type: '0'
+    save_location: ''
+    save_destination: 0
+    edit_type: '2'
+    edit_location: ''
+    edit_destination: 1
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+    default_moderation_state: draft
+name: 'Library Item'
+type: library_item
+description: 'Information pages about databases and datasets managed by the SEC Library'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

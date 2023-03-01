@@ -1,0 +1,22 @@
+uuid: 221715d3-c662-406b-8833-8dab3b3a0036
+langcode: en
+status: false
+dependencies:
+  module:
+    - help
+  theme:
+    - insider
+_core:
+  default_config_hash: 3aRrOi4g-PAMa61PniLVrSZz1YT9x2bFYIXMpQylKI0
+id: secgov_help
+theme: insider
+region: header
+weight: -7
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

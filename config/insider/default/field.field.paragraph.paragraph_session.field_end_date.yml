@@ -1,0 +1,23 @@
+uuid: f696acd6-0273-4090-a1bc-ab3d21dfb673
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_end_date
+    - paragraphs.paragraphs_type.paragraph_session
+  module:
+    - datetime
+_core:
+  default_config_hash: bia6oZRkVahKaLu8fADoLOmxiqIdPJus1_tb1rTjYB4
+id: paragraph.paragraph_session.field_end_date
+field_name: field_end_date
+entity_type: paragraph
+bundle: paragraph_session
+label: 'End Date'
+description: 'Date format: yyyy-mm-dd hh:mm:ss AM/PM'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

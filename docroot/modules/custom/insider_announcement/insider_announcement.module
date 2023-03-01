@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Contains insider_announcement.module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the FORM_ID() form.
+ */
+function insider_announcement_form_node_announcement_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  _insider_announcement_form_setup($form, $form_state);
+  $form['#validate'][] = '_insider_announcement_form_node_announcement_validate';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the FORM_ID() form.
+ */
+function insider_announcement_form_node_announcement_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  _insider_announcement_form_setup($form, $form_state);
+  $form['#validate'][] = '_insider_announcement_form_node_announcement_validate';
+}
+
+/**
+ * Setup the form
+ */
+function _insider_announcement_form_setup(&$form, FormStateInterface $form_state) {
+  $form['#attached']['library'][] = 'insider_announcement/insider_announcement';
+}
+/**
+ * Validates submission values in the FORM_ID() form.
+ */
+function _insider_announcement_form_node_announcement_validate(array &$form, FormStateInterface $form_state) {
+
+  if ($form_state->hasValue('field_link_display')) {
+    $fieldLinkDisplay = $form_state->getValue("field_link_display");
+    if ($fieldLinkDisplay[0]['value'] == 'self') {
+
+      $body = $form_state->getValue("body");
+      if (empty($body[0]['value'])) {
+        $form_state->setErrorByName('body', t("Please enter a body."));
+        $form["body"]['widget'][0]['value']['#required'] = TRUE;
+      }
+    }
+  }
+
+  /* validate to, from, and date fields for Memos/Obits */
+  if ($form_state->hasValue('field_announcement_type')) {
+    $fieldAnnouncementType = $form_state->getValue("field_announcement_type");
+    if (!empty($fieldAnnouncementType[0]['target_id']) &&
+      ($fieldAnnouncementType[0]['target_id'] === '196' ||
+        $fieldAnnouncementType[0]['target_id'] === '176')) {
+
+      $toField = $form_state->getValue("field_to");
+      if (empty($toField[0]['value'])) {
+        $form_state->setErrorByName('field_to', t("Please enter a To value."));
+        $form["field_to"]['widget'][0]['value']['#required'] = TRUE;
+      }
+
+      $fromField = $form_state->getValue("field_from");
+      if (empty($fromField[0]['value'])) {
+        $form_state->setErrorByName('field_from', t("Please enter a From value."));
+        $form["field_from"]['widget'][0]['value']['#required'] = TRUE;
+      }
+
+      $dateField = $form_state->getValue("field_date");
+      if (empty($dateField[0]['value'])) {
+        $form_state->setErrorByName('field_date', t("Please enter a Date value."));
+        $form["field_date"]['widget'][0]['value']['#required'] = TRUE;
+      }
+    }
+  }
+}

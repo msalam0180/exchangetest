@@ -1,0 +1,183 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element\PasswordConfirm;
+
+/**
+ * @file
+ * Adds customizations to admin area of Drupal
+ */
+
+/**
+ * Implements hook_page_attachments().
+ *
+ * Adds the drupal.contextual-links library to the page for any user who has the
+ * 'access contextual links' permission.
+ *
+ * @see contextual_preprocess()
+ */
+function sec_admin_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'sec_admin/env_indicator';
+  $page['#attached']['library'][] = 'sec_admin/ckeditor_linkit';
+
+  // DI-6214 Add stylesheet for static file links
+  // TODO: Can remove this once static file content type is removed
+  $page['#attached']['library'][] = 'sec_admin/file_customizations';
+
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+    return;
+  }
+
+  // DI-6214 If path is /node/add/file then return 403 unless user has administrator role
+  // Have to add this custom check because sitebuilder role has administer content types permission which grants
+  // access to all /node/add/[content-type] paths.
+  // TODO: Can remove this once static file content type is removed
+  $current_path = \Drupal::service('path.current')->getPath();
+  if ($current_path === '/node/add/file') {
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    if (!in_array('administrator', $roles)) {
+      throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+    }
+  }
+
+  $page['#attached']['library'][] = 'sec_admin/customizations';
+}
+
+/*
+ * Implements hook_form_FORM_ID_alter.
+ *
+ * Move the 'field_field_name' field to the 'path' fieldset.
+ */
+
+function sec_admin_form_node_form_alter(&$form, &$form_state) {
+  if (isset($form['field_override_modified_date'])) {
+    $form['override_date_detail'] = array(
+      '#type' => 'details',
+      '#title' => t('Override Modified Date'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+      '#group' => 'advanced',
+      '#weight' => 100,
+    );
+    $form['override_date_detail']['details'][0] = $form['field_override_modified_date'];
+    $form['field_override_modified_date']['#access'] = FALSE;
+    unset($form['field_override_modified_date']);
+  }
+}
+
+function strpos_arr($haystack, $needle) {
+  if (!is_array($needle)) $needle = array($needle);
+  foreach ($needle as $what) {
+    if (($pos = strpos($haystack, $what)) !== false) return $pos;
+  }
+  return false;
+}
+
+function sec_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Adding Required help text to forms
+  $forms_needs_required_help = false;
+  $need_help = array("node_", "media_", "taxonomy_term_", "taxonomy_vocabulary_", "block_content_", "block_form", "menu_link_content_");
+  $forms_needs_required_help = strpos_arr($form_id, $need_help);
+
+  if ($forms_needs_required_help !== false) {
+    $form['required-help'] = [
+      '#type' => 'item',
+      '#markup' => '<span class="required-help">' . t('*Fields marked with an asterisk(*) are required.') . '</span>',
+      '#weight' => -21,
+    ];
+  }
+
+  //Disable HTML5 Validation until solved - https://www.drupal.org/node/1797438
+  $form['#attributes']['novalidate'] = 'novalidate';
+
+  // DI-6240: Disable autocomplete on Password confirm fields
+  if ($form_id == 'user_form') {
+    $form['account']['pass']['#process'][] = '_sec_admin_process_password_confirm';
+  }
+}
+
+/**
+ * Alters password confirm fields to not use autocomplete
+ */
+function _sec_admin_process_password_confirm($element, FormStateInterface $form_state, &$complete_form){
+  $element = PasswordConfirm::processPasswordConfirm($element, $form_state, $complete_form);
+  $element['pass1']['#attributes']['autocomplete'] = 'off';
+  $element['pass2']['#attributes']['autocomplete'] = 'off';
+  return $element;
+}
+
+/**
+ * hook page top
+ *
+ * @param array $page_top
+ * @return void
+ */
+function sec_admin_page_top(array &$page_top) {
+
+  // remove prod switcher link
+  if (!empty($_ENV['AH_PRODUCTION']) && $_ENV['AH_PRODUCTION'] == 1) {
+    unset($page_top["indicator"]["switcher"]["#links"]["prod"]);
+  } else {
+    //overwrite environment name
+    $page_top["indicator"]["#title"] = _sec_admin_env_name();
+    $page_top["indicator"]["#attached"]["drupalSettings"]["environmentIndicator"]['name'] = _sec_admin_env_name();
+
+    // remove train switcher link
+    if (!empty($_ENV['AH_SITE_ENVIRONMENT']) && $_ENV['AH_SITE_ENVIRONMENT'] == 'train') {
+      unset($page_top["indicator"]["switcher"]["#links"]["train"]);
+    }
+  }
+}
+
+/**
+ * helper function to provide env names
+ *
+ * @return void
+ */
+function _sec_admin_env_name() {
+  // find acquia environment name
+  if (!empty($_ENV['AH_SITE_ENVIRONMENT']) && $_ENV['AH_SITE_ENVIRONMENT'] != 'local') {
+    $start = strpos($_SERVER['HTTP_HOST'], '.');
+    $env = substr($_SERVER['HTTP_HOST'], 0, $start);
+  }
+  // find local environment name
+  else {
+    $start = strpos($_SERVER['HTTP_HOST'], '.') + 1;
+    $end = strrpos($_SERVER['HTTP_HOST'], '.');
+    $env = 'Local ' . substr($_SERVER['HTTP_HOST'], $start, $end - $start);
+  }
+  return $env;
+}
+
+/**
+ * Updates exposed filter values so that batch data export filters properly DI-5508
+ */
+function _sec_admin_export_submit(&$form, FormStateInterface $form_state) {
+  $form_state->setValues($form_state->getUserInput());
+}
+
+/**
+ * Implements hook_FORM_ID_alter()
+ */
+function sec_admin_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Add custom submit handler to update exposed filter values on submission DI-5508
+  if ($form['#action'] === '/admin/content/export') {
+    array_unshift($form['#submit'], '_sec_admin_export_submit');
+  }
+}
+
+/**
+ * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter() per DI-6974.
+ */
+function sec_admin_field_widget_single_element_image_image_form_alter(array &$element, \Drupal\Core\Form\FormStateInterface $form_state, array $context) {
+  $element['#process'][] = '_image_alt_text_change';
+}
+
+function _image_alt_text_change(array &$element, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $element['alt']['#size'] = '125';
+  $element['alt']['#description'] = t('Short description of the image used by screen readers and displayed when the image is not loaded. This is important for accessibility. The optimal size for alternative text is 125 characters or less, but if needed you can type up to 512 characters.');
+  return $element;
+}

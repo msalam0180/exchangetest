@@ -1,0 +1,23 @@
+uuid: 2ac33dc8-b008-48a5-9a85-3b8eb55bab11
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_override_modified_date
+    - node.type.landing_page
+  module:
+    - datetime
+_core:
+  default_config_hash: KnNk8YeVMSQrU2hn2rpYitJ_Ep7JrBj8QnjhUsXUklI
+id: node.landing_page.field_override_modified_date
+field_name: field_override_modified_date
+entity_type: node
+bundle: landing_page
+label: 'Override Modified Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

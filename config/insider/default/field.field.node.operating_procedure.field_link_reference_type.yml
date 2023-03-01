@@ -1,0 +1,23 @@
+uuid: 1b1f670a-8330-4bbd-bbd2-3b2d57a49130
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_link_reference_type
+    - node.type.operating_procedure
+  module:
+    - options
+_core:
+  default_config_hash: r85Gb7waC3-ZjrJqzyawkUZ6I5TQI8Dq91vyWiLlEso
+id: node.operating_procedure.field_link_reference_type
+field_name: field_link_reference_type
+entity_type: node
+bundle: operating_procedure
+label: 'Link/Media Type'
+description: 'Select the type of link to be used. Link will embed the Link node, media will embed the Media type.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

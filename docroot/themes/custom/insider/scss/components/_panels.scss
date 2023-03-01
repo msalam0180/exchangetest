@@ -1,0 +1,269 @@
+//
+// LEGACY: Panels
+// Currently a bunch of styles relating to Panels (see note below)
+// --------------------------------------------------
+
+//TODO: need to refactor this, may not happen until after sidebars are added to the site
+
+
+/* Landing Pages */
+
+.panel-1col {
+  margin-top: 0;
+}
+/* Panel: Right Sidebar */
+.panel-2col {
+  font-size: 1em;
+
+  .stylized-box-1, .stylized-box-2, .stylized-box-3 {
+    padding: 10px;
+
+    h2, h3 {
+      margin: 0;
+      padding: 0;
+    }
+    hr { margin-bottom: 5px; }
+    ul {
+      margin: 20px 0px;
+      list-style: disc;
+    }
+
+    li {
+      line-height: 1.5;
+      margin-bottom: 5px;
+    }
+  }
+
+  @include breakpoint('small') {
+    display: block;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  /* Panel: Top Panel; */
+  .panel-top {
+    &:after {
+      clear: both;
+      content: ' ';
+      display: block;
+      height: 1px;
+      width: 100%;
+    }
+  }
+
+  #content & .panel-col-first {
+    @include span(7.5);
+
+    p { font-size: 1em; }
+
+    a {
+      color: $azure;
+      text-decoration: none;
+      &:hover { text-decoration: underline; }
+      &:visited { color: $anchor-visited-color; }
+    }
+
+    h2 {
+        @include raleway;
+        font-size: 1.5em;
+        font-weight: 600;
+        line-height: 1.15;
+        margin: 0px;
+        padding: 0px 0px 10px;
+        a {
+            color: $navy;
+            text-decoration: none;
+
+            &:hover {
+                color: $azure;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .item-list {
+      ul { margin: 0 !important; }
+      li {
+        list-style: none;
+        padding-left: 0;
+      }
+    }
+
+    @include breakpoint('medium','landscape') {
+      @include span(7.5);
+      margin-right: 0;
+    }
+
+    @include breakpoint('medium', 'portrait'){
+      @include span(7.5);
+      padding-left: 10px;
+    }
+
+    @include breakpoint('medium','portrait','ipad'){
+      @include span(7.5);
+      padding-left: 10px;
+    }
+
+    @include breakpoint('small'){
+      @include span(12);
+      float: none;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: 20px;
+      width: 100%;
+    }
+
+    @include breakpoint('x-small'){
+      @include span(12);
+      float: none;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 15px;
+      width: 100%;
+    }
+
+    .block {
+      background: none;
+      clear: both;
+      color: $navy;
+      display: block;
+      font-size: 13px;
+      margin: 0 0 15px 0;
+      padding-top: 5px 0 10px 0;
+      text-align: left;
+      width: 100%;
+
+      @include breakpoint('medium','portrait'){
+        margin-left: 0.625em;
+      }
+      @include breakpoint('small'){
+        padding: 0;
+      }
+      .views-element-container {
+        width: 100%;
+      }
+    }
+
+    @include breakpoint('small'){
+      .nested-column-2 {
+        clear: both;
+        display: block;
+        float: none;
+        width: 100%;
+        margin: 0 0 1em 0;
+      }
+    }
+    .field_center_2_box {
+        width: 100%;
+    }
+  }
+
+  .panel-col-last {
+    display: block;
+    float: right;
+    line-height:1.5;
+    margin-right: 0;
+    padding-left: 0.625em;
+    @include span(4.5 last);
+
+    @include breakpoint('medium','landscape') {
+      @include span(4.5 last);
+      padding-left: 0.625em;
+    }
+
+    @include breakpoint('medium','portrait') {
+      @include span(4.5 last);
+      padding-left: 0.625em;
+      padding-right: 20px;
+    }
+
+    @include breakpoint('medium','portrait','ipad') {
+      @include span(4.5 last);
+      padding-left: 0.625em;
+      padding-right: 20px;
+    }
+
+    @include breakpoint('small') {
+      clear: both;
+      width: 100%;
+      margin-right: 0;
+      padding: 0 !important;
+    }
+
+    @include breakpoint('x-small') {
+      clear: both;
+      width: 100%;
+      margin-right: 0;
+    }
+
+    .inside {
+      margin: 0;
+    }
+
+    .block, [data-block-id*='-'] {
+      background: none;
+      clear: both;
+      color: $navy;
+      display: block;
+      margin: 0;
+      padding-bottom: 10px;
+
+      @include breakpoint('medium'){
+        padding-right: 0;
+      }
+    }
+
+    div[id^='tabs-'] ul, div.tabs ul {
+      margin: 0;
+    }
+
+    #table_paging {
+      display: none;
+      height: 1px;
+    }
+
+    @include breakpoint('small'){
+      @include span(12);
+      float: none;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 15px;
+    }
+
+    header {
+      margin-bottom:0px !important;
+      &:after {
+        clear: both;
+        content: ' ';
+        display: block;
+      }
+    }
+
+    .views-row {
+      padding-bottom: 8px;
+    }
+
+    .views-field-field-display-title {
+      font-size: 1.15em;
+    }
+
+    .views-field-field-date {
+      color: #6f7479;
+    }
+
+    .more-link {
+      text-align: right;
+      padding-top: 5px;
+      @include breakpoint('medium','portrait'){
+        display: none !important;
+      }
+    }
+
+    .dynamic-block {
+      ul {
+        list-style: none;
+        margin: 0px;
+      }
+    }
+  }
+}

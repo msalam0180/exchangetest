@@ -1,0 +1,31 @@
+uuid: 7021a850-1e9f-433d-8790-40d5e686d348
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_site_section_theme
+    - taxonomy.vocabulary.site_section
+    - taxonomy.vocabulary.site_section_theme
+_core:
+  default_config_hash: 1QWA1-7UXcFyyqYsFgeiCLaI3CyQJwxZhiVcq_2OmXo
+id: taxonomy_term.site_section.field_site_section_theme
+field_name: field_site_section_theme
+entity_type: taxonomy_term
+bundle: site_section
+label: 'Microsite Theme'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      site_section_theme: site_section_theme
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

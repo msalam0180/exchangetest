@@ -1,0 +1,573 @@
+uuid: 59870743-8158-44b0-ac28-10078de57da1
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: dq6xjRitpbhaIrmUdn_L31EoAJ32fLHxBeB9SKNtuXQ
+id: pressrelease
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - news
+  - pressrelease
+migration_group: sec
+label: 'JSON import of press release content'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  item_selector: 0
+  urls: 'http://secgovdcmdev1.prod.acquia-sites.com/sites/default/files/migration/converted/secpressrelease.json'
+  fields:
+    -
+      name: id
+      label: Identifier
+      selector: id
+    -
+      name: createddate
+      label: 'Created Date'
+      selector: createddate
+    -
+      name: updateddate
+      label: 'Updated Date'
+      selector: updateddate
+    -
+      name: createdby
+      label: 'Created By'
+      selector: createdby
+    -
+      name: updatedby
+      label: 'Updated By'
+      selector: updatedby
+    -
+      name: name
+      label: Title
+      selector: name
+    -
+      name: SECAct
+      label: Act
+      selector: SECAct
+    -
+      name: SECAudience
+      label: Audience
+      selector: SECAudience
+    -
+      name: SECBody
+      label: 'Article Body'
+      selector: SECBody
+    -
+      name: SECDate
+      label: 'Publish Date'
+      selector: SECDate
+    -
+      name: SECDescriptionAbstract
+      label: 'Description / Abstract'
+      selector: SECDescriptionAbstract
+    -
+      name: SECDisplayonHomePage
+      label: 'Display on Home Page'
+      selector: SECDisplayonHomePage
+    -
+      name: SECDivisionOffice
+      label: Division/Office
+      selector: SECDivisionOffice
+    -
+      name: SECLocation
+      label: Location
+      selector: SECLocation
+    -
+      name: SECMoreAboutThisTopicTitle1
+      label: 'More About This Topic:Title'
+      selector: SECMoreAboutThisTopicTitle1
+    -
+      name: SECMoreAboutThisTopicTitle2
+      label: 'More About This Topic:Title 2'
+      selector: SECMoreAboutThisTopicTitle2
+    -
+      name: SECMoreAboutThisTopicTitle3
+      label: 'More About This Topic:Title 3'
+      selector: SECMoreAboutThisTopicTitle3
+    -
+      name: SECMoreAboutThisTopicURL1
+      label: 'More About This Topic:URL'
+      selector: SECMoreAboutThisTopicURL1
+    -
+      name: SECMoreAboutThisTopicURL2
+      label: 'More About This Topic:URL 2'
+      selector: SECMoreAboutThisTopicURL2
+    -
+      name: SECMoreAboutThisTopicURL3
+      label: 'More About This Topic:URL 3'
+      selector: SECMoreAboutThisTopicURL3
+    -
+      name: SECOverrideModifiedDate
+      label: 'Override Modified Date'
+      selector: SECOverrideModifiedDate
+    -
+      name: SECRegulation
+      label: Regulation
+      selector: SECRegulation
+    -
+      name: SECRelatedMaterialsTitle1
+      label: 'Related Materials:Title 1'
+      selector: SECRelatedMaterialsTitle1
+    -
+      name: SECRelatedMaterialsTitle2
+      label: 'Related Materials:Title 2'
+      selector: SECRelatedMaterialsTitle2
+    -
+      name: SECRelatedMaterialsTitle3
+      label: 'Related Materials:Title 3'
+      selector: SECRelatedMaterialsTitle3
+    -
+      name: SECRelatedMaterialsTitle4
+      label: 'Related Materials:Title 4'
+      selector: SECRelatedMaterialsTitle4
+    -
+      name: SECRelatedMaterialsTitle5
+      label: 'Related Materials:Title 5'
+      selector: SECRelatedMaterialsTitle5
+    -
+      name: SECRelatedMaterialsURL1
+      label: 'Related Materials:URL 1'
+      selector: SECRelatedMaterialsURL1
+    -
+      name: SECRelatedMaterialsURL2
+      label: 'Related Materials:URL 2'
+      selector: SECRelatedMaterialsURL2
+    -
+      name: SECRelatedMaterialsURL3
+      label: 'Related Materials:URL 3'
+      selector: SECRelatedMaterialsURL3
+    -
+      name: SECRelatedMaterialsURL4
+      label: 'Related Materials:URL 4'
+      selector: SECRelatedMaterialsURL4
+    -
+      name: SECRelatedMaterialsURL5
+      label: 'Related Materials:URL 5'
+      selector: SECRelatedMaterialsURL5
+    -
+      name: SECReleaseNumber
+      label: 'Release Number'
+      selector: SECReleaseNumber
+    -
+      name: SECSubjectPerson
+      label: 'Subject Person'
+      selector: SECSubjectPerson
+    -
+      name: SECSubTitle
+      label: 'Sub Title'
+      selector: SECSubTitle
+    -
+      name: SECTitle
+      label: SECTitle
+      selector: SECTitle
+    -
+      name: SECTags
+      label: Tags
+      selector: SECTags
+  ids:
+    id:
+      type: string
+process:
+  type:
+    plugin: default_value
+    default_value: news
+  title: name
+  uid:
+    plugin: static_map
+    source: createdby
+    map:
+      AtaevA: 1
+      BacinoK: 1
+      bael: 1
+      BolledduS: 1
+      BrunoC: 1
+      BUDGEJ: 1
+      buenaventurac: 1
+      BurnsJa: 1
+      caldwellm: 1
+      CallahanK: 1
+      careers_user: 1
+      cathera: 1
+      ChristieF: 1
+      cmuser: 1
+      cmusermanual: 1
+      corpfin_user: 1
+      daullg: 1
+      dinitsl: 1
+      doylene: 1
+      DrennanL: 1
+      EARLEK: 1
+      EdwardsT: 1
+      EgerdalL: 1
+      engj: 1
+      findleys: 1
+      frazierd: 1
+      FungR: 1
+      fwadmin: 1
+      HamscherW: 1
+      HannonR: 1
+      HARMONF: 1
+      hinojosan: 1
+      hudsonm: 1
+      im_user: 1
+      irzinskis: 1
+      johnsondav: 1
+      JohnW: 1
+      jonesbra: 1
+      KarpR: 1
+      KearneyCh: 1
+      kenneyn: 1
+      KirbyD: 1
+      kironc: 1
+      KurupL: 1
+      LeeL: 1
+      LEWISRO: 1
+      limn: 1
+      MAIHLET: 1
+      marquignyr: 1
+      mcmillanb: 1
+      nguyenv: 1
+      oiea_user: 1
+      omwi_user: 1
+      ParkSI: 1
+      RandR: 1
+      renkalad: 1
+      RoseR: 1
+      schwartzj: 1
+      ScottC: 1
+      secgovappmon: 1
+      SellersJ: 1
+      SerranoI: 1
+      SkrzypekF: 1
+      spicherr: 1
+      spiegelk: 1
+      stattele: 1
+      SugarmanR: 1
+      TabakisP: 1
+      thompsonte: 1
+      thomsona: 1
+      trimblem: 1
+      velidiv: 1
+      VirgilA: 1
+      whitery: 1
+      whitmanj: 1
+    default_value: 1
+  revision_uid:
+    plugin: static_map
+    source: updatedby
+    map:
+      AtaevA: 1
+      BacinoK: 1
+      bael: 1
+      BolledduS: 1
+      BrunoC: 1
+      BUDGEJ: 1
+      buenaventurac: 1
+      BurnsJa: 1
+      caldwellm: 1
+      CallahanK: 1
+      careers_user: 1
+      cathera: 1
+      ChristieF: 1
+      cmuser: 1
+      cmusermanual: 1
+      corpfin_user: 1
+      daullg: 1
+      dinitsl: 1
+      doylene: 1
+      DrennanL: 1
+      EARLEK: 1
+      EdwardsT: 1
+      EgerdalL: 1
+      engj: 1
+      findleys: 1
+      frazierd: 1
+      FungR: 1
+      fwadmin: 1
+      HamscherW: 1
+      HannonR: 1
+      HARMONF: 1
+      hinojosan: 1
+      hudsonm: 1
+      im_user: 1
+      irzinskis: 1
+      johnsondav: 1
+      JohnW: 1
+      jonesbra: 1
+      KarpR: 1
+      KearneyCh: 1
+      kenneyn: 1
+      KirbyD: 1
+      kironc: 1
+      KurupL: 1
+      LeeL: 1
+      LEWISRO: 1
+      limn: 1
+      MAIHLET: 1
+      marquignyr: 1
+      mcmillanb: 1
+      nguyenv: 1
+      oiea_user: 1
+      omwi_user: 1
+      ParkSI: 1
+      RandR: 1
+      renkalad: 1
+      RoseR: 1
+      schwartzj: 1
+      ScottC: 1
+      secgovappmon: 1
+      SellersJ: 1
+      SerranoI: 1
+      SkrzypekF: 1
+      spicherr: 1
+      spiegelk: 1
+      stattele: 1
+      SugarmanR: 1
+      TabakisP: 1
+      thompsonte: 1
+      thomsona: 1
+      trimblem: 1
+      velidiv: 1
+      VirgilA: 1
+      whitery: 1
+      whitmanj: 1
+    default_value: 1
+  created:
+    -
+      plugin: machine_name
+      source: createddate
+    -
+      plugin: substr
+      start: 0
+      length: 10
+  changed:
+    -
+      plugin: machine_name
+      source: updateddate
+    -
+      plugin: substr
+      start: 0
+      length: 10
+  field_act:
+    plugin: static_map
+    source: SECAct
+    map:
+      'Dodd-Frank Act of 2010': 84
+      'Dodd-Frank Wall Street Reform and Consumer Protection Act of 2010': 84
+      'Investment Advisers Act of 1940': 85
+      'Investment Company Act of 1940': 86
+      'JOBS Act of 2012': 87
+      'Sarbanes-Oxley Act of 2002': 88
+      'Securities Act of 1933': 83
+      'Securities Exchange Act of 1934': 89
+      'Trust Indenture Act of 1939': 90
+  field_audience:
+    plugin: static_map
+    source: SECAudience
+    map:
+      Accountants: 60
+      Auditors: 61
+      Broker-Dealers: 62
+      'Clearing Agencies': 63
+      'Compliance Officers': 64
+      'Credit Rating Agencies': 65
+      'EDGAR Filers': 66
+      International: 67
+      'Investment Advisors': 68
+      'Investment Advisers': 68
+      'Investment Companies': 69
+      Investors: 70
+      'Municipal Advisors': 71
+      'Municipal Securities': 72
+      'Non-Regulated Entities': 73
+      NRSROs: 74
+      NRSRO: 74
+      'Public Companies': 75
+      'Public Company Accounting Oversight Board': 76
+      'Security-Based Swap Data Repositories': 77
+      'Self-Regulatory Organizations': 78
+      'Small Businesses': 79
+      'Transfer Agents': 80
+      Whistleblowers: 81
+      'XBRL Filers': 82
+  body:
+    plugin: parse_embedded_content
+    source: SECBody
+  field_description_abstract:
+    plugin: skip_on_empty
+    method: process
+    source: SECDescriptionAbstract
+  field_display_title: SECTitle
+  field_location_news: SECLocation
+  field_date:
+    -
+      plugin: date_import
+      source: SECOverrideModifiedDate
+  field_more_about_this_topic:
+    -
+      plugin: get
+      source:
+        - SECMoreAboutThisTopicTitle1
+        - SECMoreAboutThisTopicURL1
+        - SECMoreAboutThisTopicTitle2
+        - SECMoreAboutThisTopicURL2
+        - SECMoreAboutThisTopicTitle3
+        - SECMoreAboutThisTopicURL3
+    -
+      plugin: flatten
+    -
+      plugin: link_import
+  field_news_type_news:
+    plugin: default_value
+    default_value: 21
+  field_primary_division_office:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: SECDivisionOffice/0
+    -
+      plugin: static_map
+      map:
+        Agency-wide: 30
+        Acquisitions: 31
+        'Administrative Law Judges': 32
+        'Chief Accountant': 33
+        'Chief Operating Officer': 34
+        'Compliance Inspections and Examinations': 35
+        'Corporation Finance': 36
+        'Credit Ratings': 37
+        'Economic and Risk Analysis': 38
+        Enforcement: 39
+        'Equal Employment Opportunity': 40
+        'Ethics Counsel': 41
+        'Financial Management': 42
+        'General Counsel': 43
+        'Human Resources': 44
+        'Information Technology': 45
+        'Inspector General': 46
+        'International Affairs': 47
+        'Investment Management': 48
+        'Investor Advocate': 49
+        'Investor Education and Advocacy': 50
+        'Legislative and Intergovernmental Affairs': 51
+        'Minority and Women Inclusion': 52
+        'Municipal Securities': 53
+        'Public Affairs': 54
+        Secretary: 55
+        'Structured Disclosure': 56
+        'Support Operations': 57
+        'Trading and Markets': 58
+        Whistleblower: 59
+  field_publish_date:
+    -
+      plugin: date_import
+      source: SECDate
+  field_regulation:
+    plugin: static_map
+    source: SECRegulation
+    map:
+      'Regulation 13D': 91
+      'Regulation 14A': 92
+      'Regulation 14C': 93
+      'Regulation 14D': 94
+      'Regulation 14E': 95
+      'Regulation 15D': 96
+      'Regulation A': 97
+      'Regulation A-R': 100
+      'Regulation AB': 98
+      'Regulation AC': 99
+      'Regulation ATS': 101
+      'Regulation BTR': 102
+      'Regulation C': 103
+      'Regulation CE': 104
+      'Regulation D': 105
+      'Regulation E': 106
+      'Regulation FD': 107
+      'Regulation G': 108
+      'Regulation M': 109
+      'Regulation M-A': 110
+      'Regulation NMS': 111
+      'Regulation S': 112
+      'Regulation S-B': 113
+      'Regulation SHO': 114
+  field_related_materials:
+    -
+      plugin: get
+      source:
+        - SECRelatedMaterialsTitle1
+        - SECRelatedMaterialsURL1
+        - SECRelatedMaterialsTitle2
+        - SECRelatedMaterialsURL2
+        - SECRelatedMaterialsTitle3
+        - SECRelatedMaterialsURL3
+        - SECRelatedMaterialsTitle4
+        - SECRelatedMaterialsURL4
+        - SECRelatedMaterialsTitle5
+        - SECRelatedMaterialsURL5
+    -
+      plugin: flatten
+    -
+      plugin: link_import
+  field_release_number: SECReleaseNumber
+  sec_subject_person:
+    plugin: explode
+    delimiter: ':'
+    source: SECSubjectPerson
+  field_person:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: '@sec_subject_person/0/1'
+    -
+      plugin: migration
+      migration: secperson
+  field_sub_title: SECSubTitle
+  field_division_office:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: SECDivisionOffice/1
+    -
+      plugin: static_map
+      map:
+        Agency-wide: 30
+        Acquisitions: 31
+        'Administrative Law Judges': 32
+        'Chief Accountant': 33
+        'Chief Operating Officer': 34
+        'Compliance Inspections and Examinations': 35
+        'Corporation Finance': 36
+        'Credit Ratings': 37
+        'Economic and Risk Analysis': 38
+        Enforcement: 39
+        'Equal Employment Opportunity': 40
+        'Ethics Counsel': 41
+        'Financial Management': 42
+        'General Counsel': 43
+        'Human Resources': 44
+        'Information Technology': 45
+        'Inspector General': 46
+        'International Affairs': 47
+        'Investment Management': 48
+        'Investor Advocate': 49
+        'Investor Education and Advocacy': 50
+        'Legislative and Intergovernmental Affairs': 51
+        'Minority and Women Inclusion': 52
+        'Municipal Securities': 53
+        'Public Affairs': 54
+        Secretary: 55
+        'Structured Disclosure': 56
+        'Support Operations': 57
+        'Trading and Markets': 58
+        Whistleblower: 59
+  field_tags:
+    -
+      plugin: entity_lookup
+      source: SECTags
+destination:
+  plugin: 'entity:node'
+migration_dependencies: null

@@ -1,0 +1,22 @@
+uuid: ab67b0e8-f3c1-4efd-a2a2-2bdad54c1ff2
+langcode: en
+status: false
+dependencies: {  }
+id: acquia
+label: Acquia
+description: 'Config for acquia environments'
+weight: 1
+folder: ../config/insider/acquia
+module:
+  acquia_search: 0
+  memcache: 0
+  r4032login: 0
+  simplesamlphp_auth: 0
+theme: {  }
+blacklist:
+  - acquia_search.settings
+  - r4032login.settings
+  - simplesamlphp_auth.settings
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true

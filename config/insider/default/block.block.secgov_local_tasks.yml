@@ -1,0 +1,22 @@
+uuid: c484db2e-3bf5-4e60-8d6e-66f4ac6dcc8c
+langcode: en
+status: false
+dependencies:
+  theme:
+    - insider
+_core:
+  default_config_hash: 5UAwDoqc1Hg-pt-IZ-oMKg7ySPIbDLTlRmOej464lGM
+id: secgov_local_tasks
+theme: insider
+region: header
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

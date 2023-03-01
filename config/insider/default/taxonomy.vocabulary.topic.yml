@@ -1,0 +1,10 @@
+uuid: 7f26d660-b664-44a6-a1a5-2bc02db395f8
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 3uZNJmdKCbNIDGxCVoiURFwbti70yEMxSZIdEkw4PF0
+name: Topic
+vid: topic
+description: 'Taxonomy vocabulary for Topics'
+weight: 0

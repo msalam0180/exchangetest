@@ -1,0 +1,8 @@
+uuid: 36da14f3-119d-4878-ac59-9836ba20da38
+langcode: en
+status: true
+dependencies: {  }
+id: human-resources
+label: 'Human Resources'
+description: 'left nav for pages in the Human Resources section'
+locked: false

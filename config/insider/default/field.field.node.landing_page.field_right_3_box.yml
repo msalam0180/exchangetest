@@ -1,0 +1,23 @@
+uuid: c395333a-c7fe-485e-8238-d82dbb83dfab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_right_3_box
+    - node.type.landing_page
+  module:
+    - text
+_core:
+  default_config_hash: 7FvmnHn0Ndoa6rwGEZ_T6plL1L5juZj90SEuS5ASgzA
+id: node.landing_page.field_right_3_box
+field_name: field_right_3_box
+entity_type: node
+bundle: landing_page
+label: 'Right 3 - Box'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

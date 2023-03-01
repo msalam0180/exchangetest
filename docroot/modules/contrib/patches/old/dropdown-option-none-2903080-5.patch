@@ -1,0 +1,116 @@
+diff --git a/better_exposed_filters.install b/better_exposed_filters.install
+index b3fa54ad9..cfb111a6f 100644
+--- a/better_exposed_filters.install
++++ b/better_exposed_filters.install
+@@ -123,6 +123,7 @@ function better_exposed_filters_update_8001() {
+                 ],
+                 // New option.
+                 'sort_options' => FALSE,
++                'add_none_option' => FALSE,
+               ];
+             }
+           }
+diff --git a/config/schema/better_exposed_filters.filter.schema.yml b/config/schema/better_exposed_filters.filter.schema.yml
+index dca60c025..92fd15e0f 100644
+--- a/config/schema/better_exposed_filters.filter.schema.yml
++++ b/config/schema/better_exposed_filters.filter.schema.yml
+@@ -13,6 +13,9 @@ better_exposed_filters_filter_widget:
+         sort_options:
+           type: boolean
+           label: 'Sort filter options alphabetically'
++        add_none_option:
++          type: boolean
++          label: 'Add None option for dropdown'
+         placeholder_text:
+           type: string
+           label: 'Placeholder text for the filter'
+diff --git a/includes/better_exposed_filters.theme.inc b/includes/better_exposed_filters.theme.inc
+index aaa1e096b..7eddd7da7 100644
+--- a/includes/better_exposed_filters.theme.inc
++++ b/includes/better_exposed_filters.theme.inc
+@@ -73,6 +73,27 @@ function better_exposed_filters_preprocess_views_exposed_form(array &$variables)
+   }
+ }
+
++/**
++ * Implements hook_form_alter().
++ */
++function better_exposed_filters_form_alter(&$form, $form_state, $form_id) {
++  if ($form_id == 'views_exposed_form') {
++    $filters = $form_state->get('view')->display_handler->handlers['filter'];
++    if ($filters) {
++      foreach ($filters as $field => $filter) {
++        if (
++          $filter->options['exposed']
++          && array_key_exists($filter->options['id'], $form)
++          && array_key_exists('#default_value', $form[$filter->options['id']])
++          && empty($_REQUEST[$filter->options['id']])
++        ) {
++          $form[$filter->options['id']]['#value'] = $form[$filter->options['id']]['#default_value'];
++        }
++      }
++    }
++  }
++}
++
+ /******************************************************************************
+  * Preprocess functions for BEF themed elements.
+  ******************************************************************************/
+diff --git a/src/Plugin/better_exposed_filters/filter/FilterWidgetBase.php b/src/Plugin/better_exposed_filters/filter/FilterWidgetBase.php
+index c0dbe40d7..471deb90a 100644
+--- a/src/Plugin/better_exposed_filters/filter/FilterWidgetBase.php
++++ b/src/Plugin/better_exposed_filters/filter/FilterWidgetBase.php
+@@ -73,6 +73,7 @@ public function defaultConfiguration() {
+           'filter_rewrite_values' => '',
+         ],
+         'sort_options' => FALSE,
++        'add_none_option' => FALSE,
+       ],
+     ];
+   }
+@@ -141,6 +142,18 @@ public function buildConfigurationForm(array $form, FormStateInterface $form_sta
+       ),
+     ];
+
++    // Remove option - Any -, insert - None - in exposed filter.
++    $form['advanced']['add_none_option'] = [
++      '#type' => 'checkbox',
++      '#title' => $this->t('Add new dropdown option None'),
++      '#default_value' => !empty($this->configuration['advanced']['add_none_option']),
++      '#description' => $this->t(
++        'Inserts a new option <strong>None</strong>, which if selected creates a dummy query condition causing the return of 0 result items.<br /> If you want to remove the <em>- Any -</em> option then use the <em>Rewrite the text displayed</em> from rewrite filers to replace it with empty: <pre>
++- Any -|
++</pre> leaving replace value empty. Make sure you have selected the use of <strong>None</strong> or have a default option seleced.'
++      ),
++    ];
++
+     // Allow any filter to be moved into the secondary options element.
+     $form['advanced']['is_secondary'] = [
+       '#type' => 'checkbox',
+@@ -157,6 +170,8 @@ public function buildConfigurationForm(array $form, FormStateInterface $form_sta
+     return $form;
+   }
+
++  public static $none_option_dummy_option_value = '_none';
++
+   /**
+    * {@inheritdoc}
+    */
+@@ -168,6 +183,17 @@ public function exposedFormAlter(array &$form, FormStateInterface $form_state) {
+     $is_collapsible = $this->configuration['advanced']['collapsible'];
+     $is_secondary = !empty($form['secondary']) && $this->configuration['advanced']['is_secondary'];
+
++    /**
++     * Rebuild options list by inserting None as an option.
++     *
++     * None option represents a dummy condition value which makes the query
++     * return an empty result set.
++     */
++    if ($this->configuration['advanced']['add_none_option']) {
++      $form[$field_id]["#options"] = array(self::$none_option_dummy_option_value => t('- None -')) + $form[$field_id]["#options"];
++      $form[$field_id]['#default_value'] = self::$none_option_dummy_option_value;
++    }
++
+     // Sort options alphabetically.
+     if ($this->configuration['advanced']['sort_options']) {
+       $form[$field_id]['#nested'] = $filter->options['hierarchy'] ?? FALSE;

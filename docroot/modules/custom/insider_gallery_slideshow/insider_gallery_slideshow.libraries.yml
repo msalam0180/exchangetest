@@ -1,0 +1,27 @@
+
+media_gallery:
+  version: 1.1
+  js:
+    components/scripts/media-gallery.js: {preprocess: false}
+  css:
+    layout:
+      components/stylesheets/media-gallery.css: {}
+  dependencies:
+    - core/jquery
+    - core/modernizr
+
+media_boxes:
+  version: 3.3
+  js:
+    components/scripts/jquery.isotope.min.js: {preprocess: false}
+    components/scripts/jquery.imagesLoaded.min.js: {preprocess: false}
+    components/scripts/jquery.transit.js: {}
+    components/scripts/jquery.easing.js: {}
+    components/scripts/waypoints.min.js: {preprocess: false}
+    components/scripts/jquery.mediaBoxes.js: {}
+    components/scripts/jquery.mediaBoxes.dropdown.js: {}
+    components/scripts/jquery.magnific-popup.js: {}
+  css:
+    layout:
+      components/stylesheets/magnific-popup.css: {}
+      components/stylesheets/mediaBoxes.css: {}

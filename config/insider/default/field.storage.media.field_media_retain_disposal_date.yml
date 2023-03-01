@@ -1,0 +1,22 @@
+uuid: 9ab2a292-1d93-4828-aed6-0b87bca199c7
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - media
+_core:
+  default_config_hash: PMG5_kM2DEZDPkyrV7V86GEpg2eD04fdbIV17y_jVjs
+id: media.field_media_retain_disposal_date
+field_name: field_media_retain_disposal_date
+entity_type: media
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

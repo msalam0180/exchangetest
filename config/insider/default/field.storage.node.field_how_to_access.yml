@@ -1,0 +1,21 @@
+uuid: 89c32f95-647a-4bf3-86d0-6d7d2428ecde
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+_core:
+  default_config_hash: BoAq67Xv-yskZHJXiRBKlai51NetQNmuc8m8khphC-8
+id: node.field_how_to_access
+field_name: field_how_to_access
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,16 @@
+uuid: 4acad6eb-905d-4ba6-a60c-ec26b2cef272
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.landing_page
+_core:
+  default_config_hash: Be--4YMgYe4oiflLxTlJW2AhzG_9M7b7QyCXOL--8B0
+id: node_type_landing_page
+entity_type_id: node_type
+entity_id: landing_page
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

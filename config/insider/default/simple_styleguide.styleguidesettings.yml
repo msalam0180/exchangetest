@@ -1,0 +1,32 @@
+default_patterns:
+  headings: headings
+  text: text
+  lists: lists
+  blockquote: blockquote
+  rule: rule
+  table: table
+  alerts: alerts
+  buttons: buttons
+  breadcrumbs: 0
+  forms: 0
+  pagination: 0
+default_colors:
+  - '#273a56|Navy---$primary-color |Usage Description'
+  - '#101f36|Dark Navy---$primary-dk-color |Usage Description'
+  - '#2f64b2|Azure---$secondary-color |Usage Description'
+  - '#25508e|Gray Blue---$tertiary-color |Usage Description'
+  - '#99cccc|Sea-foam Light---$accent-lt-color |Usage Description'
+  - '#339a99|Sea-foam---$accent-color |Usage Description'
+  - '#007471|Sea-foam Dark---$accent-dk-color |Usage Description'
+  - '#000000|black---$black |Usage Description'
+  - '#040707|Raven---$gray-dkest |Usage Description'
+  - '#393C3F|Asphalt---$gray-dkr |Usage Description'
+  - '#53575a|Stone---$gray-dk |Usage Description'
+  - '#6F7479|Cloudy Gray---$gray-middle |Usage Description'
+  - '#BFBFBF|Shadow---$gray-lt |Usage Description'
+  - '#9ca1a3|Mist---$gray-ltr |Usage Description'
+  - '#E5E5E5|Light Gray---$gray-ltest |Usage Description'
+  - '#F3F3F3|Porcelain---$white-off |Usage Description'
+  - '#ffffff|White---$white |Usage Description'
+_core:
+  default_config_hash: 66ggjEpGWdHquLjXSRBJRDw6vNg3xeT177O2hyr-Ufc

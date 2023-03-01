@@ -1,0 +1,10 @@
+uuid: 4f636fc2-5b20-48cb-b6cf-88f9de69d4a7
+langcode: en
+status: true
+dependencies: {  }
+id: insider
+label: insider
+description: ''
+source_type: null
+module: null
+shared_configuration: null

@@ -1,0 +1,15 @@
+uuid: aa76e318-066b-4aa2-bb30-0ae29ecc05b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.featured_poll
+  module:
+    - flag
+id: flag_action.featured_poll_unflag
+label: Unfeatured
+type: poll
+plugin: 'flag_action:featured_poll_unflag'
+configuration:
+  flag_id: featured_poll
+  flag_action: unflag

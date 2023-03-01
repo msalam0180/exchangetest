@@ -1,0 +1,20 @@
+uuid: b81fe5a8-0353-4c4c-a582-8954271db49c
+langcode: en
+status: true
+dependencies:
+  theme:
+    - insider
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: insider_local_actions
+theme: insider
+region: content
+weight: -10
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

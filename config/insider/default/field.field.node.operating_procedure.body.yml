@@ -1,0 +1,25 @@
+uuid: a03b0a69-59ee-4db5-989e-082703c58e13
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.operating_procedure
+  module:
+    - text
+_core:
+  default_config_hash: F2CShUex-uKuQJmO3-hWYx1UMxd70wXmeYzY6OQkDmM
+id: node.operating_procedure.body
+field_name: body
+entity_type: node
+bundle: operating_procedure
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+field_type: text_with_summary

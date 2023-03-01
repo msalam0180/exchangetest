@@ -1,0 +1,23 @@
+uuid: 9f0124f8-3238-49bd-a9df-e1e02eae5f0e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_center_2_box
+    - node.type.landing_page
+  module:
+    - text
+_core:
+  default_config_hash: 9cK0qyyPlSRH4P60WWI70nBRXvzCJaYf-IuIp-yK5l0
+id: node.landing_page.field_center_2_box
+field_name: field_center_2_box
+entity_type: node
+bundle: landing_page
+label: 'Center 2 - Box'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

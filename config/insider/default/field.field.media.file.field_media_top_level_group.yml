@@ -1,0 +1,31 @@
+uuid: 722844eb-5e1e-4a22-a6b7-3026ad6a078b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_top_level_group
+    - media.type.file
+    - taxonomy.vocabulary.top_level_group
+_core:
+  default_config_hash: 0I4dPLI9GLIR4TpFnGIG4F1y_kOiWR-14XkOMbLMiU8
+id: media.file.field_media_top_level_group
+field_name: field_media_top_level_group
+entity_type: media
+bundle: file
+label: 'Top Level Group'
+description: 'Select the section of the site in which this content should appear.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      top_level_group: top_level_group
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

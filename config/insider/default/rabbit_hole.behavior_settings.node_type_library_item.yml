@@ -1,0 +1,16 @@
+uuid: 32fc5d85-bed0-49d1-9dfe-685c32330776
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.library_item
+_core:
+  default_config_hash: rkv4N49eG1QdIRYKPC9zNXvoIOAVCdRWcA5z56HSGJE
+id: node_type_library_item
+entity_type_id: node_type
+entity_id: library_item
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

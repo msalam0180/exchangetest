@@ -1,0 +1,7 @@
+name: 'Insider Interceptor'
+description: 'Provides handling of legacy links based on legacy sys_contentid values mapped to new Drupal entity id values'
+type: module
+core: 8.x
+dependencies:
+package: Insider
+core_version_requirement: ^8 || ^9

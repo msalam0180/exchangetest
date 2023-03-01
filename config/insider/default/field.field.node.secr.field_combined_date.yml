@@ -1,0 +1,21 @@
+uuid: bb40b49a-dad0-4d79-9451-3f25a6e74d14
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_combined_date
+    - node.type.secr
+  module:
+    - datetime
+id: node.secr.field_combined_date
+field_name: field_combined_date
+entity_type: node
+bundle: secr
+label: 'Combined Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

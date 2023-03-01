@@ -1,0 +1,12 @@
+uuid: 2a60dc50-2543-4be6-a7c9-1e08378eefe1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: XEeubD_hgONxXyPfubW43vqxa70DRHIS19JBC87cd3s
+id: node.slideshow
+label: Slideshow
+targetEntityType: node
+cache: true

@@ -1,0 +1,22 @@
+uuid: fdd9a745-d52b-4d34-816e-a1ab19c82770
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+_core:
+  default_config_hash: 4df0RBzuHWrMJWmq0scJ_a5xMUkanr8RnGpUWNrA_c0
+id: node.field_override_modified_date
+field_name: field_override_modified_date
+entity_type: node
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

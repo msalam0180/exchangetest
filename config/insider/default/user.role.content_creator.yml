@@ -1,0 +1,285 @@
+uuid: 2d1ddac7-70d8-4df5-90d4-0f8135badade
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.restricted_html
+    - filter.format.teaser_html
+    - media.type.file
+    - node.type.announcement
+    - node.type.event
+    - node.type.featured
+    - node.type.form
+    - node.type.gallery
+    - node.type.image
+    - node.type.landing_page
+    - node.type.library_item
+    - node.type.link
+    - node.type.operating_procedure
+    - node.type.page
+    - node.type.sec_alert
+    - node.type.sec_article
+    - node.type.secr
+    - node.type.video
+  module:
+    - block
+    - contextual
+    - draggableviews
+    - entity_browser
+    - entity_usage
+    - environment_indicator
+    - field_permissions
+    - file
+    - filter
+    - masquerade
+    - media
+    - node
+    - panelizer
+    - panels
+    - panels_ipe
+    - paragraphs_type_permissions
+    - path
+    - poll
+    - publication_date
+    - quickedit
+    - rabbit_hole
+    - replicate_ui
+    - scheduled_updates
+    - simple_styleguide
+    - system
+    - toolbar
+    - video_embed_field
+    - workbench
+    - workbench_moderation
+_core:
+  default_config_hash: QUyDgXBFsvbbdOTpYRgtr_vCXLHD6H_igJMsdtoGb5Q
+id: content_creator
+label: 'Content Creator'
+weight: 4
+is_admin: null
+permissions:
+  - 'access content'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access draggableviews'
+  - 'access entity usage statistics'
+  - 'access environment indicator'
+  - 'access files overview'
+  - 'access gallery_browser entity browser pages'
+  - 'access in-place editing'
+  - 'access media overview'
+  - 'access panels in-place editing'
+  - 'access poll overview'
+  - 'access polls'
+  - 'access style guide'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'access workbench'
+  - 'administer blocks'
+  - 'administer nodes'
+  - 'administer panelizer node landing_page content'
+  - 'administer panelizer node landing_page defaults'
+  - 'administer panelizer node landing_page layout'
+  - 'administer panelizer node landing_page revert'
+  - 'administer polls'
+  - 'create announcement content'
+  - 'create event content'
+  - 'create featured content'
+  - 'create field_add_to_calendar'
+  - 'create field_announcement_type'
+  - 'create field_article_type'
+  - 'create field_audience'
+  - 'create field_date'
+  - 'create field_division_office'
+  - 'create field_from'
+  - 'create field_group_club'
+  - 'create field_image_reference'
+  - 'create field_left_nav_override'
+  - 'create field_retain_disposal_date'
+  - 'create field_show_field'
+  - 'create field_status'
+  - 'create field_tags'
+  - 'create field_to'
+  - 'create field_top_level_group'
+  - 'create field_topic'
+  - 'create file media'
+  - 'create form content'
+  - 'create gallery content'
+  - 'create image content'
+  - 'create landing_page content'
+  - 'create library_item content'
+  - 'create link content'
+  - 'create operating_procedure content'
+  - 'create paragraph content paragraph_session'
+  - 'create polls'
+  - 'create sec_alert content'
+  - 'create sec_article content'
+  - 'create secr content'
+  - 'create url aliases'
+  - 'create video content'
+  - 'delete any announcement content'
+  - 'delete any event content'
+  - 'delete any featured content'
+  - 'delete any file media'
+  - 'delete any form content'
+  - 'delete any image content'
+  - 'delete any landing_page content'
+  - 'delete any library_item content'
+  - 'delete any link content'
+  - 'delete any operating_procedure content'
+  - 'delete any sec_alert content'
+  - 'delete any sec_article content'
+  - 'delete any secr content'
+  - 'delete any video content'
+  - 'delete own announcement content'
+  - 'delete own event content'
+  - 'delete own featured content'
+  - 'delete own file media'
+  - 'delete own form content'
+  - 'delete own gallery content'
+  - 'delete own image content'
+  - 'delete own landing_page content'
+  - 'delete own library_item content'
+  - 'delete own link content'
+  - 'delete own operating_procedure content'
+  - 'delete own page content'
+  - 'delete own sec_alert content'
+  - 'delete own sec_article content'
+  - 'delete own secr content'
+  - 'delete own video content'
+  - 'delete paragraph content paragraph_session'
+  - 'edit any announcement content'
+  - 'edit any event content'
+  - 'edit any featured content'
+  - 'edit any file media'
+  - 'edit any form content'
+  - 'edit any image content'
+  - 'edit any landing_page content'
+  - 'edit any library_item content'
+  - 'edit any link content'
+  - 'edit any operating_procedure content'
+  - 'edit any sec_alert content'
+  - 'edit any sec_article content'
+  - 'edit any secr content'
+  - 'edit any video content'
+  - 'edit field_add_to_calendar'
+  - 'edit field_announcement_type'
+  - 'edit field_article_type'
+  - 'edit field_audience'
+  - 'edit field_date'
+  - 'edit field_division_office'
+  - 'edit field_from'
+  - 'edit field_group_club'
+  - 'edit field_image_reference'
+  - 'edit field_left_nav_override'
+  - 'edit field_retain_disposal_date'
+  - 'edit field_show_field'
+  - 'edit field_status'
+  - 'edit field_tags'
+  - 'edit field_to'
+  - 'edit field_top_level_group'
+  - 'edit field_topic'
+  - 'edit own announcement content'
+  - 'edit own event content'
+  - 'edit own featured content'
+  - 'edit own field_add_to_calendar'
+  - 'edit own field_announcement_type'
+  - 'edit own field_article_type'
+  - 'edit own field_audience'
+  - 'edit own field_date'
+  - 'edit own field_division_office'
+  - 'edit own field_from'
+  - 'edit own field_group_club'
+  - 'edit own field_image_reference'
+  - 'edit own field_left_nav_override'
+  - 'edit own field_retain_disposal_date'
+  - 'edit own field_show_field'
+  - 'edit own field_status'
+  - 'edit own field_tags'
+  - 'edit own field_to'
+  - 'edit own field_top_level_group'
+  - 'edit own field_topic'
+  - 'edit own file media'
+  - 'edit own form content'
+  - 'edit own gallery content'
+  - 'edit own image content'
+  - 'edit own landing_page content'
+  - 'edit own library_item content'
+  - 'edit own link content'
+  - 'edit own operating_procedure content'
+  - 'edit own page content'
+  - 'edit own polls'
+  - 'edit own sec_alert content'
+  - 'edit own sec_article content'
+  - 'edit own secr content'
+  - 'edit own video content'
+  - 'masquerade as enduser'
+  - 'never autoplay videos'
+  - 'rabbit hole bypass node'
+  - 'replicate entities'
+  - 'revert announcement revisions'
+  - 'revert event revisions'
+  - 'revert featured revisions'
+  - 'revert form revisions'
+  - 'revert image revisions'
+  - 'revert landing_page revisions'
+  - 'revert library_item revisions'
+  - 'revert link revisions'
+  - 'revert operating_procedure revisions'
+  - 'revert sec_alert revisions'
+  - 'revert sec_article revisions'
+  - 'revert secr revisions'
+  - 'revert video revisions'
+  - 'set landing_page published on date'
+  - 'update paragraph content paragraph_session'
+  - 'use draft_draft transition'
+  - 'use draft_needs_review transition'
+  - 'use ipe with page manager'
+  - 'use needs_review_draft transition'
+  - 'use needs_review_needs_review transition'
+  - 'use published_draft transition'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'use text format restricted_html'
+  - 'use text format teaser_html'
+  - 'view all media revisions'
+  - 'view all revisions'
+  - 'view announcement revisions'
+  - 'view any unpublished content'
+  - 'view event revisions'
+  - 'view featured revisions'
+  - 'view form revisions'
+  - 'view image revisions'
+  - 'view landing_page revisions'
+  - 'view latest version'
+  - 'view library_item revisions'
+  - 'view link revisions'
+  - 'view moderation states'
+  - 'view operating_procedure revisions'
+  - 'view own field_add_to_calendar'
+  - 'view own field_announcement_type'
+  - 'view own field_article_type'
+  - 'view own field_audience'
+  - 'view own field_date'
+  - 'view own field_division_office'
+  - 'view own field_from'
+  - 'view own field_group_club'
+  - 'view own field_image_reference'
+  - 'view own field_left_nav_override'
+  - 'view own field_retain_disposal_date'
+  - 'view own field_show_field'
+  - 'view own field_status'
+  - 'view own field_tags'
+  - 'view own field_to'
+  - 'view own field_top_level_group'
+  - 'view own field_topic'
+  - 'view own unpublished content'
+  - 'view page revisions'
+  - 'view scheduled update entities'
+  - 'view sec_alert revisions'
+  - 'view sec_article revisions'
+  - 'view secr revisions'
+  - 'view the administration theme'
+  - 'view video revisions'

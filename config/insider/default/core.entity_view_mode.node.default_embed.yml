@@ -1,0 +1,12 @@
+uuid: a0b0edbe-17ee-4ca2-9acc-79f1c025fd0c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: vqcEBFC0h5PbBaMVjU0RRNCPQUxTN11u7HrmaAxKcUs
+id: node.default_embed
+label: 'Default Embed'
+targetEntityType: node
+cache: true

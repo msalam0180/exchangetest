@@ -1,0 +1,23 @@
+uuid: b3d2149b-7dfb-414a-9a6d-10c996a97737
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video_origin
+    - node.type.video
+  module:
+    - options
+_core:
+  default_config_hash: 9FABbxJquNxqwrXauoKuehzUlfXNbc81VYOlSWDpRuw
+id: node.video.field_video_origin
+field_name: field_video_origin
+entity_type: node
+bundle: video
+label: 'Video Origin'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

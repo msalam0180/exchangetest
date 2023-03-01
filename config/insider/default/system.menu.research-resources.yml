@@ -1,0 +1,8 @@
+uuid: 24aed438-85a7-410a-853b-d179ee96a3e1
+langcode: en
+status: true
+dependencies: {  }
+id: research-resources
+label: 'Research Resources'
+description: 'Left nav for Research Resources section'
+locked: false

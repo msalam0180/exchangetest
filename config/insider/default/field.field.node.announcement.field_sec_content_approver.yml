@@ -1,0 +1,37 @@
+uuid: 3ceef44c-a266-4b3a-9336-b7134e2f4cb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sec_content_approver
+    - node.type.announcement
+_core:
+  default_config_hash: DbGCBwc1BhHgWQJ_DdCIAup1O0vcm05O3ITDg83fHBM
+id: node.announcement.field_sec_content_approver
+field_name: field_sec_content_approver
+entity_type: node
+bundle: announcement
+label: 'SEC Content Approver'
+description: '<small>Content approvers who should receive email notifications</small>  '
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    filter:
+      type: role
+      role:
+        content_approver: content_approver
+        microsite_approver: microsite_approver
+        administrator: '0'
+        content_creator: '0'
+        sitebuilder: '0'
+    include_anonymous: false
+field_type: entity_reference

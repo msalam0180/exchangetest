@@ -1,0 +1,28 @@
+uuid: ccf249bd-daf2-42fb-8244-7e139af6bdf5
+langcode: en
+status: true
+dependencies:
+  module:
+    - poll
+id: featured_poll
+label: 'Featured Poll'
+bundles: {  }
+entity_type: poll
+global: true
+flag_short: Featured
+flag_long: ''
+flag_message: ''
+unflag_short: Unfeatured
+unflag_long: ''
+unflag_message: ''
+unflag_denied_text: ''
+weight: 0
+flag_type: 'entity:poll'
+link_type: ajax_link
+flagTypeConfig:
+  show_in_links: {  }
+  show_as_field: false
+  show_on_form: true
+  show_contextual_link: false
+  extra_permissions: {  }
+linkTypeConfig: {  }

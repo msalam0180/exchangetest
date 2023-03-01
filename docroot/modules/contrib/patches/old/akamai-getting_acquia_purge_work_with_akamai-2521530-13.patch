@@ -1,0 +1,38 @@
+diff --git a/akamai.module b/akamai.module
+index b0030a1..493f65c 100644
+--- a/akamai.module
++++ b/akamai.module
+@@ -89,11 +93,30 @@ function akamai_module_implements_alter(&$implementations, $hook) {
+ 
+ /**
+  * Implements hook_expire_cache().
++ *
++ * @see akamai_exit()
+  */
+ function akamai_expire_cache($urls, $wildcards, $object_type, $object) {
+-  foreach ($urls as $short_url => $full_url) {
+-    $url = base_path() . $short_url;
+-    akamai_clear_url($url, array(), $object);
++  $expire_cache = &drupal_static(__FUNCTION__);
++  $expire_cache['urls'] = $urls;
++  $expire_cache['object'] = $object;
++}
++
++/**
++ * Implements hook_exit().
++ *
++ * @see akamai_expire_cache()
++ */
++function akamai_exit() {
++  $expire_cache = &drupal_static('akamai_expire_cache');
++  $expire_cache_urls = $expire_cache['urls'];
++  $expire_cache_object = $expire_cache['object'];
++
++  if (!empty($expire_cache_urls) && !empty($expire_cache_object)) {
++    foreach ($expire_cache_urls as $short_url => $full_url) {
++      $url = base_path() . $short_url;
++      akamai_clear_url($url, array(), $expire_cache_object);
++    }
+   }
+ }
+ 

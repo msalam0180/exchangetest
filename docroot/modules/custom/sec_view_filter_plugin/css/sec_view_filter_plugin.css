@@ -1,0 +1,13 @@
+.js-form-item-speaker {
+    display: none !important;
+}
+
+.views-exposed-form .form-item-field-person-target-id input.form-text {
+  width: 127px;
+}
+
+.speeches-list-page .views-exposed-form div.form-item,
+.testimony-list-page .views-exposed-form div.form-item,
+.ps-list-page .views-exposed-form div.form-item {
+  margin-right: 0px;
+}

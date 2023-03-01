@@ -1,0 +1,36 @@
+uuid: 1856c148-f413-4ca5-87b1-eebbb7a853fe
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_save_redirect
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+    default_moderation_state: draft
+  node_save_redirect:
+    save_type: '0'
+    save_location: ''
+    save_destination: 0
+    edit_type: '2'
+    edit_location: ''
+    edit_destination: 1
+_core:
+  default_config_hash: JSFMiGA1I9UAT0QOC6ocGSqgwkX-kfhGOmxAljnDd2U
+name: 'Landing Page'
+type: landing_page
+description: 'Main index pages for each major section and subsection of the intranet'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

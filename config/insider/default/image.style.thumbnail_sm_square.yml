@@ -1,0 +1,15 @@
+uuid: 68e6489b-ec6b-4ebc-ad61-8a3967fe97f1
+langcode: en
+status: true
+dependencies: {  }
+name: thumbnail_sm_square
+label: 'Thumbnail Small Square (64x64)'
+effects:
+  7d755157-d5cd-4c34-8d14-9b3bf73a0276:
+    uuid: 7d755157-d5cd-4c34-8d14-9b3bf73a0276
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 64
+      height: 64
+      anchor: center-center

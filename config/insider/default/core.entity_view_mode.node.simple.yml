@@ -1,0 +1,12 @@
+uuid: 86cc728d-f446-4c02-814d-82ed48f9af27
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: DLTH81Qcsg8m5D28J6v_U9rwaxaS9jq4716Ltp2SkHE
+id: node.simple
+label: 'Simple Reference'
+targetEntityType: node
+cache: true

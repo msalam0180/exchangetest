@@ -1,0 +1,65 @@
+/*Data-table */
+/*.en-datatable table .group>td {
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-weight: bold;
+  padding: 3px;
+  text-transform: uppercase;
+  line-height: 1.5;
+  font-variant: normal;
+  font-family: 'Helvetica', sans-serif;
+}
+
+.en-datatable table .group:first-of-type>td  p {
+  text-align: left;
+  text-transform: none;
+}
+.en-datatable thead .sorting_desc {
+  background-position-x: 97%!important;
+  background-size: auto;
+  background-image: url('/themes/custom/secgov/images/tablesorter/sort-desc.png');
+}
+.en-datatable thead .sorting_asc {
+  background-position-x: 97%!important;
+  background-size: auto;
+  background-image: url('/themes/custom/secgov/images/tablesorter/sort-asc.png');
+}
+
+.en-datatable thead .sorting {
+  background-size: auto;
+  background-image: url('/themes/custom/secgov/images/tablesorter/sort-neutral.gif');
+}
+
+.en-datatable table thead .sorting,
+.en-datatable table thead .sorting_asc,
+.en-datatable table thead .sorting_desc,
+.en-datatable table thead .sorting_asc_disabled,
+.en-datatable table thead .sorting_desc_disabled {
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
+span.tgroup ul {
+  margin: 0;
+}
+span.tgroup ul li {
+  display: inline-block;
+}
+
+.dataTables_filter {
+   float: right;
+   margin:10px 0px;
+}
+
+.en-datatable {
+  display: none;
+}
+
+.views-live-preview .en-datatable {
+  display: block;
+}*/
+
+.adminimal thead th > a {
+  width: 100%;
+}

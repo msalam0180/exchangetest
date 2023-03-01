@@ -1,0 +1,25 @@
+uuid: 14446d03-6996-40ae-a2ee-f1f8fe7945d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.sec_alert
+  module:
+    - text
+_core:
+  default_config_hash: 5DJAdKOkKwFws13YVMwJubNdZpRVhqu77KNNrYi6yZc
+id: node.sec_alert.body
+field_name: body
+entity_type: node
+bundle: sec_alert
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

@@ -1,0 +1,10 @@
+uuid: 1fcddb89-0adf-4c05-ba02-433f1f0fc948
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: fWZe4PFx-dQa1PEZElJEizjrOrUvIP32a1gf6WoHYhA
+id: ap_date_and_time
+label: 'AP Date and Time'
+locked: false
+pattern: '??'

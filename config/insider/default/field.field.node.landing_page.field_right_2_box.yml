@@ -1,0 +1,23 @@
+uuid: 52c91874-91a6-45f4-95e5-70df4434841f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_right_2_box
+    - node.type.landing_page
+  module:
+    - text
+_core:
+  default_config_hash: I2OikTH92Q01d-T5CpkXRWYoObnHpC6bSMsJvjc-mnE
+id: node.landing_page.field_right_2_box
+field_name: field_right_2_box
+entity_type: node
+bundle: landing_page
+label: 'Right 2 - Box'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

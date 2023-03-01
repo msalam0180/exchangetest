@@ -1,0 +1,10 @@
+uuid: null
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: RQMLFZfGnMUOwwzXffY5fgjrDZAi7lbrIeWIWaqcHAg
+name: Timezone
+vid: timezone
+description: 'Timezone for Event Content Types'
+weight: 0

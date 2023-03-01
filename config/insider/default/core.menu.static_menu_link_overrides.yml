@@ -1,0 +1,81 @@
+_core:
+  default_config_hash: jdY7AU0tU-QsjmiOw3W8vwpYMb-By--_MSFgbqKUTYM
+definitions:
+  contact__site_page:
+    menu_name: footer
+    parent: ''
+    weight: -50
+    expanded: false
+    enabled: false
+  standard__front_page:
+    menu_name: main
+    parent: ''
+    weight: -50
+    expanded: true
+    enabled: false
+  config__conditional_field:
+    menu_name: admin
+    parent: system.admin_structure
+    weight: 100
+    expanded: false
+    enabled: false
+  workbench__content:
+    menu_name: workbench
+    parent: ''
+    weight: -50
+    expanded: false
+    enabled: true
+  workbench__create_content:
+    menu_name: workbench
+    parent: ''
+    weight: -49
+    expanded: false
+    enabled: true
+  workbench__my_edited:
+    menu_name: workbench
+    parent: ''
+    weight: -48
+    expanded: false
+    enabled: true
+  workbench__all_content:
+    menu_name: workbench
+    parent: ''
+    weight: -47
+    expanded: false
+    enabled: true
+  workbench__configure:
+    menu_name: workbench
+    parent: ''
+    weight: -44
+    expanded: false
+    enabled: true
+  media__add__audio:
+    menu_name: admin
+    parent: admin_toolbar_tools.add_media
+    weight: 0
+    expanded: false
+    enabled: false
+  media__add__image:
+    menu_name: admin
+    parent: admin_toolbar_tools.add_media
+    weight: 0
+    expanded: false
+    enabled: false
+  media__add__remote_video:
+    menu_name: admin
+    parent: admin_toolbar_tools.add_media
+    weight: 0
+    expanded: false
+    enabled: false
+  media__add__video:
+    menu_name: admin
+    parent: admin_toolbar_tools.add_media
+    weight: 0
+    expanded: false
+    enabled: false
+  node__add__file:
+    menu_name: admin
+    parent: admin_toolbar_tools.add_content
+    weight: 0
+    expanded: false
+    enabled: false

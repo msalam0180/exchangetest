@@ -1,0 +1,176 @@
+// Media objects
+// 
+// Code originally based on: https://getbootstrap.com/docs/3.3/components/#media
+// This is basically any sort of list of items with a heading text and maybe an image or date
+// --------------------------------------------------
+// 
+
+//TODO: update vars
+
+.media ~ .media {
+  // Proper spacing between instances of .media
+  margin-top: $media-v-space;
+}
+
+.media,
+.media-body {
+  zoom: 1;
+  // overflow: hidden;
+}
+
+.media-body {
+  width: 10000px;
+}
+
+.media-object {
+  display: block;
+
+  // Fix collapse in webkit from max-width: 100% and display: table-cell.
+  &.img-thumbnail {
+    max-width: none;
+  }
+}
+
+.media-right,
+.media > .pull-right {
+  padding-left: 10px;
+}
+
+.media-left,
+.media > .pull-left {
+  padding-right: 10px;
+}
+
+.media-left,
+.media-right,
+.media-body {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.media-middle {
+  vertical-align: middle;
+}
+
+.media-bottom {
+  vertical-align: bottom;
+}
+
+.media .media-left img{
+  max-width: none;
+  border: 1px solid #e3e3e3;
+}
+
+
+// Reset margins on headings for tighter default spacing
+.media .media-heading {
+  @include raleway;
+  margin-top: 0;
+  margin-bottom: 5px;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: $media-heading-fz;
+  font-weight: 600;
+  color: $media-heading-color;
+
+  a{
+    color: $media-heading-a-color; //TODO: Add Color
+    font-size: $media-heading-fz;
+
+    &:hover img{
+      opacity: .85;
+      filter: alpha(opacity=85);
+    }
+    
+  }
+}
+
+
+.media .media-body{
+  p{
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  p + p{
+    margin-top: 10px;
+  }
+}
+
+// Media list variation
+//
+// Undo default ul/ol styles
+.media-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+// Day and Month as the media object
+.day-month {
+  color: $cloudy-gray;
+  width: 30px;
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  & > time {
+    display: block;
+    line-height: 1.2em;
+  }
+}
+
+//add to `media-body` to add a boarder between `media-left` and `media-body`
+.media-divider {
+    border-left: 1px solid $media-border-color;
+    padding-left: 10px;
+}
+
+//add to `media-body` to add a large boarder between `media-left` and `media-body`
+.media-divider-lg {
+    border-left: 5px solid $media-border-lg-color;
+    padding-left: 10px;
+}
+
+//add to `media` to add a boarder between two items
+.media-item-separator + .media-item-separator {
+    border-top: 1px solid $media-border-color;
+    padding-top: $media-v-space;
+}
+
+//add to `media-body` if there is only a heading in the body
+.media .media-title-only{
+  .media-heading{
+    margin-bottom: 0;
+  }
+}
+
+.media-details{
+  color: $cloudy-gray;
+  font-size: 0.8rem;
+  line-height: 1.5em;
+}
+
+//add to `media` to make the media items appear in a grid
+.media-grid {
+  width: 50%;
+  float: left;
+  padding-right: 10px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.media-grid ~ .media-grid{
+  margin-top: 0;
+}
+
+// if a media item is in a views grid, then it does not need the media-grid class
+.views-view-grid .media{
+  padding-right: 10px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+// if a media item has an image at the top, add this to give the image margin on the bottom
+.media-image-top{
+  margin-bottom: 20px;
+  border: 1px solid $gray-ltest;
+}
+

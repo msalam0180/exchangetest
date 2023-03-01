@@ -1,0 +1,27 @@
+{
+  "name": "secgov-insider",
+  "version": "1.0.0",
+  "description": "SEC Insider site",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "casperjs --ignore-ssl-errors=true test test/phantomcss/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@jira.jiratracker.com:sec/secgov.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "phantomcss": "^1.1.5"
+  }
+}

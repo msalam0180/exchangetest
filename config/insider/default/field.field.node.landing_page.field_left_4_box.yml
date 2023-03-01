@@ -1,0 +1,23 @@
+uuid: 99ed4671-e109-4a05-aa2b-60d57a37ee15
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_left_4_box
+    - node.type.landing_page
+  module:
+    - text
+_core:
+  default_config_hash: vuTXvcS-QIhTEozjhQdjBIY7Wo8d6T-eHoqpU6xVrKs
+id: node.landing_page.field_left_4_box
+field_name: field_left_4_box
+entity_type: node
+bundle: landing_page
+label: 'Left 4 - Box'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

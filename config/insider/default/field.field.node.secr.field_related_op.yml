@@ -1,0 +1,31 @@
+uuid: eb2ffd28-b585-49d3-a132-82ad941b0aac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_op
+    - node.type.operating_procedure
+    - node.type.secr
+_core:
+  default_config_hash: YpZew8rzAUtrUq1CsjxImQmF-dBOrZ9FwJwNDK0vaos
+id: node.secr.field_related_op
+field_name: field_related_op
+entity_type: node
+bundle: secr
+label: 'Related OP'
+description: 'Select one or more related operating procedures.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      operating_procedure: operating_procedure
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

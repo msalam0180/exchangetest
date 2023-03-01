@@ -1,0 +1,23 @@
+uuid: 96520454-77d1-4c10-bb2e-cb045be2e7fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_link_reference_type
+    - node.type.form
+  module:
+    - options
+_core:
+  default_config_hash: gM8dOQIaJhZyKXmlAnEIGdKkHFJFk7C8YDuPS7Rb4hs
+id: node.form.field_link_reference_type
+field_name: field_link_reference_type
+entity_type: node
+bundle: form
+label: 'Link/Media Type'
+description: 'Select the type of link to be used. Link will embed the Link node, media will embed the Media type.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

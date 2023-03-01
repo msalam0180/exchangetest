@@ -1,0 +1,88 @@
+uuid: 4ba20fcb-f3a1-4993-b0d9-05eeb0630a47
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: uMf2amHIoedoOv6cN-mkcwHe16yXy3BQ1NJ3x4L1Jok
+id: events
+label: Events
+renderer: ui_tabs
+hide_empty_tabs: false
+default_tab: 0
+options:
+  accordion_tabs:
+    jquery_ui:
+      collapsible: false
+      heightStyle: auto
+  quick_tabs:
+    ajax: false
+configuration_data:
+  -
+    title: Events
+    weight: 0
+    type: view_content
+    content:
+      block_content:
+        options:
+          bid: 'entity_view:node'
+          block_title: ''
+          display_title: false
+      node_content:
+        options:
+          nid: ''
+          view_mode: default_embed
+          hide_title: true
+      view_content:
+        options:
+          vid: event_homepage
+          display: block_1
+          args: ''
+      qtabs_content:
+        options:
+          machine_name: ''
+  -
+    title: Training
+    weight: 0
+    type: view_content
+    content:
+      block_content:
+        options:
+          bid: 'entity_view:node'
+          block_title: ''
+          display_title: false
+      node_content:
+        options:
+          nid: ''
+          view_mode: default_embed
+          hide_title: true
+      view_content:
+        options:
+          vid: event_homepage
+          display: block_2
+          args: ''
+      qtabs_content:
+        options:
+          machine_name: ''
+  -
+    title: Deadlines
+    weight: 0
+    type: view_content
+    content:
+      block_content:
+        options:
+          bid: 'entity_view:node'
+          block_title: ''
+          display_title: false
+      node_content:
+        options:
+          nid: ''
+          view_mode: default_embed
+          hide_title: true
+      view_content:
+        options:
+          vid: event_homepage
+          display: block_3
+          args: ''
+      qtabs_content:
+        options:
+          machine_name: ''

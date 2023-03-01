@@ -1,0 +1,25 @@
+uuid: 0c7451eb-b60d-44c1-9557-30bedcef8f95
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_default_menu
+    - taxonomy.vocabulary.top_level_group
+_core:
+  default_config_hash: WN5oqbF_A8lrIzheJpUU0TB0nrqSUATIXJ-Z0mtzLC0
+id: taxonomy_term.top_level_group.field_default_menu
+field_name: field_default_menu
+entity_type: taxonomy_term
+bundle: top_level_group
+label: 'Default Menu'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:menu'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

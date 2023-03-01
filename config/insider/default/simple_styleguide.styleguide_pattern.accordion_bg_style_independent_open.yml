@@ -1,0 +1,9 @@
+uuid: a00b63a4-51da-4c57-a63c-fcc367f66718
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: P1wzCCgBMaqqJlT9SxiaAzfObfqM7U5W25Mz76KX7DM
+id: accordion_bg_style_independent_open
+label: 'Accordion BG Style - Independent Open'
+pattern: "<!-- For each Accordion added to a page, the number of that accordion needs to be updated -->\r\n<!-- Example: `accordion-wysiwyg01` would be changed to `accordion-wysiwyg02` -->\r\n\r\n<div class=\"accordionGroup accordionBackground\">\r\n  <!-- accordion-wysiwyg01  -->\r\n  <div id=\"accordion-wysiwyg01\">\r\n    <div>Item Title 1</div>\r\n    <div>Item Content 1</div>\r\n  </div>\r\n  <!-- accordion-wysiwyg02  -->\r\n  <div id=\"accordion-wysiwyg02\">\r\n    <div>Item Title 2</div>\r\n    <div>Item Content 2</div>\r\n  </div>\r\n  <!-- accordion-wysiwyg03  -->\r\n  <div id=\"accordion-wysiwyg03\">\r\n    <div>Item Title 3</div>\r\n    <div>Item Content 3</div>\r\n  </div>\r\n</div>"

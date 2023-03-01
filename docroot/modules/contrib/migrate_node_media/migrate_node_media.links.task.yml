@@ -1,0 +1,24 @@
+migrate_node_media.admin:
+  route_name: migrate_node_media.settings_controller_index
+  title: 'Mappings'
+  base_route: migrate_node_media.admin
+migrate_node_media.mappings:
+  route_name: migrate_node_media.mappings_form
+  title: 'Create Map'
+  base_route: migrate_node_media.admin
+  weight: 100
+#migrate_node_media.migrate:
+#  route_name: migrate_node_media.settings_controller_migrate_settings
+#  title: 'Migrate'
+#  base_route: migrate_node_media.admin
+#  weight: 100
+migrate_node_media.json:
+  route_name: migrate_node_media.settings_controller_json
+  title: 'JSON'
+  base_route: migrate_node_media.admin
+  weight: 500
+migrate_node_media.routes:
+  route_name: migrate_node_media.settings_controller_routes
+  title: 'Route Mappings'
+  base_route: migrate_node_media.admin
+  weight: 500

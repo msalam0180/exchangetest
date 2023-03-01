@@ -1,0 +1,31 @@
+uuid: f19db07d-f487-4f3a-8b15-2d255f31a1e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_link_reference
+    - node.type.link
+    - node.type.operating_procedure
+_core:
+  default_config_hash: XxEIqhggqedf76cOsvTIPkurKDJy17xkMi6bWyDWVWo
+id: node.operating_procedure.field_link_reference
+field_name: field_link_reference
+entity_type: node
+bundle: operating_procedure
+label: 'Link Reference'
+description: 'Start typing the title of a link to select it. You can also enter an internal path such as /node/add or an external.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      link: link
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: link
+field_type: entity_reference

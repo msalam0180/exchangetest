@@ -1,0 +1,40 @@
+uuid: 996422a1-6a4f-4a99-aeed-ae544057a5a4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: like_content
+label: 'Like Content'
+bundles:
+  - announcement
+  - event
+  - form
+  - gallery
+  - landing_page
+  - library_item
+  - operating_procedure
+  - page
+  - sec_article
+  - secr
+  - video
+entity_type: node
+global: false
+flag_short: Like
+flag_long: ''
+flag_message: ''
+unflag_short: Unlike
+unflag_long: ''
+unflag_message: ''
+unflag_denied_text: ''
+weight: -10
+flag_type: 'entity:node'
+link_type: ajax_link
+flagTypeConfig:
+  show_in_links: {  }
+  show_as_field: true
+  show_on_form: false
+  show_contextual_link: false
+  extra_permissions:
+    owner: '0'
+linkTypeConfig: {  }

@@ -1,0 +1,5 @@
+services:
+  sec_workflow.subscriber:
+    class: Drupal\sec_workflow\SecWorkflowSubscriber
+    tags:
+      - { name: event_subscriber }

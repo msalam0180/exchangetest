@@ -1,0 +1,69 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a field.
+ *
+ * To override output, copy the "field.html.twig" from the templates directory
+ * to your theme's directory and customize it, just like customizing other
+ * Drupal templates such as page.html.twig or node.html.twig.
+ *
+ * Instead of overriding the theming for all fields, you can also just override
+ * theming for a subset of fields using
+ * @link themeable Theme hook suggestions. @endlink For example,
+ * here are some theme hook suggestions that can be used for a field_foo field
+ * on an article node type:
+ * - field--node--field-foo--article.html.twig
+ * - field--node--field-foo.html.twig
+ * - field--node--article.html.twig
+ * - field--field-foo.html.twig
+ * - field--text-with-summary.html.twig
+ * - field.html.twig
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ *
+ * @see template_preprocess_field()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass(field_name) }}>
+    <div{{ title_attributes.addClass('field-label')}}">
+        {{ label }}
+    </div>
+    {% if multiple %}
+      <div class="field-content">
+    {% endif %}
+    {% for key,item in items %}
+      {% set webcast = item["content"]['#options'].entity %}
+      {% set startDate = webcast.field_start_date.value %}
+      {% set runningTime = webcast.field_webcast_running_time.value %}
+      {% set archivedWebcastDisplayTitle = webcast.field_display_title.value ? webcast.field_display_title.value : webcast.title.value %}
+      {% set webcastDisplayTitle = webcast.field_display_title.value ? webcast.field_display_title.value : "This event will be webcast" %}
+        {% if webcast.field_media_id.value %}
+          <div id="field-content-{{ key+1 }}"{{ item.attributes }} class="has-mediaid">
+            <a href="?webcast={{ webcast.nid.value }}">{{ archivedWebcastDisplayTitle }}</a>
+            {% if runningTime %}
+                ({{ runningTime }})
+            {% endif %}
+        {% else %}
+          <div id="field-content-{{ key+1 }}"{{ item.attributes }} class="no-mediaid {{ webcast.field_webcast_state.value == 'live' ? 'live' : 'not-live' }}">{{ webcastDisplayTitle }} ({{ startDate|apdate }}
+          <span class="webcast_times">{{startDate|apTime }})</span>
+        {% endif %}
+          </div>
+    {% endfor %}
+    {% if multiple %}
+      </div>
+    {% endif %}
+  </div>

@@ -1,0 +1,12 @@
+#block-adminimal-theme-content ul.admin-list a[href="/node/add/file"],
+li.menu-item a[href="/node/add/file"] {
+	display:none;
+}
+
+#block-adminimal-theme-content .admin-list li {
+	border-top: none;
+}
+
+#block-adminimal-theme-content .admin-list li a {
+	border-top: 1px solid #bfbfbf;
+}

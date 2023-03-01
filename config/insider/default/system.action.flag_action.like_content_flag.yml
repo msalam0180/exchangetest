@@ -1,0 +1,15 @@
+uuid: 2a780bbf-adac-421c-85e5-e98f661c7540
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.like_content
+  module:
+    - flag
+id: flag_action.like_content_flag
+label: Like
+type: node
+plugin: 'flag_action:like_content_flag'
+configuration:
+  flag_id: like_content
+  flag_action: flag

@@ -1,0 +1,24 @@
+<!-- Setup the table for the list of mappings -->
+<div id="migration-mappings">
+    <h1>Mappings</h1>
+    <table>
+        <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Content Type</th>
+        <th>Media Type</th>
+        <th>Run Migration</th>
+        </thead>
+        <tbody>
+        {% for map in data %}
+            <tr>
+                <td>{{ map.id }}</td>
+                <td>{{ map.name }}</td>
+                <td>{{ map.content_type }}</td>
+                <td>{{ map.media_type }}</td>
+                <td><a href="/admin/config/migrate/node_media/migrate/{{ map.id }}">Run Migration</a> </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

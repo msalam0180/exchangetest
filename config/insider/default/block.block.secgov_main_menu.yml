@@ -1,0 +1,27 @@
+uuid: 4e6978f7-4467-48e4-832b-9b5dbe5b4c33
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: JYjmLTid6zx-7upW9twHdIquT78aMDMVjqMZeeYK9y0
+id: secgov_main_menu
+theme: insider
+region: global_navigation
+weight: -11
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: false
+visibility: {  }

@@ -1,0 +1,27 @@
+<?php
+
+use Drupal\block_content\Entity\BlockContent;
+
+/**
+ * Add the block_content for the QuickLinks Help
+ */
+function insider_quicklinks_install() {
+  quicklinks_help_block_content();
+}
+function insider_quicklinks_update_8101(&$sandbox) {
+  quicklinks_help_block_content();
+}
+
+function quicklinks_help_block_content() {
+  // The exported block uuid from the feature for the block placement
+  $block_uuid = "50d09789-33b5-4b55-bc22-8f4426f46d68";
+
+  // Note: This is due to not being able to export the block_content
+  //       If we don't do this we get a placed block but no content.
+  $block_content = BlockContent::create([
+    'type' => 'basic',
+    'info' => "QuickLinks Help",
+    'uuid' => $block_uuid,
+  ]);
+  $block_content->save();
+}

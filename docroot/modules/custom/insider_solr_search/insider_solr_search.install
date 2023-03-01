@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Uninstall the config from the db (for sites already running the older version of the module)
+ */
+function insider_solr_search_uninstall() {
+    // In this module
+    \Drupal::configFactory()->getEditable('search.settings')->delete();
+    \Drupal::configFactory()->getEditable('search_api_attachments.admin_config')->delete();
+    \Drupal::configFactory()->getEditable('search_api_solr.settings')->delete();
+    \Drupal::configFactory()->getEditable('search_api_solr.standard_highlighter')->delete();
+
+    // In Insider Solr Search Acquia Module
+    \Drupal::configFactory()->getEditable('search_api.index.acquia_search_index')->delete();
+    \Drupal::configFactory()->getEditable('search_api.server.acquia_search_server')->delete();
+    \Drupal::configFactory()->getEditable('views.view.the_exchange_search')->delete();
+
+    // In Insider Solr Search Local Module
+    \Drupal::configFactory()->getEditable('search_api.index.solr_search_index')->delete();
+    \Drupal::configFactory()->getEditable('search_api.server.solr')->delete();
+    \Drupal::configFactory()->getEditable('views.view.local_solr_search')->delete();
+}

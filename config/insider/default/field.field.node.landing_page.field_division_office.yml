@@ -1,0 +1,30 @@
+uuid: 30788f8e-b33c-4c42-8305-ba8e8c507435
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_division_office
+    - node.type.landing_page
+    - taxonomy.vocabulary.office_division
+_core:
+  default_config_hash: HIOpwzU2BlhF3LdBzwKDGbMkajiX1N_mVtn7QFP9MHs
+id: node.landing_page.field_division_office
+field_name: field_division_office
+entity_type: node
+bundle: landing_page
+label: 'Division / Office'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      office_division: office_division
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

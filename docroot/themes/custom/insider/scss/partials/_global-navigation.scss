@@ -1,0 +1,294 @@
+//
+// Global Navigation
+// Main site navigation
+// --------------------------------------------------
+
+//TODO: This has only been partially reviewed, and the mobile navigation is in the file "partials/_left-and-mobile-menus"
+
+// global-navigation region 
+.global-navigation {
+  background-color: $global-navigation-bg-color; 
+  display: block;
+  @include raleway;
+  //DI-1722 make height auto in case text wraps
+  //height: 45px;
+  height: auto;
+  margin-bottom: 20px;
+  padding: 0;
+  position: relative;
+  text-transform: uppercase;
+
+  @include breakpoint('mobile-menu-showing'){
+    display: none;
+  }
+}
+
+//container for main menu and Quick Links menu
+.navigation-wrapper {
+  @include span(12);
+  display: block;
+  float: none;
+  height: inherit;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 960px;
+  padding: 0;
+  
+  //med margins on middling screens
+  @media only screen and (min-width: 768px) and (max-width: 1000px) {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .block.main {
+    @include span(10);
+    margin-right: 0;
+    position:relative;
+    text-align: left;
+    z-index: 200;
+    
+    //Do not understand what this is for...
+    .menu-toggle {
+        display: none;
+    }
+  }
+}
+
+/*** All SUPERFISH STYLES ***/
+#main-menu, #quick-links {
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: auto;
+  background: $sitenav-toplevel-bg-color;
+
+  li.sfHover {
+    > a {
+      //top level, hover
+      color: $sitenav-toplevel-anchor-hover-color;
+      background: $sitenav-toplevel-anchor-hover-bg-color;
+    }
+    ul li {
+      a {
+        //dropdown, no hover
+        color: $sitenav-otherlevel-anchor-color;
+        background: $sitenav-otherlevel-anchor-bg-color;
+      }
+    } 
+  }
+
+  li > a:hover, li > a:active, li > a:focus{
+    //if there are not children
+      color: $sitenav-toplevel-anchor-hover-color;
+      background: $sitenav-toplevel-anchor-hover-bg-color;
+  }
+
+  li:last-child li { border-right: 1px solid $border-color; }
+
+  li {
+    color: $white;
+    display: inline;
+    float: left;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+    // padding: 0 7px;
+    position: relative;
+    -webkit-transition: none;
+    transition: none;
+    padding: 0;
+
+    a {
+      color: $sitenav-toplevel-anchor-color;
+      display: block;
+      font-size: 13px;
+      padding: 15px $sitenav-toplevel-anchor-h-spacing;
+      @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        padding: 15px 14px;
+      }
+      position: relative;
+      text-decoration: none;
+      background: $sitenav-toplevel-anchor-bg-color;
+      
+      //custom media query used based on menu width
+      @media only screen and (max-width: 970px){
+        //Question: What is this for
+        padding: 16px 8px;
+        font-size: 12px;
+      }
+    }
+
+    ul {
+      position: absolute;
+      display: none;
+      top: 100%;
+      left: 0;
+      width: 199px;
+      text-transform: none;
+      z-index: 99;
+
+      li {
+        color: $white;
+        margin:0;
+        padding:0;
+        text-transform: normal;
+        width: 198px;
+
+        a {
+          display: block;
+          color: $white;
+          padding: 10px $sitenav-toplevel-anchor-h-spacing;
+          text-align: left;
+          width: auto;
+          &:focus, &:hover {
+            background-color: $sitenav-otherlevel-anchor-hover-bg-color;
+            color: $sitenav-otherlevel-anchor-hover-color;
+          }
+        }
+      }
+    }
+
+    ul ul {
+      top: 14px;
+      left: 0px;
+      left: 100%;
+      text-transform: none;
+    }
+
+    ul, ul ul {
+      border: none;
+      margin-left: 0;
+      // padding-top: 15px;
+      padding-left: 0;
+      width: 200px;
+    }
+  }
+
+  & > li {
+    &:first-child {
+      padding-left: 0 !important;
+    }
+    &:last-child {
+      border-right: none;
+      
+      li:last-child {
+        border-right: 1px solid $border-color;
+      }
+    }
+
+  }
+  .menu-item--active-trail{
+	background-color: #99cccc;	
+	color: white;
+  }  
+}
+
+/*** Quick links overrides ***/
+#quick-links {
+  background: $quicklinks-toplevel-bg-color;
+  float: right;
+  margin-right: 0;
+  
+  //add chevron to quick links
+  & > li > a:after{
+    @include fontawesome;
+    content: "\f054";
+    display: inline-block;
+    margin-left: 11px;
+    position: relative;
+    top: -1px;
+    font-size: 10px;
+    
+    -webkit-transition: all .7s; /* Safari */
+    transition: all .7s;
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+
+    -webkit-transition-delay: .5s; /* Safari */
+    transition-delay: .5s;
+  }
+
+  &:hover > li > a:after {
+    -webkit-transition: all .5s; /* Safari */
+    transition: all .5s;
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+
+    -webkit-transition-delay: 0s; /* Safari */
+    transition-delay: 0s;
+  }
+
+  li.sfHover {
+    a {
+      //top level, hover
+      color: $quicklinks-toplevel-anchor-hover-color;
+      background: $quicklinks-toplevel-anchor-hover-bg-color;
+    }
+    ul li {
+      a {
+        //dropdown, no hover
+        color: $quicklinks-otherlevel-anchor-color;
+        background: $quicklinks-otherlevel-anchor-bg-color;
+        border-bottom: 1px solid $gray-middle;
+      }
+    } 
+  }
+
+  li a:hover, li a:active, li a:focus{
+    //if there are not children
+      color: $quicklinks-toplevel-anchor-hover-color;
+      background: $quicklinks-toplevel-anchor-hover-bg-color;
+  }
+
+  li {
+    a {
+      color: $quicklinks-toplevel-anchor-color;
+      background: $quicklinks-toplevel-anchor-bg-color;
+    }
+
+    ul {
+      li {
+        a {
+          padding: 15px 15px;
+          &:focus, &:hover {
+            background-color: $quicklinks-otherlevel-anchor-hover-bg-color;
+            color: $quicklinks-otherlevel-anchor-hover-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*** main menu overrides ***/
+#main-menu{
+  //add separators between menu items
+  > li{
+    &:after {
+      content: "";
+      height: 17px;
+      border-right: 1px solid $gray-ltr;
+      display: inline;
+      position: absolute;
+      top: 14px;
+      right: -1px;
+    }
+    &:last-child:after{
+      border: none;
+    }
+  }
+
+  li.sfHover, & > li:hover {
+    &:after {
+      border-right: 0;
+    }
+  }
+
+}

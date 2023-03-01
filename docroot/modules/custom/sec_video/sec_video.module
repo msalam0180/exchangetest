@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Insider SEC Video (sec_video) module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the FORM_ID() form.
+ */
+function sec_video_form_node_video_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  _sec_video_form_setup($form, $form_state);
+  $form['#validate'][] = '_sec_video_form_node_video_validate';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the FORM_ID() form.
+ */
+function sec_video_form_node_video_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  _sec_video_form_setup($form, $form_state);
+  $form['#validate'][] = '_sec_video_form_node_video_validate';
+}
+
+/**
+ * Setup the form to add validation classes.
+ */
+function _sec_video_form_setup(&$form, FormStateInterface $form_state) {
+  $form['#attached']['library'][] = 'sec_video/sec_video';
+}
+
+/**
+ * Validates submission values in the FORM_ID() form.
+ */
+function _sec_video_form_node_video_validate(array &$form, FormStateInterface $form_state) {
+
+  if ($form_state->hasValue('field_video_origin')) {
+    $fieldVideoOrigin = $form_state->getValue("field_video_origin");
+    if ($fieldVideoOrigin[0]['value'] == 'youtubevimeo') {
+      // Check if there is a Youtube/Vimeo value when youtubevimeo is selected.
+      $fieldVideo = $form_state->getValue("field_video");
+      if (empty($fieldVideo[0]['value'])) {
+        $form_state->setErrorByName('field_video', t("Please enter the URL to the YouTube or Vimeo Video"));
+      }
+    } elseif ($fieldVideoOrigin[0]['value'] == 'limelight') {
+
+      // Check if there is a wowza value when wowza is selected.
+      $fieldVideo = $form_state->getValue("field_media_id");
+      if (empty($fieldVideo[0]['value'])) {
+        $form_state->setErrorByName('field_media_id', t("Please enter the URL to the Wowza Video"));
+      }
+
+      // Check if there is a thumbnail when wowza is selected.
+      if ($form_state->hasValue('field_limelight_thumbnail')) {
+        $fieldthumb = $form_state->getValue("field_limelight_thumbnail");
+
+        if ((empty($fieldthumb[0]['fids'])) || ($fieldthumb[0]['fids'] == NULL)) {
+          $form_state->setErrorByName('field_limelight_thumbnail', t("Please add a Video on Demand Page Thumbnail"));
+        }
+      }
+    }
+  }
+}

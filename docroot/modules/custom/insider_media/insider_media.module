@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Contains insider_media.module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter() to add custom validation for field_link_reference_type
+ */
+function insider_media_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (!empty($form['field_link_reference_type'])) {
+    if ($form['field_link_reference_type']['widget']['#required']) {
+      $form['#validate'][] = 'insider_media_form_field_link_reference_type_validate';
+    }
+  }
+}
+
+/**
+ * Validates field_link_reference_type to ensure it is not empty when required
+ */
+function insider_media_form_field_link_reference_type_validate(array &$form, FormStateInterface $form_state) {
+  $fieldLinkType = $form_state->getValue('field_link_reference_type');
+  if (empty($fieldLinkType)) {
+    $form_state->setError($form['field_link_reference_type'], 'Link/Media Type Field is required.');
+  }
+}

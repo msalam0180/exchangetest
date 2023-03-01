@@ -1,0 +1,45 @@
+diff --git a/src/Masquerade.php b/src/Masquerade.php
+index d5eac37..2b3efc5 100644
+--- a/src/Masquerade.php
++++ b/src/Masquerade.php
+@@ -147,11 +147,14 @@ class Masquerade {
+    *   TRUE when masqueraded, FALSE otherwise.
+    */
+   public function switchTo(UserInterface $target_account) {
++
++    // Save previous account ID to session storage, set this before
++    // switching so that other modules can react to it, e.g. during
++    // hook_user_logout().
++    $this->session->set('masquerading', $this->currentUser->id());
++
+     $account = $this->switchUser($target_account);
+ 
+-    // Save previous account ID to session storage.
+-    $this->session->set('masquerading', $account->id());
+-
+     $this->logger->info('User %username masqueraded as %target_username.', [
+       '%username' => $account->getDisplayName(),
+       '%target_username' => $target_account->getDisplayName(),
+@@ -172,16 +175,19 @@ class Masquerade {
+     }
+     // Load previous user account.
+     $user = $this->userStorage->load($this->session->get('masquerading'));
+-
+-    // Ensure the flag is cleared.
+-    $this->session->remove('masquerading');
+     if (!$user) {
++      // Ensure the flag is cleared.
++      $this->session->remove('masquerading');
+       // User could be canceled while masquerading.
+       return FALSE;
+     }
+ 
+     $account = $this->switchUser($user);
+ 
++    // Clear the masquerading flag after switching the user so that hook
++    // implementations can differentiate this from a real logout/login.
++    $this->session->remove('masquerading');
++
+     $this->logger->info('User %username stopped masquerading as %old_username.', [
+       '%username' => $user->getDisplayName(),
+       '%old_username' => $account->getDisplayName(),

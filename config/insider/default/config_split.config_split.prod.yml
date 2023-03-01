@@ -1,0 +1,19 @@
+uuid: 9a071e2b-7b82-4189-8ee2-c2ae81d104a7
+langcode: en
+status: false
+dependencies: {  }
+id: prod
+label: Prod
+description: 'Config for production environment'
+weight: 2
+folder: ../config/insider/prod
+module: {  }
+theme: {  }
+blacklist: {  }
+graylist:
+  - environment_indicator.indicator
+  - google_tag.container.primary
+  - user.role.authenticated
+  - maillog.settings
+graylist_dependents: true
+graylist_skip_equal: true

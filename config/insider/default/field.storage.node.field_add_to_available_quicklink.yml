@@ -1,0 +1,24 @@
+uuid: 52c2ca34-dc14-44ef-b01f-1f5e5a99bb44
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - node
+third_party_settings:
+  field_permissions:
+    permission_type: public
+_core:
+  default_config_hash: modMBXADgW4Ajn0nnlOVyoRU9e3su14rdPh-b3KTiSQ
+id: node.field_add_to_available_quicklink
+field_name: field_add_to_available_quicklink
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

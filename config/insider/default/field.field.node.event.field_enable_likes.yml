@@ -1,0 +1,23 @@
+uuid: 3ea90a45-490c-4bd8-ac19-8e43646911a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_enable_likes
+    - node.type.event
+id: node.event.field_enable_likes
+field_name: field_enable_likes
+entity_type: node
+bundle: event
+label: 'Enable Likes'
+description: 'Users have the ability to like this content'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

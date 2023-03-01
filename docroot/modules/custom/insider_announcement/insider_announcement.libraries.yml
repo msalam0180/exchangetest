@@ -1,0 +1,6 @@
+insider_announcement:
+  version: VERSION
+  js:
+    js/insider_announcement.js: {}
+  dependencies:
+    - core/jquery

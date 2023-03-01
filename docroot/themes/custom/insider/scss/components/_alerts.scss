@@ -1,0 +1,61 @@
+//
+// Site Alerts
+// These appear on the homepage when content type "Site Alert" node
+// is published an promoted to the homepage
+// --------------------------------------------------
+
+.alert-box {
+  background-color: $gray-ltest !important;
+  text-align: left;
+  padding: 10px 0;
+
+  & + & { border-top: 1px solid $white;} 
+
+  .alert-box-contain{
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .alert-title {
+    font-size: 1.2em;
+    line-height: 1.5em;
+    @include raleway;
+    font-weight: 700;
+  }
+
+  p:last-child {
+    margin-bottom: 0px;
+  }
+
+}
+
+@mixin alert-type($class-name, $color) {
+  .#{$class-name}{
+    padding-left: 20px;
+    border-left: 10px solid $color;
+  }
+  
+}
+
+.alert-box{
+  @include alert-type('critical', $alert-critical-color);
+  @include alert-type('warning', $alert-warning-color);
+  @include alert-type('info', $alert-info-color);
+  @include alert-type('success', $alert-success-color);
+}
+
+.site_alerts_insider-view_alerts_block_homepage #table_paging{
+  display: none;
+  //TODO: fix #table_paging in template and then delete this
+}
+
+.highlighted { 
+  position: relative; 
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+
+
+
+//search - homepage-alert
+

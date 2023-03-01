@@ -1,0 +1,25 @@
+uuid: 097ddebb-3667-4bc8-a406-f90842adfe75
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_type
+    - node.type.featured
+  module:
+    - options
+_core:
+  default_config_hash: pnKm8L4N-p4B6X-zM6o-5ITuEIo2ifKR3DycnPY9-c0
+id: node.featured.field_featured_type
+field_name: field_featured_type
+entity_type: node
+bundle: featured
+label: 'Featured Type'
+description: 'Hero - large image that stretches across home page; Highlighted Item - smaller image within Highlights section'
+required: true
+translatable: false
+default_value:
+  -
+    value: highlighted_item
+default_value_callback: ''
+settings: {  }
+field_type: list_string

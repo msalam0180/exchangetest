@@ -1,0 +1,23 @@
+uuid: 741a8bbb-28ef-4dec-bd1d-aca8572217b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_left_2_box
+    - node.type.landing_page
+  module:
+    - text
+_core:
+  default_config_hash: TgW-CEjCPpeJ3PR6sYkWJwxgZt-xFM4Jet9eKjs2ixQ
+id: node.landing_page.field_left_2_box
+field_name: field_left_2_box
+entity_type: node
+bundle: landing_page
+label: 'Left 2 - Box'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

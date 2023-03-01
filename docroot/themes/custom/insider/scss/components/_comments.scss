@@ -1,0 +1,167 @@
+/**
+ * Comment styling.
+ */
+
+article.comment,
+article.js-comment {
+  footer {
+    article.contextual-region {
+      a {
+        // Masquerade link.
+        display: none;
+      }
+
+      a.use-ajax {
+        display: inline;
+      }
+    }
+  }
+
+  // display: flex;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  border-bottom: lightgrey 1px solid;
+
+  .flag-like-comment {
+    display: inline;
+  }
+
+  .flag-mark-comment-as-inappropriate {
+    display: inline;
+    padding-left: 30px;
+  }
+
+  .list-inline,
+  .inline {
+    padding-top: 5px;
+    padding-left: 0;
+    margin: 0px;
+    display: inline;
+
+    li {
+      font-size: 1em;
+      padding: 0px;
+      display: inline;
+    }
+
+    li.comment-delete {
+      display: none;
+    }
+
+    li:after {
+      content: '\22C5';
+      padding: 0 5px;
+    }
+  }
+
+  // Make the body text bold per request.
+  .field--name-comment-body {
+    p {
+      font-weight: bold;
+    }
+  }
+
+  .comment-username {
+    font-weight: bold;
+  }
+
+  .comment-date {
+    color: #797676;
+    font-size: .7em;
+  }
+
+  .permalink {
+    font-size: .7em;
+  }
+}
+
+.indented {
+  border-left: 2px solid $border-color;
+  padding-left: 30px;
+  margin-left: 20px;
+  // margin-bottom: 20px;
+  // padding-top: 10px;
+
+  // TODO: Look at mobile padding.
+  // @media #{$mobile} {
+  //   padding-left: 10px;
+  //   margin-left: 15px;
+  // }
+
+
+  // .comment {
+  //   margin-bottom: 10px;
+  // }
+
+  // .indented {
+  //   border-left: none;
+  // }
+}
+
+// New comment style
+mark.new {
+  color: #7b0218;
+  background: #ffe6ea;
+  padding: 1px 5px;
+  line-height: 1em;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+// Comment Form
+.comment-comment-forum-form {
+  margin-top: 20px;
+}
+
+// Don't show text formats link per request.
+#edit-comment-body-0-format-help {
+  display: none;
+}
+
+.banned {
+  .links {
+    display: none;
+
+    .comment-reply,
+    .comment-delete,
+    .comment-edit {
+      display: none;
+    }
+  }
+}
+
+.deleted {
+  .links {
+    display: none;
+
+    .comment-edit {
+      display: none;
+    }
+  }
+}
+
+.comment-form {
+  #edit-author {
+    display: none;
+  }
+}
+
+// DI-6124: Fixes issue with comment wyswig linkit button dropdown
+.ui-front.ui-dialog-content.ui-widget-content {
+  position: static;
+}
+
+// DI-6124: Adds dropdown icon and other styles to comments editor
+.cke_editor_edit-comment-body-0-value_dialog {
+  .cke_dialog_ui_input_select {
+    padding-right: 1.5em;
+    line-height: normal;
+    background: #fcfcfa url(/core/misc/icons/333333/caret-down.svg) no-repeat 99% 63%;
+  }
+
+  .cke_dialog_ui_labeled_label {
+    font-weight: bold;
+    margin: 0 0 0.1em;
+  }
+}

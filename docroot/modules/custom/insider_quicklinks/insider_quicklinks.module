@@ -1,0 +1,232 @@
+<?php
+
+use Drupal\views\Views;
+use Drupal\views\ViewExecutable;
+use Drupal\flag\FlagService;
+use Drupal\flag\FlagCountManager;
+use Drupal\Core\Session\AccountInterface;
+
+
+
+function insider_quicklinks_theme($existing, $type, $theme, $path) {
+  return [
+    'quicklinks_menu' => [
+      'template' => 'quicklinks-menu',
+      'variables' => ['quicklinks' => NULL, 'branding' => quicklinks_branding(true)],
+    ],
+    'quicklinks_mobile_menu' => [
+      'template' => 'quicklinks-mobile-menu',
+      'variables' => ['quicklinks' => NULL, 'branding' => quicklinks_branding(true)],
+    ],
+  ];
+}
+
+function quicklinks_branding($plural = false) {
+  // For usage in various output because string maintenance is hard
+  return $plural ? "QuickLinks" : "QuickLink";
+}
+
+function quicklinks_limit() {
+  return 12;
+}
+
+
+/*
+ * General functions available for use with the Insider Quicklinks
+*/
+
+/**
+ * Loads a view from configuration and returns its executable object.
+ *
+ * @param string $name
+ *   The view ID to load.
+ *
+ * @return \Drupal\views\ViewExecutable
+ *   A view executable instance, from the loaded entity.
+ */
+function getQuickLinkView(string $name): ?ViewExecutable {
+  // Fetch the view for quicklinks if it's a valid view
+  return viewNameValidate($name) ? Views::getView($name) : null;
+}
+
+/**
+ * Fetches and array of all the available Quicklinks views.
+ *
+ * @return array
+ */
+function getAllQuickLinksViews(): array {
+  // Initialize our array
+  $views = array();
+
+  // For each Quicklinks view we've set, add that view to the views array
+  foreach (insiderQuickLinksViews() as $view_name) {
+    $views[$view_name] = getQuickLinkView($view_name);
+  }
+
+  // Return all of our views
+  return $views;
+}
+
+/**
+ * Here we set all of our available views for validation.
+ *
+ * @return array
+ *  A list of the views this module manages
+ */
+function insiderQuickLinksViews(): array {
+  return [
+    'available_quicklinks',
+    'default_quicklinks',
+    'my_quicklinks',
+  ];
+}
+
+/**
+ * Loads a view from configuration and returns its executable object.
+ *
+ * @param string $name
+ *   The name of the view to test.
+ *
+ * @return bool
+ *   A true or false value of whether the view name is valid.
+ */
+function viewNameValidate(string $name): bool {
+  return in_array($name, insiderQuickLinksViews());
+}
+
+/**
+ * Get results from the Default Quicklinks view
+ *
+ * @return array
+ */
+function getDefaultQuickLinks() {
+  // Getting the Default Quicklinks view and then returning the results
+  /** Drupal\views\ViewExecutable */
+  $default_quicklinks = getQuickLinkView('default_quicklinks');
+
+  // Choose our block display
+  $default_quicklinks->setDisplay('block_1');
+
+  // Execute the view query
+  $default_quicklinks->execute();
+
+  // Returning results
+  return $default_quicklinks->result;
+}
+
+
+/**
+ * Returns an instance of the Flag service
+ *
+ * @return Drupal\flag\FlagService
+ */
+function getFlagService() {
+  return \Drupal::service('flag');
+}
+
+/**
+ * Returns an instance of the FlagCount service
+ *
+ * @return Drupal\flag\FlagCountManager
+ */
+function getFlagCountService() {
+  return \Drupal::service('flag.count');
+}
+
+/**
+ * Get results from the My Quicklinks view
+ *
+ * @return array
+ */
+function getMyQuickLinks() {
+  // Getting the My Quicklinks view and then returning the results
+  /** Drupal\views\ViewExecutable */
+  $my_quicklinks = getQuickLinkView('my_quicklinks');
+
+  // Choose our block display
+  $my_quicklinks->setDisplay('block_1');
+
+  // Execute the view query
+  $my_quicklinks->execute();
+
+  // Returning results
+  return $my_quicklinks->result;
+}
+
+function userFlagCount(AccountInterface $user) {
+  // Return the count baesd on the view so if someone removes a link from availability
+  //  that it then doesn't count against how many links they have.
+  return sizeof(getMyQuicklinks());
+}
+
+/**
+ * Set default flags for the given user based on the default flags created.
+ *
+ * @param AccountInterface $user
+ * @return void
+ */
+function setUserDefaultFlags(AccountInterface $user) {
+  // Reset User flags - shouldn't be necessary on new accounts
+  //  but good to wipe out to get known-good results.
+  resetUserFlags($user);
+
+  // Call the flag service
+  $flag_service = getFlagService();
+
+  // Get the Quicklinks flag
+  $flag = $flag_service->getFlagById('user_quicklinks');
+
+  // Get the Default Quicklinks
+  $links = getDefaultQuickLinks();
+
+  // Loop over each default Quicklink and flag it for the user
+  foreach ($links as $link) {
+    $nid = $link->nid;
+    // Get the entity for the link
+    $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+
+    // Get the flagging boolean
+    $flagging = $flag_service->getFlagging($flag, $node, $user);
+
+    // If it is not flagged, flag it (add to My Quicklinks)
+    if (!$flagging) {
+      $flag_service->flag($flag, $node, $user);
+    }
+  }
+}
+
+/**
+ * Unsets all of the selected user's Quicklinks flags
+ *
+ * @param AccountInterface $user
+ * @return void
+ */
+function resetUserFlags(AccountInterface $user) {
+  // If the user has flagged anything we'll unflag it
+  if (userFlagCount($user) > 0) {
+
+    // Call the flag service
+    $flag_service = \Drupal::service('flag');
+
+    // Get the Quicklinks flag
+    $flag = $flag_service->getFlagById('user_quicklinks');
+
+    // Get the Default Quicklinks
+    $links = getMyQuickLinks();
+
+    // Loop over each default Quicklink and unflag it for the user
+    foreach ($links as $link) {
+      $nid = $link->nid;
+      // Get the entity for the link
+      $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+
+      // Get the flagging boolean
+      $flagging = $flag_service->getFlagging($flag, $node, $user);
+
+      // If it is flagged, unflag it (add to My Quicklinks)
+      if ($flagging) {
+        $flag_service->unflag($flag, $node, $user);
+      }
+    }
+  }
+}

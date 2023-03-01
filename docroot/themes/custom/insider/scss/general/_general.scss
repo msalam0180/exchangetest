@@ -1,0 +1,130 @@
+//
+// General
+// These are general styles that apply site-wide
+// It is mainly general typography and HTML element base styles
+// --------------------------------------------------
+
+*, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html, body {
+    font-size: 100%;
+    height: 100vh;
+}
+
+body {
+    @include helvetica;
+    background: $body-bg;
+    color: $body-text;
+    font-size: $font-size;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1.5em;
+    margin: 0;
+    min-width: 320px;
+    padding: 0;
+    position: relative;
+    cursor: default;
+}
+
+%heading-base-styles{
+  @include raleway;
+  color: $heading-color;
+  font-weight: 600;
+  margin: 0px 0px .5rem;
+  font-size: 16px;
+  line-height: 1.5em;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @extend %heading-base-styles;
+}
+
+h1 {
+    color: $page-title-color;
+    font-size: 26px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+h4 {
+  font-size: 14px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  font-size: 14px;
+}
+
+h1.page-title {
+  display: inline-block;
+  line-height: 1.5;
+  min-height: 48px;
+  margin: 0px 0px 18px 0px;
+  padding: 7px 0 8px;
+  text-align: left;
+  border-bottom: 1px solid $border-color;
+  width: 100%;
+}
+
+p {
+    // color: $body-text;
+    font-family: inherit;
+    font-weight: normal;
+    // line-height: 1.5;
+    margin: 10px 0;
+    text-rendering: optimizeLegibility;
+}
+
+hr {
+  //TODO: Review This Rule
+  margin: 20px 0;
+	color: #B3B3B3;
+	border: solid #b3b3b3;
+	border-width: 1px 0 0;
+
+  border-top: 1px solid $border-color;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+a {
+  color: $anchor-color;
+  text-decoration: none;
+  font-weight: 600;
+  &:hover, &:focus {
+    color: $anchor-hover-color;
+    text-decoration: underline;
+  }
+  &:visited {
+    color: $anchor-visited-color;
+  }
+}
+
+a.button {
+  &:visited {
+    color: white;
+  }
+}
+
+em, i { font-style: italic; }
+
+
+img, object, embed { max-width: 100%; height: auto; }
+
+object, embed { height: 100%; }
+
+img { -ms-interpolation-mode: bicubic; }
+
+img { display: inline-block; vertical-align: middle; }
+
+u { text-decoration: underline; }

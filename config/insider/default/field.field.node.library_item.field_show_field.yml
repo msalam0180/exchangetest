@@ -1,0 +1,25 @@
+uuid: d615f17e-a175-4605-9d76-5478d69ed25e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_field
+    - node.type.library_item
+_core:
+  default_config_hash: MDeJ0GHi-Wa1XDXrbf7s86ra2h28S-52quOuRK5ZU20
+id: node.library_item.field_show_field
+field_name: field_show_field
+entity_type: node
+bundle: library_item
+label: 'Override Left Nav'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

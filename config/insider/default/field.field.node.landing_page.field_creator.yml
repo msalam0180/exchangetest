@@ -1,0 +1,37 @@
+uuid: e7763262-fe76-4887-9955-0a736cd48003
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_creator
+    - node.type.landing_page
+_core:
+  default_config_hash: EsTxKzjmoaJ7gTYChUzI--c-uXfkVR986xuUyv9IsIg
+id: node.landing_page.field_creator
+field_name: field_creator
+entity_type: node
+bundle: landing_page
+label: 'SEC Content Creator'
+description: '<small>Content creator who should receive email notifications</small>'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    filter:
+      type: role
+      role:
+        content_creator: content_creator
+        microsite_creator: microsite_creator
+        administrator: '0'
+        content_approver: '0'
+        sitebuilder: '0'
+    include_anonymous: false
+field_type: entity_reference

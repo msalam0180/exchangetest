@@ -1,0 +1,25 @@
+uuid: 024927c0-eb06-4e94-b0ac-40f504706c78
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_promote_to_exchange
+    - node.type.event
+_core:
+  default_config_hash: EvqGd5X1Wy9zXySmOXEFgvyHE2m7KgN_D5uayvn8VV8
+id: node.event.field_promote_to_exchange
+field_name: field_promote_to_exchange
+entity_type: node
+bundle: event
+label: 'Promote to Exchange'
+description: 'Indicates whether a site section event should be promoted generally to The Exchange.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

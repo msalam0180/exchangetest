@@ -1,0 +1,26 @@
+uuid: 027bee25-e024-4926-8e16-baafb9233e30
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_retain_disposal_date
+    - node.type.sec_article
+  module:
+    - datetime
+_core:
+  default_config_hash: oEgX6h5XsO8RyA9MKMbaKbmci78Kgkr0GPmEVa0dzxc
+id: node.sec_article.field_retain_disposal_date
+field_name: field_retain_disposal_date
+entity_type: node
+bundle: sec_article
+label: 'Expiration/Review Date'
+description: 'Date article should be reviewed for updates or removal'
+required: false
+translatable: true
+default_value:
+  -
+    default_date_type: relative
+    default_date: '+3 years'
+default_value_callback: ''
+settings: {  }
+field_type: datetime

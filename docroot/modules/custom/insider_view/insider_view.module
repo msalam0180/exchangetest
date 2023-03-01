@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ * Contains insider_view.module.
+ */
+
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\search_api\Query\QueryInterface;
+
+/**
+ * Implements hook_search_api_query_alter().
+ */
+function insider_view_search_api_query_alter(QueryInterface &$query) {
+  if (($query->getSearchId() == "views_page:the_exchange_search__page_1" || $query->getSearchId() == "views_page:local_solr_search__page_1") && $query->getConditionGroup() != null) {
+    if (isset($query->getConditionGroup()->getConditions()[0])) {
+      $filterValue = $query->getConditionGroup()->getConditions()[0]->getConditions()[0]->getValue();
+      if ($filterValue[0] == "_none") {
+        $query->getConditionGroup()->getConditions()[0]->getConditions()[0]->setOperator("=");
+        $query->getConditionGroup()->getConditions()[0]->getConditions()[0]->setValue(NULL);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function insider_view_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  // Modify events list to remove grouping if not sorting by date.
+  // Removing this condition since Events page doesnt use sorting.
+  // if ($view->id() == 'events_list' && $view->current_display == 'block_1') {
+  if ($view->id() == 'announcements_list' && $view->current_display == 'block_3') {
+    //check if table sorting has added an extra sort to this view
+    if (sizeof($query->orderby) == 3) {
+      if ($query->orderby[2]["field"] == 'node_field_data.title') {
+        //if not sorting by date then remove grouping
+        $view->style_plugin->options["grouping"] = [];
+        $direction = $query->orderby[2]["direction"];
+        $query->orderby = [];
+        $query->addOrderBy(NULL, 'vns_node_field_data.content', $direction, 'vns_node_field_data_content_test');
+        array_unshift($query->orderby, end($query->orderby));
+      } else {
+        if ($query->orderby[2]["field"] != 'node__field_combined_date.field_combined_date_value') {
+          $view->style_plugin->options["grouping"] = [];
+        }
+        $sortField = $query->orderby[2]["field"];
+        $direction = $query->orderby[2]["direction"];
+        $query->orderby = [];
+        $query->addOrderBy(NULL, $sortField, $direction, 'other_sort');
+        array_unshift($query->orderby, end($query->orderby));
+      }
+    }
+  }
+
+  if ($view->id() == 'impact_reporting' && $view->current_display == 'page_1') {
+    // Replacing count field to source_id to count distinct unique nodes.
+    $query->fields['entity_usage_node_count']['field'] = 'source_id';
+  }
+}
+
+
+/**
+ * Implements hook_views_data().
+ */
+function insider_view_views_data() {
+  $data['entity_usage']['table']['group'] = t('Entity Usage');
+
+  //add source_id to entity usage relationship for impact analysis
+  $data['entity_usage']['source_id'] = [
+    'title' => t('Source ID'),
+    'help' => t('source entity.'),
+    'field' => [
+      'id' => 'numeric',
+    ],
+    'sort' => [
+      'id' => 'standard',
+    ],
+    'filter' => [
+      'id' => 'numeric',
+    ],
+    'argument' => [
+      'id' => 'numeric',
+    ],
+  ];
+  return $data;
+}

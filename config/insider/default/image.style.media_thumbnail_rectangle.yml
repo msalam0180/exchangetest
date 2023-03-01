@@ -1,0 +1,15 @@
+uuid: 58ab0410-4671-4a08-9fc3-b6c11eb02a26
+langcode: en
+status: true
+dependencies: {  }
+name: media_thumbnail_rectangle
+label: 'Media Thumbnail Rectangle'
+effects:
+  dfcfa842-5f56-44c9-8f7b-88f1f02b619b:
+    uuid: dfcfa842-5f56-44c9-8f7b-88f1f02b619b
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 455
+      height: 300
+      anchor: center-center

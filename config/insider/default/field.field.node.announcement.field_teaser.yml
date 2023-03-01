@@ -1,0 +1,26 @@
+uuid: 98f2eef1-e579-4d68-aa2c-d3be8a12e463
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_teaser
+    - node.type.announcement
+  module:
+    - text
+_core:
+  default_config_hash: 3Msb6x8wRqzEQPaU0Nt11bRyhfXlRk9WefyrkSMTuyY
+id: node.announcement.field_teaser
+field_name: field_teaser
+entity_type: node
+bundle: announcement
+label: Teaser
+description: 'Teaser text only appears when announcement is promoted to the homepage.'
+required: false
+translatable: false
+default_value:
+  -
+    value: ' '
+    format: teaser_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

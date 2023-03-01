@@ -1,0 +1,31 @@
+uuid: 76be2f35-bb00-4279-a930-f18224707039
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_topic
+    - media.type.file
+    - taxonomy.vocabulary.topic
+_core:
+  default_config_hash: 0uYpfDrRyq5uCPBNvCOePotOuSUD6vkhtfD43hQjZes
+id: media.file.field_media_topic
+field_name: field_media_topic
+entity_type: media
+bundle: file
+label: Topic
+description: 'Select at least one topic'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      topic: topic
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

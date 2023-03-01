@@ -1,0 +1,29 @@
+uuid: e675931f-9622-411b-a747-110111a85b79
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+_core:
+  default_config_hash: aNMjJHhOVhyDWBZxx6Oi4SkoQmHtBEQ_xant9XXNcWg
+id: node.field_featured_type
+field_name: field_featured_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: hero
+      label: 'Hero Image'
+    -
+      value: highlighted_item
+      label: 'Highlighted Item'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

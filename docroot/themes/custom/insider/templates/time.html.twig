@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Theme override for a date / time element.
+ *
+ * Available variables
+ * - timestamp: (optional) A UNIX timestamp for the datetime attribute. If the
+ *   datetime cannot be represented as a UNIX timestamp, use a valid datetime
+ *   attribute value in attributes.datetime.
+ * - text: (optional) The content to display within the <time> element.
+ *   Defaults to a human-readable representation of the timestamp value or the
+ *   datetime attribute value using format_date().
+ * - attributes: (optional) HTML attributes to apply to the <time> element.
+ *   A datetime attribute in 'attributes' overrides the 'timestamp'. To
+ *   create a valid datetime attribute value from a UNIX timestamp, use
+ *   format_date() with one of the predefined 'html_*' formats.
+ *
+ * @see template_preprocess_time()
+ * @see http://www.w3.org/TR/html5-author/the-time-element.html#attr-time-datetime
+ */
+#}
+{%-  if text is same as('$$') -%} 
+  {# $$ is our custom AP date formatter #} 
+  <time {{- attributes.addClass('datetime') -}}>{{- attributes.datetime|apdate -}}</time> 
+{%- elseif text is same as('%%') -%} 
+  {# %% is our custom AP month and year date formatter #} 
+  <time {{- attributes.addClass('datetime') -}}>{{- attributes.datetime|apDateMonthYear -}}</time> 
+{%- elseif text is same as('??') -%} 
+  {# %% is our custom AP date and time date formatter #} 
+  <time {{- attributes.addClass('datetime') -}}>{# text #} 
+  {{- attributes.datetime|apdate -}} | {{- attributes.datetime|date('g:i a T') -}}</time>
+{# Regex matching one of these formats for HTML datetime; 1990-12-31T23:59:60Z or 1996-12-19T16:39:57-08:00 #}
+{%- elseif text matches '/([0-2][0-9]{3})\-([0-1][0-9])\-([0-3][0-9])T([0-5][0-9])\:([0-5][0-9])\:([0-5][0-9])(Z|([\-\+]([0-1][0-9])\:00))/' -%}
+   <time {{- attributes.addClass('datetime') -}}>{{- text|apdate -}}</time>
+{%- else -%} 
+   <time {{- attributes.addClass('datetime') -}}>{{- text -}}</time>
+{%-  endif -%} 

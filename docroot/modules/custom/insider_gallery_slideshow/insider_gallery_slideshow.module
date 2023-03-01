@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Contains insider_gallery_slideshow.module.
+ */
+
+function insider_gallery_slideshow_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  //check content type and attach gallery css/js
+  if ($node->bundle() == 'gallery') {
+    $variables['#attached']['library'][] = 'insider_gallery_slideshow/media_boxes';
+    $variables['#attached']['library'][] = 'insider_gallery_slideshow/media_gallery';
+
+    //loop over $node->field_media
+    foreach ($node->field_media as $media) {
+
+      //get vimeo thumbnail manually
+      if ($media->entity && $media->entity->bundle() == "video") {
+        $mediaUrl = $media->entity->field_video->value;
+        if (!empty($mediaUrl) && strpos($mediaUrl, 'vimeo') !== false) {
+          $mediaId = explode(".com/", $mediaUrl)[1];
+          $thumbnail = insider_gallery_slideshow_getVimeoThumb($mediaId);
+          $media->entity->field_limelight_thumbnail->value = $thumbnail;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Gets a vimeo thumbnail url
+ * @param mixed $id A vimeo id (ie. 1185346)
+ * @return thumbnail's url
+ */
+function insider_gallery_slideshow_getVimeoThumb($id) {
+  $data = file_get_contents("http://vimeo.com/api/v2/video/$id.json");
+  $data = json_decode($data);
+  return $data[0]->thumbnail_medium;
+}

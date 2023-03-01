@@ -1,0 +1,48 @@
+uuid: ce758105-43f0-4ef0-94e6-57c5e3cf2608
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file_upload
+    - node.type.file
+  module:
+    - file
+    - filefield_paths
+third_party_settings:
+  filefield_paths:
+    enabled: true
+    file_path:
+      value: 'media/[node:field_top_level_group:entity:field_abbreviation]'
+      options:
+        slashes: false
+        pathauto: true
+        transliterate: false
+    file_name:
+      value: '[node:title].[file:ffp-extension-original]'
+      options:
+        slashes: true
+        pathauto: true
+        transliterate: false
+    redirect: false
+    retroactive_update: false
+    active_updating: true
+_core:
+  default_config_hash: kRaG04pY5TJnGS_rWmkCgPYv7cKLzklxWSAtjZzBQr8
+id: node.file.field_file_upload
+field_name: field_file_upload
+entity_type: node
+bundle: file
+label: 'File Upload'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: ''
+  file_extensions: 'csv doc docx ics pdf ppt pptx txt vcs xls xlsx xml zip'
+  max_filesize: ''
+  description_field: false
+field_type: file

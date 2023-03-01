@@ -1,0 +1,5 @@
+services:
+  insider_comments.flag_subscriber:
+    class: Drupal\insider_comments\EventSubscriber\InsiderCommentsFlagSubscriber
+    tags:
+      - { name: event_subscriber }

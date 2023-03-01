@@ -1,0 +1,83 @@
+//
+// List pages that use the Media Layout
+// These styles apply List pages that do not use tables
+// --------------------------------------------------
+
+.media-view{
+	.views-exposed-form{
+		border-bottom: 1px solid $table-border-color;
+		margin-bottom: 40px;
+	}
+
+	.media-heading{
+		a{
+			font-size: 22px;
+	    	line-height: 1.5em;
+		}
+	}
+
+	.media-left,
+	.media > .pull-left {
+	  padding-right: 30px;
+	}
+
+	.video-divider{
+	    border-top: 2px solid #89d0d0;
+	    width: 30px;
+	    margin-bottom: 10px;
+	    margin-top: 10px;
+	}
+
+	.video-category{
+	    color: $accent-dk-color;
+	    display: inline-block;
+	    font-weight: 600;
+	    @include raleway;
+	    font-size: .9em;
+        position: relative;
+    	top: -5px;
+        border: 1px solid #d0cfcf;
+	    border-radius: 3px;
+	    line-height: 12px;
+	    padding: 2px 3px;
+	}
+
+	.media .media-left img{
+		@media only screen and (min-width: 500px) and (max-width: 767px) {
+			max-width: 150px;
+		}
+		@media only screen and (max-width: 349px) {
+			width: 100%;
+		}
+	}
+
+	@media only screen and (max-width: 500px) {
+		.media-left, .media-right, .media-body{
+			display: block;
+			margin-right: 0;
+			padding-right: 0;
+			width: auto;
+		}
+		.views-row{
+			border: 1px solid $table-border-color;
+		}
+		.media-left{
+			background: #e3e3e3;
+		    text-align: center;
+	        padding-top: 5px;
+    		padding-bottom: 5px;
+		}
+		.media-body{
+			padding: 10px;
+		}
+
+	}
+
+	@media only screen and (max-width: 349px) {
+		.media-left{
+	        padding: 0;
+		}
+	}
+
+}
+

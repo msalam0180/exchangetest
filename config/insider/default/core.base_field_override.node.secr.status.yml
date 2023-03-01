@@ -1,0 +1,24 @@
+uuid: 034e9faa-8c8c-4ec4-81b9-27a2bbe5b3c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.secr
+_core:
+  default_config_hash: hVD_sKzmBDhS10AzRXeWpUTwiccq0Xv4H8nUaxuW0yY
+id: node.secr.status
+field_name: status
+entity_type: node
+bundle: secr
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

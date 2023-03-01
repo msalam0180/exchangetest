@@ -1,0 +1,23 @@
+uuid: 0be66d63-5a44-4db6-8ce8-f2e1f0f16d58
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_source
+    - node.type.sec_article
+  module:
+    - text
+_core:
+  default_config_hash: rxtvrKc8U-uvY4l_UxrErOBAbGWm7_1GDutQVQDELT8
+id: node.sec_article.field_source
+field_name: field_source
+entity_type: node
+bundle: sec_article
+label: Source
+description: 'Federal employee responsible for providing the information for publishing.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

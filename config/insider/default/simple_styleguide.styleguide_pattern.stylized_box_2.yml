@@ -1,0 +1,9 @@
+uuid: c8e99450-41be-479f-86b4-53dab8ff3152
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: Xj_8UzUkqUVLE2CB4seZhJlPUij8eT9CDhadPMeGqek
+id: stylized_box_2
+label: 'Stylized Box 2'
+pattern: "<div class='stylized-box-2'>\r\nAlohamora wand elf parchment, Wingardium Leviosa hippogriff, house dementors betrayal. Holly, Snape centaur portkey ghost Hermione spell bezoar Scabbers. Peruvian-Night-Powder werewolf, Dobby pear-tickle half-moon-glasses, Knight-Bus. Padfoot snargaluff seeker: Hagrid broomstick mischief managed. Snitch Fluffy rock-cake, 9 ¾ dress robes I must not tell lies. Mudbloods yew pumpkin juice phials Ravenclaw’s Diadem 10 galleons Thieves Downfall.\r\n</div>"

@@ -1,0 +1,16 @@
+uuid: 462321ce-7549-445d-81af-85ee10fab669
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.operating_procedure
+_core:
+  default_config_hash: MsPGK4mOIHkGFA6RRCsvCEdkUDgfqsLf79v3lqXNBTQ
+id: node_type_operating_procedure
+entity_type_id: node_type
+entity_id: operating_procedure
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

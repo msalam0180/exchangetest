@@ -1,0 +1,10 @@
+uuid: 63ff3590-e74a-4c92-9095-d29c370dac35
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: Q2Ra3jfoIVk0f3SjxJX61byRQFVBAbpzYDQOiY-kno8
+id: main
+label: 'Main navigation'
+description: 'global navigation links in header of every page'
+locked: true

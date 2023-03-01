@@ -1,0 +1,10 @@
+uuid: 1630cb3d-34c0-4ab1-b2dc-2bfd42062e53
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.full_width_embed
+label: 'Full Width Embed'
+targetEntityType: node
+cache: true

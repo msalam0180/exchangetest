@@ -1,0 +1,15 @@
+uuid: 969d4f1a-3607-4939-81ab-bd2bab33d01d
+langcode: en
+status: true
+dependencies: {  }
+name: full_width_embed
+label: 'Full Width Embed (940×330)'
+effects:
+  43cfd34e-30ee-4907-9e02-266f97be89da:
+    uuid: 43cfd34e-30ee-4907-9e02-266f97be89da
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 940
+      height: 330
+      anchor: center-center

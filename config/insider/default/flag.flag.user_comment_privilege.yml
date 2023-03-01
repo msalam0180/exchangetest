@@ -1,0 +1,32 @@
+uuid: f9a63640-3ca9-4c86-9c36-b8c78629540b
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user_comment_privilege
+label: 'User Comment Privilege'
+bundles: {  }
+entity_type: user
+global: true
+flag_short: 'Remove Commenting Privileges'
+flag_long: ''
+flag_message: ''
+unflag_short: 'Add Commenting Privileges'
+unflag_long: ''
+unflag_message: ''
+unflag_denied_text: ''
+weight: 0
+flag_type: 'entity:user'
+link_type: ajax_link
+flagTypeConfig:
+  show_in_links:
+    full: full
+    token: token
+  show_as_field: true
+  show_on_form: false
+  show_contextual_link: false
+  extra_permissions:
+    owner: '0'
+  show_on_profile: true
+linkTypeConfig: {  }

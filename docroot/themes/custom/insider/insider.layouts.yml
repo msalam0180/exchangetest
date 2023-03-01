@@ -1,0 +1,13 @@
+toptwocol:
+  label: Top Span Two Column
+  category: 'Columns: 2'
+  path: templates/layouts/toptwocol
+  icon: toptwocol.png
+  template: panels-toptwocol
+  regions:
+    top:
+      label: Top Content
+    left:
+      label: Main Content
+    right:
+      label: Sidebar Content

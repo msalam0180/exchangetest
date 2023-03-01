@@ -1,0 +1,31 @@
+uuid: 0c574ca5-9061-4e42-9bae-d38b20615e7f
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - workbench_access
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  workbench_access:
+    workbench_access_status: true
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+    default_moderation_state: draft
+_core:
+  default_config_hash: y93tg2U_xhkgLbGI8RCYuvzsrTMMuTtXAa7EOkm2hGU
+name: Form
+type: form
+description: 'Fillable SEC-related and other federal forms'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

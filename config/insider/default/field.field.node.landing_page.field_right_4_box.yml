@@ -1,0 +1,23 @@
+uuid: 0d50e265-6a01-4767-b05e-b9147ddfd99a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_right_4_box
+    - node.type.landing_page
+  module:
+    - text
+_core:
+  default_config_hash: ZF-WlZ50P6cdTNd9t-bNvwh_CfQe3bTmXI1pZE0NA0k
+id: node.landing_page.field_right_4_box
+field_name: field_right_4_box
+entity_type: node
+bundle: landing_page
+label: 'Right 4 - Box'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

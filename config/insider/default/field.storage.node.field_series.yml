@@ -1,0 +1,113 @@
+uuid: 7d275afc-4552-4528-bf81-0376767231ff
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+_core:
+  default_config_hash: PhCQkqFqJifT6ScFMM0Rb9ggyIONP738FREoyTi8Dd0
+id: node.field_series
+field_name: field_series
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '1'
+      label: '1 - Directives Management'
+    -
+      value: '2'
+      label: '2 - Data Management'
+    -
+      value: '3'
+      label: '3 - Organization and Mission'
+    -
+      value: '4'
+      label: '4 - Office of the Chief Operating Officer'
+    -
+      value: '5'
+      label: '5 - Administrative Services'
+    -
+      value: '6'
+      label: '6 - Human Resources Management'
+    -
+      value: '7'
+      label: '7 - Records Management'
+    -
+      value: '8'
+      label: '8 - Reserved'
+    -
+      value: '9'
+      label: '9 - Property, Supplies and Asset Management'
+    -
+      value: '10'
+      label: '10 - Acquisitions'
+    -
+      value: '11'
+      label: '11 - Real Property Leasing'
+    -
+      value: '12'
+      label: '12 - Safety'
+    -
+      value: '13'
+      label: '13 - Reserved'
+    -
+      value: '14'
+      label: '14 - Financial Management'
+    -
+      value: '15'
+      label: '15 - Reserved'
+    -
+      value: '16'
+      label: '16 - Reserved'
+    -
+      value: '17'
+      label: '17 - Travel Management'
+    -
+      value: '18'
+      label: '18 - Public Affairs'
+    -
+      value: '19'
+      label: '19 - Office of General Counsel'
+    -
+      value: '20'
+      label: '20 - Reserved'
+    -
+      value: '21'
+      label: '21 - Reserved'
+    -
+      value: '22'
+      label: '22 - Reserved'
+    -
+      value: '23'
+      label: '23 - Security'
+    -
+      value: '24'
+      label: '24 - Information Technology'
+    -
+      value: '25'
+      label: '25 - Reserved'
+    -
+      value: '26'
+      label: '26 - Reserved'
+    -
+      value: '27'
+      label: '27 - Equal Employment Opportunity'
+    -
+      value: '28'
+      label: '28 - Diversity Management'
+    -
+      value: '29'
+      label: '29 - Inspector General'
+    -
+      value: '30'
+      label: '30 - Management Controls'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

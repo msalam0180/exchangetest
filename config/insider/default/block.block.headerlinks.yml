@@ -1,0 +1,27 @@
+uuid: f50399bd-32c2-4615-a193-cc2ca5f9bdac
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.header-links
+  module:
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: ZZH4IU7a1yCCHgW0UrfaUSbKRbxBDFhL3UWAdTF_8zk
+id: headerlinks
+theme: insider
+region: header
+weight: -10
+provider: null
+plugin: 'system_menu_block:header-links'
+settings:
+  id: 'system_menu_block:header-links'
+  label: 'Header Links'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

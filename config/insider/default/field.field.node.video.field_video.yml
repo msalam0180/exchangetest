@@ -1,0 +1,27 @@
+uuid: b0b2cba9-8d35-4422-abb9-94528d038b8d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video
+    - node.type.video
+  module:
+    - video_embed_field
+_core:
+  default_config_hash: pHnRI9DtFl3OalwdUIv6Pto5geKC3O0sxxt3VB5yHD4
+id: node.video.field_video
+field_name: field_video
+entity_type: node
+bundle: video
+label: 'YouTube/Vimeo Link'
+description: 'Enter the Youtube or Vimeo URL. For example: https://www.youtube.com/watch?v=xf9BpXOtMcc'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_providers:
+    vimeo: vimeo
+    youtube: youtube
+    youtube_playlist: '0'
+field_type: video_embed_field

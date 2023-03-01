@@ -1,0 +1,24 @@
+uuid: 7559dfad-2430-43db-8b45-bc3ad9e01b69
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: _Iz2FueacthBySMcFbfVfEWJ6i5PsT4cy9jLawhBfes
+id: announcement
+label: Announcement
+type: 'canonical_entities:node'
+pattern: '[node:field_top_level_group:entity:field_abbreviation]/announcements/[node:field_announcement_type:entity:field_abbreviation]/[node:field_combined_date:date:html_month]/[node:title]'
+selection_criteria:
+  adf26e52-97c1-40a9-a8a0-c97e96bbb00d:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: adf26e52-97c1-40a9-a8a0-c97e96bbb00d
+    context_mapping:
+      node: node
+    bundles:
+      announcement: announcement
+selection_logic: and
+weight: -5
+relationships: {  }

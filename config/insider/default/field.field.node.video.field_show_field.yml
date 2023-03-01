@@ -1,0 +1,25 @@
+uuid: f5490595-74c5-4c16-a1dc-04dba658f225
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_field
+    - node.type.video
+_core:
+  default_config_hash: oPM9DdMvR0LUqMNWtfcjWpMOHDsX0e9PW4drRYTWLz8
+id: node.video.field_show_field
+field_name: field_show_field
+entity_type: node
+bundle: video
+label: 'Override Left Nav'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

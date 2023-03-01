@@ -1,0 +1,13 @@
+diff --git a/src/CommentDeleteManager.php b/src/CommentDeleteManager.php
+index 1e0566f19c..4cac477e7c 100644
+--- a/src/CommentDeleteManager.php
++++ b/src/CommentDeleteManager.php
+@@ -218,6 +218,8 @@ public function softDelete(): CommentDeleteManagerInterface {
+         foreach ($fields as $field) {
+           $entity->set($field, NULL);
+         }
++        $entity->set('subject', NULL);
++        $entity->set('comment_body', 'This comment has been deleted.');
+         try {
+           $entity->save();
+         }

@@ -1,0 +1,23 @@
+uuid: b0c35cf9-c5f7-4e06-8404-fbc3d76d45ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_source
+    - node.type.operating_procedure
+  module:
+    - text
+_core:
+  default_config_hash: WTBbFxmheJd3td4zEEUsnX4th58aQam5af40mtwpo5Y
+id: node.operating_procedure.field_source
+field_name: field_source
+entity_type: node
+bundle: operating_procedure
+label: Source
+description: 'Federal employee responsible for providing the information for publishing.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,11 @@
+uuid: c462a5e2-de93-455b-a09b-62b2211d7109
+langcode: en
+status: true
+dependencies:
+  module:
+    - workbench_moderation_actions
+id: state_change__section_association__published
+label: 'Set Section association as Published'
+type: section_association
+plugin: 'state_change:section_association__published'
+configuration: {  }

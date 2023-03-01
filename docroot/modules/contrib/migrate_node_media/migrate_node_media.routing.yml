@@ -1,0 +1,60 @@
+
+migrate_node_media.settings_controller_index:
+  path: '/admin/config/migrate/node_media'
+  defaults:
+    _controller: '\Drupal\migrate_node_media\Controller\SettingsController::index'
+    _title: 'Mappings'
+  requirements:
+    _permission: 'migrate content'
+migrate_node_media.settings_controller_json:
+  path: '/admin/config/migrate/node_media/json'
+  defaults:
+    _controller: '\Drupal\migrate_node_media\Controller\SettingsController::json'
+    _title: 'Content Type Output'
+  requirements:
+    _permission: 'migrate content'
+migrate_node_media.settings_controller_json_api:
+  path: '/admin/config/migrate/node_media/json/{type}'
+  defaults:
+    _controller: '\Drupal\migrate_node_media\Controller\SettingsController::json_api'
+    _title: 'Content Type Output'
+  methods: [GET]
+  requirements:
+    _permission: 'migrate content'
+migrate_node_media.settings_controller_migrate_settings:
+  path: '/admin/config/migrate/node_media/migrate'
+  defaults:
+    _controller: '\Drupal\migrate_node_media\Controller\SettingsController::migrate'
+    _title: 'Migrate'
+  requirements:
+    _permission: 'migrate content'
+migrate_node_media.settings_controller_migrate_data:
+  path: '/admin/config/migrate/node_media/migrate/{map_id}'
+  defaults:
+    _controller: '\Drupal\migrate_node_media\Controller\SettingsController::migrate_data'
+    _title: 'Run Migration'
+  requirements:
+    _permission: 'migrate content'
+migrate_node_media.settings_controller_routes:
+  path: '/admin/config/migrate/node_media/routes'
+  defaults:
+    _controller: '\Drupal\migrate_node_media\Controller\SettingsController::routes'
+    _title: 'View Mapped Routes'
+  requirements:
+    _permission: 'migrate content'
+migrate_node_media.settings_controller_routes_json:
+  path: '/admin/config/migrate/node_media/routes/json/{map_id}'
+  defaults:
+    _controller: '\Drupal\migrate_node_media\Controller\SettingsController::route_json'
+    _title: 'Routes JSON'
+  requirements:
+    _permission: 'migrate content'
+migrate_node_media.mappings_form:
+  path: '/admin/config/migrate/node_media/settings'
+  defaults:
+    _form: '\Drupal\migrate_node_media\Form\MappingsForm'
+    _title: 'Mappings Form'
+    nojs: 'ajax'
+  requirements:
+    _access: 'TRUE'
+  

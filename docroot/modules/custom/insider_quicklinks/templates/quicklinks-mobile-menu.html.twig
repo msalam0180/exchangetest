@@ -1,0 +1,16 @@
+<ul class="mobile-nav-ql">
+  <li class="mobile-nav-ql-sliders ui-accordion ui-widget ui-helper-reset" role="tablist">
+    <a href="#void" data-drupal-link-system-path="<front>" class="ui-accordion-header ui-corner-top ui-state-default ui-accordion-icons ui-accordion-header-collapsed ui-corner-all" role="tab" id="ui-id-15" aria-controls="ui-id-16" aria-selected="false" aria-expanded="false" tabindex="0">
+      <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+      {{ branding }}</a>
+    <ul
+      aria-hidden="true" aria-labelledby="ui-id-15" class="submenu ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-16" role="tabpanel" style="display: none;">
+      {# Generate a link for each of the quicklinks received #}
+      {% for link in quicklinks %}
+        <li>
+          <a href="{{link.href}}" target="{{link.target}}">{{link.title}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </li>
+</ul>

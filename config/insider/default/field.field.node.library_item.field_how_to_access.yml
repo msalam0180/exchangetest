@@ -1,0 +1,23 @@
+uuid: 2b28d5b1-930b-4091-9817-f875ee309f88
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_how_to_access
+    - node.type.library_item
+  module:
+    - text
+_core:
+  default_config_hash: 3it1xHJPOGufJ8ySJAegyi5UlfE5rIH_90qWtDuBY8M
+id: node.library_item.field_how_to_access
+field_name: field_how_to_access
+entity_type: node
+bundle: library_item
+label: 'How to Access'
+description: 'Enter instructions on how an employee would access this Library Item.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

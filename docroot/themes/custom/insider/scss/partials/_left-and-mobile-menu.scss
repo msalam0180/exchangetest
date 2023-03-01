@@ -1,0 +1,435 @@
+//
+// Left amd Mobile Menus
+// The left sidebar and the mobile menu are a combination
+//
+// NOTE:
+// When at mobile widths, you see the mobile menu
+// When not at mobile widths, you see the left menu, if that menu is available on the page
+// --------------------------------------------------
+
+//Show and hide navigation etc for mobile devices
+@include breakpoint('mobile-menu-notshowing'){
+  //do not show the sidebar on large screens when sidebar-hide class is present
+  .hide-sidebar #sidebar-first{
+    display: none;
+  }
+  //do not show the sidebar, but allow in the mobile nav
+  #sidebar-first .local-nav .mobile-nav,
+  #sidebar-first .local-nav .mobile-extras,
+  #sidebar-first .local-nav .mobile-nav-ql{
+    display: none;
+  }
+
+}
+
+//Toggle for #sidebar-first
+.left-nav-menu {
+  .fa,
+  .svg-inline--fa {
+    background: none;
+    color: $cloudy-gray;
+    font-size: 2em;
+    margin-right: 20px;
+    margin-top: 20px;
+    float: right;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  @include breakpoint('mobile-menu-notshowing'){
+    //do not show the sidebar toggle on large screens
+    display: none;
+  }
+}
+
+//#sidebar-first becomes the mobile menu on small screens
+#sidebar-first {
+  margin-bottom: 20px;
+
+  @include breakpoint('mobile-menu-showing'){
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    z-index: 500;
+    top: 0;
+    .path-frontpage & {
+    	top: -20px;
+    }
+  }
+}
+
+
+/* #sidebar-first navigation */
+#sidebar-first .local-nav {
+
+  &,
+  .ui-widget{
+    //general styles
+    @include raleway;
+    font-size: 12px;
+    font-weight: bold;
+    background: $left-bg-color;
+
+    @include breakpoint('mobile-menu-showing'){
+      font-weight: normal;
+      background: $mobile-left-bg-color;
+      font-size: 12px;
+    }
+  }
+
+  @include breakpoint('mobile-menu-showing'){
+    display: none;
+  }
+
+  // Sidebar header //TODO: are we using this?
+  a.subHeader {
+    background-color: $gray-ltest; //TODO: color var
+    text-transform: none;
+    font-weight: normal;
+    color: $cloudy-gray; //TODO: color var
+    padding-right: 50px;
+  }
+
+}
+
+// Menus in Left sidebar and mobile
+#sidebar-first .local-nav{
+
+  ul {
+    background: transparent;
+    border: 1px solid $gray-ltest;
+    border-top: none;
+    display:block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    //hide deep links
+    & > ul > ul,
+    & > ul > ul > ul{
+      display: none;
+    }
+  }
+
+  ul.contextual-links{
+    display: none;
+  }
+
+  ////////////
+  //menu items
+  ////////////
+  li {
+    border-bottom: 1px solid $gray-ltest;
+    margin: 0px;
+    &:first-child {
+      border-top: 1px solid $gray-ltest;
+      @include breakpoint('mobile-menu-showing'){
+        border-top: none;
+      }
+    }
+    &:last-child {border-bottom: none;}
+
+    a {
+
+      //normal State
+      display: block;
+      padding: 14px 2px 14px 6px;
+      position: relative;
+      text-decoration: none;
+      font-weight: bold;
+
+      color: $left-item-color;
+      background-color: $left-item-bg-color;
+
+      @include breakpoint('mobile-menu-showing'){
+        padding: 10px 5px 10px 15px;
+        position: relative;
+
+        color: $mobile-left-item-color;
+        background-color: $mobile-left-item-bg-color;
+
+      }
+
+      //active State
+      &.current, &.is-active, &.ui-state-active {
+        color: $left-item-active-color;
+        background-color: $left-item-active-bg-color;
+
+        @include breakpoint('mobile-menu-showing'){
+          color: $mobile-left-item-active-color;
+          background-color: $mobile-left-item-active-bg-color;
+        }
+      }
+
+      //hover State
+      &:hover, &:focus {
+        color: $left-item-hover-color;
+        background-color: $left-item-hover-bg-color;
+
+        @include breakpoint('mobile-menu-showing'){
+          color: $mobile-left-item-hover-color;
+          background-color: $mobile-left-item-hover-bg-color;
+        }
+      }
+
+    }
+
+  }
+
+  ////////////
+  //menu accordian header
+  ////////////
+  .ui-accordion-header, .ui-state-default {
+    //normal State
+    color: $left-collapsible-item-color;
+    background: $left-collapsible-item-bg-color;
+    border-radius: 0;
+    border: none;
+    margin: 0px;
+    padding-right: 30px;
+
+    @include breakpoint('mobile-menu-showing'){
+      color: $mobile-left-collapsible-item-color;
+      background: $mobile-left-collapsible-item-bg-color;
+      padding-left: 15px;
+    }
+
+    //active State
+    &.current, &.is-active, &.ui-state-active {
+      color: $left-collapsible-item-active-color;
+      background-color: $left-collapsible-item-active-bg-color;
+      @include breakpoint('mobile-menu-showing'){
+        color: $mobile-left-collapsible-item-active-color;
+        background-color: $mobile-left-collapsible-item-active-bg-color;
+      }
+    }
+
+    //hover State
+    &:hover, &:focus {
+      color: $left-collapsible-item-hover-color;
+      background-color: $left-collapsible-item-hover-bg-color;
+      @include breakpoint('mobile-menu-showing'){
+        color: $mobile-left-collapsible-item-hover-color;
+        background-color: $mobile-left-collapsible-item-hover-bg-color;
+      }
+    }
+
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+  }
+
+  //icon
+  .ui-accordion-header{
+
+    .ui-accordion-header-icon {
+      bottom: 0;
+      background: none;
+      display: table-cell;
+      vertical-align: middle;
+      position: absolute;
+      margin: 0;
+      right: 0;
+      left: auto;
+      top: 0;
+      border: 0;
+      height: auto;
+      width: 40px;
+
+       &:after {
+        @include fontawesome;
+        content: "\f105";
+        font-weight: bold;
+        font-size: 1.3rem;
+        position: absolute;
+        right: 15px;
+        top: 7px;
+        text-indent: 0;
+
+        -webkit-transition: all .7s; /* Safari */
+        transition: all .7s;
+
+        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+    }
+
+    &.ui-state-active .ui-accordion-header-icon:after{
+
+      -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+
+    }
+  }
+
+
+
+
+
+
+
+  //review
+  .ui-accordion-header.ui-accordion-header-active.ui-state-active {
+    @include breakpoint('mobile-menu-showing'){
+      text-decoration: underline;
+    }
+  }
+
+  //review
+  .ui-accordion .ui-accordion-icons {
+    border-radius: 0;
+  }
+
+  .ui-accordion-content {
+    border: none;
+    a{
+      padding-left: 20px;
+      @include breakpoint('mobile-menu-showing'){
+        padding-left: 30px;
+      }
+    }
+  }
+
+  //review
+  .item-rss-feeds a,
+  .item-social-media a {
+    padding-left: 6px !important;
+  }
+
+  .activeClicked{
+    color: $white;
+    background-color: $accent-dk-color !important;
+  }
+}
+
+//Extra stuff in the mobile menu - Search and a couple links
+.mobile-extras {
+  background: $mobile-extras-bg;
+  border-left: 1px solid $white;
+  border-right: 1px solid $white;
+  clear: both;
+  color: $mobile-extras-color;
+  padding: 20px;
+  @include helvetica;
+
+  a {
+    color:$mobile-extras-color;
+    text-decoration: underline;
+  }
+
+  //Mobile Search block
+  .search-block{
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+
+    //Search field
+    input[type="search"]{
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 12px 30px 12px 12px;
+      height: auto;
+      &::-ms-clear {
+        display: none;
+      }
+    }
+
+    //Search button wrapper
+    .form-actions{
+      border: none;
+      display: block;
+      height: 46px;
+      width: 32px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 2;
+      color: transparent;
+      margin-bottom: 0;
+      border-radius: 0px 3px 3px 0;
+
+      //search button icon
+      &:before {
+        content: "\f002";
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: absolute;
+        top: 30%;
+        left: 16%;
+        color: $secondary-color;
+      }
+    }
+
+    //Search Button
+    .form-submit {
+      background: transparent;
+      color: transparent;
+      border: none;
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      &:hover, &:focus {
+        background-color: $gray-middle;
+        opacity: 0.3;
+        width: 114%;
+        margin-left: -5px;
+      }
+
+    }
+  }
+}
+
+// Mobile view hearlinks CSS
+#sidebar-first .local-nav .mobile-headerlinks {
+  color: $mobile-extras-color;
+  text-transform: uppercase;
+  text-align: center;
+  .menu--header-links {
+    all: unset;
+    display: block;
+    .menu-ul {
+      border: none;
+      float: unset;
+      text-align: center;
+      li {
+        border: none;
+        a {
+          display: inline-block;
+          padding: 0px;
+          background-color: unset;
+          text-decoration: underline;
+        }
+        &:not(:last-child):after {
+          content: '|';
+          color: $mobile-extras-color;
+          display: inline;
+          padding: 0px;
+        }
+      }
+    }
+  }
+}
+
+.navigation-wrapper {
+  .username {
+    text-transform: capitalize;
+    display: none;
+    @include breakpoint("mobile-menu-showing") {
+      display: block;
+    }
+  }
+}

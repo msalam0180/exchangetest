@@ -1,0 +1,24 @@
+uuid: bd7cd9a3-1917-491f-9d6b-bc4b7ec83b8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.secr
+_core:
+  default_config_hash: Bf6J-B3p-mPlLTsIhOSzApivS5v5U7Li198V_s_zLNk
+id: node.secr.promote
+field_name: promote
+entity_type: node
+bundle: secr
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,16 @@
+diff --git a/src/Plugin/RabbitHoleBehaviorPlugin/PageRedirect.php b/src/Plugin/RabbitHoleBehaviorPlugin/PageRedirect.php
+index f1a106c..b2b5a5e 100644
+--- a/src/Plugin/RabbitHoleBehaviorPlugin/PageRedirect.php
++++ b/src/Plugin/RabbitHoleBehaviorPlugin/PageRedirect.php
+@@ -172,7 +172,10 @@
+     if (!UrlHelper::isExternal($target)) {
+       $target = Url::fromUserInput($target)->toString();
+     }
+-
++
++    // DI-1724 decode html special chars
++    $target = htmlspecialchars_decode($target);
++
+     switch ($response_code) {
+       case self::REDIRECT_MOVED_PERMANENTLY:
+       case self::REDIRECT_FOUND:

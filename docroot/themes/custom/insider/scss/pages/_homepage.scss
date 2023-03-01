@@ -1,0 +1,68 @@
+//
+// Homapage
+// These are homepage overwrites
+// Styles that are only specific to the homepage
+// Whenever possible, put code into a component rather than a page file
+// --------------------------------------------------
+
+
+.path-frontpage{
+
+  .layout__region{
+    margin-top: $home-spacing;
+    &.layout__region--middle {
+      margin-top: 0px;
+    }
+    @include breakpoint('mobile-menu-showing'){
+      margin-top: 20px;
+    }
+  }
+  // layout
+
+  // Fourth column change column width
+  @media (min-width: 701px){
+    .layout__region.layout__region--first-below {
+      flex: 0 1 65%;
+    }
+
+    .layout__region.layout__region--second-below {
+      flex: 0 1 35%;
+    }
+  }
+
+  // //Panel spacing
+  // .layout__region--first-above,
+  // .layout__region--second-above,
+  // .layout__region--first-below,
+  // .layout__region--second-below {
+  //   padding-bottom: $home-spacing;
+  // }
+
+
+  //general page styles
+  .page-title{
+    @extend .sr-only;
+  }
+
+  .views-element-container footer{
+    margin-top: 20px;
+    float: right;
+
+    .more-link{
+      color: $accent-dk-color;
+      font-weight: 600;
+      @include raleway;
+      text-transform: capitalize;
+      font-size: 12px;
+      display: inline-block;
+      padding-left: 10px;
+    }
+  }
+
+  .messages{
+    position: relative;
+    top: 25px;
+  }
+
+}
+

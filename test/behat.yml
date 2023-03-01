@@ -1,0 +1,86 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - HomepageContext
+        - WysiwygContext
+        - ListPageContext
+        - EntityContext
+        - PanelsContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\RawDrupalContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+  extensions:
+    Drupal\MinkExtension:
+      goutte: ~
+      selenium2:
+        browser: chrome
+        wd_host: http://chrome-exchange.lndo.site:4444/wd/hub
+        capabilities:
+          marionette: null
+          extra_capabilities:
+            chromeOptions:
+              args:
+                - "--disable-gpu"
+                - "--window-size=1820,1024"
+              w3c: false
+      files_path: '%paths.base%/files'
+      show_cmd: chrome.exe
+    Bex\Behat\ScreenshotExtension:
+      image_drivers:
+        local:
+          screenshot_directory: '%paths.base%/behat-screenshots'
+          clear_screenshot_directory: true
+    Drupal\DrupalExtension:
+      selectors:
+        message_selector: '#messages'
+        error_message_selector: '#messages.messages-error'
+        success_message_selector: '#messages.messages-status'
+      blackbox: ~
+      api_driver: 'drupal'
+      region_map:
+        menu: "#main-menu"
+        quicklinks: "#quick-links"
+        headerlinks: "#block-headerlinks"
+        footertop: "#block-footertop"
+        footer: "#block-secgov-footer"
+        image: ".embedded-image"
+        file: ".field_file_upload"
+        modal: "#drupal-modal"
+        highlights: ".highlights-block_1"
+        announcements: ".announcements_list-block_2"
+        leftnav: ".local-nav"
+        filters: ".view-filters"
+        editmeta: "#edit-meta-published"
+        editmetaauthor: "#edit-meta-author"
+        paging: "#table_paging"
+        content: "#content"
+        login: "#user-login-content"
+        headerbranding: "#block-secgov-branding"
+        search_results: ".view-content"
+        username: ".username"
+        myquicklinks: "div.view-content:nth-child(1)"
+        thumbnail: ".js-form-type-managed-file"
+        videolist: "#panels-ipe-content"
+        gc_events: ".block-region-right"
+        hp_genevents: "#qt-events-ui-tabs1"
+        hp_trainevents: "#qt-events-ui-tabs2"
+        hp_deadevents: "#qt-events-ui-tabs3"
+        env_indicator: "#environment-indicator"
+        published_on: "#edit-published-at-0-value-date"
+        like_count: ".flag-count"
+        comments_section: ".links.inline"
+        like_reply_section: ".flag.flag-like-comment"
+        comment_settings: "#edit-field-comments-0 > summary"
+        insider_content: "#block-insider-content"
+        image_popup: ".mfp-content"
+        system_message: ".messages"
+        hp_alert: "#block-views-block-site-alerts-insider-view-alerts-block-homepage"
+        page_tabs: "#block-adminimal-theme-primary-local-tasks"
+        comm_practice: "#block-insider-content > div > div"
+        image_preview: "div.image-preview"
+        image_widget: "div.image-widget-data"
+        file_widget: "#edit-field-media-file-wrapper"

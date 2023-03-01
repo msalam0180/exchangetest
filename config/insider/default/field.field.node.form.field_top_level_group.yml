@@ -1,0 +1,30 @@
+uuid: 00fa7f54-1624-4eb8-9cbf-e7bd3d30f201
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_top_level_group
+    - node.type.form
+    - taxonomy.vocabulary.top_level_group
+_core:
+  default_config_hash: b01OdOVihKGRmZDOyCnl-1aIOfxL7gi7JNpEXMr55GE
+id: node.form.field_top_level_group
+field_name: field_top_level_group
+entity_type: node
+bundle: form
+label: 'Top Level Group'
+description: 'Select the section of the site in which this content should appear. This selection determines the left navigation on the page.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      top_level_group: top_level_group
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

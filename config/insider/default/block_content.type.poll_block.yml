@@ -1,0 +1,8 @@
+uuid: 803c0041-60c5-4f06-ab36-db8b454f436a
+langcode: en
+status: true
+dependencies: {  }
+id: poll_block
+label: 'Poll Block'
+revision: 1
+description: 'Ability to embed polls on landing page content types'

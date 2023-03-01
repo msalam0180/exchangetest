@@ -1,0 +1,25 @@
+uuid: 727a3522-63ab-4818-825b-119c517943e8
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: jo19uJPEstDnin0Z9VIfyixWoE868lj3vGBXAnu_trQ
+id: secgov_branding
+theme: insider
+region: header
+weight: -12
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'CF Intranet'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

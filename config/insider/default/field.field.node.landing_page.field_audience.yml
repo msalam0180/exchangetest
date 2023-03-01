@@ -1,0 +1,29 @@
+uuid: b657c6e4-2aa3-461a-9bd8-fd2a7d523afd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_audience
+    - node.type.landing_page
+_core:
+  default_config_hash: 7ij_31QWdJn9_2sRzJ9OyG634SojCrK1wGKNCEZo82g
+id: node.landing_page.field_audience
+field_name: field_audience
+entity_type: node
+bundle: landing_page
+label: Audience
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      audience: audience
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

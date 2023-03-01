@@ -1,0 +1,10 @@
+uuid: 4aa57a67-83c3-414e-83ae-483c8018cc59
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: QJV1J6zepoVZxLEKmXlRseqL4LcdeffEEDHXu2iJfwo
+name: 'Microsite Themes'
+vid: site_section_theme
+description: 'List of available Microsite Themes'
+weight: 0

@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Contains migrate_node_media.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function migrate_node_media_theme() {
+  // Let Drupal know about our template files
+  return [
+    // Setup the template file for the list of maps
+    'migrate_node_media'       => [
+      'variables' => [
+        'data' => [],
+      ],
+      'templates' => 'templates/migrate-node-media',
+    ],
+    // Setup the template file for the list of mapped routes
+    'migrate_node_media_route' => [
+      'variables' => [
+        'data' => [],
+      ],
+      'templates' => 'templates/migrate-node-media-route',
+    ],
+  ];
+}
+
+
+/**
+ * @param $route_name
+ * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
+ *
+ * @return bool|string
+ */
+function migrate_node_media_help(
+  $route_name,
+  RouteMatchInterface $route_match
+) {
+  switch ($route_name) {
+    // Main module help for the migrate_node_media module.
+    case 'help.page.migrate_node_media':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Migrates Entities of type Node to Media') . '</p>';
+
+      return $output;
+
+    default:
+  }
+  return FALSE;
+}

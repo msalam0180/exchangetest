@@ -1,0 +1,22 @@
+uuid: 571303ae-ff17-487c-9369-2d26e91c9c05
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: jQQUUWN2Uxr5qZtc9zcJKBCxpKY8orN1u2HPqYYRQDI
+id: insider_powered
+theme: insider
+region: header
+weight: -9
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

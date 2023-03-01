@@ -1,0 +1,21 @@
+uuid: 4e57d43e-2b26-4d64-8d3a-076556278179
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+_core:
+  default_config_hash: T2P9QvMmmLJWy_jI9hOJTrOte4VezWnecF7Q-zfO8VU
+id: node.field_contact
+field_name: field_contact
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

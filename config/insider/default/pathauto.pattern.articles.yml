@@ -1,0 +1,22 @@
+uuid: c7c1a704-9003-4469-8c9d-3455d6e92835
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: articles
+label: Articles
+type: 'canonical_entities:node'
+pattern: '/[node:field_primary_division_office:entity:field_abbreviated]/[node:field_article_type_secarticle]/[node:field_article_sub_type_secart]/[node:title]'
+selection_criteria:
+  c3f3736b-83cc-4a0a-9072-fdae1ffb5777:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: c3f3736b-83cc-4a0a-9072-fdae1ffb5777
+    context_mapping:
+      node: node
+    bundles:
+      secarticle: secarticle
+selection_logic: and
+weight: -5
+relationships: {  }

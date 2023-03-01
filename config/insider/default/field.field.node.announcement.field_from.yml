@@ -1,0 +1,21 @@
+uuid: db1827d0-0351-45fd-88eb-ba0b45a1c75e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_from
+    - node.type.announcement
+_core:
+  default_config_hash: esKU92U_lmiAxHuYCzgabMHTW33OuVGuGSfy6FOhjmA
+id: node.announcement.field_from
+field_name: field_from
+entity_type: node
+bundle: announcement
+label: From
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

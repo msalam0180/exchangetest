@@ -1,0 +1,29 @@
+From e017c5bd4fef4c15405b8ea9e0fbf496f50b3599 Mon Sep 17 00:00:00 2001
+From: Nejc <nejc.koporec@agiledrop.com>
+Date: Thu, 22 Mar 2018 10:40:16 +0100
+Subject: [PATCH] Fix from widget checkboxes
+
+---
+ src/Plugin/conditional_fields/handler/OptionsButtons.php | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/src/Plugin/conditional_fields/handler/OptionsButtons.php b/src/Plugin/conditional_fields/handler/OptionsButtons.php
+index 70d0559..a208656 100644
+--- a/src/Plugin/conditional_fields/handler/OptionsButtons.php
++++ b/src/Plugin/conditional_fields/handler/OptionsButtons.php
+@@ -104,7 +104,11 @@ class OptionsButtons extends ConditionalFieldsHandlerBase {
+       case CONDITIONAL_FIELDS_DEPENDENCY_VALUES_WIDGET:
+         $selector = conditional_fields_field_selector($field);
+         foreach ($options['value_form'] as $value) {
+-          $selector_key = str_replace($field['#return_value'], current($value), $selector);
++          if(empty($field['#return_value']) && isset($field['#name'])) {
++            $selector_key = "[name=\"".$field['#name']."[".current($value)."]\"]";
++          } else {
++            $selector_key = str_replace($field['#return_value'], current($value), $selector);
++          }
+           $checkboxes_selectors[$selector_key] = ['checked' => TRUE];
+         }
+         break;
+-- 
+2.15.1
+

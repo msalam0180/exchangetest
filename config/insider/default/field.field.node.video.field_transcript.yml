@@ -1,0 +1,23 @@
+uuid: bffc81a8-d8ce-48ca-b620-f81b0ec31532
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_transcript
+    - node.type.video
+  module:
+    - text
+_core:
+  default_config_hash: LkHgwvIjsEyuVHZCK2eqDzMh-q5NkEsv94JEkxsBm8I
+id: node.video.field_transcript
+field_name: field_transcript
+entity_type: node
+bundle: video
+label: Transcript
+description: 'Full script of the words spoken throughout video'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

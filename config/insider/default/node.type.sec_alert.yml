@@ -1,0 +1,37 @@
+uuid: c6c7158c-ada1-4d21-9657-6fa65d25d4ce
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_save_redirect
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  node_save_redirect:
+    save_type: '0'
+    save_location: ''
+    save_destination: 0
+    edit_type: '2'
+    edit_location: ''
+    edit_destination: 1
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+    default_moderation_state: draft
+_core:
+  default_config_hash: GymxjUnjo4quShxHM7NNzaGgOszvKZGPYs_3HBuW33Y
+name: 'Site Alert'
+type: sec_alert
+description: 'Gives urgent notice on the home page, such as an unplanned system outage, emergency, operating status or facility advisory'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: true

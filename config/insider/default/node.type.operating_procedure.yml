@@ -1,0 +1,40 @@
+uuid: e88ae485-8d30-438a-991e-55609c657226
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_save_redirect
+    - workbench_access
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  workbench_access:
+    workbench_access_status: false
+  node_save_redirect:
+    save_type: '0'
+    save_location: ''
+    save_destination: 0
+    edit_type: '2'
+    edit_location: ''
+    edit_destination: 1
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+    default_moderation_state: draft
+_core:
+  default_config_hash: WR6snMGe0wiQrF0vNkh2-1a7zLCHjDBd9NyFMbUqXX4
+name: 'Operating Procedure'
+type: operating_procedure
+description: 'Operating procedures with details on how to comply with official SEC administrative regulations (SECRs)'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

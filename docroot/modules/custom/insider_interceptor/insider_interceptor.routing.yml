@@ -1,0 +1,7 @@
+insider_interceptor.interceptor:
+  path: '/interceptor'
+  defaults:
+    _controller: '\Drupal\insider_interceptor\Controller\InterceptController::intercept'
+    _title: 'Redirecting...'
+  requirements:
+    _permission: 'access content'

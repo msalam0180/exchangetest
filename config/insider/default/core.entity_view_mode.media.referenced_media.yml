@@ -1,0 +1,12 @@
+uuid: 52c04dca-2c0c-4f1a-9276-de80dfb97580
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: s1pw7E8ebu2ZUyGrjmEZjVjvjq0wNlNn64ZZNazmy_E
+id: media.referenced_media
+label: 'Referenced Media'
+targetEntityType: media
+cache: true

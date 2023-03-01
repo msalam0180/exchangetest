@@ -1,0 +1,23 @@
+uuid: 88a7b854-c460-4b6a-82dd-a93cec987a92
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_start_date
+    - paragraphs.paragraphs_type.paragraph_session
+  module:
+    - datetime
+_core:
+  default_config_hash: 37h7mNiojyTCbDzCqP6jIcdRmgpUIXK59LLVZeIjSdc
+id: paragraph.paragraph_session.field_start_date
+field_name: field_start_date
+entity_type: paragraph
+bundle: paragraph_session
+label: 'Start Date'
+description: 'Date format: yyyy-mm-dd hh:mm:ss AM/PM'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

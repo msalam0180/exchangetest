@@ -1,0 +1,29 @@
+uuid: 4475c6e1-c1e9-46e2-9cd8-93bed3fa3bf9
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+_core:
+  default_config_hash: Yprj-qrqp1LoFVcj_oVnKsmEPirUPUsH2WtsJbMZznA
+id: node.field_hero_position
+field_name: field_hero_position
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: top
+      label: Top
+    -
+      value: middle
+      label: Middle
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

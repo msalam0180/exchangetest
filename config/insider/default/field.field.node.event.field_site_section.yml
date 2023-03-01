@@ -1,0 +1,31 @@
+uuid: 45918ac0-d207-4c27-a4dd-a774d9de2b56
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_site_section
+    - node.type.event
+    - taxonomy.vocabulary.site_section
+_core:
+  default_config_hash: mdnaEnPZGP3XV50hCdIpIU0EaCI3Y4XJJRoawP_lIo4
+id: node.event.field_site_section
+field_name: field_site_section
+entity_type: node
+bundle: event
+label: Microsite
+description: 'What microsite does this page belong to?'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      site_section: site_section
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

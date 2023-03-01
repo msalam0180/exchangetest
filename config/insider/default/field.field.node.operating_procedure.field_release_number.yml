@@ -1,0 +1,21 @@
+uuid: bd04d12b-74ba-410d-a023-d536e78c3bb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_release_number
+    - node.type.operating_procedure
+_core:
+  default_config_hash: 4dDnXbCptJCmRjo45Fxz1Js9ZU8RygMuURm9wof0pyQ
+id: node.operating_procedure.field_release_number
+field_name: field_release_number
+entity_type: node
+bundle: operating_procedure
+label: 'OP Number'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

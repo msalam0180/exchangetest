@@ -1,0 +1,23 @@
+uuid: cc927dae-63be-40c0-abcc-f985469b9a03
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_source
+    - node.type.form
+  module:
+    - text
+_core:
+  default_config_hash: MHAjZHIHi1G3BhjU_uNp8P2LSNYYP7CR_o9p9cB4p1s
+id: node.form.field_source
+field_name: field_source
+entity_type: node
+bundle: form
+label: Source
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

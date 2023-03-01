@@ -1,0 +1,31 @@
+uuid: 5104b113-b540-4ad2-b990-2acb22026890
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media_reference
+    - media.type.file
+    - node.type.operating_procedure
+_core:
+  default_config_hash: umMtMxa2HbWtjulSMGExkfJW9xi2Q-SiP78d7D61qQk
+id: node.operating_procedure.field_media_reference
+field_name: field_media_reference
+entity_type: node
+bundle: operating_procedure
+label: 'File Media Reference'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      file: file
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: file
+field_type: entity_reference

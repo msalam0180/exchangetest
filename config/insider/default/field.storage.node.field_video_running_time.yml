@@ -1,0 +1,23 @@
+uuid: 96b7164e-fcac-401e-bb1f-2258d915c0fe
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: O7CUJF7DwxCHEGH5fCuU28SF7cr3wxBcTTzc0YjmPE8
+id: node.field_video_running_time
+field_name: field_video_running_time
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

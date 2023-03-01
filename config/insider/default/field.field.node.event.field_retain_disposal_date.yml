@@ -1,0 +1,26 @@
+uuid: 211e5da3-94ab-4ef8-86c2-b0036090d60c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_retain_disposal_date
+    - node.type.event
+  module:
+    - datetime
+_core:
+  default_config_hash: hVQGY7jhEav40YJGPrrOC_UvtwYCVFSs3fS70kdA_Lw
+id: node.event.field_retain_disposal_date
+field_name: field_retain_disposal_date
+entity_type: node
+bundle: event
+label: 'Expiration/Review Date'
+description: 'Date article should be reviewed for updates or removal'
+required: false
+translatable: true
+default_value:
+  -
+    default_date_type: relative
+    default_date: '+3 years'
+default_value_callback: ''
+settings: {  }
+field_type: datetime

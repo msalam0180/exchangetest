@@ -1,0 +1,22 @@
+uuid: 6b3e0318-b5f3-46e5-9085-56e7f42ebc1c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - user
+_core:
+  default_config_hash: IUWGUFOMzrXrndnXNdSLS0Bg486Q7ri42IkSGpSYj7Y
+id: node.field_sec_content_approver
+field_name: field_sec_content_approver
+entity_type: node
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

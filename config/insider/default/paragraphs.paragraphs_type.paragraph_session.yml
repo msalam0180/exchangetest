@@ -1,0 +1,11 @@
+uuid: ddff3661-0249-4037-a407-70d8eea4b045
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 9cTBy_NJr4-tqn6RJ8R3llOu3pMevthY3taPW8c8llM
+id: paragraph_session
+label: Session
+icon_uuid: null
+description: null
+behavior_plugins: {  }

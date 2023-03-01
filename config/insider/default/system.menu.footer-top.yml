@@ -1,0 +1,8 @@
+uuid: 6effb884-3ac9-40a8-ae18-ca78d85815a7
+langcode: en
+status: true
+dependencies: {  }
+id: footer-top
+label: 'Footer Top'
+description: 'Gray bar with news links'
+locked: false

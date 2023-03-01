@@ -1,0 +1,7 @@
+sec_workflow.admin_settings:
+  path: 'admin/config/sec/cron/settings'
+  defaults:
+    _form: '\Drupal\sec_workflow\Form\SecWorkflowForm'
+    _title: 'SEC cron settings'
+  requirements:
+    _permission: 'access content'

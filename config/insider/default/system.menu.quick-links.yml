@@ -1,0 +1,8 @@
+uuid: e0190515-7b75-4c27-a49a-9ec1c0ebe14a
+langcode: en
+status: true
+dependencies: {  }
+id: quick-links
+label: 'Quick Links'
+description: 'Top 10 external links'
+locked: false

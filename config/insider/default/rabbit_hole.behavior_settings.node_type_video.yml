@@ -1,0 +1,16 @@
+uuid: 6d13e6f6-00d8-4805-bc82-cfdb1426ba48
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.video
+_core:
+  default_config_hash: duXDG6V2ZdQg_W6jtyHsKxEJI8lN4JjxDwXKsjGn3y4
+id: node_type_video
+entity_type_id: node_type
+entity_id: video
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

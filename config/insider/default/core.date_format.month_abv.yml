@@ -1,0 +1,10 @@
+uuid: 34d19b5f-83b5-46ef-be53-fe036a3e5843
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: Lw172C8eN6WyihLi4tw1dA_h3-sNkd84oFIc7XqJUqc
+id: month_abv
+label: 'Month Abv'
+locked: false
+pattern: M

@@ -1,0 +1,25 @@
+uuid: bf05e03b-66b4-4572-be7d-0545f429fecb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_add_to_available_quicklink
+    - node.type.link
+_core:
+  default_config_hash: luTKZrNbiY3ZWfC13qXVcExp4Ws1nnIBBpgkd8uiZBQ
+id: node.link.field_add_to_available_quicklink
+field_name: field_add_to_available_quicklink
+entity_type: node
+bundle: link
+label: 'Add to Available QuickLinks'
+description: 'Add link to the available QuickLinks'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

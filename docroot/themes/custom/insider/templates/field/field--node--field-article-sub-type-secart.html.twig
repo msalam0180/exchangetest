@@ -1,0 +1,140 @@
+{#
+/**
+ * @file
+ * Theme override for a field.
+ *
+ * To override output, copy the "field.html.twig" from the templates directory
+ * to your theme's directory and customize it, just like customizing other
+ * Drupal templates such as page.html.twig or node.html.twig.
+ *
+ * Instead of overriding the theming for all fields, you can also just override
+ * theming for a subset of fields using
+ * @link themeable Theme hook suggestions. @endlink For example,
+ * here are some theme hook suggestions that can be used for a field_foo field
+ * on an article node type:
+ * - field--node--field-foo--article.html.twig
+ * - field--node--field-foo.html.twig
+ * - field--node--article.html.twig
+ * - field--field-foo.html.twig
+ * - field--text-with-summary.html.twig
+ * - field.html.twig
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{% set subTypeList = [
+    {'type':'data','subtype':'broker-dealers','listpage':'/data','pageDetailTitle':'Data'}, 
+    {'type':'data','subtype':'enforcement','listpage':'/data','pageDetailTitle':'Data'}, 
+    {'type':'data','subtype':'funds-and-advisers','listpage':'/data','pageDetailTitle':'Data'}, 
+    {'type':'data','subtype':'investor-complaints','listpage':'/data','pageDetailTitle':'Data'}, 
+    {'type':'data','subtype':'market-structure','listpage':'/data','pageDetailTitle':'Data'}, 
+    {'type':'data','subtype':'other','listpage':'/data','pageDetailTitle':'Data'}, 
+    {'type':'data','subtype':'public-companies','listpage':'/data','pageDetailTitle':'Data'}, 
+
+    {'type':'reports-and-publications','subtype':'annual-reports','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-AnnualReports','pageDetailTitle':'Annual Reports'},  {'type':'reports-and-publications','subtype':'budget-reports','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-BudgetReports','pageDetailTitle':'Budget Reports'},   {'type':'reports-and-publications','subtype':'buy-american-act','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-BuyAmericanAct','pageDetailTitle':'Buy American Act'}, {'type':'reports-and-publications','subtype':'conference-spending','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-ConferenceSpending','pageDetailTitle':'Conference Spending'},   {'type':'reports-and-publications','subtype':'fair-act','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-FAIRAct','pageDetailTitle':'FAIR Act'},  {'type':'reports-and-publications','subtype':'federal-employee-viewpoint-survey','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-FederalEmployeeViewpointSurvey','pageDetailTitle':'Federal Employee Viewpoint Survey'},   {'type':'reports-and-publications','subtype':'internal-supervisory-controls','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-InternalSupervisoryControls' ,'pageDetailTitle':'Internal Supervisory Controls'}, {'type':'reports-and-publications','subtype':'investor-publications','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-InvestorPublications' ,'pageDetailTitle':'Investor Publications'}, 
+    {'type':'reports-and-publications','subtype':'other','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-Other' ,'pageDetailTitle':'Reports and Publications'},  {'type':'reports-and-publications','subtype':'select-sec-and-market-data','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-SelectSECandMarketData' ,'pageDetailTitle':'Select SEC and Market Data'}, {'type':'reports-and-publications','subtype':'service-contract-inventory','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-ServiceContractInventory' ,'pageDetailTitle':'Service Contract Inventory'}, {'type':'reports-and-publications','subtype':'special-studies','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-SpecialStudies' ,'pageDetailTitle':'Special Studies'}, {'type':'reports-and-publications','subtype':'strategic-plan','listpage':'/reports?field_article_sub_type_secart_value=Reports+and+Publications-StrategicPlan' ,'pageDetailTitle':'Strategic Plan'}, 
+
+    {'type':'staff-papers','subtype':'economic-analyses','listpage':'/dera/staff-papers?field_article_sub_type_secart_value=Staff+Papers-Economic-Analyses' ,'pageDetailTitle':'Economic Analyses'}, 
+    {'type':'staff-papers','subtype':'other','listpage':'/dera/staff-papers' ,'pageDetailTitle':'Staff Papers'}, 
+    {'type':'staff-papers','subtype':'white-papers','listpage':'/dera/staff-papers?field_article_sub_type_secart_value=Staff+Papers-WhitePapers' ,'pageDetailTitle':'White Papers'}, 
+    {'type':'staff-papers','subtype':'working-papers','listpage':'/dera/staff-papers?field_article_sub_type_secart_value=Staff+Papers-WorkingPapers' ,'pageDetailTitle':'Working Papers'}, 
+
+    {'type':'webcasts','subtype':'advisory-committees','listpage':'/news/webcasts.shtml' ,'pageDetailTitle':'Advisory Committees'}, 
+    {'type':'webcasts','subtype':'news-conferences','listpage':'/news/webcasts.shtml' ,'pageDetailTitle':'News Conferences'}, 
+    {'type':'webcasts','subtype':'open-meetings','listpage':'/news/webcasts.shtml' ,'pageDetailTitle':'Open Meetings'}, 
+    {'type':'webcasts','subtype':'other','listpage':'/news/webcasts.shtml' ,'pageDetailTitle':'Webcasts'}, 
+    {'type':'webcasts','subtype':'roundtables','listpage':'/news/webcasts.shtml' ,'pageDetailTitle':'Roundtables'}
+] %}
+{% set pageUrl = url('<current>') %}
+{% set breakloop = false %}
+
+<div id="page-title">
+<h1>
+{% if label_hidden %}
+  {% if multiple %}
+
+    {% for item in items %}
+    <div{{ item.attributes }}>      
+      {% set listItem = item.content|render|striptags|lower|trim|replace({' ':'-'})|replace({'/':'-'}) %} {{list}}
+      {% for a in subTypeList if a.subtype is same as(listItem) %}
+        <a href="{{ a.listpage }}">        
+          {{ a.pageDetailTitle }} <!-- pageDetailTitle /-->
+          {# item.content|render|striptags #} 
+        </a>
+      {% else %}             
+        {{ item.content|render|striptags }}   
+      {% endfor %}
+    </div>   
+    {% endfor %}
+
+  {% else %}
+
+    {% for item in items %}
+    <div{{ item.attributes }}>
+      {% set listItem = item.content|render|striptags|lower|trim|replace({' ','-'})|replace({'/':'-'}) %} 
+
+      {% for a in subTypeList if a.subtype is same as(listItem) and breakloop == false %}
+
+        {% if listItem is same as('other') %}
+
+          {% for aType in subTypeList if (aType.type in pageUrl['#markup'] and aType.subType is same as(listItem)) and breakloop == false %}
+            <a href="{{ aType.listpage }}"> 
+              {{ aType.pageDetailTitle }}
+              {# item.content|render|striptags #}       
+            </a>
+            {% set breakloop = true %}
+          {% endfor %}
+
+        {% else %}
+          <a href="{{ a.listpage }}"> 
+            {{ a.pageDetailTitle }}
+            {# item.content|render|striptags #}       
+          </a>
+          {% set breakloop = true %}
+
+        {% endif %}
+        {% set breakloop = true %}
+
+      {% else %}
+        <a href="{{ a.listpage }}"> 
+          {{ a.pageDetailTitle }}
+          {# item.content|render|striptags #}       
+        </a>
+
+      {% endfor %}
+    </div>        
+    {% endfor %}
+
+  {% endif %}
+{% else %}
+
+  <div{{ attributes }}>
+    <div{{ item.attributes }}><a href="">{{ item.content }}</a></div>
+    {% if multiple %}
+      <div>
+    {% endif %}
+    {% for item in items %}
+      <div{{ item.attributes }}><a href="">{{ item.content }}</a></div>
+    {% endfor %}
+    {% if multiple %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
+</h1>
+
+</div>

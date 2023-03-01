@@ -1,0 +1,471 @@
+//
+// Functions
+// --------------------------------------------------
+@function get-base-url() {
+	@return '/themes/custom/insider/';
+}
+
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+//
+// Variables
+// --------------------------------------------------
+
+
+/////////////////////////////////////////////
+//== Colors
+//
+//## Settings for some of the most global styles.
+/////////////////////////////////////////////
+
+
+///!!!!!!!!!!!!!!!!!!!!!!!!!!!
+///!!! DO *NOT* USE THESE !!!
+///!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+//********************
+//*SEC Color Names
+// DO NOT USE
+//--------------------
+
+$charcoal: rgb(57, 61, 64);				// #393D40
+$dark-navy: rgb(16, 31, 54);			// #101F36
+$navy: rgb(39, 58, 86);					// #273a56
+$gray-blue: rgb(37, 80, 142);     // #25508E
+$deep-sea: rgb(37, 80, 142);			// #25508E
+$azure:	rgb(47, 100, 178); 				// #2F64B2
+$yellow-orange: rgb(255, 192, 87);		// #FFC057​
+
+
+//********************
+//*Insider Color Names
+// USE 'SITE COLORS' below
+//--------------------
+
+$azure: #2f64b2;
+$gray-blue: #25508e;
+$navy: #273a56;
+$dark-navy: #101f36;
+$seafoam-lt: #99cccc;
+$seafoam: #339a99;
+$seafoam-dk: #007471;
+
+
+//********************
+//*SEC GRAY COLORS - Darkest to lightest
+// USE 'SITE COLORS' below
+//--------------------
+
+$raven: #040707;
+$asphalt: #393C3F;
+$stone: #53575a;
+$cloudy-gray: #6F7479;
+$shadow: #BFBFBF;
+$mist: #9ca1a3;
+$light-gray: #E5E5E5;
+$porcelain: #F3F3F3;
+$black: #000000;
+$white: #ffffff;
+
+
+///!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/// !!!!! *USE THESE* !!!!!!
+///!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+//********************
+//*SITE COLORS
+// variables instead of using actual color name variables
+//--------------------
+
+//*Main Colors
+//http://www.colourco.de/none/%23273a56%2C%23101f36%2C%232f64b1%2C%2325508e%2C%2399cccc%2C%23339a99%2C%23007471
+$primary-color: $navy;
+$primary-dk-color: $dark-navy;
+$secondary-color: $azure;
+$tertiary-color: $gray-blue;
+$accent-lt-color: $seafoam-lt;
+$accent-color: $seafoam;
+$accent-dk-color: $seafoam-dk;
+
+//*Main Neutral Colors
+//http://www.colourco.de/none/%23000000%2C%23040707%2C%23393c3f%2C%2353575a%2C%236f7479%2C%239ca1a3%2C%23bfbfbf%2C%23e5e5e5%2C%23f3f3f3%2C%23ffffff
+$black: rgb(0, 0, 0);
+$gray-dkest: $raven;
+$gray-dkr: $asphalt;
+$gray-dk: $stone;
+$gray-middle: $cloudy-gray;
+$gray-lt: $shadow;
+$gray-ltr: $mist;
+$gray-ltest: $light-gray;
+$white-off: $porcelain; //remove  replace with white
+$white: rgb(255, 255, 255);
+
+
+
+/////////////////////////////////////////////
+//== General
+//
+//## Settings for some of the most global styles.
+/////////////////////////////////////////////
+
+
+$legacy-support-for-ie: true;
+$breakpoint-ie-output: true;
+
+$body-text: $primary-color; //TODO: use this var in the correct places
+$body-bg: transparent; //TODO: use this var in the correct places
+$font-size: 14px; //TODO: use this var in the correct places
+
+$heading-color: $primary-color;
+$page-title-color: $gray-middle;
+
+$anchor-color: $secondary-color; //TODO: use this var in the correct places
+$anchor-hover-color: $anchor-color; //TODO: use this var in the correct places
+$anchor-visited-color: $anchor-color; //TODO: use this var in the correct places
+
+$border-color: $gray-lt;
+
+
+//?TODO: REVIEW AND MOVE INTO THE CORRECT PLACE ?????
+$gray-heading: $cloudy-gray;
+$button-gray: $stone;
+$row-hover-color: $mist;
+//????????????????????????????
+
+
+//********************
+//*Gris System - Suzy
+//--------------------
+
+$susy: (
+  flow: ltr, // ltr | rtl
+  output: float, // float | isolate
+  math: fluid, // fluid | static (requires column-width)
+  column-width: false, // false | value
+  container: auto, // length or % | auto
+  container-position: center, // left | center | right | <length> [*2] (grid padding)
+  last-flow: to,
+  columns: 12,
+  gutters: 3/16,
+  gutter-position: after, // before | after | split | inside | inside-static (requires column-width)
+  global-box-sizing: border-box, // content-box | border-box (affects inside/inside-static)
+  debug: (
+    image: hide,
+    color: rgba(#66f, .25),
+    output: background, // background | overlay
+    toggle: top right,
+  ),
+  use-custom: (
+    background-image: true, // look for background-image mixin
+    background-options: false, // look for background-size, -origin and -clip and other compass/bourbon mixins
+    box-sizing: true, // look for custom bix sizing mixin
+    clearfix: false, // true = look for internal clearfix before using micro clearfix
+    rem: true, // look for rem mixin
+  )
+);
+
+
+//********************
+//*Header
+//--------------------
+
+$header-bg: transparent;
+$header-text: $primary-dk-color;
+$header-v-padding: 25px;
+$header-mobile-v-padding: 15px;
+
+/////////////////////////////////////////////
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+/////////////////////////////////////////////
+
+// TODO: need to move styles here
+$font-size-base:          13;
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:        1.428571429; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed:    floor(($font-size-base * $line-height-base)); // ~20px
+
+
+$padding-base-vertical:     6px;
+$padding-base-horizontal:   12px;
+
+
+/////////////////////////////////////////////
+//== Forms
+//
+//## modular components
+/////////////////////////////////////////////
+
+//********************
+//**All Forms
+//--------------------
+
+//** `<input>` background color
+$input-bg:                       $white;
+//** `<input disabled>` background color
+$input-bg-disabled:              $gray-lt;
+
+//** Text color for `<input>`s
+$input-color:                    $gray-middle;
+//** `<input>` border color
+$input-border:                   #ccc;
+
+$input-border-radius:            3px;
+
+//** Border color for inputs on focus
+$input-border-focus:             #66afe9 !default;
+
+//** Placeholder text color
+$input-color-placeholder:        #999 !default;
+
+//** Default `.form-control` height
+$input-height-base:              ($line-height-computed + ($padding-base-vertical * 2) + 2) !default;
+
+//** `.form-group` margin
+$form-group-margin-bottom:       15px !default;
+
+$legend-color:                   $gray-dk !default;
+$legend-border-color:            #e5e5e5 !default;
+
+//** Background color for textual input addons
+$input-group-addon-bg:           $gray-lt !default;
+//** Border color for textual input addons
+$input-group-addon-border-color: $input-border !default;
+
+//** Disabled cursor for form controls and buttons.
+$cursor-disabled:                not-allowed !default;
+
+//********************
+//**Buttons
+//--------------------
+
+$button-font-weight:                normal;
+
+$button-primary-color:              $white;
+$button-primary-bg:                 $azure;
+$button-primary-border:             $azure;
+
+$button-link-disabled-color:        $gray-lt;
+
+$button-border-radius-base:         3px;
+
+
+//********************
+//**Exposed Filters
+//--------------------
+
+$exposed-form-bg-color: $white-off;
+$exposed-form-text-color: $primary-color;
+
+
+/////////////////////////////////////////////
+//== Tables
+//
+//## modular components
+/////////////////////////////////////////////
+
+//** Padding for `<th>`s and `<td>`s.
+$table-cell-padding:            8px;
+//** Padding for cells in `.table-condensed`.
+$table-condensed-cell-padding:  5px;
+
+//** Default background color used for all tables.
+$table-bg:                      transparent;
+//** Background color used for `.table-striped`.
+$table-bg-accent:               #f9f9f9;
+//** Background color used for `.table-hover`.
+$table-bg-hover:                #f9f9f9;
+$table-bg-active:               $table-bg-hover;
+
+//** Border color for table and cell borders.
+$table-border-color:            lighten($border-color, 10%);
+
+$table-caption-color: $gray-middle;
+
+//** Table heading Colors
+$table-header-bg-color: $primary-color;
+$table-header-color: $white;
+$table-header-active-bg-color: $primary-dk-color;
+$table-header-active-color: $white;
+
+//** Table Group Colors
+$table-group-color: $primary-dk-color;
+$table-group-bg-color: $white-off;
+
+
+/////////////////////////////////////////////
+//== Navigation
+//
+//## modular components
+/////////////////////////////////////////////
+
+
+//********************
+//**global-navigation region
+//--------------------
+
+$global-navigation-bg-color: $secondary-color;
+
+//main sitenav menu
+$sitenav-toplevel-bg-color: transparent;
+
+$sitenav-toplevel-anchor-color: $white;
+$sitenav-toplevel-anchor-bg-color: transparent;
+$sitenav-toplevel-anchor-hover-color: $tertiary-color;
+$sitenav-toplevel-anchor-hover-bg-color: $accent-lt-color; //TODO: check color
+
+$sitenav-otherlevel-anchor-color: $white;
+$sitenav-otherlevel-anchor-bg-color: $tertiary-color;
+$sitenav-otherlevel-anchor-hover-color: $tertiary-color;  //TODO: check color
+$sitenav-otherlevel-anchor-hover-bg-color: $accent-lt-color;
+
+$sitenav-toplevel-anchor-h-spacing: 15px;
+
+
+//********************
+//**Quick links menu
+//--------------------
+
+$quicklinks-toplevel-bg-color: transparent;
+
+$quicklinks-toplevel-anchor-color: $white;
+$quicklinks-toplevel-anchor-bg-color: $dark-navy;
+$quicklinks-toplevel-anchor-hover-color: $quicklinks-toplevel-anchor-color;
+$quicklinks-toplevel-anchor-hover-bg-color: $navy;
+
+$quicklinks-otherlevel-anchor-color: $white;
+$quicklinks-otherlevel-anchor-bg-color: $dark-navy;
+$quicklinks-otherlevel-anchor-hover-color: $quicklinks-otherlevel-anchor-color;
+$quicklinks-otherlevel-anchor-hover-bg-color: $gray-blue;
+
+//********************
+//**Left menus
+//--------------------
+
+$left-bg-color: $white;
+
+$left-collapsible-item-color: $gray-dk;
+$left-collapsible-item-bg-color: $white-off;
+$left-collapsible-item-hover-color: $left-collapsible-item-color;
+$left-collapsible-item-hover-bg-color: darken($white-off, 5%);
+$left-collapsible-item-active-color: $left-collapsible-item-hover-color;
+$left-collapsible-item-active-bg-color: $left-collapsible-item-hover-bg-color;
+
+$left-item-color: $gray-dk;
+$left-item-bg-color: $white;
+$left-item-hover-color: $white;
+$left-item-hover-bg-color: $accent-dk-color;
+$left-item-active-color:  $left-item-hover-color;
+$left-item-active-bg-color: $left-item-hover-bg-color;
+
+
+//********************
+//**Mobile Left menus
+//--------------------
+
+$mobile-left-bg-color: $primary-dk-color;
+
+$mobile-left-collapsible-item-color: $white;
+$mobile-left-collapsible-item-bg-color: $primary-color;
+$mobile-left-collapsible-item-hover-color: $white;
+$mobile-left-collapsible-item-hover-bg-color: $primary-dk-color;
+$mobile-left-collapsible-item-active-color: $white;
+$mobile-left-collapsible-item-active-bg-color: darken($primary-dk-color, 5%);
+
+$mobile-left-item-color: $white;
+$mobile-left-item-bg-color: $secondary-color;
+$mobile-left-item-hover-color: $white;
+$mobile-left-item-hover-bg-color: darken($secondary-color, 10%);
+$mobile-left-item-active-color: $white;
+$mobile-left-item-active-bg-color: darken($secondary-color, 15%);
+
+$mobile-extras-color: $white;
+$mobile-extras-bg: $primary-color;
+
+//********************
+//*Top Footer menu
+//--------------------
+
+$footertop-bg-color: $stone;
+
+$footertop-anchor-color: $white;
+$footertop-anchor-hover-color: $footertop-anchor-color;
+
+
+//********************
+//*Footer menu
+//--------------------
+
+$footer-bg-color: $gray-blue;
+
+$footer-anchor-color: $white;
+$footer-anchor-hover-color: $footer-anchor-color;
+
+
+
+
+/////////////////////////////////////////////
+//== Components
+//
+//## modular components
+/////////////////////////////////////////////
+
+//********************
+//*Media Object
+//--------------------
+
+$media-v-space: 20px;
+$media-border-color: $border-color;
+$media-border-lg-color: $primary-color;
+$media-heading-color: $header-text;
+$media-heading-fz: 16px;
+$media-heading-a-color: $anchor-color;
+
+
+//********************
+//*alerts
+//--------------------
+
+$alert-critical-color: #f04b44;
+$alert-warning-color: #ffc057;
+$alert-info-color: #2F64B2;
+$alert-success-color: #589f73;
+
+
+//********************
+//*Tabs (jQuery UI)
+//--------------------
+
+$tab-border-color: $border-color;
+
+$tab-bg-default: $white;
+$tab-color-default: $header-text;
+
+$tab-bg-active: tint($accent-lt-color, 60%);
+$tab-color-active: $header-text;
+
+$tab-bg-hover: tint($accent-lt-color, 85%);
+$tab-color-hover: $header-text;
+
+
+
+/////////////////////////////////////////////
+//== Pages
+//
+//## modular components
+/////////////////////////////////////////////
+
+//********************
+//*Homepage
+//--------------------
+
+$home-spacing: 25px;

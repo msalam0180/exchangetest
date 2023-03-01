@@ -1,0 +1,55 @@
+uuid: 6be74dec-e114-4b23-a9df-79ea9066c217
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.link.field_add_to_available_quicklink
+    - field.field.node.link.field_add_to_default_quicklinks
+    - field.field.node.link.field_combined_date
+    - field.field.node.link.field_description_abstract
+    - field.field.node.link.field_tags
+    - field.field.node.link.field_url
+    - node.type.link
+  module:
+    - link
+    - panelizer
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.link.teaser
+targetEntityType: node
+bundle: link
+mode: teaser
+content:
+  field_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  workbench_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+hidden:
+  field_add_to_available_quicklink: true
+  field_add_to_default_quicklinks: true
+  field_combined_date: true
+  field_description_abstract: true
+  field_tags: true
+  langcode: true
+  links: true
+  published_at: true
+  search_api_excerpt: true

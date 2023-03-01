@@ -1,0 +1,210 @@
+uuid: a2ca06de-054c-47fb-aa2f-e10da1557dda
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: e75fm9KcdNLzdpIMih19AZGV_GeIhMm5RwHuaOHXzOo
+id: insider_agendas
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - insider_agendas
+migration_group: insider
+label: 'JSON import of Insider Static Files'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  item_selector: 0
+  urls: 'http://secgovdcmdev1.prod.acquia-sites.com/files/migration/insider/source/insider_agendas.json'
+  fields:
+    -
+      name: id
+      label: Identifier
+      selector: id
+    -
+      name: title
+      label: title
+      selector: title
+    -
+      name: contenttypeid
+      label: contenttypeid
+      selector: contenttypeid
+    -
+      name: location
+      label: location
+      selector: location
+    -
+      name: publish_date
+      label: publish_date
+      selector: publish_date
+    -
+      name: filename
+      label: filename
+      selector: filename
+  ids:
+    id:
+      type: string
+  constants:
+    urlprefix: 'http://secgov.insider.dd:8083/sites/secgov.insider.dd/files/migration/files'
+process:
+  type:
+    plugin: default_value
+    default_value: file
+  created:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: publish_date
+    -
+      plugin: date_import
+      return_timestamp: true
+  changed: '@created'
+  published_at: '@created'
+  title: title
+  field_file_upload:
+    -
+      plugin: concat
+      source:
+        - constants/urlprefix
+        - location
+    -
+      plugin: file_import
+  division_office:
+    plugin: insider_taxonomy_by_url
+    source: location
+    return_type: division_office
+    content_type: generic
+  field_division_office:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: '@division_office'
+    -
+      plugin: static_map
+      map:
+        'Atlanta Regional Office (ARO)': 596
+        'Boston Regional Office (BRO)': 601
+        Chairman: 461
+        'Chicago Regional Office (CHRO)': 606
+        'Denver Regional Office (DRO)': 611
+        'Division of Corporation Finance (CF)': 456
+        'Division of Economic and Risk Analysis (DERA)': 466
+        'Division of Enforcement (ENF)': 476
+        'Division of Investment Management (IM)': 491
+        'Division of Trading and Markets (TM)': 591
+        'EDGAR Business Office (EBO)': 1061
+        'Fort Worth Regional Office (FWRO)': 621
+        'Los Angeles Regional Office (LARO)': 626
+        'Miami Regional Office (MIRO)': 631
+        'New York Regional Office (NYRO)': 636
+        'Office Financial Management (OFM)': 526
+        'Office of Acquisitions (OA)': 86
+        'Office of Administrative Law Judges (ALJ)': 501
+        'Office of Compliance Inspections and Examinations (OCIE)': 511
+        'Office of Credit Ratings (OCR)': 521
+        'Office of Equal Employment Opportunity (OEEO)': 471
+        'Office of Financial Management (OFM)': 681
+        'Office of Human Resources (OHR)': 536
+        'Office of Information Technology (OIT)': 676
+        'Office of International Affairs (OIA)': 541
+        'Office of Investor Education and Advocacy (OIEA)': 551
+        'Office of Legislative and Intergovernmental Affairs (OLIA)': 566
+        'Office of Minority and Women Inclusion (OMWI)': 576
+        'Office of Municipal Securities (OMS)': 571
+        'Office of Public Affairs (OPA)': 96
+        'Office of Strategic Initiatives (OSI)': 586
+        'Office of Support Operations (OSO)': 486
+        'Office of the Chief Accountant (OCA)': 506
+        'Office of the Chief Operating Officer (OCOO)': 516
+        'Office of the Ethics Counsel (OEC)': 481
+        'Office of the General Counsel (OGC)': 531
+        'Office of the Information Technology (OIT)': 561
+        'Office of Inspector General (OIG)': 556
+        'Office of the Investor Advocate (OIAD)': 546
+        'Office of the Secretary (OS)': 581
+        'Office the General Counsel (OGC)': 656
+        'Office the Strategic Initiatives (OSI)': 661
+        'Philadelphia Regional Office (PLRO)': 641
+        'Salt Lake Regional Office (SLRO)': 651
+        'San Francisco Regional Office (SFRO)': 646
+  topic:
+    plugin: insider_taxonomy_by_url
+    source: location
+    return_type: topic
+    content_type: generic
+  field_topic:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: '@topic'
+    -
+      plugin: static_map
+      map:
+        'About the SEC': 71
+        Acquisitions: 66
+        'Agencywide Initiatives': 1051
+        'Award Programs': 346
+        Bicycle: 351
+        Commuting: 341
+        'Company Research Guide': 276
+        'Conference Rooms': 401
+        'Court Information': 286
+        Cybersecurity: 731
+        'Data and Research Tools': 696
+        'Data Feeds': 281
+        'Divisions and Offices': 236
+        Emergencies: 406
+        Ethics: 726
+        Facilities: 411
+        'Floor Plans': 416
+        Forms: 1056
+        'Groups and Clubs': 241
+        'Historical Information': 326
+        'Human Resources': 256
+        'Legislative Histories': 306
+        'Library Services': 316
+        'Litigation Releases, Enforcement, and SRO Appeals, Securities Laws and Regulations': 266
+        'Mail Operations and Deliveries': 421
+        'News Media Coverage': 311
+        'Online Newspapers': 321
+        'Organization Charts': 246
+        Passwords: 1046
+        'Phone Directories and Contact Lists': 251
+        Policies: 716
+        'Printing and Graphics': 426
+        Privacy: 366
+        Recommind: 691
+        'Registrant Info': 296
+        'SEC Administrative Regulations': 331
+        'SEC Operating Procedures': 336
+        'Securities Laws': 301
+        Security: 431
+        'Security (IT)': 361
+        'Spotlight on Topics of Current Interest at the SEC': 271
+        'SROs, Exchanges, and Financial Regulatory Organizations': 261
+        'Systems and Applications': 376
+        Technology: 356
+        'Tips, Complaints, and Referrals (TCR) System': 386
+        Training: 391
+        'Training - Mandatory': 396
+        Travel: 436
+  field_top_level_group:
+    -
+      plugin: insider_taxonomy_by_url
+      source: location
+      return_type: top_level
+    -
+      plugin: static_map
+      map:
+        'My SEC': 231
+        News: 211
+        'Policies and Forms': 206
+        'Research Resources': 446
+        'SEC Organization': 451
+        'SEC Workplace': 216
+        Technology: 441
+destination:
+  plugin: 'entity:node'
+migration_dependencies: null

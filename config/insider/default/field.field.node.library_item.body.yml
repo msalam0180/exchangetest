@@ -1,0 +1,25 @@
+uuid: 9e1d79b6-44cf-4e0d-bb90-0db24c44f722
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.library_item
+  module:
+    - text
+_core:
+  default_config_hash: NdHMpG9TBdZk-l47fiA1cbQBsMCAA5-fyzXZCE-XQ5I
+id: node.library_item.body
+field_name: body
+entity_type: node
+bundle: library_item
+label: Description
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

@@ -1,0 +1,50 @@
+uuid: 2608ddee-d2cf-4b5e-bbe2-b6edf0ea8a01
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.announcement
+    - node.type.event
+    - node.type.featured
+    - node.type.form
+    - node.type.image
+    - node.type.landing_page
+    - node.type.library_item
+    - node.type.link
+    - node.type.operating_procedure
+    - node.type.page
+    - node.type.sec_alert
+    - node.type.sec_article
+    - node.type.secr
+    - node.type.video
+  module:
+    - entity_embed
+    - node
+_core:
+  default_config_hash: '-5p_BTxrfiy4iMTvrpkYAJEY-GAO_3AD5SdOtBBSO5s'
+label: Node
+id: node
+type_id: entity
+type_settings:
+  entity_type: node
+  bundles:
+    - announcement
+    - sec_article
+    - page
+    - event
+    - featured
+    - form
+    - image
+    - landing_page
+    - library_item
+    - link
+    - operating_procedure
+    - secr
+    - sec_alert
+    - video
+  display_plugins:
+    - 'view_mode:node.default_embed'
+    - 'view_mode:node.teaser'
+  entity_browser: ''
+  entity_browser_settings: null
+icon_uuid: null

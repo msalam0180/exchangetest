@@ -1,0 +1,8 @@
+uuid: 03a192fd-87f3-4f99-aba9-2b95fdc9ffd5
+langcode: en
+status: true
+dependencies: {  }
+id: news
+label: News
+description: 'left nav for News section '
+locked: false

@@ -1,0 +1,63 @@
+uuid: 8bde11ab-0938-4039-9a5a-26d2b977c892
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.referenced_media
+    - field.field.media.file.field_media_audience
+    - field.field.media.file.field_media_description_abstract
+    - field.field.media.file.field_media_division_office
+    - field.field.media.file.field_media_file
+    - field.field.media.file.field_media_group_club
+    - field.field.media.file.field_media_override_modified
+    - field.field.media.file.field_media_retain_disposal_date
+    - field.field.media.file.field_media_tags
+    - field.field.media.file.field_media_top_level_group
+    - field.field.media.file.field_media_topic
+    - media.type.file
+  module:
+    - media_entity_download
+_core:
+  default_config_hash: ODDJLS7FuGbrqYXFuCPgk0zyn0AuwGiiFPuAgK6lWcU
+id: media.file.referenced_media
+targetEntityType: media
+bundle: file
+mode: referenced_media
+content:
+  field_media_file:
+    type: media_entity_download_download_link
+    label: visually_hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: _blank
+      disposition: inline
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  name:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_media_audience: true
+  field_media_description_abstract: true
+  field_media_division_office: true
+  field_media_group_club: true
+  field_media_override_modified: true
+  field_media_retain_disposal_date: true
+  field_media_tags: true
+  field_media_top_level_group: true
+  field_media_topic: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true
+  workbench_moderation_control: true

@@ -1,0 +1,14 @@
+uuid: ed86eee7-4fe2-478b-8334-8128cb780888
+langcode: en
+status: true
+dependencies:
+  config:
+    - workbench_moderation.moderation_state.archived
+    - workbench_moderation.moderation_state.published
+_core:
+  default_config_hash: 7Wjv612rJRdRDZeO3L82lvgHZO6h5tIx1pklqCcvIlA
+id: archived_published
+label: Re-publish
+stateFrom: archived
+stateTo: published
+weight: 0

@@ -1,0 +1,32 @@
+uuid: 6718cd06-a289-4fa1-b44e-eeb02c9102e3
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+id: mark_comment_as_inappropriate
+label: 'Mark comment as inappropriate'
+bundles: {  }
+entity_type: comment
+global: true
+flag_short: Delete
+flag_long: ''
+flag_message: ''
+unflag_short: Restore
+unflag_long: ''
+unflag_message: ''
+unflag_denied_text: ''
+weight: 0
+flag_type: 'entity:comment'
+link_type: reload
+flagTypeConfig:
+  show_in_links:
+    full: full
+    token: token
+  show_as_field: true
+  show_on_form: false
+  show_contextual_link: true
+  extra_permissions:
+    owner: '0'
+    parent_owner: '0'
+linkTypeConfig: {  }

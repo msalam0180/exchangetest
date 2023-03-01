@@ -1,0 +1,5 @@
+services:
+  insider_poll.flag_subscriber:
+    class: Drupal\insider_poll\EventSubscriber\PollFlagSubscriber
+    tags:
+      - { name: event_subscriber }

@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI
+langcode: en
+uuid: fcc19a16-c1ad-4bdc-96d1-e34471d82099
+name: 'The Exchange'
+mail: no-reply@sec.gov
+slogan: ''
+page:
+  403: /node/1921
+  404: /node/1926
+  front: /home
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en
+mail_notification: ''

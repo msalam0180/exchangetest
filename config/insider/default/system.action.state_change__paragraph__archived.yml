@@ -1,0 +1,11 @@
+uuid: 0987c758-4642-4042-a69e-918472f60084
+langcode: en
+status: true
+dependencies:
+  module:
+    - workbench_moderation_actions
+id: state_change__paragraph__archived
+label: 'Set Paragraph as Unpublished'
+type: paragraph
+plugin: 'state_change:paragraph__archived'
+configuration: {  }

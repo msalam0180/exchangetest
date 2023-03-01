@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * Main hooks for SEC filters (sec_view_filter_plugin) module.
+ */
+
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function sec_view_filter_plugin_views_pre_render(ViewExecutable $view) {
+  $view->element['#attached']['library'][] = 'sec_view_filter_plugin/sec_view_filter_plugin-datatables';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function sec_view_filter_plugin_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (isset($form['#id']) && $form['#id'] == 'views-exposed-form-events-list-block-1') {
+
+    $form['field_start_date_value'] = [
+      '#type' => 'single_date_time',
+      '#allow_times' => 15,
+      '#field_type' => 'daterange',
+      '#date_type' => 'date',
+      '#disable_days' => [],
+      '#max_date' => '',
+      '#min_date' => '',
+      '#datetimepicker-theme' => 'default',
+      '#hour_format' => '24h',
+      '#attributes' => ['aria-describedby' => 'edit-field-start-date-value--description']
+    ];
+
+    $form['field_end_date_value'] = [
+      '#type' => 'single_date_time',
+      '#allow_times' => 15,
+      '#date_type' => 'date',
+      '#disable_days' => [],
+      '#max_date' => '',
+      '#min_date' => '',
+      '#datetimepicker-theme' => 'default',
+      '#hour_format' => '24h',
+      '#attributes' => ['aria-describedby' => 'edit-field-end-date-value-1--description']
+    ];
+
+    $form['#attributes']['autocomplete'] = 'off';
+  }
+}

@@ -1,0 +1,21 @@
+uuid: eba4fe19-c323-4f25-bcba-ecb5c6a46e43
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_combined_date
+    - node.type.sec_alert
+  module:
+    - datetime
+id: node.sec_alert.field_combined_date
+field_name: field_combined_date
+entity_type: node
+bundle: sec_alert
+label: 'Combined Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

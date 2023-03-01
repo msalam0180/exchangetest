@@ -1,0 +1,26 @@
+uuid: d44b2fdd-c8a1-460c-9181-dac095746aab
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.image
+  module:
+    - entity_embed
+    - node
+_core:
+  default_config_hash: Lha2ybNRxRcjix1BZsr8PtwyGa0L5ZVW7efY6vC4fSY
+label: 'Image Embed'
+id: image_embed
+type_id: entity
+type_settings:
+  entity_type: node
+  bundles:
+    - image
+  display_plugins:
+    - 'view_mode:node.default_embed'
+    - 'view_mode:node.full_width_embed'
+    - 'view_mode:node.original_size'
+    - 'view_mode:node.teaser'
+  entity_browser: ''
+  entity_browser_settings: null
+icon_uuid: null

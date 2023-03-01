@@ -1,0 +1,30 @@
+uuid: 2592b8aa-8c26-467f-b71a-bb39900b11a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_topic
+    - node.type.library_item
+    - taxonomy.vocabulary.topic
+_core:
+  default_config_hash: M51OM0gXQq-zq4SPkE-xSNzekNNo-x-jCXtImtT7obM
+id: node.library_item.field_topic
+field_name: field_topic
+entity_type: node
+bundle: library_item
+label: Topic
+description: 'Select at least one topic'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      topic: topic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

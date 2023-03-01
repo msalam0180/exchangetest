@@ -1,0 +1,12 @@
+uuid: 6441cc49-579b-4a95-b8f8-f9915b86d0f3
+langcode: en
+status: true
+dependencies: {  }
+id: send_comment_created_email
+label: 'Send Comment Created Email'
+type: system
+plugin: action_send_email_action
+configuration:
+  recipient: '[comment:author:mail], SECToday@sec.gov, TheExchange@sec.gov, [node:field_comment_moderator]'
+  subject: 'A Comment Was Created'
+  message: "Comment made by: \r\n[comment:author:mail]\r\n\r\nComment Body:\r\n[comment:body]\r\n\r\nComment Created:\r\n[comment:created]\r\n\r\nComment Link:\r\n[comment:url]\r\n\r\nComment Page:\r\n[node:url]"

@@ -1,0 +1,10 @@
+uuid: 6ed7cfef-0941-4c80-9ca8-39d095d1b634
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: AZXrwsSORjEVmFSZjpNO5AgNBJ36fdRKhA7Mr75mE5E
+name: Audience
+vid: audiences
+description: 'Taxonomy vocabulary for Audiences'
+weight: 0

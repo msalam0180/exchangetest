@@ -1,0 +1,7 @@
+name: 'Insider Pages'
+type: module
+core: 8.x
+version: 8.x-1.0
+package: Insider
+description: 'Page Manager Pages used on insider'
+core_version_requirement: ^8 || ^9

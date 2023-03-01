@@ -1,0 +1,14 @@
+uuid: 430b083c-07e4-4664-be67-39a14cc79590
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.content_approver
+  module:
+    - user
+id: user_add_role_action.content_approver
+label: 'Add the Content Approver role to the selected users'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: content_approver

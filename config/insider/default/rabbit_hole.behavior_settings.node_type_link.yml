@@ -1,0 +1,14 @@
+uuid: 3ad92d2f-aab1-4658-9000-c74cc1cc28f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.link
+id: node_type_link
+entity_type_id: node_type
+entity_id: link
+action: page_redirect
+allow_override: 0
+redirect: '[node:field_url:uri]'
+redirect_code: 301
+redirect_fallback_action: access_denied

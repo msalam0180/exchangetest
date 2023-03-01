@@ -1,0 +1,12 @@
+uuid: 50be0a07-17fc-464f-8dfe-ce52f298480e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: vylzw_VelpwzaR5xc3iaj9tQQMZ2AIdXLnaq4rz8wVw
+id: node.small_embed
+label: 'Small Embed'
+targetEntityType: node
+cache: true

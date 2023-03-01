@@ -1,0 +1,23 @@
+uuid: 72523b87-8889-4be0-96ba-2234318fb3f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_title_visibility
+    - node.type.featured
+  module:
+    - options
+_core:
+  default_config_hash: d12nF08Ol260Ikh3j3rv7LxuT0S82Xv-DU6IdrgUsxs
+id: node.featured.field_title_visibility
+field_name: field_title_visibility
+entity_type: node
+bundle: featured
+label: 'Title Visibility'
+description: 'If "Visible", title will display above the image '
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

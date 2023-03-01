@@ -1,0 +1,23 @@
+uuid: 3cd792b6-c939-4d95-8bb8-52a52ca7f5a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_series
+    - node.type.secr
+  module:
+    - options
+_core:
+  default_config_hash: ZkathuKmoNaCYM3-T5so-tDYM3fd1lUjjMbHgn5ucpE
+id: node.secr.field_series
+field_name: field_series
+entity_type: node
+bundle: secr
+label: Series
+description: 'Select the applicable series.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

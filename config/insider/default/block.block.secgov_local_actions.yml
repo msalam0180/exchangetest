@@ -1,0 +1,20 @@
+uuid: be2b7f0b-78c0-46bc-bc4d-b933ae10709b
+langcode: en
+status: false
+dependencies:
+  theme:
+    - insider
+_core:
+  default_config_hash: qD7HuStgJJwJYJrVPRDDi7Iz-H8v2rW7uye9y9iGaDA
+id: secgov_local_actions
+theme: insider
+region: header
+weight: -4
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

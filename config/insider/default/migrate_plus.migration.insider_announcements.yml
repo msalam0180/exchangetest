@@ -1,0 +1,99 @@
+uuid: a8711d74-7004-4c82-9f80-f334f1b19adb
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: ENQlIoIdFjUozUX1q9aCE501rW9DcRfQCsnOyLWMFZU
+id: insider_announcements
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - insider_announcements
+migration_group: insider
+label: 'JSON import of Insider Announcements'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  item_selector: 0
+  urls: 'http://secgovdcmdev1.prod.acquia-sites.com/files/migration/insider/source/delta-migration-03-11/announcements.json'
+  fields:
+    -
+      name: id
+      label: Identifier
+      selector: id
+    -
+      name: title
+      label: title
+      selector: title
+    -
+      name: contenttypeid
+      label: contenttypeid
+      selector: contenttypeid
+    -
+      name: location
+      label: location
+      selector: location
+    -
+      name: created_date
+      label: created_date
+      selector: created_date
+    -
+      name: change_date
+      label: change_date
+      selector: change_date
+    -
+      name: body
+      label: body
+      selector: body
+  ids:
+    id:
+      type: string
+process:
+  type:
+    plugin: default_value
+    default_value: announcement
+  title: title
+  status:
+    plugin: default_value
+    default_value: 0
+  uid:
+    plugin: default_value
+    default_value: 1
+  created:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: created_date
+    -
+      plugin: date_import
+      return_timestamp: true
+  change:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: change_date
+    -
+      plugin: date_import
+      return_timestamp: true
+  changed: '@change'
+  published_at: '@created'
+  field_override_modified_date:
+    plugin: date_import
+    source: created_date
+  body:
+    plugin: html_import
+    source: body
+  field_top_level_group:
+    plugin: default_value
+    default_value: 211
+  field_retain_disposal_date:
+    plugin: expire_retain_date
+    source: change_date
+  moderation_state:
+    plugin: default_value
+    default_value: published
+destination:
+  plugin: 'entity:node'
+migration_dependencies: null

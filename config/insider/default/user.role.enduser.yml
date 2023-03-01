@@ -1,0 +1,22 @@
+uuid: afeb425c-efbe-4cd8-808b-228f63df7ab4
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - media_entity_download
+    - paragraphs_type_permissions
+    - search
+    - system
+_core:
+  default_config_hash: eAQGxHy3go8DhHFghRxdP3kawEC5TL-fEoqqwYt7mho
+id: enduser
+label: Enduser
+weight: 1
+is_admin: false
+permissions:
+  - 'access content'
+  - 'download media'
+  - 'search content'
+  - 'view media'
+  - 'view paragraph content paragraph_session'

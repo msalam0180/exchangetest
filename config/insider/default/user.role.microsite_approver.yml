@@ -1,0 +1,166 @@
+uuid: 1bfc27a2-ecde-4446-b678-38a9fb094394
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.restricted_html
+    - filter.format.teaser_html
+    - media.type.file
+    - node.type.announcement
+    - node.type.event
+    - node.type.image
+    - node.type.landing_page
+    - node.type.link
+    - node.type.sec_alert
+    - node.type.sec_article
+    - node.type.video
+  module:
+    - block
+    - contextual
+    - draggableviews
+    - entity_usage
+    - environment_indicator
+    - field_permissions
+    - file
+    - filter
+    - masquerade
+    - media
+    - node
+    - panels
+    - panels_ipe
+    - paragraphs_type_permissions
+    - path
+    - quickedit
+    - scheduled_updates
+    - simple_styleguide
+    - system
+    - toolbar
+    - video_embed_field
+    - workbench
+    - workbench_moderation
+_core:
+  default_config_hash: c8UlZsKPdUujm3QOCu67Hz_LD5wPvIYuOa1Tu-Dhrmg
+id: microsite_approver
+label: 'Microsite Approver'
+weight: 8
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access draggableviews'
+  - 'access entity usage statistics'
+  - 'access environment indicator'
+  - 'access files overview'
+  - 'access in-place editing'
+  - 'access media overview'
+  - 'access panels in-place editing'
+  - 'access style guide'
+  - 'access toolbar'
+  - 'access workbench'
+  - 'administer blocks'
+  - 'create announcement content'
+  - 'create event content'
+  - 'create field_site_section'
+  - 'create file media'
+  - 'create image content'
+  - 'create landing_page content'
+  - 'create paragraph content paragraph_session'
+  - 'create publish_on scheduled updates'
+  - 'create scheduling_options'
+  - 'create sec_alert content'
+  - 'create sec_article content'
+  - 'create unpublish_on scheduled updates'
+  - 'create url aliases'
+  - 'create video content'
+  - 'delete any announcement content'
+  - 'delete any event content'
+  - 'delete any file media'
+  - 'delete any image content'
+  - 'delete any link content'
+  - 'delete any publish_on scheduled updates'
+  - 'delete any sec_alert content'
+  - 'delete any sec_article content'
+  - 'delete any unpublish_on scheduled updates'
+  - 'delete any video content'
+  - 'delete own announcement content'
+  - 'delete own event content'
+  - 'delete own file media'
+  - 'delete own image content'
+  - 'delete own landing_page content'
+  - 'delete own link content'
+  - 'delete own publish_on scheduled updates'
+  - 'delete own sec_alert content'
+  - 'delete own sec_article content'
+  - 'delete own unpublish_on scheduled updates'
+  - 'delete own video content'
+  - 'delete paragraph content paragraph_session'
+  - 'edit any announcement content'
+  - 'edit any event content'
+  - 'edit any file media'
+  - 'edit any image content'
+  - 'edit any landing_page content'
+  - 'edit any link content'
+  - 'edit any publish_on scheduled updates'
+  - 'edit any sec_alert content'
+  - 'edit any sec_article content'
+  - 'edit any unpublish_on scheduled updates'
+  - 'edit any video content'
+  - 'edit field_site_section'
+  - 'edit own announcement content'
+  - 'edit own event content'
+  - 'edit own field_site_section'
+  - 'edit own file media'
+  - 'edit own image content'
+  - 'edit own link content'
+  - 'edit own publish_on scheduled updates'
+  - 'edit own scheduling_options'
+  - 'edit own sec_alert content'
+  - 'edit own sec_article content'
+  - 'edit own unpublish_on scheduled updates'
+  - 'edit own video content'
+  - 'edit scheduling_options'
+  - 'masquerade as enduser'
+  - 'never autoplay videos'
+  - 'revert announcement revisions'
+  - 'revert event revisions'
+  - 'revert image revisions'
+  - 'revert link revisions'
+  - 'revert sec_alert revisions'
+  - 'revert sec_article revisions'
+  - 'revert video revisions'
+  - 'update paragraph content paragraph_session'
+  - 'use archived_published transition'
+  - 'use draft_draft transition'
+  - 'use draft_needs_review transition'
+  - 'use draft_published transition'
+  - 'use ipe with page manager'
+  - 'use needs_review_draft transition'
+  - 'use needs_review_needs_review transition'
+  - 'use needs_review_published transition'
+  - 'use published_archived transition'
+  - 'use published_draft transition'
+  - 'use published_published transition'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'use text format restricted_html'
+  - 'use text format teaser_html'
+  - 'view all media revisions'
+  - 'view all revisions'
+  - 'view announcement revisions'
+  - 'view any unpublished content'
+  - 'view event revisions'
+  - 'view image revisions'
+  - 'view latest version'
+  - 'view link revisions'
+  - 'view moderation states'
+  - 'view own field_site_section'
+  - 'view own scheduling_options'
+  - 'view own unpublished content'
+  - 'view scheduled update entities'
+  - 'view scheduling_options'
+  - 'view sec_alert revisions'
+  - 'view sec_article revisions'
+  - 'view the administration theme'
+  - 'view video revisions'

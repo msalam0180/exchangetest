@@ -1,0 +1,234 @@
+//
+// jQuery UI Accordion
+// Add an ID with the following syntax - div[id^="accordion-"]
+// the accordion on the video pages is edited in the pages/node_video.scss file
+// --------------------------------------------------
+
+div[id^="accordion-"] {
+  margin-bottom: 20px;
+
+  //Accordion Header
+  .ui-accordion-header.ui-state-default {
+    background: none;
+    font-weight: 600;
+    padding: 10px 0 10px 25px;
+    @include helvetica;
+
+    &.ui-accordion-header-active.ui-state-active {
+    }
+  }
+
+  //Accordion Content
+  .ui-accordion-content {
+    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    font-size: $font-size;
+    @include helvetica;
+    p {
+      font-size: $font-size;
+    }
+  }
+
+  // Corner radius
+  .ui-corner-all,
+  .ui-corner-top,
+  .ui-corner-left,
+  .ui-corner-tl {
+    border-top-left-radius: 0;
+  }
+  .ui-corner-all,
+  .ui-corner-top,
+  .ui-corner-right,
+  .ui-corner-tr {
+    border-top-right-radius: 0;
+  }
+  .ui-corner-all,
+  .ui-corner-bottom,
+  .ui-corner-left,
+  .ui-corner-bl {
+    border-bottom-left-radius: 0;
+  }
+  .ui-corner-all,
+  .ui-corner-bottom,
+  .ui-corner-right,
+  .ui-corner-br {
+    border-bottom-right-radius: 0;
+  }
+}
+
+// Accordion Groups
+.accordionGroup {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  div[id^="accordion-"] .ui-accordion-header.ui-state-default {
+    margin: 0;
+  }
+
+  div[id^="accordion-"] {
+    margin-bottom: 0;
+  }
+
+  div[id^="accordion-"] + div[id^="accordion-"] {
+    .ui-accordion-header {
+      border-top: 0;
+    }
+  }
+}
+
+// Accordion bordered
+.accordionBordered div[id^="accordion-"] {
+  .ui-state-active,
+  .ui-button:active {
+    color: inherit;
+  }
+
+  .ui-state-active .ui-icon,
+  .ui-button:active .ui-icon {
+    background-image: url(/core/assets/vendor/jquery.ui/themes/base/images/ui-icons_444444_256x240.png);
+  }
+
+  .ui-accordion-content + .ui-accordion-header {
+    margin: 0;
+    margin-top: -1px;
+  }
+
+  .ui-state-active,
+  .ui-widget-content .ui-state-active,
+  .ui-widget-header .ui-state-active,
+  a.ui-button:active,
+  .ui-button:active,
+  .ui-button.ui-state-active:hover {
+    border-color: #c5c5c5;
+  }
+  .ui-accordion-header.ui-state-default:focus,
+  .ui-accordion-header.ui-state-default:hover,
+  .ui-accordion-header-active {
+    background: #f8fbfb;
+    border-color: #c5c5c5;
+  }
+}
+
+// Accordion Background
+$accordionBGMain: $tertiary-color;
+$accordionBGSecondary: $primary-color;
+
+$accordionBGHeaderBG: tint($accordionBGSecondary, 80%);
+$accordionBGHeaderHover: darken($accordionBGHeaderBG, 3%);
+$accordionBGHeaderbdColor: darken($accordionBGHeaderBG, 15%);
+$accordionBGHeaderText: $accordionBGSecondary;
+
+$accordionBGBorder: $accordionBGHeaderBG;
+$accordionBGPadding: 10px 10px 10px 10px;
+
+$accordionBGBodyBG: #fff;
+$accordionBGBodyText: $accordionBGSecondary;
+
+$accordionBGDarkBgHeadingColor: #fff;
+$accordionBGDarkBgHeadingBG: shade($accordionBGMain, 30%);
+
+$accordionBGmediumBgHeadingColor: #fff;
+$accordionBGmediumBgHeadingBG: tint($accordionBGMain, 5%);
+
+.accordionBackground div[id^="accordion-"] {
+  margin-bottom: 0;
+  .ui-accordion-header.ui-state-default {
+    border: 0;
+    background: $accordionBGHeaderBG;
+    color: $accordionBGHeaderText;
+    display: flex;
+    // margin: 0;
+    padding: $accordionBGPadding;
+    &:hover,
+    &:focus {
+      background: $accordionBGHeaderHover;
+    }
+
+    .ui-accordion-content + .ui-accordion-header.ui-state-default {
+      border-top: 1px solid $accordionBGHeaderbdColor !important;
+      background: red !important;
+    }
+  }
+
+  .ui-accordion-header-icon {
+    background: none;
+    margin: 0;
+    text-indent: 0;
+    overflow: unset;
+    display: block;
+    font-family: "FontAwesome";
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    min-width: 20px;
+    height: 20px;
+    border: 2px solid $accordionBGHeaderText;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    &:after {
+      content: "\f067";
+      display: block;
+      background: none;
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+  .ui-accordion-header-active {
+    .ui-accordion-header-icon {
+      &:after {
+        content: "\f068";
+      }
+    }
+  }
+
+  //Content
+  .ui-accordion-content {
+    background: $accordionBGBodyBG;
+    color: $accordionBGBodyText;
+    border: 0;
+    border-left: 1px solid #c5c5c5;
+    border-right: 1px solid #c5c5c5;
+    &:last-child {
+      border-bottom: 1px solid #c5c5c5;
+    }
+  }
+}
+
+.darkBgHeading {
+  background-color: $accordionBGDarkBgHeadingBG !important;
+  padding: $accordionBGPadding;
+  @include raleway;
+  color: $accordionBGDarkBgHeadingColor;
+  margin: 0;
+  font-weight: bold;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #fff;
+    font-weight: bold;
+  }
+}
+
+.mediumBgHeading {
+  background-color: $accordionBGmediumBgHeadingBG !important;
+  color: $accordionBGmediumBgHeadingColor;
+  padding: $accordionBGPadding;
+  @include raleway;
+  margin: 0;
+  font-weight: bold;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #273858;
+  }
+}

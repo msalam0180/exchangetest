@@ -1,0 +1,5 @@
+description: 'Run a migration'
+options: {}
+arguments: {}
+messages:
+    success: 'Ran a migration'

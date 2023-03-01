@@ -1,0 +1,17 @@
+<div {{ attributes.addClass('block').addClass('search-block').addClass(plugin_id|split(':')|last) }}>
+  {% block content %}
+    <div class="global-search">
+      <form accept-charset="UTF-8" action="/search" id="filter" method="get"><input name="aId" type="hidden" value=""/>
+        <div class="form-item form-item-search-api-fulltext form-item-keys form-no-label">
+          <input class="form-search" id="edit-keys" maxlength="128" name="search_api_fulltext" size="15" title="Enter the terms you wish to search for." type="search" placeholder="Search"/>
+        </div>
+        <input class="form-select" desc="" id="edit-field-site-section" name="field_site_section" type="hidden" value="_none"/>
+        <input class="form-select" desc="" id="edit-sort-bef-combine" name="sort_bef_combine" type="hidden" value="search_api_relevance_DESC"/>
+        <div class="form-actions " id="edit-actions-the-exchange-search"><input class="button form-submit" id="edit-submit" type="submit" value="Search"/></div>
+        <noscript>
+          <input type="submit" id="submitFilter" value="Go">
+        </noscript>
+      </form>
+    </div>
+  {% endblock %}
+</div>

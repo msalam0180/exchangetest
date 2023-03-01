@@ -1,0 +1,30 @@
+uuid: c5e69904-0145-4e04-a507-0e51d9a6fe61
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.link
+    - taxonomy.vocabulary.tags
+_core:
+  default_config_hash: WTtcErS_Nc3S0yumAELhvFjTfR97qwViS1WP3NG7snY
+id: node.link.field_tags
+field_name: field_tags
+entity_type: node
+bundle: link
+label: Tags
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

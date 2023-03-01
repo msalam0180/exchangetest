@@ -1,0 +1,22 @@
+uuid: 7012b7a6-351d-42aa-ac9e-50a864326ef7
+langcode: en
+status: false
+dependencies:
+  module:
+    - help
+  theme:
+    - insider
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: insider_help
+theme: insider
+region: header
+weight: -10
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

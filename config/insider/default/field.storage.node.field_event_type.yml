@@ -1,0 +1,32 @@
+uuid: 65d569cd-f4e1-440b-acb9-42957b8eac90
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+_core:
+  default_config_hash: woDNxqd2UDYIg1HCUuvjli07L-vySGuZsh8vqsmldKw
+id: node.field_event_type
+field_name: field_event_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: general
+      label: General
+    -
+      value: deadlines
+      label: Deadlines
+    -
+      value: training
+      label: Training
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

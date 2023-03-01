@@ -1,0 +1,187 @@
+//
+// MIXINS
+// 
+// --------------------------------------------------
+
+$mobile-menu-breakpoint: 767px; //
+
+//TODO: fix this mixin!!!
+
+// Breakpoint Mixin
+// TODO: Write documentation on how to use this
+@mixin breakpoint($class, $orientation:'', $device:'') {
+  @if $class == 'x-small' {
+    @media (max-width : 300px) { @content; }
+  }
+
+  @if $class == 'small' {
+    @if $orientation == 'portrait' {
+      @media (max-width : 767px) and (orientation : portrait){ @content; }
+    }
+    @elseif $orientation == 'landscape' {
+      @media (max-width : 767px) and (orientation : landscape) { @content; }
+    }
+    @else {
+      @media (max-width: 767px) { @content; }
+    }
+  }
+ 
+  @else if $class == 'medium' { 
+    @if $device == 'ipad' {
+      @if $orientation == 'portrait' {
+        @media only screen and (min-device-width: 768px) and (orientation: portrait)
+        { @content; }
+      } @elseif $orientation == 'landscape' {
+        @media only screen and (min-device-width: 800px) and (orientation: landscape)
+        { @content; }
+      }
+    }
+    @else {
+      @if $orientation == 'portrait' {
+        @media only screen and (min-device-width: 768px) 
+        and (max-device-width: 1024px) 
+        and (orientation: portrait) { @content; }
+      }
+      @elseif $orientation == 'landscape' {
+        @media only screen and (min-device-width: 800px) 
+        and (max-device-width: 1024px) 
+        and (orientation: landscape) 
+        { @content; }
+      } @else {
+        @media only screen and (min-device-width: 768px) { @content; }
+      }
+    }
+  }
+  @else if $class == 'medium-and-up' {
+    @media (min-width: 768px) { @content; }
+  }
+  @else if $class == 'large' {
+    @media (min-width: 1024px) { @content; }
+  }
+ 
+  @else if $class == 'x-large' {
+    @media (min-width: 1440px) { @content; }
+  }
+  @else if $class == "mobile-menu-showing"{
+    @media (max-width: $mobile-menu-breakpoint) { @content; }
+  }
+  @else if $class == "mobile-menu-notshowing"{
+    @media (min-width: ($mobile-menu-breakpoint + 1px)) { @content; }
+  }
+}
+
+//TODO: When is this used?
+@mixin section {
+  clear: both;
+  display: block;
+  float:none;
+  margin-left:auto;
+  margin-right:auto;
+  padding:0;
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin field-table-layout($label-class: "field__label", $item-class: "field__item"){
+  
+  display: table;
+
+  .#{$label-class}{
+      display: table-cell;
+      width: 1px;
+      padding-right: 5px;
+      vertical-align: top;
+      float: none;
+  }
+
+  .#{$item-class}{
+      display: table-cell;
+      vertical-align: top;
+      float: none;
+  }
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  // IE8 filter
+  $opacity-ie: ($opacity * 100);
+  filter: alpha(opacity=$opacity-ie);
+}
+
+@mixin relatedContent($child_li: field__item, $bd_color: #e3e3e3){
+  border: 1px solid $bd_color;
+  padding: 20px;
+  margin-top: 20px;
+  display: inline-block;
+  min-width: 50%;
+
+  .#{$child_li}{
+      display: list-item;
+      margin-left: 26px;
+  }
+}
+
+//TODO: move to the proper place
+.field--name-field-related-op{
+  @include relatedContent();
+}
+
+//TODO: move to the proper place
+.related-secr{
+  @include relatedContent("views-row");
+}
+
+
+// Make Tables Responsive
+@mixin table-respond{
+  border: none !important;
+  > thead {
+    > tr.header {
+      border: none;
+      margin-top: 10px;
+      display: block;
+      padding-left: 10px;
+      margin-bottom: -1px;
+      > th,
+      > td {
+        display: inline-block;
+      }
+    }
+  }
+  > tbody {
+    > tr {
+      border-top: 1px solid $table-border-color;
+      padding: 10px;
+      display: block;
+      > th,
+      > td {
+        padding: 2px;
+        display: block;
+        border: none !important;
+      }
+    }
+    .td-content{
+      display: table-cell;
+    }
+  }
+  .show-for-small, .td-mobile-label{
+    display: table-cell;
+    font-weight: 600;
+    padding-right: 5px;
+    //TODO: remove 'show-for-small' here, once the rest of the css has been cleaned
+  }
+
+  .sorting_disabled{
+    display: none;
+  }
+
+  .group .td-mobile-label{
+    display: none;
+  }
+}

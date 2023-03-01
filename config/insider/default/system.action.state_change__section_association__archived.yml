@@ -1,0 +1,11 @@
+uuid: 9d7018cb-ae94-4abf-8060-2e43dbfe5de2
+langcode: en
+status: true
+dependencies:
+  module:
+    - workbench_moderation_actions
+id: state_change__section_association__archived
+label: 'Set Section association as Unpublished'
+type: section_association
+plugin: 'state_change:section_association__archived'
+configuration: {  }

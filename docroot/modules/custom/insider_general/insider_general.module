@@ -1,0 +1,345 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\node\Entity\Node;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element\PasswordConfirm;
+
+/**
+ * Implements entity_hook_presave().
+ */
+function insider_general_entity_presave(EntityInterface $entity) {
+  insider_general_update_combined_date_field($entity);
+}
+
+function insider_general_update_combined_date_field(EntityInterface $entity) {
+  /**
+   * Set the hidden combined_date field to use override_modified_date field or published_at field if the former is not
+   * set.
+   */
+  if ($entity->getEntityTypeId() == 'node') {
+
+    // Get fields for content type.
+    $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $entity->bundle());
+
+    if (isset($fields['field_combined_date'])) {
+
+      // Used to track if combined date field is set already
+      $setCombinedDate = FALSE;
+
+      if (isset($fields['field_override_modified_date'])) {
+        $modifiedDate = $entity->get('field_override_modified_date')->getValue();
+
+        // If override_modified_date is set, we set combined_date to use it.
+        if (isset($modifiedDate[0]['value']) && $modifiedDate[0]['value']) {
+          $entity->set('field_combined_date', $modifiedDate[0]['value']);
+          $setCombinedDate = TRUE;
+        }
+      }
+
+      if (!$setCombinedDate) {
+        //set specific rules for using published at date for certain content, see DI-5996
+        $publishedAtBundles = array("announcement", "featured", "video");
+
+        if (in_array($entity->bundle(), $publishedAtBundles)) {
+            if (isset($fields['published_at'])) {
+            $publishedDate = $entity->get('published_at')->getValue();
+            if (isset($publishedDate[0]['value']) && $publishedDate[0]['value']) {
+              $date = new DateTime('@' . $publishedDate[0]['value']);
+              $entity->set('field_combined_date', $date->format("Y-m-d\TH:i:s"));
+            }
+          }
+        } else if($entity->status->getString() == 1) {
+          $date = new DateTime('@' . $entity->getChangedTime());
+          $entity->set('field_combined_date', $date->format("Y-m-d\TH:i:s"));
+        }
+
+      }
+    }
+  }
+}
+
+/**
+ * Update combined date field for all nodes.
+ */
+function insider_general_update_nodes_combined_field() {
+
+  $nids = \Drupal::service('entity_type.manager')->getStorage('node')->getQuery()->execute();
+
+  foreach ((array)$nids as $nid) {
+    $node = Node::load($nid);
+    $changed = $node->getChangedTime();
+    insider_general_update_combined_date_field($node);
+    $node->setChangedTime($changed + 1);
+    $node->setSyncing(TRUE);
+    $node->save();
+  }
+}
+
+
+/**
+ * Update service now link domains
+ */
+function insider_general_update_service_now_links() {
+  $database = \Drupal::database();
+  $old_domain = 'seceamsprod.service-now.com';
+  $new_domain = 'seceamsprod.servicenowservices.com';
+
+  // Tables targeted for update
+  $affected_tables = [
+    'key_value' => 'value',
+    'menu_link_content_data' => 'link__uri',
+    'menu_link_content_field_revision' => 'link__uri',
+    'menu_tree' => 'url',
+    'node_revision__body' => 'body_value',
+    'node_revision__field_center_2_box' => 'field_center_2_box_value',
+    'node_revision__field_left_1_box' => 'field_left_1_box_value',
+    'node_revision__field_left_2_box' => 'field_left_2_box_value',
+    'node_revision__field_left_3_box' => 'field_left_3_box_value',
+    'node_revision__field_left_4_box' => 'field_left_4_box_value',
+    'node_revision__field_left_5_box' => 'field_left_5_box_value',
+    'node_revision__field_right_2_box' => 'field_right_2_box_value',
+    'node_revision__field_right_3_box' => 'field_right_3_box_value',
+    'node_revision__field_right_4_box' => 'field_right_4_box_value',
+    'node_revision__field_teaser' => 'field_teaser_value',
+    'node_revision__field_url' => 'field_url_uri',
+    'node__body' => 'body_value',
+    'node__field_center_2_box' => 'field_center_2_box_value',
+    'node__field_left_1_box' => 'field_left_1_box_value',
+    'node__field_left_2_box' => 'field_left_2_box_value',
+    'node__field_left_3_box' => 'field_left_3_box_value',
+    'node__field_left_4_box' => 'field_left_4_box_value',
+    'node__field_left_5_box' => 'field_left_5_box_value',
+    'node__field_right_2_box' => 'field_right_2_box_value',
+    'node__field_right_3_box' => 'field_right_3_box_value',
+    'node__field_right_4_box' => 'field_right_4_box_value',
+    'node__field_teaser' => 'field_teaser_value',
+    'node__field_url' => 'field_url_uri',
+    'old_821695menu_link_content_data' => 'link__uri'
+  ];
+
+  // Check all affected tables
+  foreach ($affected_tables as $table => $field) {
+
+    // log record id for entities and revisions
+    $select_fields = [$field, 'entity_id'];
+    if (preg_match('/revision/i', $table)) {
+      $select_fields[] = 'revision_id';
+    }
+
+    // special cases where entity_id or revision_id do not exist
+    if ($table == 'key_value' || $table == 'menu_tree') {
+      unset($select_fields[1]);
+    } elseif (preg_match('/menu_link_content/i', $table)) {
+      $select_fields[1] = 'id';
+    }
+
+    // keep record of update records
+    $select_sql = $database->select($table)
+      ->fields($table, $select_fields)
+      ->condition($field, '%' .  $old_domain . '%', 'LIKE');
+
+    // record only id fields
+    if (count($select_fields) > 1) {
+      $result[$table]['node_id'] = $select_sql->execute()->fetchCol(1);
+      array_unshift($result[$table]['node_id'], 'node_id');
+
+      if (in_array('revision_id', $select_fields)) {
+        $result[$table]['revision_id'] = $select_sql->execute()->fetchCol(2);
+        array_unshift($result[$table]['revision_id'], 'revision_id');
+      }
+    }
+
+    // update tables
+    $update_sql = $database->update($table)
+      ->expression($field, 'REPLACE(' . $field . ', :old, :new)', [':old' => $old_domain, ':new' => $new_domain])
+      ->condition($field, '%' .  $old_domain . '%', 'LIKE')
+      ->execute();
+  }
+
+  // Create log file based on Acquia or local environment
+  if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
+    $log_file = fopen('/mnt/gfs/home/insidergov/' . $_ENV['AH_SITE_ENVIRONMENT'] . '/logs/service_now_links.log', 'w');
+  } else {
+    $log_file = fopen('service_now_links.log', 'w');
+  }
+
+  // Write data to log
+  foreach ($result as $table => $data) {
+    $result_cnt = count($data['node_id']) - 1;
+    fputs($log_file, $table . '(' . $result_cnt . ')' . PHP_EOL);
+    foreach ($data as $record => $ids) {
+      fputcsv($log_file, $ids);
+    }
+    fputs($log_file, PHP_EOL);
+  }
+  fclose($log_file);
+}
+
+/**
+ *  * Modify Flag/Like title within entity edit forms
+ * hook_form_alter
+ *
+ * @param [type] $form
+ * @param Drupal\Core\Form\FormStateInterface $form_state
+ * @param [type] $form_id
+ * @return void
+ */
+ function insider_general_form_node_form_alter(&$form, Drupal\Core\Form\FormStateInterface $form_state, $form_id){
+
+  // Update entity form info enable_like_content
+  if(isset( $form['field_enable_likes'])){
+    $form['field_enable_likes']['#type'] = 'details';
+    $form['field_enable_likes']['#group'] = 'advanced';
+    $form['field_enable_likes']['#title'] = t('Like Settings');
+    $form['field_enable_likes']['#open'] = true;
+    $form['field_enable_likes']['#weight'] = $form['field_comments']['#weight'] + 1; //Place form below comments
+  }
+  // Add field to entity details pane
+  if(isset($form['field_comment_moderator'])){
+    $form['field_comment_moderator']['#type'] = 'details';
+    $form['field_comment_moderator']['#group'] = 'advanced';
+    $form['field_comment_moderator']['#title'] = t('Comment Moderator');
+  }
+
+}
+
+/**
+ * Removes like button for disabled content/nodes
+ * @param [type] $variables
+ * @return void
+ * hook
+ */
+function insider_general_preprocess_node(&$variables){
+  // Check if field is available to content type
+  if($variables['node']->hasField('field_enable_likes')){
+      $enable_likes = $variables['node']->get('field_enable_likes')->value;
+
+    // Determine if disabled and unset
+    if(!$enable_likes){
+      unset($variables['content']['flag_like_content']);
+    }
+  }
+
+}
+
+/**
+ * Adds like button to landing page if enabled
+ *
+ * @param [type] $variables
+ * @return void
+ */
+function insider_general_preprocess_panelizer_view_mode(&$variables)
+{
+  // Check if field is available to content type
+  if ($variables['entity']->hasField('field_enable_likes')) {
+    $enable_likes = $variables['entity']->get('field_enable_likes')->value;
+
+    // Generate render array for like button
+    $like_button = [
+      '#lazy_builder' => [
+        'flag.link_builder:build',
+        [
+          $variables['entity']->getEntityTypeId(),
+          $variables['entity']->id(),
+          'like_content',
+        ],
+      ],
+      '#create_placeholder' => TRUE,
+      '#weight' => 0
+    ];
+
+    // If enabled display like button
+    if ($variables['entity']->bundle() == 'landing_page' && $enable_likes) {
+      $variables['like_button'] = $like_button;
+    }
+  }
+}
+
+/**
+ * Implements hook_file_download().
+ *
+ * Copy of function from docroot/core/modules/file/file.module.
+ * Altered this function to make sure to use the most recent file by reverse
+ * sorting the files of array, which makes the array of files to be looped
+ * through from the highest file ID to the lowest.
+ */
+function insider_general_file_download($uri) {
+  // Get the file record based on the URI. If not in the database just return.
+  /** @var \Drupal\file\FileInterface[] $files */
+  $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $uri]);
+  if (count($files)) {
+    // The array needs to be reversed because we need to make sure the last item
+    // is picked, since the DB may contain the same uri for different fid's and
+    // taking the first item will result in a file ID mismatch to the original
+    // entity that is calling this function.
+    krsort($files);
+    foreach ($files as $item) {
+      // Since some database servers sometimes use a case-insensitive comparison
+      // by default, double check that the filename is an exact match.
+      if ($item->getFileUri() === $uri) {
+        $file = $item;
+        break;
+      }
+    }
+  }
+  if (!isset($file)) {
+    return;
+  }
+
+  // Find out if a temporary file is still used in the system.
+  if ($file->isTemporary()) {
+    $usage = \Drupal::service('file.usage')->listUsage($file);
+    if (empty($usage) && $file->getOwnerId() != \Drupal::currentUser()->id()) {
+      // Deny access to temporary files without usage that are not owned by the
+      // same user. This prevents the security issue that a private file that
+      // was protected by field permissions becomes available after its usage
+      // was removed and before it is actually deleted from the file system.
+      // Modules that depend on this behavior should make the file permanent
+      // instead.
+      return -1;
+    }
+  }
+
+  // Find out which (if any) fields of this type contain the file.
+  $references = file_get_file_references($file, NULL, EntityStorageInterface::FIELD_LOAD_CURRENT, NULL);
+
+  // Stop processing if there are no references in order to avoid returning
+  // headers for files controlled by other modules. Make an exception for
+  // temporary files where the host entity has not yet been saved (for example,
+  // an image preview on a node/add form) in which case, allow download by the
+  // file's owner.
+  if (empty($references) && ($file->isPermanent() || $file->getOwnerId() != \Drupal::currentUser()->id())) {
+    return;
+  }
+
+  if (!$file->access('download')) {
+    return -1;
+  }
+
+  // Access is granted.
+  $headers = file_get_content_headers($file);
+  return $headers;
+}
+
+/**
+ * Implements HOOK_form_alter
+ */
+function insider_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // DI-6240: Disable autocomplete on Password confirm fields
+  if ($form_id == 'user_form') {
+    $form['account']['pass']['#process'][] = '_insider_process_password_confirm';
+  }
+}
+
+/**
+ * Alters password confirm fields to not use autocomplete
+ */
+function _insider_process_password_confirm($element, FormStateInterface $form_state, &$complete_form){
+  $element = PasswordConfirm::processPasswordConfirm($element, $form_state, $complete_form);
+  $element['pass1']['#attributes']['autocomplete'] = 'off';
+  $element['pass2']['#attributes']['autocomplete'] = 'off';
+  return $element;
+}

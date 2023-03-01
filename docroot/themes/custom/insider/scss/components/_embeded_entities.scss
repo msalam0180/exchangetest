@@ -1,0 +1,103 @@
+//
+// Embedded Entities
+// These appear on the homepage when content type "Site Alert" node
+// is published an promoted to the homepage
+// --------------------------------------------------
+
+// Reset Floats because they break video layouts
+.embedded-entity{
+    &.align-right {
+        float: none;
+    }
+
+    &.align-left {
+        float: none;
+    }
+}
+
+.embedded-entity{
+    
+    //Embedded image
+    .embedded-image{
+        border: 1px solid #e3e3e3;
+        margin: 5px 0;
+        display: inline-block;
+    }
+
+    &.align-right .embedded-image {
+        margin-left: 20px;
+        float: right;
+    }
+
+    &.align-left .embedded-image {
+        margin-right: 20px;
+        float: left;
+    }
+
+    &.align-right .node--view-mode-full-width-embed .embedded-image,
+    &.align-left .node--view-mode-full-width-embed .embedded-image{
+        margin-left: 0;
+        margin-right: 0;
+        float: none;
+    }
+   
+    //Embedded Video
+    .embedded-video {
+        border-bottom: 1px solid $border-color;
+        padding-bottom: 10px;
+        border-top: 1px solid $border-color;
+        padding-top: 15px;
+        margin: 30px 0;
+
+        .video-embed-field-responsive-video{
+            margin: 0;
+        }
+
+        .field--name-field-media-id .video-embed-field-responsive-video:after {
+          content: none;
+          display: none;
+          padding-bottom: 0;
+        }
+
+        .video-embed-details{
+            position: relative;
+        }
+        h2{
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .transcript-button{
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: white;
+            padding: 1px 6px;
+        }
+    }
+		.node--view-mode-small-embed {
+		  .video-embed-field-responsive-video{
+            width: 320px;
+			height: 180px;
+		  }
+		}
+
+		.node--view-mode-medium-embed {
+		  .video-embed-field-responsive-video{
+            width: 640px;
+			height: 360px;
+		  }
+		}
+		
+		.node--view-mode-large-embed {
+		  .video-embed-field-responsive-video{
+            width: 800px;
+			height: 450px;
+		  }
+		}    
+}
+
+.embedded-entity:first-child .embedded-video {
+    //if video is the first thing on the page, remove the top border and padding
+    border-top: none;
+    padding-top: 0;
+}

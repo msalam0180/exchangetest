@@ -1,0 +1,10 @@
+uuid: df125a4c-650d-40a4-8c3d-d415342c0cf9
+langcode: en
+status: true
+dependencies: {  }
+machine: train
+description: null
+name: Train
+url: 'https://training.intranet.sec.gov'
+fg_color: '#bebebe'
+bg_color: '#333'

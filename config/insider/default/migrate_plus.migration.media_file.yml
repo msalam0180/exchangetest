@@ -1,0 +1,69 @@
+uuid: 33048959-a1f9-4195-bcf0-6d67c9510bfe
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: IA7quDi3-Qo1Kl-mGBZyLPreBaieJrKzz9LsMzLkcDA
+id: media_file
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - media_file
+migration_group: insider
+label: 'JSON import of Insider Static Files'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  item_selector: 0
+  track_changes: true
+  urls:
+    - 'http://insidergov.dev.dd:8083/files/1.json'
+  constants:
+    source_prefix: node/
+    redirect_prefix: 'internal:/media/'
+  fields:
+    -
+      name: id
+      label: Identifier
+      selector: id
+    -
+      name: content_route
+      label: content_route
+      selector: content_route
+    -
+      name: map_id
+      label: map_id
+      selector: map_id
+    -
+      name: nid
+      label: nid
+      selector: nid
+    -
+      name: mid
+      label: mid
+      selector: mid
+  ids:
+    id:
+      type: string
+process:
+  uid:
+    plugin: default_value
+    default_value: 1
+  redirect_source:
+    plugin: concat
+    source:
+      - constants/source_prefix
+      - nid
+  redirect_redirect:
+    plugin: concat
+    source:
+      - constants/redirect_prefix
+      - mid
+  status_code:
+    plugin: default_value
+    default_value: 301
+destination:
+  plugin: 'entity:redirect'
+migration_dependencies: null

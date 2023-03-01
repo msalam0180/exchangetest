@@ -1,0 +1,41 @@
+name: Insider
+description: Insider Drupal 8/9 theme
+type: theme
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: Core
+base theme: false
+libraries:
+  - insider/global-css
+  - insider/global-js-header
+  - insider/global-js
+  - insider/optional-js
+stylesheets-override:
+  - css/system.theme.css
+libraries-override:
+  addtocalendar/base:
+    js:
+      '//addtocalendar.com/atc/1.5/atc.min.js': 'js/third-party/ics.js'
+regions:
+  header: 'Header'
+  highlighted: 'Highlighted'
+  global_navigation: 'Global Navigation'
+  sidebar_first: 'Left Navigation'
+  breadcrumb: 'Breadcrumb Navigation'
+  page_title: 'Page Title'
+  content: 'Main Content'
+  sidebar_second: 'Right Sidebar'
+  sidebar_grid: 'Grid Sidebar'
+  footer: 'Global Footer'
+  off_canvas: 'Off Canvas'
+  page_bottom: 'Page Bottom'
+features:
+  logo: true
+  name: true
+  slogan: true
+  node_user_picture: true
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  main_menu: true
+  secondary_menu: true

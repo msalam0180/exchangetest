@@ -1,0 +1,33 @@
+uuid: c1a3ba66-2413-4495-851b-6c689163427b
+langcode: en
+status: true
+dependencies:
+  module:
+    - masquerade
+    - user
+  theme:
+    - insider
+id: masquerade
+theme: insider
+region: off_canvas
+weight: -12
+provider: null
+plugin: masquerade
+settings:
+  id: masquerade
+  label: 'Preview as User'
+  label_display: visible
+  provider: masquerade
+  show_unmasquerade_link: true
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      enduser: enduser
+      administrator: administrator
+      content_creator: content_creator
+      content_approver: content_approver
+      sitebuilder: sitebuilder

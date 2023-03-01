@@ -1,0 +1,50 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: wbDhtVSWSonS5iicSeWCMLV4W1NUn2Yq_J_U2jJ7SXs
+label: 'Default Linkit'
+id: default_linkit
+description: 'Default profile for linkit '
+matchers:
+  1bad9f67-ef41-42ae-ad32-0eb0d13da758:
+    id: 'entity:node'
+    uuid: 1bad9f67-ef41-42ae-ad32-0eb0d13da758
+    settings:
+      metadata: '[node:url:relative]'
+      bundles:
+        announcement: announcement
+        event: event
+        form: form
+        gallery: gallery
+        landing_page: landing_page
+        library_item: library_item
+        link: link
+        operating_procedure: operating_procedure
+        secr: secr
+        sec_article: sec_article
+        video: video
+      group_by_bundle: true
+      substitution_type: canonical
+      limit: 100
+      include_unpublished: false
+      result_description: '[node:url:relative]'
+    weight: 0
+  1e0433f8-4569-400a-9668-fbac255d2dfe:
+    id: 'entity:media'
+    uuid: 1e0433f8-4569-400a-9668-fbac255d2dfe
+    settings:
+      metadata: ''
+      bundles: {  }
+      group_by_bundle: true
+      substitution_type: media
+      limit: 100
+    weight: 0
+  9753653c-cc7f-49df-85a3-6ab63339bcfa:
+    id: email
+    uuid: 9753653c-cc7f-49df-85a3-6ab63339bcfa
+    settings: {  }
+    weight: 0

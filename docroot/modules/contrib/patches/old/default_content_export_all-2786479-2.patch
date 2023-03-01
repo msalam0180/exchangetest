@@ -1,0 +1,55 @@
+diff --git a/drush/default_content.drush.inc b/drush/default_content.drush.inc
+index c062ca2..0bce286 100644
+--- a/drush/default_content.drush.inc
++++ b/drush/default_content.drush.inc
+@@ -41,6 +41,19 @@ function default_content_drush_command() {
+     'aliases' => ['dcem'],
+     'required-arguments' => 1,
+   ];
++  $items['default-content-export-all'] = [
++      'description' => dt('Export content entity with properties defined criteria.'),
++      'arguments' => [
++          'entity_type' => dt('The entity type to export all its items.'),
++          'property_name' => dt('The property name for to load entities based upon.'),
++          'property_value' => dt('The property value for the condition.'),
++        ],
++      'options' => [
++          'folder' => dt('Folder to export to, entities are grouped by entity type into directories.'),
++        ],
++      'aliases' => ['dceall'],
++      'required-arguments' => 1,
++  ];
+ 
+   return $items;
+ }
+@@ -105,3 +118,30 @@ function drush_default_content_export_module($module_name) {
+   $module_folder = \Drupal::moduleHandler()->getModule($module_name)->getPath() . '/content';
+   $manager->writeDefaultContent($serialized_by_type, $module_folder);
+ }
++
++/**
++ * Export all content from defined entity with properties defined criteria.
++ * @param type $entity_type
++ * @param type $property_name
++ * @param type $property_value
++ */
++function drush_default_content_export_all($entity_type, $property_name = FALSE, $property_value = FALSE) {
++  $properties = $property_name ? [$property_name => $property_value] : [];
++
++  try {
++    $entities = \Drupal::entityManager()->getStorage($entity_type)->loadByProperties($properties);
++  } catch (Drupal\Core\Entity\Query\QueryException $e) {
++    echo $e->getMessage() . ' , Not valid property ';
++  }
++
++  foreach ($entities as $entity) {
++    if($id = $entity->id()){
++      //prevent exporting superadmin
++      if($entity_type == 'user' && $id == 1 || !$id){
++        continue;
++      }
++
++      drush_default_content_export_references($entity_type, $id);
++    }
++  }
++}

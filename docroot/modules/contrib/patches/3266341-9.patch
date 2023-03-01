@@ -1,0 +1,12 @@
+diff --git a/core/modules/views/src/Plugin/views/pager/SqlBase.php b/core/modules/views/src/Plugin/views/pager/SqlBase.php
+--- a/core/modules/views/src/Plugin/views/pager/SqlBase.php
++++ b/core/modules/views/src/Plugin/views/pager/SqlBase.php	(date 1647272798281)
+@@ -260,7 +260,7 @@
+     if ($this->itemsPerPageExposed()) {
+       $query = $this->view->getRequest()->query;
+       $items_per_page = $query->get('items_per_page');
+-      if ($items_per_page > 0) {
++      if ((int) $items_per_page > 0) {
+         $this->options['items_per_page'] = $items_per_page;
+       }
+       elseif ($items_per_page == 'All' && $this->options['expose']['items_per_page_options_all']) {

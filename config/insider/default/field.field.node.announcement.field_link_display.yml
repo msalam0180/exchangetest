@@ -1,0 +1,25 @@
+uuid: f5383791-b2f4-43d6-b92a-a90215ae93b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_link_display
+    - node.type.announcement
+  module:
+    - options
+_core:
+  default_config_hash: lCabqPlk2C8d0WfqRmoIRU-UCtRPkdoWBDdJnkO84Uw
+id: node.announcement.field_link_display
+field_name: field_link_display
+entity_type: node
+bundle: announcement
+label: 'Link to:'
+description: 'Link to Self = announcement creates a link within Drupal; Link to URL = announcement is hosted on external platform (SharePoint, askHR, etc.)'
+required: true
+translatable: false
+default_value:
+  -
+    value: self
+default_value_callback: ''
+settings: {  }
+field_type: list_string

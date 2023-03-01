@@ -1,0 +1,27 @@
+uuid: a8d55ffe-68af-4f9d-a513-eb35ff26455c
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - insider
+_core:
+  default_config_hash: sBG5W_gn08A7514IbnhqvQ7nc0jL___1SGbYqnr_Rio
+id: secgov_breadcrumbs
+theme: insider
+region: breadcrumb
+weight: -10
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/about/upcoming-events.htm\r\n/nb/news/upcoming-events/*\r\n/news/upcoming-events\r\n/news/upcoming-events/*\r\n/news/sec-videos\r\n/news/sec-videos/*\r\n/news/spotlights\r\n/news/spotlights/*\r\n/spotlight-topic/*"

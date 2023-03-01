@@ -1,0 +1,36 @@
+//
+// Panels Layouts General
+// For all pages that that use panels
+// --------------------------------------------------
+
+$panel-gutter: 30px / 2;
+
+////////////////////////////
+//For rows with 2 columns
+/////////////////////////////
+
+// Have to add padding to the block-region-* div due to IE overflow bug w/ flex
+.layout__region--second-above > div[class^=block-region],
+.layout__region--second-below > div[class^=block-region] {
+	padding-left: $panel-gutter;
+	@include breakpoint('mobile-menu-showing'){
+		padding-left: 0px;
+	}
+}
+
+.layout__region--first-above > div[class^=block-region],
+.layout__region--first-below > div[class^=block-region] {
+	padding-right: $panel-gutter;
+	@include breakpoint('mobile-menu-showing'){
+		padding-right: 0px;
+	}
+}
+
+// When View Columns are in a 1/2 column
+.views-view-grid{
+	@media (max-width: 340px) {
+	  .views-col {
+	    width: 100% !important;
+	  }
+	}
+}

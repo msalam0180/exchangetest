@@ -1,0 +1,10 @@
+uuid: 284ea766-0a34-4450-b894-e59e625cf0ee
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: n1hBjBB_NJaLxwDRAv7qqsBEq7aDG0fZmkepXBu0dkQ
+name: Microsites
+vid: site_section
+description: 'Used to generate static microsites'
+weight: 0

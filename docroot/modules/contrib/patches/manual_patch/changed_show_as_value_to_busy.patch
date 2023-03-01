@@ -1,0 +1,13 @@
+diff --git a/docroot/themes/custom/insider/js/third-party/ics.js b/docroot/themes/custom/insider/js/third-party/ics.js
+index 0b4cfbbdc..330bf62c7 100644
+--- a/docroot/themes/custom/insider/js/third-party/ics.js
++++ b/docroot/themes/custom/insider/js/third-party/ics.js
+@@ -167,7 +167,7 @@ var ics = function(uidDomain, prodId) {
+         'LOCATION:' + location,
+         'SUMMARY;LANGUAGE=en-us:' + subject,
+         'X-ALT-DESC;FMTTYPE=text/html:<base href=' + baseUrl + '/>' + desc_mod,
+-        'TRANSP:TRANSPARENT',
++        'TRANSP:OPAQUE',
+         'END:VEVENT'
+       ];
+ 

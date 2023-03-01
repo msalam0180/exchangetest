@@ -1,0 +1,20 @@
+sec_view_filter_plugin:
+  version: VERSION
+  css:
+    theme:
+      css/plugins/jquery-ui.css: {}
+      css/sec_view_filter_plugin.css: {}
+  js:
+    js/sec_view_filter_plugin.js: {}
+
+sec_view_filter_plugin-datatables:
+  css:
+    theme:
+      css/sec_datatable.css: {}
+  js:
+    js/plugins/jquery.dataTables.min.js: {}
+    js/plugins/natural.js: {}
+    js/sec_datatable.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once

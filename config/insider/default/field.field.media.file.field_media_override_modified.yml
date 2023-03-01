@@ -1,0 +1,23 @@
+uuid: afcf71df-79c3-4a4b-8c56-b126428b6e01
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_override_modified
+    - media.type.file
+  module:
+    - datetime
+_core:
+  default_config_hash: bSYp16tx2UVrmSppfFTp2ifmiHEYbduaBeQIJ2mNYh8
+id: media.file.field_media_override_modified
+field_name: field_media_override_modified
+entity_type: media
+bundle: file
+label: 'Override Modified Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

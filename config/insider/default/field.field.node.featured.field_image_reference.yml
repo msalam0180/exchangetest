@@ -1,0 +1,30 @@
+uuid: 550885e8-d151-495a-8630-cc51e5da7e6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image_reference
+    - node.type.featured
+    - node.type.image
+_core:
+  default_config_hash: THGk_qltbhMtUTwfC-O0o2N2tTZPrVG7t_hEzWlTD-w
+id: node.featured.field_image_reference
+field_name: field_image_reference
+entity_type: node
+bundle: featured
+label: 'Image Reference'
+description: "Hero Images need to be AT LEAST 940x330\r\nFeatured Images need to be AT LEAST 300x200"
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

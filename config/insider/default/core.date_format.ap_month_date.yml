@@ -1,0 +1,10 @@
+uuid: 2b340182-8a17-4c58-be0d-ecd097f4681d
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: XJ9sa1exf3Yn6IN28PZjUr-2FBjVqbbD8AntG3X8g8A
+id: ap_month_date
+label: 'AP Date Month Year'
+locked: false
+pattern: '%%'

@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the insider_video module.
+ */
+
+/**
+ * Implements hook_update().
+ * Migrating limelight media ID to wowza media URLs.
+ */
+function sec_video_update_9201() {
+  $database = \Drupal::database();
+
+  $table = 'node__field_media_id';
+  $field = 'field_media_id_value';
+
+  // Following code works
+  $file = fopen('public://limelight-wowza.csv', 'r');
+  while (($line = fgetcsv($file)) !== FALSE) {
+    $limelight = $line[0];
+    $wowza = $line[1];
+    $database->update($table)
+    ->fields([$field => $wowza])
+    ->condition($field, $limelight)
+    ->execute();
+  }
+  fclose($file);
+}

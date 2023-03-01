@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Extend the Core workflow and provides email notification.
+ */
+
+use Drupal\Component\Utility\Html;
+
+/**
+ * Implements hook_mail().
+ */
+
+function sec_workflow_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+
+  switch ($key) {
+    case 'sec_content_workflow':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = $params['subject'];
+      $message['body'][] = Html::escape($params['message']);
+      break;
+    default:
+      break;
+  }
+}
+
+
+/**
+ * Implements hook_mail_alter().
+ */
+
+function sec_workflow_mail_alter(&$message) {
+  switch ($message['key']) {
+    case 'sec_user_activities_log':
+    case 'sec_content_workflow':
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+      break;
+  }
+}

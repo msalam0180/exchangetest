@@ -1,0 +1,88 @@
+uuid: 8327f0da-b693-4444-9751-c42722a3f3df
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_session.field_end_date
+    - field.field.paragraph.paragraph_session.field_location
+    - field.field.paragraph.paragraph_session.field_start_date
+    - paragraphs.paragraphs_type.paragraph_session
+  module:
+    - single_datetime
+    - text
+    - workbench_moderation
+_core:
+  default_config_hash: JfqMHdoW64_PPw1C1FvgunilZYsJDoV_Sgl3Sbb9NYo
+id: paragraph.paragraph_session.default
+targetEntityType: paragraph
+bundle: paragraph_session
+mode: default
+content:
+  field_end_date:
+    type: single_date_time_widget
+    weight: 1
+    region: content
+    settings:
+      hour_format: 12h
+      allow_times: '15'
+      allowed_hours: ''
+      exclude_date: ''
+      datetimepicker_theme: default
+      start_date: ''
+      min_date: ''
+      max_date: ''
+      year_start: ''
+      year_end: ''
+      allow_blank: '1'
+      allow_seconds: 0
+      disable_days:
+        1: 0
+        2: 0
+        3: 0
+        4: 0
+        5: 0
+        6: 0
+        7: 0
+      inline: 0
+      mask: 0
+    third_party_settings: {  }
+  field_location:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_start_date:
+    type: single_date_time_widget
+    weight: 0
+    region: content
+    settings:
+      hour_format: 12h
+      allow_times: '15'
+      allowed_hours: ''
+      exclude_date: ''
+      datetimepicker_theme: default
+      start_date: ''
+      min_date: ''
+      max_date: ''
+      year_start: ''
+      year_end: ''
+      allow_blank: '1'
+      allow_seconds: 0
+      disable_days:
+        1: 0
+        2: 0
+        3: 0
+        4: 0
+        5: 0
+        6: 0
+        7: 0
+      inline: 0
+      mask: 0
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

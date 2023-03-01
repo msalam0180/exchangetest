@@ -1,0 +1,25 @@
+uuid: 161aeced-0b20-4eaa-a00e-6eafef0ef9d5
+langcode: en
+status: false
+dependencies: {  }
+id: local
+label: Local
+description: 'Config for local environment'
+weight: 1
+folder: ../config/insider/local
+module:
+  dblog: 0
+  devel: 0
+  devel_generate: 0
+theme: {  }
+blacklist:
+  - dblog.settings
+  - devel.settings
+  - devel.toolbar.settings
+  - system.menu.devel
+  - views.view.watchdog
+graylist:
+  - environment_indicator.indicator
+  - search_api.server.acquia_search_server
+graylist_dependents: true
+graylist_skip_equal: true

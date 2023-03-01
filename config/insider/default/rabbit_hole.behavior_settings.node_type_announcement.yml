@@ -1,0 +1,16 @@
+uuid: 72b452a3-5065-441c-a04c-39d25ebdf1cb
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.announcement
+_core:
+  default_config_hash: xHQnRsjN3yBO2G5KkarzGa6R-jxAKOYMOn0RDluUaP8
+id: node_type_announcement
+entity_type_id: node_type
+entity_id: announcement
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

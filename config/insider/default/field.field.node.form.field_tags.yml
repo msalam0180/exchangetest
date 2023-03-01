@@ -1,0 +1,30 @@
+uuid: 00770217-3e3d-426f-a4cc-a2009d57b806
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.form
+    - taxonomy.vocabulary.tags
+_core:
+  default_config_hash: gFT2QxSEfbWY7SYsd2A4WgkRtUSBmuz2ILjoiz38o0A
+id: node.form.field_tags
+field_name: field_tags
+entity_type: node
+bundle: form
+label: Tags
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

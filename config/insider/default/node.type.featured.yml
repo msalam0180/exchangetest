@@ -1,0 +1,37 @@
+uuid: 5b1d01d3-adde-4a6c-ac2a-e5d9c419767d
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_save_redirect
+    - workbench_access
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  workbench_access:
+    workbench_access_status: false
+  node_save_redirect:
+    save_type: '0'
+    save_location: ''
+    save_destination: 0
+    edit_type: '2'
+    edit_location: ''
+    edit_destination: 1
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+    default_moderation_state: draft
+name: Featured
+type: featured
+description: 'Highlights news, feature stories, big programs/events and other important or interesting information of weight on the home page '
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

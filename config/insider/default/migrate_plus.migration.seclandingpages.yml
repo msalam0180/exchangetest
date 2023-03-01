@@ -1,0 +1,307 @@
+uuid: 11088c6b-de5e-4a4d-b59a-23be51e5365d
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: EElcowqt_5oVYJHH_eU9MYlWXThPkwmXdlx9fKGZcp8
+id: seclandingpages
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - news
+  - seclandingpages
+migration_group: sec
+label: 'JSON import of SEC Landing Pages content'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  item_selector: 0
+  urls: 'http://secgovdcmdev1.prod.acquia-sites.com/sites/default/files/migration/converted/seclandingpages.json'
+  fields:
+    -
+      name: id
+      label: Identifier
+      selector: id
+    -
+      name: createddate
+      label: 'Created Date'
+      selector: createddate
+    -
+      name: updateddate
+      label: 'Updated Date'
+      selector: updateddate
+    -
+      name: name
+      label: Title
+      selector: name
+    -
+      name: SECAct
+      label: Act
+      selector: SECAct
+    -
+      name: SECAudience
+      label: Audience
+      selector: SECAudience
+    -
+      name: SECDescriptionAbstract
+      label: 'Description / Abstract'
+      selector: SECDescriptionAbstract
+    -
+      name: SECDivisionOffice
+      label: Division/Office
+      selector: SECDivisionOffice
+    -
+      name: SECRegulation
+      label: Regulation
+      selector: SECRegulation
+    -
+      name: SECLeft1Box
+      label: SECLeft1Box
+      selector: SECLeft1Box
+    -
+      name: SECLeft2DynamicSet
+      label: SECLeft2DynamicSet
+      selector: SECLeft2DynamicSet
+    -
+      name: SECLeft3Box
+      label: SECLeft3Box
+      selector: SECLeft3Box
+    -
+      name: SECLeft4Box
+      label: SECLeft4Box
+      selector: SECLeft4Box
+    -
+      name: SECLeft5Box
+      label: SECLeft5Box
+      selector: SECLeft5Box
+    -
+      name: SECRight2Box
+      label: SECRight2Box
+      selector: SECRight2Box
+    -
+      name: SECRight3DynamicSet
+      label: SECRight3DynamicSet
+      selector: SECRight3DynamicSet
+    -
+      name: SECRight4Box
+      label: SECRight4Box
+      selector: SECRight4Box
+    -
+      name: SECCenter2Box
+      label: SECCenter2Box
+      selector: SECCenter2Box
+    -
+      name: SECTags
+      label: Tags
+      selector: SECTags
+    -
+      name: PageTitle
+      label: 'Page Title'
+      selector: PageTitle
+  ids:
+    id:
+      type: string
+process:
+  type:
+    plugin: default_value
+    default_value: landing_page
+  uid:
+    plugin: default_value
+    default_value: 1
+  title: name
+  created:
+    -
+      plugin: machine_name
+      source: createddate
+    -
+      plugin: substr
+      start: 0
+      length: 10
+  changed:
+    -
+      plugin: machine_name
+      source: updateddate
+    -
+      plugin: substr
+      start: 0
+      length: 10
+  field_date:
+    -
+      plugin: date_import
+      source: updateddate
+  field_act:
+    plugin: static_map
+    source: SECAct
+    map:
+      'Dodd-Frank Act of 2010': 84
+      'Investment Advisers Act of 1940': 85
+      'Investment Company Act of 1940': 86
+      'JOBS Act of 2012': 87
+      'Sarbanes-Oxley Act of 2002': 88
+      'Securities Act of 1933': 83
+      'Securities Exchange Act of 1934': 89
+      'Trust Indenture Act of 1939': 90
+  field_audience:
+    plugin: static_map
+    source: SECAudience
+    map:
+      Accountants: 60
+      Auditors: 61
+      Broker-Dealers: 62
+      'Clearing Agencies': 63
+      'Compliance Officers': 64
+      'Credit Rating Agencies': 65
+      'EDGAR Filers': 66
+      International: 67
+      'Investment Advisors': 68
+      'Investment Advisers': 68
+      'Investment Companies': 69
+      Investors: 70
+      'Municipal Advisors': 71
+      'Municipal Securities': 72
+      'Non-Regulated Entities': 73
+      NRSROs: 74
+      'Public Companies': 75
+      'Public Company Accounting Oversight Board': 76
+      'Security-Based Swap Data Repositories': 77
+      'Self-Regulatory Organizations': 78
+      'Small Businesses': 79
+      'Transfer Agents': 80
+      Whistleblowers: 81
+      'XBRL Filers': 82
+  field_left_1_box:
+    plugin: parse_embedded_content
+    source: SECLeft1Box
+  field_left_3_box:
+    plugin: parse_embedded_content
+    source: SECLeft3Box
+  field_left_4_box:
+    plugin: parse_embedded_content
+    source: SECLeft4Box
+  field_left_5_box:
+    plugin: parse_embedded_content
+    source: SECLeft5Box
+  field_right_2_box:
+    plugin: parse_embedded_content
+    source: SECRight2Box
+  field_right_4_box:
+    plugin: parse_embedded_content
+    source: SECRight4Box
+  field_center_2_box:
+    plugin: parse_embedded_content
+    source: SECCenter2Box
+  field_description_abstract: SECDescriptionAbstract
+  field_display_title: PageTitle
+  field_primary_division_office:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: SECDivisionOffice/0
+    -
+      plugin: static_map
+      map:
+        Agency-wide: 30
+        Acquisitions: 31
+        'Administrative Law Judges': 32
+        'Chief Accountant': 33
+        'Chief Operating Officer': 34
+        'Compliance Inspections and Examinations': 35
+        'Corporation Finance': 36
+        'Credit Ratings': 37
+        'Economic and Risk Analysis': 38
+        Enforcement: 39
+        'Equal Employment Opportunity': 40
+        'Ethics Counsel': 41
+        'Financial Management': 42
+        'General Counsel': 43
+        'Human Resources': 44
+        'Information Technology': 45
+        'Inspector General': 46
+        'International Affairs': 47
+        'Investment Management': 48
+        'Investor Advocate': 49
+        'Investor Education and Advocacy': 50
+        'Legislative and Intergovernmental Affairs': 51
+        'Minority and Women Inclusion': 52
+        'Municipal Securities': 53
+        'Public Affairs': 54
+        Secretary: 55
+        'Structured Disclosure': 56
+        'Support Operations': 57
+        'Trading and Markets': 58
+        Whistleblower: 59
+  field_regulation:
+    plugin: static_map
+    source: SECRegulation
+    map:
+      'Regulation 13D': 91
+      'Regulation 14A': 92
+      'Regulation 14C': 93
+      'Regulation 14D': 94
+      'Regulation 14E': 95
+      'Regulation 15D': 96
+      'Regulation A': 97
+      'Regulation A-R': 100
+      'Regulation AB': 98
+      'Regulation AC': 99
+      'Regulation ATS': 101
+      'Regulation BTR': 102
+      'Regulation C': 103
+      'Regulation CE': 104
+      'Regulation D': 105
+      'Regulation E': 106
+      'Regulation FD': 107
+      'Regulation G': 108
+      'Regulation M': 109
+      'Regulation M-A': 110
+      'Regulation NMS': 111
+      'Regulation S': 112
+      'Regulation S-B': 113
+      'Regulation SHO': 114
+  field_division_office:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: SECDivisionOffice/1
+    -
+      plugin: static_map
+      map:
+        Agency-wide: 30
+        Acquisitions: 31
+        'Administrative Law Judges': 32
+        'Chief Accountant': 33
+        'Chief Operating Officer': 34
+        'Compliance Inspections and Examinations': 35
+        'Corporation Finance': 36
+        'Credit Ratings': 37
+        'Economic and Risk Analysis': 38
+        Enforcement: 39
+        'Equal Employment Opportunity': 40
+        'Ethics Counsel': 41
+        'Financial Management': 42
+        'General Counsel': 43
+        'Human Resources': 44
+        'Information Technology': 45
+        'Inspector General': 46
+        'International Affairs': 47
+        'Investment Management': 48
+        'Investor Advocate': 49
+        'Investor Education and Advocacy': 50
+        'Legislative and Intergovernmental Affairs': 51
+        'Minority and Women Inclusion': 52
+        'Municipal Securities': 53
+        'Public Affairs': 54
+        Secretary: 55
+        'Structured Disclosure': 56
+        'Support Operations': 57
+        'Trading and Markets': 58
+        Whistleblower: 59
+  field_tags:
+    -
+      plugin: entity_lookup
+      source: SECTags
+destination:
+  plugin: 'entity:node'
+migration_dependencies: {  }

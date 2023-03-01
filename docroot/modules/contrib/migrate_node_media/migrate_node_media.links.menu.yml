@@ -1,0 +1,6 @@
+migrate_node_media.admin:
+  title: "Migrate Nodes to Media Settings"
+  description: "Select content type to migrate"
+  parent: system.admin_config_development
+  route_name: migrate_node_media.settings_controller_index
+  weight: 100

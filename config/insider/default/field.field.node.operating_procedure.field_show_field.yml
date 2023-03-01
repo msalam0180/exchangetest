@@ -1,0 +1,25 @@
+uuid: 161c4c79-a44d-46a3-9b17-7445ea39605e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_field
+    - node.type.operating_procedure
+_core:
+  default_config_hash: vxi0IaMfGPFK2fZD9DZFz1bqCVE6n1LJrZLKq9eCKzc
+id: node.operating_procedure.field_show_field
+field_name: field_show_field
+entity_type: node
+bundle: operating_procedure
+label: 'Override Left Nav'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

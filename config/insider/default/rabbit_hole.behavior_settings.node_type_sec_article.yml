@@ -1,0 +1,16 @@
+uuid: 4246480d-b2f8-4e8c-8e9b-5344c0b7b857
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.sec_article
+_core:
+  default_config_hash: a5e4JdF1obhTaey9eqdAqLsV23dcDwAsqdEriDXTF14
+id: node_type_sec_article
+entity_type_id: node_type
+entity_id: sec_article
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

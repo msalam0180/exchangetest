@@ -1,0 +1,25 @@
+uuid: dc853800-293d-411c-af9a-e92b14ca4b98
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_media_titles
+    - node.type.gallery
+_core:
+  default_config_hash: PLGytvNaHSvau5tPBxnV5qui2mGi-CRnSPXGGB7ejeI
+id: node.gallery.field_show_media_titles
+field_name: field_show_media_titles
+entity_type: node
+bundle: gallery
+label: 'Show Media Titles'
+description: 'When checked, the title of each media item will be displayed in the gallery.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

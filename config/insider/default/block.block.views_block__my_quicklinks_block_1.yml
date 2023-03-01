@@ -1,0 +1,32 @@
+uuid: a5e51147-da6d-4fd4-b9e0-626cbc0f5463
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.my_quicklinks
+  module:
+    - system
+    - views
+  theme:
+    - insider
+_core:
+  default_config_hash: IC5B-8dxtDP60M-7QDi0eWNWyPz1KbMau1cCa-sQsvQ
+id: views_block__my_quicklinks_block_1
+theme: insider
+region: content
+weight: -9
+provider: null
+plugin: 'views_block:my_quicklinks-block_1'
+settings:
+  id: 'views_block:my_quicklinks-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/user/profile/quicklinks\r\n/user/profile/quicklinks/*"

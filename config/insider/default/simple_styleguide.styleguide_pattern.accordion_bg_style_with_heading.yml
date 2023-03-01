@@ -1,0 +1,9 @@
+uuid: 8b719a92-ddca-466e-9ea2-cc8d1e525505
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: vCPxnEGqzHT4Cq4SNjOlMeYQUPz6BHNJwbes5OTQItM
+id: accordion_bg_style_with_heading
+label: 'Accordion BG Style with heading'
+pattern: "<!-- For each Accordion added to a page, the number of that accordion needs to be updated -->\r\n<!-- Example: `accordion-wysiwyg01` would be changed to `accordion-wysiwyg02` -->\r\n\r\n<div class=\"accordionGroup accordionBackground\">\r\n  <div class=\"mediumBgHeading\">Medium Heading</div>\r\n  <!-- accordion-wysiwyg01  -->\r\n  <div id=\"accordion-wysiwyg01\">\r\n    <!-- Item 1 -->\r\n    <div>Item Title 1</div>\r\n    <div>Item Content 1</div>\r\n\r\n    <!-- Item 2 -->\r\n    <div>Item Title 2</div>\r\n    <div>Item Content 2</div>\r\n\r\n    <!-- Item 3 -->\r\n    <div>Item Title 3</div>\r\n    <div>Item Content 3</div>\r\n  </div>\r\n</div>"
