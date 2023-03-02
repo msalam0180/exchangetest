@@ -1,7 +1,7 @@
 # Ignore paths that contain user-generated content.
 docroot/example.gitignore
 docroot/INSTALL.txt
-docroot/README.md
+#docroot/README.md
 
 # Ignore paths that contain user-generated content.
 #docroot/files
